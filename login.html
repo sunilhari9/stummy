@@ -42,11 +42,11 @@
 
   window.fbAsyncInit = function() {
   FB.init({
-    appId      : '{794671257313774}',
+    appId      : '794671257313774',
     cookie     : true,  // enable cookies to allow the server to access 
                         // the session
     xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.2' // use version 2.2
+    version    : 'v2.3' // use version 2.2
   });
 
   // Now that we've initialized the JavaScript SDK, we call 
@@ -81,6 +81,7 @@
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
+        console.log(response);
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
@@ -90,8 +91,8 @@
 
 </head>
 <body>
-    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
+   <!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>-->
 
 <div id="status">
 </div>
@@ -106,8 +107,11 @@
 		<div class="row omb_row-sm-offset-3 omb_socialButtons">
     	    <div class="col-xs-6 col-sm-3">
 		        <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
-			        <i class="fa fa-facebook visible-xs"></i>
-			        <span class="hidden-xs">Facebook</span>
+			      <!--  <i class="fa fa-facebook visible-xs"></i>-->
+			        <!--<span class="hidden-xs">Facebook</span>-->
+                    <!--<div class="fb-login-button hidden-xs" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false">Facebook</div>-->
+                    <fb:login-button size="large" data-auto-logout-link="true" scope="public_profile,email,phone" onlogin="checkLoginState();">
+</fb:login-button>
 		        </a>
 	        </div>
         	
