@@ -71,3 +71,20 @@
  	}		
 }    
 /*End Login Screen Style*/
+
+/*Index Screen Style*/
+body{
+    background-image: url("../../custom/images/bg_image.jpg");
+    background-size: 100%;
+}
+.navbar-default .navbar-nav>li>a{
+    color: #A0001C !important;
+}
+.logo{
+    height:45px;
+    margin-top: -17px;
+}
+.navbar-default {
+  background-color: #FFFFFF !important;
+}
+/*End Index Screen Style*/

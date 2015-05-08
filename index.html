@@ -9,6 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="vendor/css/bootstrap.min.css" rel="stylesheet">
+    <link href="custom/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,31 +19,32 @@
     <![endif]-->
   </head>
   <body>
-  <div class="container-fluid">
-      <h1>Welcome to Stummy</h1>
-       <form class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
+  <div class="container-fluid ">
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">   
+            <a class="navbar-brand" href="#">
+            <img class="logo" alt="Brand" src="custom/images/logo.png">
+            </a>
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="#" class="nav-links">Sign-in</a></li>
+                <li ><a href="#" class="nav-links">Sign-up</a></li>
+            </ul>
+        </div>  
+      </nav>
+      <div class="container-fluid main-container"> 
+        <div class="row">
+          <div class="col-md-3">.col-md-3</div>
+          <div class="col-md-6">.col-md-6</div>
+          <div class="col-md-3">.col-md-3</div>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
-      <div class="row">
-  <div class="col-md-3">.col-md-3</div>
-  <div class="col-md-6">.col-md-6</div>
-  <div class="col-md-3">.col-md-3</div>
-</div>
-      </div>
-      
+          </div>
+      <nav class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container">
     
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        </div>
+      </nav>
+ </div>
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="vendor/js/bootstrap.min.js"></script>
