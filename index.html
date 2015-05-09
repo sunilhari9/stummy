@@ -10,7 +10,9 @@
     <!-- Bootstrap -->
     <link href="vendor/css/bootstrap.min.css" rel="stylesheet">
     <link href="custom/css/style.css" rel="stylesheet">
-
+    <link rel="icon" 
+      type="image/png" 
+      href="custom/images/favicon.png">  
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -66,7 +68,7 @@
                   <li class="dinner"><a href="#">Dinner</a></li>
                   <li class="lateNight"><a href="#">Late Night etc.</a></li>
             </ul>
-            <div class="items">
+            <div class="items scroll">
               <div class="media">
                   <div class="media-left">
                     <a href="#">
@@ -182,7 +184,43 @@
             
           </div>
               </div>              
-          <div class="col-md-3 cart hidden-xs">Cart</div>
+          <div class="col-md-3 cart hidden-xs">
+              <div class="cartHeading"> <img src="custom/images/cart.png"> Your Cart</div>
+              <div class="estimatedTime">Estimated Delivary time: 50 min</div>
+              <div class="cartItems scroll">
+                  <div class="row cartList">
+                      <span class="col-md-8">
+                          Hot & Sour Soap Veg   
+                          </span>
+                          <span class="col-md-4">
+                            <span class="decrement">&lt;</span> 
+                              <span class="quantity">2</span> 
+                              <span class="increment">&gt;</span>
+                          </span>
+                     
+                          <span class="col-md-8">Sweet Corn Soup</span>
+                              
+                          <span class="col-md-4">
+                              <span class="decrement">&lt;</span>
+                              <span class="quantity">1 </span>
+                              <span class="increment">&gt;</span>
+                            </span>
+                              
+                    </div>
+                    <hr class="hrLine">
+                    <div class="customize">Customize</div>
+                    <div>Sub Total</div>
+                    <div>Delivary Free</div>
+                    <div>&plus; Container Charges</div>
+                    <div>Total will be Rounded off</div>
+                    <div class="totalAmount row">
+                        <span class="col-md-6">Total</span>
+                        <span class="col-md-6 text-right">Rs. 350</Span>
+                    </div>
+                    <hr class="hrLine">
+                  <div id="checkout" class="col-md-8">Proceed to Checkout</div>
+              </div>
+            </div>
         </div>
           </div>
       <nav class="navbar navbar-inverse navbar-fixed-bottom">
