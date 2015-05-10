@@ -92,7 +92,7 @@ body{
     font-family: san-Regular;
 }
 .categories{
-   min-height: 642px;
+   height: 642px;
     background-color: rgb(239, 231, 215);
        padding-right: 0px !important; 
    padding-left: 0px !important; 
@@ -100,14 +100,24 @@ body{
 .items{
     background-color: #fff;
     padding: 12px;
-    max-height: 600px;
+	 min-height: 601px;
+    max-height: 601px;
       overflow: auto;
+	 
+}
+.items div.media:after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 100%;
+	margin-top: 10px;
+    background: #A0001C;
 }
 .nav-links{
     color: #A0001C !important;
 }
 .itemList{
-   min-height: 100px;
+   height: 642px;
     padding-left: 0px !important;
 }
 .img{
@@ -147,9 +157,19 @@ body{
    background-color: transparent !important; 
    border: none !important; 
 }
+.list-group-item.activeCat{
+   background-color: #FFF !important; 
+   border: none !important; 
+}
 .heading{
-    background-color: #FFFFFF !important;
+    background-color: #D1CBC0 !important;
     font-size: 18px;
+	height: 42px;
+}
+@media (min-width: 768px){
+.nav-tabs.nav-justified>li>a {
+  border-bottom: 0px solid #ddd !important;
+  }
 }
 .links-active{
     border: 1px solid;
@@ -169,6 +189,7 @@ body{
   margin-top: 40px;
   max-height: 400px;
  background-color: rgb(70, 0, 14);
+ width: 292px;
 }
 .cartItems{
     padding: 5px;
@@ -179,6 +200,7 @@ body{
     background: linear-gradient(#EFE7D7, #fff,#EFE7D7); /* Standard syntax (must be last) */
       margin-bottom: 16px;
       font-family: san-Light;
+	  padding-bottom: 25px;
 }
 .scroll::-webkit-scrollbar {
     width: 5px;
@@ -199,7 +221,8 @@ width: 40px;
       margin-top: 10px;
   margin-left: 5px;
   font-family: san-Regular;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: bold;
   color: #fff;
 }.cartList{
       margin-top: 13px;
@@ -232,6 +255,7 @@ margin-bottom: 40px;
  color: #fff;
   margin-top: -12px;
   padding: 5px;
+  width:100%;
 }
 #checkout:before {
     content: '';
@@ -263,5 +287,12 @@ margin-bottom: 40px;
   margin-top: 10px;
       padding-left: 5px;
 font-family: san-Light;
+}
+.left{
+float: left;
+width: 55%;
+}
+.right{
+float: right;
 }
 /*End Index Screen Style*/
