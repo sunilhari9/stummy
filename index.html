@@ -10,9 +10,9 @@
     <!-- Bootstrap -->
     <link href="vendor/css/bootstrap.min.css" rel="stylesheet">
     <link href="custom/css/style.css" rel="stylesheet">
-    <link rel="icon" 
+<link rel="icon" 
       type="image/png" 
-      href="custom/images/favicon.png">  
+      href="custom/images/favicon.png">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -44,12 +44,12 @@
       </nav><!--/.nav-defult -->
       <div class="container main-container"> 
         <div class="row">
-         <div class="col-md-3 categories hidden-xs">
+         <div class="col-md-3 categories hidden-xs hidden-sm">
             <div class="list-group">
               <a href="#" class="list-group-item heading">
                 Stummy's Categories
               </a>
-              <a href="#" class="list-group-item item-type">Startes</a>
+              <a href="#" class="list-group-item item-type activeCat">Startes</a>
               <a href="#" class="list-group-item item-type">Thai Soups</a>
               <a href="#" class="list-group-item item-type">Thai Startes</a>
               <a href="#" class="list-group-item item-type">Veg. Main Course</a>
@@ -66,13 +66,13 @@
                   <li class="breakFast"><a href="#">Break Fast</a></li>
                   <li class="lunch"><a href="#" >Lunch</a></li>
                   <li class="dinner"><a href="#">Dinner</a></li>
-                  <li class="lateNight"><a href="#">Late Night etc.</a></li>
+                  <li class="lateNight"><a href="#">Late Night</a></li>
             </ul>
-            <div class="items scroll">
+            <div class="items">
               <div class="media">
                   <div class="media-left">
                     <a href="#">
-                  <img class="img media-object" src="/custom/images/food/1.jpg" alt="Test">
+                  <img class="img media-object" src="./custom/images/food/1.jpg" alt="Test">
                     </a>
                   </div>
                   <div class="media-body media-bottom">
@@ -83,7 +83,7 @@
                 <hr><div class="media">
                   <div class="media-left">
                     <a href="#">
-                  <img class="img media-object" src="/custom/images/food/2.jpg" alt="Test">
+                  <img class="img media-object" src="./custom/images/food/2.jpg" alt="Test">
                     </a>
                   </div>
                   <div class="media-body media-bottom">
@@ -94,7 +94,7 @@
                 <hr><div class="media">
                   <div class="media-left">
                     <a href="#">
-                  <img class="img media-object" src="/custom/images/food/3.jpg" alt="Test">
+                  <img class="img media-object" src="./custom/images/food/3.jpg" alt="Test">
                     </a>
                   </div>
                   <div class="media-body media-bottom">
@@ -105,7 +105,7 @@
                 <hr><div class="media">
                   <div class="media-left">
                     <a href="#">
-                  <img class="img media-object" src="/custom/images/food/4.jpg" alt="Test">
+                  <img class="img media-object" src="./custom/images/food/4.jpg" alt="Test">
                     </a>
                   </div>
                   <div class="media-body media-bottom">
@@ -117,7 +117,7 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                  <img class="img media-object" src="/custom/images/food/4.jpg" alt="Test">
+                  <img class="img media-object" src="./custom/images/food/4.jpg" alt="Test">
                     </a>
                   </div>
                   <div class="media-body media-bottom">
@@ -128,7 +128,7 @@
                 <hr><div class="media">
                   <div class="media-left">
                     <a href="#">
-                  <img class="img media-object" src="/custom/images/food/4.jpg" alt="Test">
+                  <img class="img media-object" src="./custom/images/food/4.jpg" alt="Test">
                     </a>
                   </div>
                   <div class="media-body media-bottom">
@@ -139,7 +139,7 @@
                 <hr><div class="media">
                   <div class="media-left">
                     <a href="#">
-                  <img class="img media-object" src="/custom/images/food/4.jpg" alt="Test">
+                  <img class="img media-object" src="./custom/images/food/4.jpg" alt="Test">
                     </a>
                   </div>
                   <div class="media-body media-bottom">
@@ -150,7 +150,7 @@
                 <hr><div class="media">
                   <div class="media-left">
                     <a href="#">
-                  <img class="img media-object" src="/custom/images/food/4.jpg" alt="Test">
+                  <img class="img media-object" src="./custom/images/food/4.jpg" alt="Test">
                     </a>
                   </div>
                   <div class="media-body media-bottom">
@@ -161,7 +161,7 @@
                 <hr><div class="media">
                   <div class="media-left">
                     <a href="#">
-                  <img class="img media-object" src="/custom/images/food/4.jpg" alt="Test">
+                  <img class="img media-object" src="./custom/images/food/4.jpg" alt="Test">
                     </a>
                   </div>
                   <div class="media-body media-bottom">
@@ -172,7 +172,7 @@
                 <hr><div class="media">
                   <div class="media-left">
                     <a href="#">
-                  <img class="img media-object" src="/custom/images/food/4.jpg" alt="Test">
+                  <img class="img media-object" src="./custom/images/food/4.jpg" alt="Test">
                     </a>
                   </div>
                   <div class="media-body media-bottom">
@@ -184,13 +184,15 @@
             
           </div>
               </div>              
-          <div class="col-md-3 cart hidden-xs">
+          <div class="col-md-3 cart hidden-xs hidden-sm"> 
+			<!--<img class="img_cart" src="./custom/images/CartImage.png" alt="Test">-->
+			
               <div class="cartHeading"> <img src="custom/images/cart.png"> Your Cart</div>
               <div class="estimatedTime">Estimated Delivary time: 50 min</div>
               <div class="cartItems scroll">
                   <div class="row cartList">
                       <span class="col-md-8">
-                          Hot & Sour Soap Veg   
+                          Hot &amp; Sour Soap Veg   
                           </span>
                           <span class="col-md-4">
                             <span class="decrement">&lt;</span> 
@@ -211,16 +213,16 @@
                     <div class="customize">Customize</div>
                     <div>Sub Total</div>
                     <div>Delivary Free</div>
-                    <div>&plus; Container Charges</div>
+                    <div>+ Container Charges</div>
                     <div>Total will be Rounded off</div>
                     <div class="totalAmount row">
                         <span class="col-md-6">Total</span>
-                        <span class="col-md-6 text-right">Rs. 350</Span>
+                        <span class="col-md-6 text-right">Rs. 350</span>
                     </div>
                     <hr class="hrLine">
                   <div id="checkout" class="col-md-8">Proceed to Checkout</div>
               </div>
-            </div>
+		  </div>
         </div>
           </div>
       <nav class="navbar navbar-inverse navbar-fixed-bottom">
@@ -232,6 +234,7 @@
      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="custom/js/test.js"></script>
     <script src="vendor/js/bootstrap.min.js"></script>
   </body>
 </html>

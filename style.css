@@ -1,0 +1,281 @@
+@font-face {
+    font-family: san-Light;
+    src: url(../fonts/OpenSans-Light.ttf);
+}
+
+@font-face {
+    font-family: san-Regular;
+    src: url(../fonts/OpenSans-Regular.ttf);
+}
+
+/*Login Screen Style*/
+ 
+/*
+    Note: It is best to use a less version of this file ( see http://css2less.cc
+    For the media queries use @screen-sm-min instead of 768px.
+    For .omb_spanOr use @body-bg instead of white.
+*/
+
+@media (min-width: 768px) {
+    .omb_row-sm-offset-3 div:first-child[class*="col-"] {
+        margin-left: 25%;
+    }
+}
+
+.omb_login .omb_authTitle {
+    text-align: center;
+	line-height: 300%;
+}
+	
+.omb_login .omb_socialButtons a {
+	color: white; // In yourUse @body-bg 
+	opacity:0.9;
+}
+.omb_login .omb_socialButtons a:hover {
+    color: white;
+	opacity:1;    	
+}
+.omb_login .omb_socialButtons .omb_btn-facebook {background: #3b5998;}
+.omb_login .omb_socialButtons .omb_btn-twitter {background: #00aced;}
+.omb_login .omb_socialButtons .omb_btn-google {background: #c32f10;}
+
+
+.omb_login .omb_loginOr {
+	position: relative;
+	font-size: 1.5em;
+	color: #aaa;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+.omb_login .omb_loginOr .omb_hrOr {
+	background-color: #cdcdcd;
+	height: 1px;
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+}
+.omb_login .omb_loginOr .omb_spanOr {
+	display: block;
+	position: absolute;
+	left: 50%;
+	top: -0.6em;
+	margin-left: -1.5em;
+	background-color: white;
+	width: 3em;
+	text-align: center;
+}			
+
+.omb_login .omb_loginForm .input-group.i {
+	width: 2em;
+}
+.omb_login .omb_loginForm  .help-block {
+    color: red;
+}
+
+	
+@media (min-width: 768px) {
+    .omb_login .omb_forgotPwd {
+        text-align: right;
+		margin-top:10px;
+ 	}		
+}    
+/*End Login Screen Style*/
+
+/*Index Screen Style*/
+body{
+    background-image: url("../../custom/images/bg_image.jpg");
+    background-size: 100%;
+     min-height: 500px;
+  padding-top: 70px;
+     padding-bottom: 70px;
+    font-family: san-Regular;
+}
+.categories{
+   min-height: 642px;
+    background-color: rgb(239, 231, 215);
+       padding-right: 0px !important; 
+   padding-left: 0px !important; 
+}
+.items{
+    background-color: #fff;
+    padding: 12px;
+   /* max-height: 600px;*/
+      overflow: auto;
+}
+.nav-links{
+    color: #A0001C !important;
+}
+.itemList{
+   min-height: 100px;
+    padding-left: 0px !important;
+}
+.img{
+    width:100px;
+    height:100px;
+      border: 2px solid #000000;
+  border-bottom-left-radius: 20px;
+}
+.img_cart{
+    width:80%;
+      border: 2px solid #000000;
+  border-bottom-left-radius: 20px;
+  margin-top: 40px;
+}
+.logo{
+    height:45px;
+    margin-top: -17px;
+}
+.nav-tabs>li>a{
+    color:#fff !important;
+}
+
+.breakFast{
+     background-color: rgb(233, 105, 44);
+    border-top-right-radius: 10px;
+}
+.lunch{
+     background-color: rgb(254, 17, 59);
+    border-top-right-radius: 10px;
+}
+.dinner{
+     background-color: rgb(195, 0, 35);
+    border-top-right-radius: 10px;
+}
+.lateNight{
+     background-color: rgb(70, 0, 14);
+    border-top-right-radius: 10px;
+}
+.navbar-default {
+  background-color: #FFFFFF !important;
+}
+.list-group-item {
+   background-color: transparent !important; 
+   border: none !important; 
+}
+.list-group-item.activeCat{
+   background-color: #FFF !important; 
+   border: none !important; 
+}
+
+.heading{
+/*    background-color: #FFFFFF !important;*/
+    font-size: 18px;
+}
+.links-active{
+    border: 1px solid;
+  margin: 0px;
+  height: 8px;
+  margin-top: 7px !important;
+  padding-bottom: 25px !important;
+  padding-top: 6px !important;
+  background-color: #a0001c !important;
+  color: #ffffff !important;
+  border-top-right-radius: 10px;
+}
+.item-type:hover{
+    background-color: rgb(255, 249, 237) !important;
+}
+ .item-type:hover{
+     background-color: rgb(255, 249, 237) !important;
+ }
+.cart{
+  margin-top: 40px;
+  max-height: 400px;
+ background-color: rgb(70, 0, 14);
+}
+.cartItems{
+    padding: 5px;
+    min-height: 300px; 
+     background: -webkit-linear-gradient(#EFE7D7, #fff,#EFE7D7); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#EFE7D7, #fff,#EFE7D7); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#EFE7D7, #fff,#EFE7D7); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#EFE7D7, #fff,#EFE7D7); /* Standard syntax (must be last) */
+      margin-bottom: 16px;
+      font-family: san-Light;
+}
+.scroll::-webkit-scrollbar {
+    width: 5px;
+    background-color: rgb(255, 249, 237);
+    padding-right: 10px;
+}
+ 
+.scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+.scroll::-webkit-scrollbar-thumb {
+  background-color:  rgb(204,190,173);
+  outline: 1px solid slategrey;
+width: 40px;
+}
+.cartHeading{
+      margin-top: 10px;
+  margin-left: 5px;
+  font-family: san-Regular;
+  font-size: 12px;
+  color: #fff;
+}.cartList{
+      margin-top: 13px;
+    margin-left: 10px;
+ 
+}
+.hrLine{
+      border-top: 1px solid #a0001c !important;
+}
+.customize{
+    background-color: #46000E !important;
+  text-align: center;
+  width: 138px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -20px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: #fff;
+margin-bottom: 40px;
+    
+}
+.totalAmount{
+    font-size: 20px;
+    font-weight: bolder;
+      margin-bottom: -15px;
+}
+#checkout{
+ background-color: #46000E !important;
+ color: #fff;
+  margin-top: -12px;
+  padding: 5px;
+}
+#checkout:before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    border-top: 15px solid #F2EBDE;
+    border-left: 15px solid #46000E;
+    border-bottom: 15px solid #F2EBDE;
+    width: 0;
+}
+.decrement{
+    color:  rgb(233, 105, 44);
+     font-weight: bolder;
+
+}
+.increment{
+    color:  rgb(233, 105, 44);
+     font-weight: bolder;
+
+    
+}
+ 
+.itemCount{
+    margin-left: 10px;
+}
+.estimatedTime{
+  background-color: rgb(239,231,215) !important;
+  margin-bottom: 10px;
+  margin-top: 10px;
+      padding-left: 5px;
+font-family: san-Light;
+}
+/*End Index Screen Style*/
