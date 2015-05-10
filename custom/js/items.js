@@ -27,13 +27,7 @@ var displayItemDOM = function(ProductName){
 	var item = '<div class="media"><div class="media-left"><a href="#"><img class="img media-object" src="./custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-middle"><h4 class="media-heading">'+ProductName+'<div class="pull-right more">...</div></h4><div class="summary">Sample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample Test</div></div><div class="media-right"><input type="text" value=1 class="quantity"></div></div>';
 	$('.items').append(item);
 };
-$(document).ready(function(){
-$(".summary").hide();
-$(".more").on("click", function(){
-   $(this).parent().next().toggle(500);
-});
-    
-});
+
 var getUniqueCategories = function(){ 
 	var categories = [];
 	$.each(items, function(index, value) {
