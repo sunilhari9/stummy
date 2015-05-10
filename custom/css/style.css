@@ -24,7 +24,6 @@
 
 .omb_login .omb_authTitle {
     text-align: center;
-	line-height: 300%;
 }
 	
 .omb_login .omb_socialButtons a {
@@ -35,9 +34,32 @@
     color: white;
 	opacity:1;    	
 }
-.omb_login .omb_socialButtons .omb_btn-facebook {background: #3b5998;}
-.omb_login .omb_socialButtons .omb_btn-twitter {background: #00aced;}
-.omb_login .omb_socialButtons .omb_btn-google {background: #c32f10;}
+.omb_login .omb_socialButtons .omb_btn-facebook {
+    background: #3b5998;
+    border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.omb_login .omb_socialButtons .omb_btn-google {background: #c32f10;
+ border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.modal-content{
+   border-bottom-left-radius: 50px;
+  border-top-right-radius: 50px;  
+    background-color:  rgb(239, 231, 215);
+}
+.loginButton{
+    border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px; 
+    text-align: center;
+    color: #fff;
+    border: none;
+    background-color: #c32f10;
+      width: 227px;
+  margin-top: 13px;
+  padding: 5px;
+}
 
 
 .omb_login .omb_loginOr {
@@ -46,7 +68,6 @@
 	color: #aaa;
 	margin-top: 1em;
 	margin-bottom: 1em;
-	padding-top: 0.5em;
 	padding-bottom: 0.5em;
 }
 .omb_login .omb_loginOr .omb_hrOr {
@@ -72,7 +93,14 @@
 .omb_login .omb_loginForm  .help-block {
     color: red;
 }
-
+.loginForm{
+      padding: 19px;
+  margin: -9px;
+  border-bottom-left-radius: 40px;
+  border-top-right-radius: 40px;
+    background: url("../images/bg_image.jpg");
+    background-size: 100%;
+}
 	
 @media (min-width: 768px) {
     .omb_login .omb_forgotPwd {
@@ -278,6 +306,15 @@ margin-bottom: 40px;
     
 }
 
+.more{
+      color: red !important;
+  cursor: pointer;
+}
+.quantity{
+      width: 20px;
+  height: 22px;
+  padding-left: 4px;
+}
 .itemCount{
     margin-left: 10px;
 }
@@ -295,4 +332,16 @@ width: 55%;
 .right{
 float: right;
 }
+.medial-heading span.pull-right{
+    color: red !important;
+}
+.media-heading{
+    background-color: rgb(239,231,215) !important;
+    margin-bottom: 15px;
+  margin-top: 15px;
+      padding-left: 5px;
+      padding-right: 5px;
+font-family: san-Light;
+}
 /*End Index Screen Style*/
+/**/

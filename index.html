@@ -35,13 +35,86 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li ><a href="#" class="links-active">Sign-in</a></li>
+                <li ><a href="#" class="links-active" data-toggle="modal" data-target="#loginScreen">Sign-in</a></li>
                 <li ><a href="#">or</a></li>
                 <li ><a href="#" class="nav-links">Sign-up</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container -->
       </nav><!--/.nav-defult -->
+      <!--Login Screen-->
+      <div class="modal fade" id="loginScreen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      
+       <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-body">
+       
+    <div class="omb_login">
+    	<h3 class="omb_authTitle">Login or <a href="#">Sign up</a></h3>
+		<div class="row omb_socialButtons">
+    	    <div class="col-xs-6 col-sm-6">
+		        <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
+			        <i class="fa fa-facebook visible-xs"></i>
+			        <span class="hidden-xs">Facebook</span>
+                    <!--<div class="fb-login-button hidden-xs" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false">Facebook</div>-->
+                    <fb:login-button size="large" data-auto-logout-link="true" scope="public_profile,email,phone" onlogin="checkLoginState();">
+</fb:login-button>
+		        </a>
+	        </div>
+        	
+        	<div class="col-xs-6 col-sm-6">
+		        <a href="#" class="btn btn-lg btn-block omb_btn-google">
+			        <i class="fa fa-google-plus visible-xs"></i>
+			        <span class="hidden-xs">Google+</span>
+		        </a>
+	        </div>	
+		</div>
+
+		<div class="row omb_row-sm-offset-3 omb_loginOr">
+			<div class="col-xs-12 col-sm-6">
+				<hr class="omb_hrOr">
+				<span class="omb_spanOr">or</span>
+			</div>
+		</div>
+
+		<div class="row loginForm">
+			<div class="col-xs-12 col-sm-12">	
+			    <form class="omb_loginForm" action="" autocomplete="off" method="POST">
+					<div class="input-group input-group-lg">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+						<input type="text" class="form-control" name="username" placeholder="9705984789">
+					</div>
+					<span class="help-block"></span>
+										
+					<div class="input-group input-group-lg">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+						<input  type="password" class="form-control" name="password" placeholder="Password">
+					</div>
+                    <span class="help-block"></span>
+<div class="row col-xs-12">
+			
+			<div class="col-xs-12 col-sm-6">
+				<p class="omb_forgotPwd">
+					<a href="#">Generate OTP/Forgot password?</a>
+				</p>
+			</div>
+            <div class="col-xs-12 col-sm-3">
+                
+					<button class="loginButton" type="submit">Login</button>
+			</div>
+		</div>	 
+				</form>
+			</div>
+    	</div>
+		   	
+
+
+</div>	
+      </div>
+      </div>
+  </div>
+      </div>
+      <!--End Login Screen-->
       <div class="container main-container"> 
         <div class="row">
          <div class="col-md-3 categories hidden-xs hidden-sm">
@@ -49,16 +122,6 @@
               <span class="list-group-item heading">
                 Stummy's Categories
               </span>
-             <!-- <a href="#" class="list-group-item item-type activeCat">Startes</a>
-              <a href="#" class="list-group-item item-type">Thai Soups</a>
-              <a href="#" class="list-group-item item-type">Thai Startes</a>
-              <a href="#" class="list-group-item item-type">Veg. Main Course</a>
-              <a href="#" class="list-group-item item-type">Poultry Main Course</a>
-              <a href="#" class="list-group-item item-type">Appetizers: Veg</a>
-              <a href="#" class="list-group-item item-type">Appetizers: Non-Veg</a>
-              <a href="#" class="list-group-item item-type">Thai Main Course:Veg</a>
-              <a href="#" class="list-group-item item-type">Thai Main Course:Non-Veg</a>
-              <a href="#" class="list-group-item item-type"></a>-->
             </div>  
          </div>
           <div class="col-md-6 itemList">
@@ -69,124 +132,11 @@
                   <li class="lateNight"><a href="#">Late Night</a></li>
             </ul>
             <div class="items">
-				<!--<div class="media">
-				  <div class="media-left">
-					<a href="#">
-				  <img class="img media-object" src="./custom/images/food/1.jpg" alt="Test">
-					</a>
-				  </div>
-				  <div class="media-body media-bottom">
-					<h4 class="media-heading">Media heading</h4>
-				   Sample Test
-				  </div>
-				</div>
-                <hr><div class="media">
-                  <div class="media-left">
-                    <a href="#">
-                  <img class="img media-object" src="./custom/images/food/2.jpg" alt="Test">
-                    </a>
-                  </div>
-                  <div class="media-body media-bottom">
-                    <h4 class="media-heading">Media heading</h4>
-                   Sample Test
-                  </div>
-            </div>
-                <hr><div class="media">
-                  <div class="media-left">
-                    <a href="#">
-                  <img class="img media-object" src="./custom/images/food/3.jpg" alt="Test">
-                    </a>
-                  </div>
-                  <div class="media-body media-bottom">
-                    <h4 class="media-heading">Media heading</h4>
-                   Sample Test
-                  </div>
-            </div>
-                <hr><div class="media">
-                  <div class="media-left">
-                    <a href="#">
-                  <img class="img media-object" src="./custom/images/food/4.jpg" alt="Test">
-                    </a>
-                  </div>
-                  <div class="media-body media-bottom">
-                    <h4 class="media-heading">Media heading</h4>
-                   Sample Test
-                  </div>
-            </div>
-                <hr>
-                <div class="media">
-                  <div class="media-left">
-                    <a href="#">
-                  <img class="img media-object" src="./custom/images/food/4.jpg" alt="Test">
-                    </a>
-                  </div>
-                  <div class="media-body media-bottom">
-                    <h4 class="media-heading">Media heading</h4>
-                   Sample Test
-                  </div>
-            </div>
-                <hr><div class="media">
-                  <div class="media-left">
-                    <a href="#">
-                  <img class="img media-object" src="./custom/images/food/4.jpg" alt="Test">
-                    </a>
-                  </div>
-                  <div class="media-body media-bottom">
-                    <h4 class="media-heading">Media heading</h4>
-                   Sample Test
-                  </div>
-            </div>
-                <hr><div class="media">
-                  <div class="media-left">
-                    <a href="#">
-                  <img class="img media-object" src="./custom/images/food/4.jpg" alt="Test">
-                    </a>
-                  </div>
-                  <div class="media-body media-bottom">
-                    <h4 class="media-heading">Media heading</h4>
-                   Sample Test
-                  </div>
-            </div>
-                <hr><div class="media">
-                  <div class="media-left">
-                    <a href="#">
-                  <img class="img media-object" src="./custom/images/food/4.jpg" alt="Test">
-                    </a>
-                  </div>
-                  <div class="media-body media-bottom">
-                    <h4 class="media-heading">Media heading</h4>
-                   Sample Test
-                  </div>
-            </div>
-                <hr><div class="media">
-                  <div class="media-left">
-                    <a href="#">
-                  <img class="img media-object" src="./custom/images/food/4.jpg" alt="Test">
-                    </a>
-                  </div>
-                  <div class="media-body media-bottom">
-                    <h4 class="media-heading">Media heading</h4>
-                   Sample Test
-                  </div>
-            </div>
-                <hr><div class="media">
-                  <div class="media-left">
-                    <a href="#">
-                  <img class="img media-object" src="./custom/images/food/4.jpg" alt="Test">
-                    </a>
-                  </div>
-                  <div class="media-body media-bottom">
-                    <h4 class="media-heading">Media heading</h4>
-                   Sample Test
-                  </div>
-            </div>
-                -->
+				
             
           </div>
               </div>              
           <div class="col-md-3 cart hidden-xs hidden-sm"> 
-			<!--<img class="img_cart" src="./custom/images/CartImage.png" alt="Test">-->
-			
               <div class="cartHeading"> <img src="custom/images/cart.png"> Your Cart</div>
               <div class="estimatedTime">Estimated Delivery time: 50 min</div>
               <div class="cartItems scroll">
@@ -232,10 +182,8 @@
       </nav>
  </div>
      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-	<!--<script src="custom/js/test.js"></script>-->
-	<script src="custom/js/items.js"></script>
+    <script src="vendor/js/jquery-1.11.3.min.js"></script>
+  	<script src="custom/js/items.js"></script>
     <script src="vendor/js/bootstrap.min.js"></script>
   </body>
 </html>

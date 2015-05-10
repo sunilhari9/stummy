@@ -19,17 +19,21 @@ var items =
 {"PUPrice": 70,"PName": "Tomato soup","PCode": "4","PCategory": "Soups"}
 ];
 
-console.log("Total items:"+items.length);
 var filterItems = function(categoryName){
 	var as=$(items).filter(function (i,n){return n.PCategory===categoryName});
 	return as;
 };
 var displayItemDOM = function(ProductName){
-	var item = '<div class="media"><div class="media-left"><a href="#"><img class="img media-object" src="./custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-bottom"><h4 class="media-heading">'+ProductName+'</h4>Sample Test</div></div>';
+	var item = '<div class="media"><div class="media-left"><a href="#"><img class="img media-object" src="./custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-middle"><h4 class="media-heading">'+ProductName+'<div class="pull-right more">...</div></h4><div class="summary">Sample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample Test</div></div><div class="media-right"><input type="text" value=1 class="quantity"></div></div>';
 	$('.items').append(item);
 };
-
-
+$(document).ready(function(){
+$(".summary").hide();
+$(".more").on("click", function(){
+   $(this).parent().next().toggle(500);
+});
+    
+});
 var getUniqueCategories = function(){ 
 	var categories = [];
 	$.each(items, function(index, value) {
@@ -51,9 +55,12 @@ $('.items').html('');
 	var items = filterItems(categoryName);
 	for (var i=0;i<items.length;i++)
 	{
-		console.log(items[i].PName +"         "+items[i].PCode);
 		displayItemDOM(items[i].PName);
 	}
+     $(".summary").hide();
+    $(".more").on("click", function(){
+   $(this).parent().next().toggle(500);
+});
 }
 var displayDefaultItems = function(){
 
@@ -64,6 +71,6 @@ $(document).ready(function(){
 	$('.list-group-item.item-type').click(function(){
 		$('.list-group-item.item-type').removeClass('activeCat');
 		$(this).addClass('.list-group-item .item-type activeCat');
-		displayItems($(this).text());
+       	displayItems($(this).text());
 	});
 });
