@@ -352,4 +352,11 @@ font-family: san-Light;
 .glyphicon-plus,.glyphicon-chevron-right,.glyphicon-minus,.glyphicon-chevron-left,.glyphicon-trash{
 	cursor: pointer;
 }
+.socialButton {
+  cursor: pointer;
+  max-width: 100%;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
 /*End Index Screen Style*/
+
