@@ -349,7 +349,7 @@ float: right;
       padding-right: 5px;
 font-family: san-Light;
 }
-.glyphicon-plus,.glyphicon-chevron-right,.glyphicon-minus,.glyphicon-chevron-left,.glyphicon-trash{
+.glyphicon-plus,.glyphicon-chevron-right,.glyphicon-minus,.glyphicon-chevron-left,.glyphicon-trash,.glyphicon-edit{
 	cursor: pointer;
 }
 .socialButton {

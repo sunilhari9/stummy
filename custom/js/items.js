@@ -1,6 +1,8 @@
 $.getJSON( "custom/js/products.json", function( items ) {
-	var displayItemDOM = function(ProductName){
-		var item = '<div class="media"><div class="media-left"><a href="#"><img class="img media-object" src="./custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName+'<div class="pull-right more">...</div></h4><div class="summary">Sample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample Test</div></div><div class="media-right"><input type="text" value=1 class="quantity"></div></div>';
+sessionStorage.setItem('products',JSON.stringify(items));
+
+	var displayItemDOM = function(ProductName,ProductCode){
+		var item = '<div class="media"><div class="media-left"><a href="#"><img class="img media-object" src="./custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName+'<div class="pull-right more">...</div></h4><div class="summary">Sample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample Test</div></div><div class="media-right"><span class="glyphicon glyphicon-minus" title="Click to decrease"></span><span class="quantity" data-product-code="'+ProductCode+'">1</span><span class="glyphicon glyphicon-plus" title="Click to increase"></span><span class="glyphicon glyphicon-edit"></span></div>';
 		$('.items').append(item);
 	};
 	var getUniqueCategories = function(){ 
@@ -22,12 +24,12 @@ $.getJSON( "custom/js/products.json", function( items ) {
 	var displayItems = function(categoryName){
 	$('.items').html('');
 		$.each(items, function(index, value) {
-			if(value.Name===categoryName){
+			if(value.Name === categoryName){
 				var items = value.ProductsList;
 				if(items.length > 0){
 					for (var i=0;i<items.length;i++)
 					{
-						displayItemDOM(items[i].ProductName);
+						displayItemDOM(items[i].ProductName,items[i].ProductCode);
 					}
 				}
 			}
@@ -37,6 +39,7 @@ $.getJSON( "custom/js/products.json", function( items ) {
 		   $(this).parent().next().toggle(500);
 		});
 	}
+	
 	var displayDefaultItems = function(){
 		displayItems(uniqueCategories[0]);
 	}
@@ -46,4 +49,5 @@ $.getJSON( "custom/js/products.json", function( items ) {
 		$(this).addClass('.list-group-item .item-type activeCat');
 		displayItems($(this).text());
 	});
+
 });
