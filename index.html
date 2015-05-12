@@ -35,9 +35,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li ><a href="#" class="links-active" data-toggle="modal" data-target="#loginScreen">Sign-in</a></li>
-                <li ><a href="#">or</a></li>
-                <li ><a href="#" class="nav-links">Sign-up</a></li>
+                <li ><a href="#" class="links-active" data-toggle="modal" data-target="#loginScreen">Sign-in / Sign-up</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container -->
@@ -47,26 +45,22 @@
       
        <div class="modal-dialog">
     <div class="modal-content">
+	<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><h3 class="omb_authTitle" align="center">Login or <a href="#">Sign up</a></h3></h4>
+      </div>
           <div class="modal-body">
        
     <div class="omb_login">
-    	<h3 class="omb_authTitle">Login or <a href="#">Sign up</a></h3>
 		<div class="row omb_socialButtons">
     	    <div class="col-xs-6 col-sm-6">
-		        <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
-			        <i class="fa fa-facebook visible-xs"></i>
-			        <span class="hidden-xs">Facebook</span>
-                    <!--<div class="fb-login-button hidden-xs" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false">Facebook</div>-->
-                    <fb:login-button size="large" data-auto-logout-link="true" scope="public_profile,email,phone" onlogin="checkLoginState();">
-</fb:login-button>
-		        </a>
+		        <img src="custom/images/button-facebook.png" onclick="FbClick()" class="socialButton"/>
+				   <div id="fbDetails"></div>
 	        </div>
         	
         	<div class="col-xs-6 col-sm-6">
-		        <a href="#" class="btn btn-lg btn-block omb_btn-google">
-			        <i class="fa fa-google-plus visible-xs"></i>
-			        <span class="hidden-xs">Google+</span>
-		        </a>
+		       <img src="custom/images/button-google-plus.png" onclick="handleAuthClick()" class="socialButton"/>
+			   <div id="googleDetails"></div>
 	        </div>	
 		</div>
 
@@ -145,9 +139,9 @@
                           Hot &amp; Sour Soap Veg   
                           </span>
                           <span class="col-md-4">
-                            <span class="glyphicon glyphicon-minus" title="Click to decrease"></span> 
-                              <span class="quantity">1</span> 
-                              <span class="glyphicon glyphicon-plus" title="Click to increase"></span>
+								<span class="glyphicon glyphicon-minus" title="Click to decrease"></span> 
+								<span class="quantity">1</span> 
+								<span class="glyphicon glyphicon-plus" title="Click to increase"></span>
                           </span>                     
                           <span class="col-md-8">Sweet Corn Soup</span>                              
                           <span class="col-md-4">
@@ -181,7 +175,9 @@
  </div>
      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="vendor/js/jquery-1.11.3.min.js"></script>
-  	<script src="custom/js/items.js"></script>
+  	<script src="custom/js/SocialLogin.js"></script>	
+   <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+	<script src="custom/js/items.js"></script>
 	<script src="custom/js/script.js"></script>
     <script src="vendor/js/bootstrap.min.js"></script>
   </body>

@@ -357,10 +357,17 @@ float: right;
       padding-right: 5px;
 font-family: san-Light;
 }
-.glyphicon-plus,.glyphicon-chevron-right,.glyphicon-minus,.glyphicon-chevron-left,.glyphicon-trash{
+.glyphicon-plus,.glyphicon-chevron-right,.glyphicon-minus,.glyphicon-chevron-left,.glyphicon-trash,.glyphicon-edit{
 	cursor: pointer;
 }
+.socialButton {
+  cursor: pointer;
+  max-width: 100%;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
 /*End Index Screen Style*/
+<<<<<<< HEAD
 @media screen and (max-width: 640px) {
     .media-right {
       margin-top: -33%;
@@ -376,3 +383,6 @@ font-family: san-Light;
      margin-top: -18.5%;
   }
 }
+=======
+
+>>>>>>> origin/master
