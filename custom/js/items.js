@@ -1,10 +1,9 @@
 $.getJSON( "custom/js/products.json", function( items ) {
-
-	var displayItemDOM = function(ProductName){
-		var item = '<div class="media"><div class="media-left"><a href="#"><img class="img media-object" src="./custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName+'<div class="pull-right more">...</div></h4><div class="summary">Sample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample Test</div></div><div class="media-right"><span class="glyphicon glyphicon-minus" title="Click to decrease"></span>                              <input type="text" value=1 class="quantity"><span class="glyphicon glyphicon-plus" title="Click to increase"></span></span></div>';
 sessionStorage.setItem('products',JSON.stringify(items));
 
-	$('.items').append(item);
+	var displayItemDOM = function(ProductName,ProductCode){
+		var item = '<div class="media"><div class="media-left"><a href="#"><img class="img media-object" src="./custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName+'<div class="pull-right more">...</div></h4><div class="summary">Sample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample Test</div></div><div class="media-right"><span class="glyphicon glyphicon-minus" title="Click to decrease"></span><span class="quantity" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus" title="Click to increase"></span><span class="glyphicon glyphicon-edit" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div>';
+		$('.items').append(item);
 	};
 	var getUniqueCategories = function(){ 
 		var categories = [];
@@ -51,4 +50,7 @@ sessionStorage.setItem('products',JSON.stringify(items));
 		displayItems($(this).text());
 	});
 
+});
+$.getJSON( "custom/js/LineItems.json", function( items ) {
+	sessionStorage.setItem('LineItems',JSON.stringify(items));
 });
