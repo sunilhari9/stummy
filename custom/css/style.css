@@ -321,6 +321,14 @@ margin-bottom: 40px;
 	height: 22px;
 	text-align: center;
 }
+.media-right {
+  padding-left: -6px;
+  /* margin-left: 116px; */
+  position: absolute;
+  display: inline-block;
+  margin-top: -19%;
+  margin-left: 80%;
+}
 .itemCount{
     margin-left: 10px;
 }
@@ -353,3 +361,18 @@ font-family: san-Light;
 	cursor: pointer;
 }
 /*End Index Screen Style*/
+@media screen and (max-width: 640px) {
+    .media-right {
+      margin-top: -33%;
+  margin-left: 68%;}
+}
+@media screen and (min-width: 768px) {
+    .media-right {
+     margin-top: -22.5%;
+  }
+}
+@media screen and (min-width: 1024px) {
+    .media-right {
+     margin-top: -18.5%;
+  }
+}
