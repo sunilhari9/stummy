@@ -50,7 +50,7 @@ $(document).ready(function(){
 			});
 		}
 		console.log(ul_items);
-		$('.customizeFoodBody').html(ul_items+'<button id=customizeFoodBut>Update &amp; Add to Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
+		$('.customizeFoodBody').html(ul_items+'<button id="customizeFoodBut">Update &amp; Add to Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
 		$('#customizeFood').modal('show');		
 	});//cartList
 	

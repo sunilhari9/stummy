@@ -323,8 +323,6 @@ margin-bottom: 40px;
 }
 .media-right {
   padding-left: -6px;
-  /* margin-left: 116px; */
-  position: absolute;
   display: inline-block;
   margin-top: -19%;
   margin-left: 80%;
@@ -367,7 +365,7 @@ font-family: san-Light;
   border-top-right-radius: 20px;
 }
 /*End Index Screen Style*/
-<<<<<<< HEAD
+
 @media screen and (max-width: 640px) {
     .media-right {
       margin-top: -33%;
@@ -383,6 +381,42 @@ font-family: san-Light;
      margin-top: -18.5%;
   }
 }
-=======
+/*Start Product line item*/
+ul.product-line-items {
+  list-style: none;
+}
+ul.product-line-items li{
+  float: left;
+ margin-right: 2%;
+}
+ul.product-line-items li input[type="radio"] {
+  margin-right: 4px;
+}
 
->>>>>>> origin/master
+.modal-header .close {
+  margin-top: 3px !important;
+  margin-right: 12px !important;
+}
+.customizeFoodBody .product-name {
+  float: left;
+  margin-right: 2%;
+}
+.modal-body.customizeFoodBody {
+  padding-top: 0px !important;
+    text-align: center;
+}
+.modal-header.customizeFoodHeader {
+  padding-bottom: 0px !important;
+}
+#customizeFoodBut{
+  background-color: #46000E !important;
+ border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+  text-align: center;
+  color: #fff;
+  border: none;
+  width: 227px;
+  margin-top: 13px;
+  padding: 5px;
+}
+/*End Product line item*/
