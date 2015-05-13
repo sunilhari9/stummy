@@ -25,6 +25,7 @@ $(document).ready(function(){
 			$(this).prev().val(parseInt(currentVal)+1);
 		}
 	});
+    $(".customizeFoodHeader").parent().addClass("customizeFoodModel")
 	$('body').on('click','.glyphicon-edit',function(){
 		console.log("clicked edit");
 		var currentVal = $(this).prev().prev().text() || $(this).prev().prev().val();

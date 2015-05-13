@@ -98,7 +98,7 @@
   margin: -9px;
   border-bottom-left-radius: 40px;
   border-top-right-radius: 40px;
-    background: url("../images/bg_image.jpg");
+    background: url("../images/bg_image.png");
     background-size: 100%;
 }
 	
@@ -112,7 +112,7 @@
 
 /*Index Screen Style*/
 body{
-    background-image: url("../../custom/images/bg_image.jpg");
+    background-image: url("../../custom/images/bg_image.png");
     background-size: 100%;
      min-height: 500px;
   padding-top: 70px;
@@ -324,7 +324,7 @@ margin-bottom: 40px;
 .media-right {
   padding-left: -6px;
   display: inline-block;
-  margin-top: -19%;
+  margin-top: -15%;
   margin-left: 80%;
 }
 .itemCount{
@@ -354,6 +354,7 @@ float: right;
       padding-left: 5px;
       padding-right: 5px;
 font-family: san-Light;
+    margin-right: 30%;
 }
 .glyphicon-plus,.glyphicon-chevron-right,.glyphicon-minus,.glyphicon-chevron-left,.glyphicon-trash,.glyphicon-edit{
 	cursor: pointer;
@@ -368,17 +369,17 @@ font-family: san-Light;
 
 @media screen and (max-width: 640px) {
     .media-right {
-      margin-top: -33%;
-  margin-left: 68%;}
-}
+  margin-top: -10%;
+  margin-left: 70%;
+}}
 @media screen and (min-width: 768px) {
     .media-right {
-     margin-top: -22.5%;
+     margin-top: -19.5%;
   }
 }
 @media screen and (min-width: 1024px) {
     .media-right {
-     margin-top: -18.5%;
+     margin-top: -15.5%;
   }
 }
 /*Start Product line item*/
@@ -404,9 +405,23 @@ ul.product-line-items li input[type="radio"] {
 .modal-body.customizeFoodBody {
   padding-top: 0px !important;
     text-align: center;
+      margin-top: -10%;
 }
 .modal-header.customizeFoodHeader {
   padding-bottom: 0px !important;
+    border-bottom: 0px;
+      padding: 72px !important;
+}
+.modal-content < .customizeFoodHeader{
+    background-color: red;
+}
+.customizeFoodModel{
+    border-top-left-radius: 50% !important;
+    border-top-right-radius: 50% !important;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background-color: rgb(237, 178, 67);
+    color: white;
 }
 #customizeFoodBut{
   background-color: #46000E !important;
@@ -418,5 +433,21 @@ ul.product-line-items li input[type="radio"] {
   width: 227px;
   margin-top: 13px;
   padding: 5px;
+}
+.nav-tabs>li>a:hover {
+  background-color: rgb(70, 0, 14) !important;
+  border-color: rgb(70, 0, 14) !important;
+}
+.nav-tabs>li>a:focus {
+  background-color: rgb(70, 0, 14) !important;
+  border-color: rgb(70, 0, 14) !important;
+}
+img.img.media-object.visible-xs {
+  margin-right: 3%;
+    float:left;
+}
+
+.media-right span {
+  margin-right: 3px;
 }
 /*End Product line item*/
