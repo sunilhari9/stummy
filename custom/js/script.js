@@ -35,7 +35,7 @@ $(document).ready(function(){
 		console.log("product_name:"+product_name);
 		var ul_items="";
 		for(var i=0;i<parseInt(currentVal);i++){
-			var ul_item = "<ul>"+product_name+" "+(i+1)+":";
+			var ul_item = "<div class='product-name'>"+product_name+" "+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
 			$.each(LineItems, function(index, value) {
 				if (value.ProductCode == product_code) {
 					console.log(value.ProductsLineList);
