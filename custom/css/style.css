@@ -147,6 +147,7 @@ body{
 .itemList{
    height: 642px;
     padding-left: 0px !important;
+      padding-right: 0px !important;
 }
 .img{
     width:100px;
@@ -369,9 +370,26 @@ font-family: san-Light;
 
 @media screen and (max-width: 640px) {
     .media-right {
-  margin-top: -10%;
-  margin-left: 70%;
-}}
+  margin-top: -6%;
+  margin-left: 64%;
+}
+.media-heading{
+    margin-right: 35%;
+}
+}
+@media screen and (max-width: 420px) {
+    .media-right {
+  margin-top: -9%;
+
+}
+}
+@media screen and (max-width: 320px) {
+    .media-right {
+  margin-top: -12%;
+
+}
+}
+
 @media screen and (min-width: 768px) {
     .media-right {
      margin-top: -19.5%;
@@ -450,4 +468,5 @@ img.img.media-object.visible-xs {
 .media-right span {
   margin-right: 3px;
 }
+
 /*End Product line item*/

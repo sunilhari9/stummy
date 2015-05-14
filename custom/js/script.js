@@ -12,6 +12,9 @@ $.getJSON( "custom/js/LineItems.json", function( items ) {
 /*}else{
 init();
 }*/
+    /*Modal window stlying Css class apply*/
+     $(".customizeFoodHeader").parent().addClass("customizeFoodModel")
+    /*End*/
 	function init(){
 		cartJson.itemsArray = itemsArray;
 		items = JSON.parse(localStorage.getItem('products'));
