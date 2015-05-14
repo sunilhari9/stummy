@@ -3,7 +3,8 @@
         "ProductsLineList": [
 			{
 					"ProductLineItemName": "Spicy",
-					"ProductLineItemCode": "1"
+					"ProductLineItemCode": "1",
+					"default":true
 			},
 			{
 					"ProductLineItemName": "No Spicy",
@@ -12,12 +13,26 @@
 			{
 					"ProductLineItemName": "Med Spicy",
 					"ProductLineItemCode": "3"
-			},
-			{
-					"ProductLineItemName": "Full Yummy",
-					"ProductLineItemCode": "4"
 			}
 		],
        "ProductCode": "1001"
+    },
+	{
+        "ProductsLineList": [
+			{
+					"ProductLineItemName": "Dry Fish",
+					"ProductLineItemCode": "1",
+					"default":true
+			},
+			{
+					"ProductLineItemName": "Boneless Fish",
+					"ProductLineItemCode": "2"
+			},
+			{
+					"ProductLineItemName": "Large Fish",
+					"ProductLineItemCode": "3"
+			}
+		],
+       "ProductCode": "1002"
     }
 ]
