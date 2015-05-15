@@ -2,3 +2,11 @@ http://tastykhana.in/hyderabad/manjeera-mall/domino-s-pizza-8609
 
 
 reference URL for implementation for items display....Just now I found...It is exactly suibale for our requirement. Implement this and try to finish it by today.
+
+Checkout forms examples:
+------------------------
+http://codepen.io/bartveneman/pen/KHxLG 
+http://codepen.io/DavieB/full/DonHl
+http://www.shruticreation.com/  - I told u earlier
+
+
