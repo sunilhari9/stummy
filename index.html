@@ -10,6 +10,7 @@
     <!-- Bootstrap -->
     <link href="vendor/css/bootstrap.min.css" rel="stylesheet">
     <link href="custom/css/style.css" rel="stylesheet">
+	<link href="vendor/css/bootstrap-dialog.min.css" rel="stylesheet">
 <link rel="icon" 
       type="image/png" 
       href="custom/images/favicon.png">
@@ -129,8 +130,8 @@
         <div class="row">
          <div class="col-md-3 categories hidden-xs hidden-sm">
             <div class="list-group">
-              <span class="list-group-item heading">
-                Stummy's Categories
+              <span class="list-group-item heading">                
+				<span class="glyphicon glyphicon-th-list" title="Click to decrease"></span> Stummy's Categories
               </span>
             </div>  
          </div>
@@ -144,25 +145,10 @@
           </div>
               </div>              
           <div class="col-md-3 cart hidden-xs hidden-sm"> 
-              <div class="cartHeading"> <img src="custom/images/cart.png"> Your Cart</div>
-              <div class="estimatedTime">Estimated Delivery time: 50 min</div>
+              <div class="cartHeading"><span class="glyphicon glyphicon-shopping-cart"></span>  Your Cart <span class="badge cartItemCount"></span></div>
+              <!--<div class="estimatedTime">Estimated Delivery time: 50 min</div>-->
               <div class="cartItems scroll">
-                 <div class="row cartList">
-			<span class="col-md-8">Hot &amp; Sour Soap </span>
-			<span class="col-md-4">
-				<span class="glyphicon glyphicon-minus" title="Click to decrease"></span> 
-				<span class="quantity">1</span> 
-				<span class="glyphicon glyphicon-plus" title="Click to increase"></span>
-			</span>
-		</div>
-		<div class="row cartList">
-			<span class="col-md-8">Sweet Corn Soup </span>
-			<span class="col-md-4">
-				<span class="glyphicon glyphicon-minus" title="Click to decrease"></span> 
-				<span class="quantity">1</span> 
-				<span class="glyphicon glyphicon-plus" title="Click to increase"></span>
-			</span>
-		</div>
+					<div id="cartItemDesc"></div>
                     <hr class="hrLine">
                     <div class="customize">Customize</div>
                     <div><div class="left">Sub Total</div><div class="right">300.00</div></div>
@@ -185,6 +171,33 @@
         </div>
       </nav>
  </div>
+ <div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body…</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+<div class="row cartListTemplate hidden">
+	<div class="row cartList">
+				<span class="col-md-8 product_name_cart">Hot &amp; Sour Soap </span>
+				<span class="col-md-4">
+					<span class="glyphicon glyphicon-minus" title="Click to decrease"></span> 
+					<span class="quantity">1</span> 
+					<span class="glyphicon glyphicon-plus" title="Click to increase"></span>
+				</span>
+	</div>
+</div>
      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="vendor/js/jquery-1.11.3.min.js"></script>
   	<script src="custom/js/SocialLogin.js"></script>	
@@ -192,5 +205,6 @@
 	<script src="custom/js/items.js"></script>
 	<script src="custom/js/script.js"></script>
     <script src="vendor/js/bootstrap.min.js"></script>
+	<script src="vendor/js/bootstrap-dialog.min.js"></script>
   </body>
 </html>
