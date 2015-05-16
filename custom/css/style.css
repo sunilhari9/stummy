@@ -483,6 +483,11 @@ position: absolute;
   .cartHeading .glyphicon-shopping-cart{
   font-size:20px;
   }
+.customizeIcon{
+    float:right;
+      margin-top: -5%;
+  margin-right: 25px;
+}
 .messagesBar{
 align: center;
 text-align: center;
@@ -490,23 +495,20 @@ color: white;
 font-size: 14px;
 font-weight: bold;
 }
-li.food_item{background-color:#e2e2e2; padding:0 0.5em; margin-top:0.5em;padding-top:20px;display:block;}
+li.food_item{background-color:#e2e2e2; padding-bottom: 0.5em !important; padding:0 0.5em; margin-top:0.5em;padding-top:20px;display:block;}
 @media (max-width: 768px) {
     .customizeIcon {
-   margin-right: -1% !important;
+        margin-right: -1% !important;
+        margin-top: -27px;
 }
     .customizeIcon span{
-  margin-right: 2%;
+  margin-right: 0%;
 }
 }
 @media (min-width: 992px){
     .customizeIcon {
    margin-right: 0% !important;
+          margin-top: -8%;
 }
     
-}
-.customizeIcon{
-    float:right;
-    margin-top: -32px;
-  margin-right: 32px;
 }

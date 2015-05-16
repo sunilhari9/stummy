@@ -2,7 +2,8 @@ $.getJSON( "custom/js/products.json", function( items ) {
 localStorage.setItem('products',JSON.stringify(items));
 
 	var displayItemDOM = function(ProductName,ProductCode){
-		var item = '<li class="food_item"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="./custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName+'<div class="pull-right more">...</div></h4><div class="summary"><a href="#"><img class="img media-object visible-xs" src="./custom/images/food/1.jpg" alt="Test"></a>Sample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample Test</div></div><div class="media-right"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><span class="glyphicon glyphicon-edit" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></li>';		
+        var item = '<li class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="./custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName+'<div class="pull-right more">...</div></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus" title="Click to decrease"></span><span class="quantity" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus" title="Click to increase"></span><span class="glyphicon glyphicon-edit" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="./custom/images/food/1.jpg" alt="Test"></a>Sample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample Test</div></li>';
+		/*var item = '<div class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="/custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName+'<div class="pull-right more">...</div></h4></div><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><span class="glyphicon glyphicon-edit" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="/custom/images/food/1.jpg" alt="Test"></a>Sample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample TestSample Test</div></div>';	*/	
 		$('.items').append(item);
 	};
 	var getUniqueCategories = function(){ 
@@ -34,7 +35,7 @@ localStorage.setItem('products',JSON.stringify(items));
 				}
 			}
 		});
-		$(".summary").hide();
+         $(".summary").hide();
 		$(".more").on("click", function(){
             
             var body=$(this).closest(".media");
