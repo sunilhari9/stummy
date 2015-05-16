@@ -22,22 +22,6 @@
     }
 }
 
-
-@media (max-width: 768px) {
-    .customizeIcon {
-   margin-right: -1% !important;
-}
-    .customizeIcon span{
-  margin-right: 2%;
-}
-}
-@media (min-width: 992px){
-    .customizeIcon {
-   margin-right: 0% !important;
-}
-    
-}
-
 .omb_login .omb_authTitle {
     text-align: center;
 }
