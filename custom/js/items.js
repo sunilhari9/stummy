@@ -35,7 +35,7 @@ localStorage.setItem('products',JSON.stringify(items));
 			}
 		});
 		$(".summary").hide();
-		$(".more").on("click", function(){
+		$(".media-heading").on("click", function(){
             
             var body=$(this).closest(".media");
 		   $(".summary",body).toggle(500);
