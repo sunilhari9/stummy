@@ -35,15 +35,12 @@ localStorage.setItem('products',JSON.stringify(items));
 			}
 		});
 		$(".summary").hide();
-<<<<<<< HEAD
-		$(".more").on("click", function(){
-		   $(this).parent().next().toggle(500);
-=======
+
+	
 		$(".media-heading").on("click", function(){
             
             var body=$(this).closest(".media");
 		   $(".summary",body).toggle(500);
->>>>>>> parent of 16abd53... Revert "Summary Expand Updated to Item title"
 		});
 	}
 	
