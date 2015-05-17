@@ -499,7 +499,42 @@ color: white;
 font-size: 14px;
 font-weight: bold;
 }
-li.food_item{background-color:#e2e2e2; padding-bottom: 0.5em !important; padding:0 0.5em; margin-top:0.5em;padding-top:15px;padding-bottom:15px;display:block;}
+li.food_item{background-color:#e2e2e2; padding-bottom: 1em !important;
+    
+    border-bottom-left-radius: 35px;
+    border-top-right-radius:35px;
+    padding:0 0.5em; 
+    margin-top:0.5em;
+    padding-top:15px;
+    padding-bottom:15px;
+    display:block;
+}
+.stummyBrandingTop{
+    border-top-right-radius:35px !important;
+    border-top-left-radius:35px !important;
+}
+.stummyBranding{
+    border-bottom-right-radius:35px !important;
+    border-top-left-radius:35px !important;
+}
+.stummyBrandingBottom{
+    border-bottom-left-radius: 35px !important;
+    border-bottom-right-radius: 35px !important;
+    
+}
+.text-center{
+    color: #fff !important;
+}
+.active a{
+    border-top-left-radius: 35px !important;
+    border-bottom-right-radius:35px !important;
+}
+a:hover{
+    border-top-left-radius: 35px !important;
+    border-bottom-right-radius:35px !important;
+    
+}
+
 @media (max-width: 768px) {
     .customizeIcon {
         margin-right: 3% !important;
