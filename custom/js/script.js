@@ -341,4 +341,90 @@ init();
 			$('#cartItemDesc').html("<div>No items yet</div>");
 		}			
 	};
-});
+	var productsSearch = JSON.parse(localStorage.getItem('products'));
+	
+	
+	//console.log(items);
+	$('.typeahead').on('keyup',function(){		
+	//$('.typeahead').keyup(function(){
+	var searchKeyword = $(this).val();
+	console.log("searchKeyword:"+searchKeyword);
+	/*var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
+		if(cartTotalItems != undefined){
+			cartTotalItemsLength = cartTotalItems.itemsArray.length;
+			if(cartTotalItemsLength > 0){
+				for(var index = 0;index<cartTotalItemsLength;index++){
+					var eachItemData = cartTotalItems.itemsArray[index];
+					//if (searchKeyword.test(eachItemData.product_name)) {
+					if ( eachItemData.product_name.indexOf(searchKeyword) !== -1 ) {
+						console.log("searchKeyword:"+searchKeyword);
+					}
+				}
+			}
+		}		
+	*/
+	if($(this).val().length >= 3){
+	$('.items').html('');
+		searchProduct(items,$(this).val().toLowerCase());
+	}
+	$(document).ready(function(){
+            var maxLength = 50;
+        function showLess(){
+            $(".show-read-more").each(function(){
+                var myStr = $(this).text();
+                if($.trim(myStr).length > maxLength){
+                    var newStr = myStr.substring(0, maxLength);
+                    var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                    $(this).empty().html(newStr);
+                    $(this).append(' <a href="javascript:void(0);" class="read-more"> More Details...</a>');
+                    $(this).append('<span class="more-text">' + removedStr + '</span>');
+                }
+            });
+            $(".read-more").click(function(){
+                $(this).siblings(".more-text").contents().unwrap();
+                $(this).remove();
+                $(".show-read-more").append(' <a href="javascript:void(0);" class="read-less"> Less Details...</a>');
+                $(".read-less").on("click",function(){
+                        showLess();
+	               });
+            });
+                     
+        }
+        showLess();
+	
+   
+          });
+	});
+	});	
+	function searchProduct(array,product_name){
+	//console.log("product_name:"+product_name);
+		var data = [];
+		for (var i = 0; i < array.length; i++) {
+		//console.log(array[i].ProductsList);
+		array1 = array[i].ProductsList;
+		//console.log(array1);
+			for (var ii = 0; ii < array1.length; ii++) {
+			//console.log(array1[ii]);
+			//console.log(array1[ii].ProductName);
+			if(array1[ii].ProductName != undefined){
+			
+			if ((array1[ii].ProductName.toLowerCase()).indexOf(product_name)  !== -1 ) {
+				/*var obj = {};
+				obj.product_code = array1[ii].product_code;
+				obj.product_name = array1[ii].product_name;
+				data.push(obj);*/
+				//console.log("found");
+				//console.log(array1[ii]);
+				displayItemDOMSearch(array1[ii].ProductName,array1[ii].ProductCode,array1[ii].unitPrice)
+			}
+			}
+			
+		}
+		}
+		
+	};
+	var displayItemDOMSearch = function(ProductName,ProductCode,unitPrice){
+        var item = '<li class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="./custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName+'</h4><div class="customizeIcon"><span class="round-button">&#8377; '+unitPrice+'</span><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><span class="glyphicon glyphicon-edit" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="./custom/images/food/1.jpg" alt="Test"></a><p class="show-read-more"> eu lacus dignissim efficitur. Proin ex metus, ornare placerat nisi at, porta lobortis turpis. Praesent euismod nec nulla ultrices maximus. Vivamus imperdiet quam ac lobortis cursus. Nam dapibus ullamcorper magna vehicula aliquam. Vivamus hendrerit molestie neque. Ut interdum diam a purus ultrices facilisis. Suspendisse molestie</p></div></li>';
+		$('.items').append(item);
+	};
+	
