@@ -362,7 +362,8 @@ font-family: verdana;
 	font-weight: bold;
   font-size: 14px;
 }
-.glyphicon-plus,.glyphicon-chevron-right,.glyphicon-minus,.glyphicon-chevron-left,.glyphicon-trash,.glyphicon-edit{
+.glyphicon-plus,.glyphicon-chevron-right,.glyphicon-minus,.glyphicon-chevron-left,.glyphicon-trash,.glyphicon-edit,.glyphicon-shopping-cart{
+	padding-left: 3px;
 	cursor: pointer;
 }
 .socialButton {
@@ -498,7 +499,7 @@ color: white;
 font-size: 14px;
 font-weight: bold;
 }
-li.food_item{background-color:#e2e2e2; padding-bottom: 0.5em !important; padding:0 0.5em; margin-top:0.5em;padding-top:20px;display:block;}
+li.food_item{background-color:#e2e2e2; padding-bottom: 0.5em !important; padding:0 0.5em; margin-top:0.5em;padding-top:15px;padding-bottom:15px;display:block;}
 @media (max-width: 768px) {
     .customizeIcon {
         margin-right: 3% !important;
@@ -514,4 +515,44 @@ li.food_item{background-color:#e2e2e2; padding-bottom: 0.5em !important; padding
           margin-top: -8%;
 }
     
+}
+@media (min-width: 992px) {
+.categories{
+width: 19% !important;
+}
+}
+@media (min-width: 1050px) {
+.categories{
+width: 21% !important;
+}
+}
+@media (min-width: 1100px) {
+.categories{
+width: 22% !important;
+}
+}
+@media (min-width: 1150px) {
+.categories{
+width: 23% !important;
+}
+}
+.round-button {
+    display:block;
+    width:50px;
+    height:50px;
+    line-height:50px;
+    border: 2px solid #f5f5f5;
+    border-radius: 50%;
+    color:#f5f5f5;
+    text-align:center;
+    text-decoration:none;
+    background: #464646;
+    box-shadow: 0 0 3px gray;
+    font-size:14px;
+    font-weight:bold;
+	margin-left: 15px;
+	margin-bottom: 5px;
+}
+.round-button:hover {
+    background: #262626;
 }

@@ -238,6 +238,42 @@ init();
 			currentCartJSON.itemsArray = [];
 		}
 		var currentItemsArray = currentCartJSON.itemsArray;
+		
+		for (var i=0; i<currentItemsArray.length; i++) {
+		  if (currentItemsArray[i].product_code == product_code) {
+			currentItemsArray[i].product_qty = parseInt(currentVal);
+			currentItemsArray[i].product_lineitems.pop();
+			break;
+		  }
+		}			
+		localStorage.setItem('cartJson',JSON.stringify(currentCartJSON));
+		renderCart();
+		$('.messagesBar').html("Cart updated successfully");
+		$('.messagesBar').show('slow').delay(3000).fadeOut('slow');
+		}
+	});
+	$('body').on('click','.cartPlus',function(){		
+		var currentVal = $(this).prev().text() || $(this).prev().val();
+		console.log("currentVal:"+currentVal);
+		if(currentVal >= 1){
+			$(this).prev().text(parseInt(currentVal)+1);
+			$(this).prev().val(parseInt(currentVal)+1);
+		
+		currentVal = parseInt(currentVal)+1;
+		console.log("currentVal:"+currentVal);
+		//var currentVal = $(this).siblings( ".quantity" ).text();
+		console.log("sibling:"+$(this).siblings( ".quantity" ).data('product-code'));
+		var product_code = $(this).siblings( ".quantity" ).data('product-code');
+		var product_name = $(this).siblings( ".quantity" ).data('product-name');
+		var ul_items="";		
+		var currentCartJSON = {};
+		if(localStorage.getItem('cartJson') != undefined && localStorage.getItem('cartJson').length>0)
+			currentCartJSON = JSON.parse(localStorage.getItem('cartJson'));
+		if(Object.keys(currentCartJSON).length == 0){
+			currentCartJSON = {};
+			currentCartJSON.itemsArray = [];
+		}
+		var currentItemsArray = currentCartJSON.itemsArray;
 		var selectedLineItems = [];
 		var selectedItem = {};
 		selectedItem.product_code = product_code;
@@ -257,10 +293,10 @@ init();
 		for (var i=0; i<currentItemsArray.length; i++) {
 		  if (currentItemsArray[i].product_code == product_code) {
 			currentItemsArray[i].product_qty = parseInt(currentVal);
-			//$.merge(currentItemsArray[i].product_lineitems, selectedLineItems);
+			$.merge(currentItemsArray[i].product_lineitems, selectedLineItems);
 			//console.log(currentItemsArray[i].product_lineitems);
 			//console.log(JSON.stringify(currentItemsArray[i].product_lineitems));
-			currentItemsArray[i].product_lineitems.pop();
+			//currentItemsArray[i].product_lineitems.pop();
 			//console.log(currentItemsArray[i].product_lineitems);
 			break;
 		  }
