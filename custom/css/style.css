@@ -168,8 +168,10 @@ body{
     border-top-right-radius: 10px;
 }
 .lunch{
-     background-color: rgb(254, 17, 59);
-    border-top-right-radius: 10px;
+    /* background-color: rgb(254, 17, 59);
+    border-top-right-radius: 10px;*/
+	 background-color: rgb(70, 0, 14);
+	 
 }
 .dinner{
      background-color: rgb(195, 0, 35);
@@ -178,6 +180,9 @@ body{
 .lateNight{
      background-color: rgb(70, 0, 14);
     border-top-right-radius: 10px;
+	    text-align: right;
+    padding-right: 10px;
+}
 }
 .glyphicon-th-list{
      color: rgb(70, 0, 14);
@@ -499,42 +504,7 @@ color: white;
 font-size: 14px;
 font-weight: bold;
 }
-li.food_item{background-color:#e2e2e2; padding-bottom: 1em !important;
-    
-    border-bottom-left-radius: 35px;
-    border-top-right-radius:35px;
-    padding:0 0.5em; 
-    margin-top:0.5em;
-    padding-top:15px;
-    padding-bottom:15px;
-    display:block;
-}
-.stummyBrandingTop{
-    border-top-right-radius:35px !important;
-    border-top-left-radius:35px !important;
-}
-.stummyBranding{
-    border-bottom-right-radius:35px !important;
-    border-top-left-radius:35px !important;
-}
-.stummyBrandingBottom{
-    border-bottom-left-radius: 35px !important;
-    border-bottom-right-radius: 35px !important;
-    
-}
-.text-center{
-    color: #fff !important;
-}
-.active a{
-    border-top-left-radius: 35px !important;
-    border-bottom-right-radius:35px !important;
-}
-a:hover{
-    border-top-left-radius: 35px !important;
-    border-bottom-right-radius:35px !important;
-    
-}
-
+li.food_item{background-color:#e2e2e2; padding-bottom: 0.5em !important; padding:0 0.5em; margin-top:0.5em;padding-top:15px;padding-bottom:15px;display:block;}
 @media (max-width: 768px) {
     .customizeIcon {
         margin-right: 3% !important;
@@ -590,4 +560,70 @@ width: 23% !important;
 }
 .round-button:hover {
     background: #262626;
+}
+.tt-menu {
+  width: 422px;
+  margin: 12px 0;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: left;
+}
+
+.tt-suggestion:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #0097cf;
+}
+
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+.typeahead{
+	padding-left: 10px;
+  border: 2px solid #ccc;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  outline: none;
+}
+
+@media (max-width: 420px){
+  .show-read-more{
+      clear:both !important;
+	  padding-top: 4%;
+
+  }
+   .customizeIcon {
+   margin-top: 10px;
+}
+   
+}
+@media (max-width: 768px){
+.lateNight{
+height: 45px;
+text-align: center;
+}
+.typeahead {
+    margin-top: 9px;
+}
 }
