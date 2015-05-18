@@ -168,10 +168,8 @@ body{
     border-top-right-radius: 10px;
 }
 .lunch{
-    /* background-color: rgb(254, 17, 59);
-    border-top-right-radius: 10px;*/
-	 background-color: rgb(70, 0, 14);
-	 
+     background-color: rgb(254, 17, 59);
+    border-top-right-radius: 10px;
 }
 .dinner{
      background-color: rgb(195, 0, 35);
@@ -180,9 +178,6 @@ body{
 .lateNight{
      background-color: rgb(70, 0, 14);
     border-top-right-radius: 10px;
-	    text-align: right;
-    padding-right: 10px;
-}
 }
 .glyphicon-th-list{
      color: rgb(70, 0, 14);
@@ -253,6 +248,9 @@ body{
   background-color:  rgb(204,190,173);
   outline: 1px solid slategrey;
 width: 40px;
+}
+li{
+      list-style: none !important;
 }
 .cartHeading{
       margin-top: 10px;
@@ -379,6 +377,16 @@ font-family: verdana;
 }
 /*End Index Screen Style*/
 
+/*Start Search*/
+.search .form-control-feedback{
+    margin-right: 4%;
+}
+.search.form-group {
+  margin-top: 8px !important;
+  margin-bottom: 7px !important;
+      margin-left: 20%;
+}
+/*End Search*/
 @media screen and (max-width: 640px) {
     .media-right {
   margin-top: -6%;
@@ -392,6 +400,12 @@ font-family: verdana;
     .media-right {
   margin-top: -9%;
 
+}
+    .search.form-group {
+    margin-left: 0%;
+}
+.itemList ul{
+    margin-top: 35px;
 }
 }
 @media screen and (max-width: 320px) {
@@ -451,6 +465,11 @@ ul.product-line-items li input[type="radio"] {
     background-color: rgb(237, 178, 67);
     color: white;
 }
+.lateNight span.input-group{
+      float: right;
+  margin-top: -7%;
+  margin-right: -43%;
+}
 #customizeFoodBut{
   background-color: #46000E !important;
  border-bottom-left-radius: 20px;
@@ -504,7 +523,6 @@ color: white;
 font-size: 14px;
 font-weight: bold;
 }
-<<<<<<< HEAD
 li.food_item{background-color:#e2e2e2; padding-bottom: 1em !important;
     
     border-bottom-left-radius: 35px;
@@ -541,9 +559,6 @@ a:hover{
     
 }
 
-=======
-li.food_item{background-color:#e2e2e2; padding-bottom: 0.5em !important; padding:0 0.5em; margin-top:0.5em;padding-top:15px;padding-bottom:15px;display:block;}
->>>>>>> origin/master
 @media (max-width: 768px) {
     .customizeIcon {
         margin-right: 3% !important;
@@ -610,7 +625,6 @@ width: 23% !important;
 .round-button:hover {
     background: #262626;
 }
-<<<<<<< HEAD
 
 /*Start cart checkout*/
 .table>tbody>tr>td, .table>tfoot>tr>td{
@@ -649,71 +663,3 @@ width: 23% !important;
 }
 
 /*End cart checkout*/
-=======
-.tt-menu {
-  width: 422px;
-  margin: 12px 0;
-  padding: 8px 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  -webkit-border-radius: 8px;
-     -moz-border-radius: 8px;
-          border-radius: 8px;
-  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-          box-shadow: 0 5px 10px rgba(0,0,0,.2);
-}
-
-.tt-suggestion {
-  padding: 3px 20px;
-  font-size: 18px;
-  line-height: 24px;
-  text-align: left;
-}
-
-.tt-suggestion:hover {
-  cursor: pointer;
-  color: #fff;
-  background-color: #0097cf;
-}
-
-.tt-suggestion.tt-cursor {
-  color: #fff;
-  background-color: #0097cf;
-
-}
-
-.tt-suggestion p {
-  margin: 0;
-}
-.typeahead{
-	padding-left: 10px;
-  border: 2px solid #ccc;
-  -webkit-border-radius: 8px;
-     -moz-border-radius: 8px;
-          border-radius: 8px;
-  outline: none;
-}
-
-@media (max-width: 420px){
-  .show-read-more{
-      clear:both !important;
-	  padding-top: 4%;
-
-  }
-   .customizeIcon {
-   margin-top: 10px;
-}
-   
-}
-@media (max-width: 768px){
-.lateNight{
-height: 45px;
-text-align: center;
-}
-.typeahead {
-    margin-top: 9px;
-}
-}
->>>>>>> origin/master

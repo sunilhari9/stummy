@@ -35,6 +35,14 @@
             </button>
             <a class="navbar-brand" href="#"><img class="logo" alt="Brand" src="custom/images/logo.png"></a>
           </div>
+            <div class="col-md-6 text-center navbar-left">
+  
+        <div class="col-md-9 search form-group has-feedback">
+             <input type="text" class="form-control typeahead" placeholder="Search....">
+  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                      
+        </div>
+            </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li ><a href="#" class="links-active" data-toggle="modal" data-target="#loginScreen">Sign-in / Sign-up</a></li>
@@ -138,12 +146,54 @@
          </div>
           <div class="col-md-6 itemList">
               <ul class="nav nav-tabs nav-justified">
-                  <li class="lunch hidden-xs"><a></a> </li>
-				  <li class="lunch hidden-xs"><a></a> </li>
-				  <li class="lunch "><a>Menu Items</a></li>
-				  <li class="lateNight"><input class="typeahead" type="text" placeholder="Search Food"></li>
+                  
+                  <li class="lateNight"><a href="#">Menu Items</a> 
+                    
+                  </li>
             </ul>
             <div class="items">
+			<!--<div>
+				<ul class="food_items">
+					<li class="food_item" id="find_1302135">
+						<div class="food-img">
+							<img src="http://tkstatic.in/cdn/cheese-tomato_dominos_item.png" alt="cheese tomato" style="">
+						</div>
+						<div class="name">
+							Cheese Tomato
+							<br>
+							<span class="item_desc">Cheese and Fresh Tomato</span>
+						</div>
+						<div class="adopt">
+							<div class="down-arrow" id="close_1302135">
+								<a class="btn" style="padding: 0.1em 0.5em; display: block;" id="button_"><i class="fa fa-chevron-circle-down "></i></a>
+							</div>
+							<div class="pricea">
+								<i class="fa fa-inr"></i> <span class="money" id="price1302135">85	</span>
+							</div>
+						</div>
+
+					</li>
+					<li class="food_item" id="find_1302135">
+						<div class="food-img">
+							<img src="http://tkstatic.in/cdn/cheese-tomato_dominos_item.png" alt="cheese tomato" style="">
+						</div>
+						<div class="name">
+							Cheese Tomato
+							<br>
+							<span class="item_desc">Cheese and Fresh Tomato</span>
+						</div>
+						<div class="adopt">
+							<div class="down-arrow" id="close_1302135">
+								<a class="btn" style="padding: 0.1em 0.5em; display: block;" id="button_"><i class="fa fa-chevron-circle-down "></i></a>
+							</div>
+							<div class="pricea">
+								<i class="fa fa-inr"></i> <span class="money" id="price1302135">85	</span>
+							</div>
+						</div>
+
+					</li>
+				</ul>
+            </div>-->
           </div>
               </div>              
           <div class="col-md-3 cart hidden-xs hidden-sm"> 
@@ -206,12 +256,9 @@
   	<script src="custom/js/SocialLogin.js"></script>	
    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 	<script src="custom/js/items.js"></script>
-	<script src="custom/js/typeahead.bundle.js"></script>
 	<script src="custom/js/script.js"></script>
 	<script src="custom/js/ReadMore.js"></script>
     <script src="vendor/js/bootstrap.min.js"></script>
 	<script src="vendor/js/bootstrap-dialog.min.js"></script>
-	
-
   </body>
 </html>
