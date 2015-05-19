@@ -1,5 +1,7 @@
-http://jsfiddle.net/BXreg/3/ = for checkbox view as responsive with tables
-This may be the best option to use.
+http://jsfiddle.net/132ht1s8/
+http://jsfiddle.net/BXreg/3/ = 
+for checkbox view as responsive
+Any option can be used
 
 
 http://tastykhana.in/hyderabad/manjeera-mall/domino-s-pizza-8609
