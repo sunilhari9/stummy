@@ -392,8 +392,11 @@ init();
         }
         showLess();
 	
-   
+   mobileChk();
           });
+	});
+	$('body').on('click','.hlink',function(){
+		$(this).siblings('.summary').children('.mobileHide').toggle();
 	});
 	});	
 	function searchProduct(array,product_name){
@@ -427,4 +430,34 @@ init();
         var item = '<li class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="./custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName+'</h4><div class="customizeIcon"><span class="round-button">&#8377; '+unitPrice+'</span><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><span class="glyphicon glyphicon-edit" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="./custom/images/food/1.jpg" alt="Test"></a><p class="show-read-more"> eu lacus dignissim efficitur. Proin ex metus, ornare placerat nisi at, porta lobortis turpis. Praesent euismod nec nulla ultrices maximus. Vivamus imperdiet quam ac lobortis cursus. Nam dapibus ullamcorper magna vehicula aliquam. Vivamus hendrerit molestie neque. Ut interdum diam a purus ultrices facilisis. Suspendisse molestie</p></div></li>';
 		$('.items').append(item);
 	};
-	
+	var calcRWD = function(){
+		var rwdInfo = "1";
+		if (window.getComputedStyle) {
+			rwdInfo = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('z-index');
+		}
+		return rwdInfo;
+		}
+		var mobileChk = function(){
+		var rwdInfo = calcRWD();
+			if(rwdInfo == 4){
+				if($('.summary > p').hasClass('show-read-more'))
+					console.log("there");
+					$('.summary > p > a.read-more').addClass('hidden');
+					$('.summary > p').addClass('mobileHide').removeClass('show-read-more');
+					$('.media-heading').addClass('hlink');
+					$('.mobileHide').hide();
+			}else{
+				if($('.summary > p').hasClass('mobileHide')){
+					$('.mobileHide').show();
+					$('.summary > p').addClass('show-read-more').removeClass('mobileHide');
+					$('.summary > p > a.read-more').removeClass('hidden');
+					$('.media-heading').removeClass('hlink');
+					
+				}
+				
+			}
+		}
+	$( window ).resize(function() {
+			
+				mobileChk();		
+			});
