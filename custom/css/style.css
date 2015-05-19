@@ -449,6 +449,18 @@ ul.product-line-items li input[type="radio"] {
     text-align: center;
       margin-top: -10%;
 }
+.navToggle{
+    height:40px !important;
+}
+.navbar-toggle {
+  padding: 0px !important;
+  margin-bottom: 0px !important; 
+  border-radius: 0px !important;
+border-color: #fff !important;
+}
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{
+    background-color: #fff !important;
+}
 .modal-header.customizeFoodHeader {
   padding-bottom: 0px !important;
     border-bottom: 0px;
