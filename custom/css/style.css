@@ -13,6 +13,14 @@ body:before {
     content: 'Mobile';
     z-index: 3;
   }
+
+.search .form-control-feedback {
+  margin-right: 20% !important;
+}
+.form-control {
+    width: 80% !important;
+    margin-top: -45px !important;
+}
 }
 @media screen and (min-width: 0) and (max-width: 419px) {
   body:before {
