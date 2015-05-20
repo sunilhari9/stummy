@@ -33,7 +33,8 @@ init();
 		}
 	});
 	$('body').on('click','.glyphicon-edit',function(){
-		var currentVal = $(this).prev().prev().text() || $(this).prev().prev().val();
+        $(this).parent().siblings(".cartCustomizeHiden").toggle(500);
+		/*var currentVal = $(this).prev().prev().text() || $(this).prev().prev().val();
 		var product_code = $(this).prev().prev().data('product-code');
 		var product_name = $(this).prev().prev().data('product-name');
 		var ul_items="";
@@ -50,8 +51,8 @@ init();
 				ul_items += ul_item+"</ul>";
 			});
 		}
-		$('.customizeFoodBody').html(ul_items+'<button id="customizeFoodBut">Update &amp; Add to Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
-		$('#customizeFood').modal('show');		
+		$('.customizeFoodBody').html(ul_items+'<button id="customizeFoodBut">Update &amp; Add to Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');*/
+		//$('#customizeFood').modal('show');		
 	});
 	
 	$('body').on('click','#customizeFoodBut',function(){	
@@ -427,7 +428,7 @@ init();
 		
 	};
 	var displayItemDOMSearch = function(ProductName,ProductCode,unitPrice){
-        var item = '<li class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="./custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName+'</h4><div class="customizeIcon"><span class="round-button">&#8377; '+unitPrice+'</span><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><span class="glyphicon glyphicon-edit" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="./custom/images/food/1.jpg" alt="Test"></a><p class="show-read-more"> eu lacus dignissim efficitur. Proin ex metus, ornare placerat nisi at, porta lobortis turpis. Praesent euismod nec nulla ultrices maximus. Vivamus imperdiet quam ac lobortis cursus. Nam dapibus ullamcorper magna vehicula aliquam. Vivamus hendrerit molestie neque. Ut interdum diam a purus ultrices facilisis. Suspendisse molestie</p></div></li>';
+        var item = '<li class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="./custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName+'</h4><div class="customizeIcon"><span class="round-button">&#8377; '+unitPrice+'</span><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><span class="glyphicon glyphicon-edit" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="./custom/images/food/1.jpg" alt="Test"></a><p class="show-read-more"> eu lacus dignissim efficitur. Proin ex metus, ornare placerat nisi at, porta lobortis turpis. Praesent euismod nec nulla ultrices maximus. Vivamus imperdiet quam ac lobortis cursus. Nam dapibus ullamcorper magna vehicula aliquam. Vivamus hendrerit molestie neque. Ut interdum diam a purus ultrices facilisis. Suspendisse molestie</p></div><div class="cartCustomizeHiden">Hide/Show</div></li>';
 		$('.items').append(item);
 	};
 	var calcRWD = function(){
