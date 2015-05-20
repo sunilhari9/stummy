@@ -50,9 +50,9 @@ localStorage.setItem('products',JSON.stringify(items));
                 }
             });
             $(".read-more").click(function(){
+                $(this).siblings(".more-text").append(' <a href="javascript:void(0);" class="read-less"> Less Details...</a>');
                 $(this).siblings(".more-text").contents().unwrap();
                 $(this).remove();
-                $(".show-read-more").append(' <a href="javascript:void(0);" class="read-less"> Less Details...</a>');
                 $(".read-less").on("click",function(){
                         showLess();
 	               });
