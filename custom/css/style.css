@@ -24,6 +24,10 @@ body:before {
     font-family: san-Light;
     src: url(../fonts/OpenSans-Light.ttf);
 }
+@font-face {
+    font-family: segoe-Light;
+    src: url(../fonts/segoe-ui-light.ttf);
+}
 
 @font-face {
     font-family: san-Regular;
@@ -139,7 +143,7 @@ body{
      min-height: 500px;
   padding-top: 70px;
      padding-bottom: 70px;
-    font-family: san-Regular;
+    font-family: segoe-Light;
 }
 .categories{
    height: 642px;
@@ -254,7 +258,7 @@ body{
     background: -moz-linear-gradient(#EFE7D7, #fff,#EFE7D7); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#EFE7D7, #fff,#EFE7D7); /* Standard syntax (must be last) */
       margin-bottom: 16px;
-      font-family: san-Light;
+      font-family: segoe-Light;
 	  padding-bottom: 25px;
 }
 .scroll::-webkit-scrollbar {
@@ -275,7 +279,7 @@ width: 40px;
 .cartHeading{
       margin-top: 10px;
   margin-left: 5px;
-  font-family: san-Regular;
+  font-family: segoe-Light;
   font-size: 14px;
   font-weight: bold;
   color: #fff;
@@ -363,7 +367,7 @@ margin-bottom: 40px;
   margin-bottom: 10px;
   margin-top: 10px;
       padding-left: 5px;
-font-family: san-Light;
+font-family: segoe-Light;
 }
 .left{
 float: left;
@@ -381,7 +385,7 @@ float: right;
   margin-top: 15px;
       padding-left: 5px;
       padding-right: 5px;
-font-family: verdana;
+font-family: segoe-Light;
     margin-right: 30%;
 	font-weight: bold;
   font-size: 18px;
