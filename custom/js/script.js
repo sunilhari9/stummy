@@ -14,7 +14,9 @@ init();
 }*/
 	function init(){
 		cartJson.itemsArray = itemsArray;
-		items = JSON.parse(localStorage.getItem('products'));
+		$.getJSON( "custom/js/products.json", function( data ) {
+			items = data;
+		});
 		LineItems = JSON.parse(sessionStorage.getItem('LineItems'));
 		renderCart();
 	}
@@ -32,7 +34,7 @@ init();
 			$(this).prev().val(parseInt(currentVal)+1);
 		}
 	});
-	$('body').on('click','.glyphicon-edit',function(){
+	$('body').on('click','.glyphicon-edit.itemPanel',function(){
 		var currentVal = $(this).prev().prev().text() || $(this).prev().prev().val();
 		var product_code = $(this).prev().prev().data('product-code');
 		var product_name = $(this).prev().prev().data('product-name');
@@ -43,7 +45,7 @@ init();
 				if (value.ProductCode == product_code) {
 				ul_item = "<div class='product-name'>"+product_name+" "+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
 					$.each(value.ProductsLineList, function(index1, value1) {
-						var li_item = '<li><input type=radio name="product-line-items-selection'+i+'" value="'+value1.ProductLineItemCode+'">'+value1.ProductLineItemName+'</li>';
+						var li_item = '<li><input type=checkbox name="product-line-items-selection'+i+'" value="'+value1.ProductLineItemCode+'">'+value1.ProductLineItemName+'</li>';
 						ul_item += li_item;
 					});
 				}
@@ -53,7 +55,61 @@ init();
 		$('.customizeFoodBody').html(ul_items+'<button id="customizeFoodBut">Update &amp; Add to Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
 		$('#customizeFood').modal('show');		
 	});
+	$('body').on('click','.glyphicon-edit.cartPanel',function(event){
+	console.log("in click");
+		var currentVal = $(this).siblings( ".quantity" ).text();
+		console.log("sibling:"+$('.glyphicon-edit.cartPanel').siblings( ".quantity" ).data('product-code'));
+		var product_code = $(this).siblings( ".quantity" ).data('product-code');
+		var product_name = $(this).siblings( ".quantity" ).data('product-name');
+		var currentCartJSON = {};
+		if(localStorage.getItem('cartJson') != undefined && localStorage.getItem('cartJson').length>0)
+			currentCartJSON = JSON.parse(localStorage.getItem('cartJson'));
+		if(Object.keys(currentCartJSON).length == 0){
+			currentCartJSON = {};
+			currentCartJSON.itemsArray = [];
+		}
+		var currentItemsArray = currentCartJSON.itemsArray;
+		var curretnProductArray;
+		for (var i=0; i<currentItemsArray.length; i++) {
+		  if (currentItemsArray[i].product_code == product_code) {
+			curretnProductArray = currentItemsArray[i].product_lineitems;
+			break;
+		  }
+		}	
+		console.log(curretnProductArray);
+		var ul_items="";
+		for(var i=0;i<parseInt(currentVal);i++){
+			$.each(LineItems, function(index, value) {
+				var ul_item = "";
+				if (value.ProductCode == product_code) {
+				ul_item = "<div class='product-name'>"+product_name+" "+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
+					$.each(value.ProductsLineList, function(index1, value1) {
+						var li_item = '';
+						console.log(value1.ProductLineItemCode);
+						//console.log(curretnProductArray[i].indexOf(value1.ProductLineItemCode));
+						if(curretnProductArray[i] != undefined){
+							if(curretnProductArray[i].indexOf(value1.ProductLineItemCode) != -1)
+								li_item = '<li><input type=checkbox name="product-line-items-selection-cart'+i+'" value="'+value1.ProductLineItemCode+'" checked="checked">'+value1.ProductLineItemName+'</li>';
+							else
+								li_item = '<li><input type=checkbox name="product-line-items-selection-cart'+i+'" value="'+value1.ProductLineItemCode+'">'+value1.ProductLineItemName+'</li>';
+						}
+						else
+								li_item = '<li><input type=checkbox name="product-line-items-selection-cart'+i+'" value="'+value1.ProductLineItemCode+'">'+value1.ProductLineItemName+'</li>';
+						ul_item += li_item;
+					});
+				}
+				ul_items += ul_item+"</ul>";
+			});
+		}
+		$('.customizeFoodBody').html(ul_items+'<button id="customizeFoodButCart">Customize the Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
+		$('#customizeFood').modal('show');
+	});
+	var editCartPanel = function(){
 	
+		
+		
+		
+	};
 	$('body').on('click','#customizeFoodBut',function(){	
 		var currentCartJSON = {};
 		if(localStorage.getItem('cartJson') != undefined && localStorage.getItem('cartJson').length>0)
@@ -73,9 +129,57 @@ init();
 		}else
 			saveItemToCart();		
 	});
+	$('body').on('click','#customizeFoodButCart',function(){
+		var currentCartJSON = {};
+		var selectedLineItemsAll = [];		
+		var selectedItem = {};
+		if(localStorage.getItem('cartJson') != undefined && localStorage.getItem('cartJson').length>0)
+			currentCartJSON = JSON.parse(localStorage.getItem('cartJson'));
+		if(Object.keys(currentCartJSON).length == 0){
+			currentCartJSON = {};
+			currentCartJSON.itemsArray = [];
+		}
+		var currentItemsArray = currentCartJSON.itemsArray;		
+		selectedItem.product_code = $('#current_product_code').val();
+		selectedItem.product_name = $('#current_product_name').val();
+		selectedItem.product_qty = $('#current_product_qty').val();
+		$('#errorMsgs').html('');
+		for(var i=0;i<parseInt($('#current_product_qty').val());i++){
+			var selectedLineItems = [];
+			console.log($('input[name=product-line-items-selection-cart'+i+']:checked').val());
+			if($('input[name="product-line-items-selection-cart'+i+'"]:checked').length > 0){
+				$('input[name="product-line-items-selection-cart'+i+'"]:checked').each(function() {
+				   selectedLineItems.push(this.value);
+				});
+			}
+			else{
+				if(parseInt($('#current_product_qty').val())>1)
+						$('#errorMsgs').html("Choose any one option to proceed under each section");
+					else
+						$('#errorMsgs').html("Choose any one option to proceed");
+				}
+			selectedLineItemsAll.push(selectedLineItems);
+		}
+		selectedItem.product_lineitems = selectedLineItemsAll;		
+		if($('#errorMsgs').text().length == 0){
+			for (var i=0; i<currentItemsArray.length; i++) {
+			  if (currentItemsArray[i].product_code == $('#current_product_code').val()) {
+				currentItemsArray[i].product_qty =  parseInt($('#current_product_qty').val());
+				currentItemsArray[i].product_lineitems = selectedLineItemsAll;
+				break;
+			  }
+			}	
+			currentCartJSON.itemsArray = currentItemsArray;
+			localStorage.setItem('cartJson',JSON.stringify(currentCartJSON));
+			renderCart();
+			$('#customizeFood').modal('hide');
+			$('.messagesBar').html("Cart updated successfully");
+			$('.messagesBar').show('slow').delay(3000).fadeOut('slow');
+		}
+	});
 	
 	var saveItemToCart = function(){
-		var selectedLineItems = [];
+		var selectedLineItemsAll = [];		
 		var selectedItem = {};
 		var currentCartJSON = {};
 		if(localStorage.getItem('cartJson') != undefined && localStorage.getItem('cartJson').length>0)
@@ -90,17 +194,22 @@ init();
 		selectedItem.product_qty = $('#current_product_qty').val();
 		$('#errorMsgs').html('');
 		for(var i=0;i<parseInt($('#current_product_qty').val());i++){
-			if($('input[name=product-line-items-selection'+i+']:checked').val() != undefined)
-				selectedLineItems.push($('input[name=product-line-items-selection'+i+']:checked').val());
-			else
-			{	
-				if(parseInt($('#current_product_qty').val())>1)
-					$('#errorMsgs').html("Choose any one option to proceed under each section");
-				else
-					$('#errorMsgs').html("Choose any one option to proceed");
+			var selectedLineItems = [];
+			console.log($('input[name=product-line-items-selection'+i+']:checked').val());
+			if($('input[name="product-line-items-selection'+i+'"]:checked').length > 0){
+				$('input[name="product-line-items-selection'+i+'"]:checked').each(function() {
+				   selectedLineItems.push(this.value);
+				});
 			}
+			else{
+				if(parseInt($('#current_product_qty').val())>1)
+						$('#errorMsgs').html("Choose any one option to proceed under each section");
+					else
+						$('#errorMsgs').html("Choose any one option to proceed");
+				}
+			selectedLineItemsAll.push(selectedLineItems);
 		}
-		selectedItem.product_lineitems = selectedLineItems;		
+		selectedItem.product_lineitems = selectedLineItemsAll;		
 		if($('#errorMsgs').text().length == 0){
 			currentItemsArray.push(selectedItem);
 			currentCartJSON.itemsArray = currentItemsArray;
@@ -123,7 +232,7 @@ init();
 	};
 	
 	var updateItemToCart = function(){
-		var selectedLineItems = [];
+		var selectedLineItemsAll = [];
 		var selectedItem = {};
 		var currentCartJSON = {};
 		if(localStorage.getItem('cartJson') != undefined && localStorage.getItem('cartJson').length>0)
@@ -135,23 +244,26 @@ init();
 		var currentItemsArray = currentCartJSON.itemsArray;
 		$('#errorMsgs').html('');
 		for(var i=0;i<parseInt($('#current_product_qty').val());i++){
-			if($('input[name=product-line-items-selection'+i+']:checked').val() != undefined)
-			{
-				selectedLineItems.push($('input[name=product-line-items-selection'+i+']:checked').val());		
+			var selectedLineItems = [];
+			console.log($('input[name=product-line-items-selection'+i+']:checked').val());
+			if($('input[name="product-line-items-selection'+i+'"]:checked').length > 0){
+				$('input[name="product-line-items-selection'+i+'"]:checked').each(function() {
+				   selectedLineItems.push(this.value);
+				});
 			}
-			else
-			{	
+			else{
 				if(parseInt($('#current_product_qty').val())>1)
-					$('#errorMsgs').html("Choose any one option to proceed under each section");
-				else
-					$('#errorMsgs').html("Choose any one option to proceed");
-			}
+						$('#errorMsgs').html("Choose any one option to proceed under each section");
+					else
+						$('#errorMsgs').html("Choose any one option to proceed");
+				}
+			selectedLineItemsAll.push(selectedLineItems);
 		}
 		if($('#errorMsgs').text().length == 0){
 			for (var i=0; i<currentItemsArray.length; i++) {
 			  if (currentItemsArray[i].product_code == $('#current_product_code').val()) {
 				currentItemsArray[i].product_qty = parseInt(currentItemsArray[i].product_qty) + parseInt($('#current_product_qty').val());
-				$.merge(currentItemsArray[i].product_lineitems,selectedLineItems);
+				$.merge(currentItemsArray[i].product_lineitems,selectedLineItemsAll);
 				break;
 			  }
 			}	
@@ -177,38 +289,45 @@ init();
 			currentCartJSON.itemsArray = [];
 		}
 		var currentItemsArray = currentCartJSON.itemsArray;
-		var selectedLineItems = [];
+		var selectedLineItemsAll = [];
+		
 		var selectedItem = {};
 		selectedItem.product_code = product_code;
 		selectedItem.product_name = product_name;
 		selectedItem.product_qty = currentVal;
 		for(var i=0;i<parseInt(currentVal);i++){
 			$.each(LineItems, function(index, value) {
+			var selectedLineItems = [];
 				if (value.ProductCode == product_code) {
 					$.each(value.ProductsLineList, function(index1, value1) {
-						if(value1.default)
+						if(value1.default){
 							selectedLineItems.push(value1.ProductLineItemCode);
+							selectedLineItemsAll.push(selectedLineItems);
+							}
 					});
 				}
 			});
 		}
+		
+		console.log(selectedLineItemsAll);
 		if(currentItemsArray.length > 0){
 			if(!existsProduct(currentItemsArray,product_code))
 			{ 
-				selectedItem.product_lineitems = selectedLineItems;
+			console.log("in if");
+				selectedItem.product_lineitems = selectedLineItemsAll;
 				currentCartJSON.itemsArray.push(selectedItem);
 			}
 			else{
 				for (var i=0; i<currentItemsArray.length; i++) {
 				  if (currentItemsArray[i].product_code == product_code) {
 					currentItemsArray[i].product_qty = parseInt(currentItemsArray[i].product_qty) + parseInt(currentVal);
-					$.merge(currentItemsArray[i].product_lineitems,selectedLineItems);
+					$.merge(currentItemsArray[i].product_lineitems,selectedLineItemsAll);
 					break;
 				  }
 				}
 			}
 		}else{
-			selectedItem.product_lineitems = selectedLineItems;
+			selectedItem.product_lineitems = selectedLineItemsAll;
 			currentCartJSON.itemsArray.push(selectedItem);
 		}
 		localStorage.setItem('cartJson',JSON.stringify(currentCartJSON));
@@ -219,17 +338,18 @@ init();
 	$('body').on('click','.cartMinus',function(){		
 		var currentVal = $(this).next().text() || $(this).next().val();
 		console.log("currentVal:"+currentVal);
-		if(currentVal > 1){
+	/*	if(currentVal > 1){
 			$(this).next().text(parseInt(currentVal)-1);
 			$(this).next().val(parseInt(currentVal)-1);
+			console.log("setting");
+		}*/
+		console.log("currentVal:"+$(this).next().text());
 		
-		currentVal = parseInt(currentVal)-1;
-		console.log("currentVal:"+currentVal);
-		//var currentVal = $(this).siblings( ".quantity" ).text();
-		console.log("sibling:"+$(this).siblings( ".quantity" ).data('product-code'));
+		//$('.glyphicon-edit.cartPanel').trigger('click');
+		var currentVal = $(this).siblings( ".quantity" ).text();
+		console.log("sibling:"+$('.glyphicon-edit.cartPanel').siblings( ".quantity" ).data('product-code'));
 		var product_code = $(this).siblings( ".quantity" ).data('product-code');
 		var product_name = $(this).siblings( ".quantity" ).data('product-name');
-		var ul_items="";		
 		var currentCartJSON = {};
 		if(localStorage.getItem('cartJson') != undefined && localStorage.getItem('cartJson').length>0)
 			currentCartJSON = JSON.parse(localStorage.getItem('cartJson'));
@@ -238,83 +358,106 @@ init();
 			currentCartJSON.itemsArray = [];
 		}
 		var currentItemsArray = currentCartJSON.itemsArray;
-		
+		var curretnProductArray;
 		for (var i=0; i<currentItemsArray.length; i++) {
 		  if (currentItemsArray[i].product_code == product_code) {
-			currentItemsArray[i].product_qty = parseInt(currentVal);
-			currentItemsArray[i].product_lineitems.pop();
+			curretnProductArray = currentItemsArray[i].product_lineitems;
 			break;
 		  }
-		}			
-		localStorage.setItem('cartJson',JSON.stringify(currentCartJSON));
-		renderCart();
-		$('.messagesBar').html("Cart updated successfully");
-		$('.messagesBar').show('slow').delay(3000).fadeOut('slow');
-		}
-	});
-	$('body').on('click','.cartPlus',function(){		
-		var currentVal = $(this).prev().text() || $(this).prev().val();
-		console.log("currentVal:"+currentVal);
-		if(currentVal >= 1){
-			$(this).prev().text(parseInt(currentVal)+1);
-			$(this).prev().val(parseInt(currentVal)+1);
-		
-		currentVal = parseInt(currentVal)+1;
-		console.log("currentVal:"+currentVal);
-		//var currentVal = $(this).siblings( ".quantity" ).text();
-		console.log("sibling:"+$(this).siblings( ".quantity" ).data('product-code'));
-		var product_code = $(this).siblings( ".quantity" ).data('product-code');
-		var product_name = $(this).siblings( ".quantity" ).data('product-name');
-		var ul_items="";		
-		var currentCartJSON = {};
-		if(localStorage.getItem('cartJson') != undefined && localStorage.getItem('cartJson').length>0)
-			currentCartJSON = JSON.parse(localStorage.getItem('cartJson'));
-		if(Object.keys(currentCartJSON).length == 0){
-			currentCartJSON = {};
-			currentCartJSON.itemsArray = [];
-		}
-		var currentItemsArray = currentCartJSON.itemsArray;
-		var selectedLineItems = [];
-		var selectedItem = {};
-		selectedItem.product_code = product_code;
-		selectedItem.product_name = product_name;
-		selectedItem.product_qty = currentVal;
-		//for(var i=0;i<parseInt(currentVal);i++){
+		}	
+		console.log(curretnProductArray);
+		var ul_items="";
+		for(var i=0;i<parseInt(currentVal);i++){
 			$.each(LineItems, function(index, value) {
+				var ul_item = "";
 				if (value.ProductCode == product_code) {
+				ul_item = "<div class='product-name'>"+product_name+" "+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
 					$.each(value.ProductsLineList, function(index1, value1) {
-						if(value1.default)
-							selectedLineItems.push(value1.ProductLineItemCode);
+						var li_item = '';
+						console.log(value1.ProductLineItemCode);
+						console.log(curretnProductArray[i].indexOf(value1.ProductLineItemCode));
+						if(curretnProductArray[i].indexOf(value1.ProductLineItemCode) != -1)
+							li_item = '<li><input type=checkbox name="product-line-items-selection-cart'+i+'" value="'+value1.ProductLineItemCode+'" checked="checked">'+value1.ProductLineItemName+'</li>';
+						else
+							li_item = '<li><input type=checkbox name="product-line-items-selection-cart'+i+'" value="'+value1.ProductLineItemCode+'">'+value1.ProductLineItemName+'</li>';
+						ul_item += li_item;
 					});
 				}
+				ul_items += ul_item+"</ul>";
 			});
-		//}
-
+		}
+		$('.customizeFoodBody').html(ul_items+'<button id="removeFoodButCart">Update the Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
+		$('#customizeFood').modal('show');
+	});
+	$('body').on('click','.cartPlus',function(){		
+	console.log("click of cartplus");
+		var currentVal = $(this).prev().text() || $(this).prev().val();
+		console.log("currentVal:"+currentVal);
+		if(currentVal >= 1){
+			$(this).prev().text(parseInt(currentVal)+1);
+			$(this).prev().val(parseInt(currentVal)+1);
+			console.log("setting");
+		}
+		console.log("currentVal:"+$(this).prev().text());
+		
+		//$('.glyphicon-edit.cartPanel').trigger('click');
+		var currentVal = $(this).siblings( ".quantity" ).text();
+		console.log("sibling:"+$('.glyphicon-edit.cartPanel').siblings( ".quantity" ).data('product-code'));
+		var product_code = $(this).siblings( ".quantity" ).data('product-code');
+		var product_name = $(this).siblings( ".quantity" ).data('product-name');
+		var currentCartJSON = {};
+		if(localStorage.getItem('cartJson') != undefined && localStorage.getItem('cartJson').length>0)
+			currentCartJSON = JSON.parse(localStorage.getItem('cartJson'));
+		if(Object.keys(currentCartJSON).length == 0){
+			currentCartJSON = {};
+			currentCartJSON.itemsArray = [];
+		}
+		var currentItemsArray = currentCartJSON.itemsArray;
+		var curretnProductArray;
 		for (var i=0; i<currentItemsArray.length; i++) {
 		  if (currentItemsArray[i].product_code == product_code) {
-			currentItemsArray[i].product_qty = parseInt(currentVal);
-			$.merge(currentItemsArray[i].product_lineitems, selectedLineItems);
-			//console.log(currentItemsArray[i].product_lineitems);
-			//console.log(JSON.stringify(currentItemsArray[i].product_lineitems));
-			//currentItemsArray[i].product_lineitems.pop();
-			//console.log(currentItemsArray[i].product_lineitems);
+			curretnProductArray = currentItemsArray[i].product_lineitems;
 			break;
 		  }
-		}			
-		localStorage.setItem('cartJson',JSON.stringify(currentCartJSON));
-		renderCart();
-		$('.messagesBar').html("Cart updated successfully");
-		$('.messagesBar').show('slow').delay(3000).fadeOut('slow');
+		}	
+		console.log(curretnProductArray);
+		var ul_items="";
+		for(var i=0;i<parseInt(currentVal);i++){
+			$.each(LineItems, function(index, value) {
+				var ul_item = "";
+				if (value.ProductCode == product_code) {
+				ul_item = "<div class='product-name'>"+product_name+" "+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
+					$.each(value.ProductsLineList, function(index1, value1) {
+						var li_item = '';
+						console.log(value1.ProductLineItemCode);
+						//console.log(curretnProductArray[i].indexOf(value1.ProductLineItemCode));
+						if(curretnProductArray[i] != undefined){
+							if(curretnProductArray[i].indexOf(value1.ProductLineItemCode) != -1)
+								li_item = '<li><input type=checkbox name="product-line-items-selection-cart'+i+'" value="'+value1.ProductLineItemCode+'" checked="checked">'+value1.ProductLineItemName+'</li>';
+							else
+								li_item = '<li><input type=checkbox name="product-line-items-selection-cart'+i+'" value="'+value1.ProductLineItemCode+'">'+value1.ProductLineItemName+'</li>';
+						}
+						else
+								li_item = '<li><input type=checkbox name="product-line-items-selection-cart'+i+'" value="'+value1.ProductLineItemCode+'">'+value1.ProductLineItemName+'</li>';
+						ul_item += li_item;
+					});
+				}
+				ul_items += ul_item+"</ul>";
+			});
 		}
+		$('.customizeFoodBody').html(ul_items+'<button id="customizeFoodButCart">Customize &amp; Update the Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
+		$('#customizeFood').modal('show');
+		
 	});
-	$('body').on('click','.cartPlus',function(){
+	/*$('body').on('click','.cartPlus',function(){
 		var currentVal = $(this).prev().text() || $(this).prev().val();
 		if(currentVal >= 1){
 			$(this).prev().text(parseInt(currentVal)+1);
 			$(this).prev().val(parseInt(currentVal)+1);
 		}
-	});
+	});*/
 	var renderCart = function(){
+	$('#cartItemDesc').html("<center><img src='custom/images/loading.gif' /></center>");
 		var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
 		if(cartTotalItems != undefined){
 			cartTotalItemsLength = cartTotalItems.itemsArray.length
@@ -322,7 +465,7 @@ init();
 				$('.cartItemCount').html(cartTotalItemsLength);
 				$('.cartItemCount').addClass('active');
 				$clone = $('.cartListTemplate').clone();
-				$('#cartItemDesc').html('');
+				var cartItemDescHtml = '';
 				for(var index = 0;index<cartTotalItemsLength;index++){
 					var eachItemData = cartTotalItems.itemsArray[index];
 					$clone.find('.quantity').text(eachItemData.product_qty);
@@ -330,18 +473,28 @@ init();
 					$clone.find('.quantity').attr('data-product-code',eachItemData.product_code);
 					$clone.find('.quantity').attr('data-product-name',eachItemData.product_name);
 					$clone.find('.product_name_cart').text(eachItemData.product_name);
-					$('#cartItemDesc').append($clone.html());
+					cartItemDescHtml += $clone.html();
 				}
+				$('#cartItemDesc').html('');
+				$('#cartItemDesc').append(cartItemDescHtml);
+				
 			}else{
 				$('.cartItemCount').html("0");
+				$('.cartItemCount').removeClass('active');
 				$('#cartItemDesc').html("<div>No items yet</div>");
 			}
 		}else{
 			$('.cartItemCount').html("0");
+			$('.cartItemCount').removeClass('active');
 			$('#cartItemDesc').html("<div>No items yet</div>");
 		}			
 	};
-	var productsSearch = JSON.parse(localStorage.getItem('products'));
+	//$('#myModal').on('hidden.bs.modal', function () {
+  
+	$('body').on('hidden.bs.modal',function(){
+			renderCart();
+		});
+	var productsSearch = items;
 	
 	
 	//console.log(items);
@@ -398,6 +551,15 @@ init();
 	$('body').on('click','.hlink',function(){
 		$(this).siblings('.summary').children('.mobileHide').toggle();
 	});
+	$('body').on('click','.clearCart',function(){
+		BootstrapDialog.confirm('Are you sure to clear the Cart?'
+		, function(result){
+            if(result) {
+                localStorage.removeItem('cartJson');
+				renderCart();
+            }
+        });
+	});
 	});	
 	function searchProduct(array,product_name){
 	//console.log("product_name:"+product_name);
@@ -427,18 +589,26 @@ init();
 		
 	};
 	var displayItemDOMSearch = function(ProductName,ProductCode,unitPrice){
-        var item = '<li class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="./custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName+'</h4><div class="customizeIcon"><span class="round-button">&#8377; '+unitPrice+'</span><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><span class="glyphicon glyphicon-edit" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="./custom/images/food/1.jpg" alt="Test"></a><p class="show-read-more"> eu lacus dignissim efficitur. Proin ex metus, ornare placerat nisi at, porta lobortis turpis. Praesent euismod nec nulla ultrices maximus. Vivamus imperdiet quam ac lobortis cursus. Nam dapibus ullamcorper magna vehicula aliquam. Vivamus hendrerit molestie neque. Ut interdum diam a purus ultrices facilisis. Suspendisse molestie</p></div></li>';
+        var item = '<li class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="./custom/images/food/1.jpg" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName+'</h4><div class="customizeIcon"><span class="round-button"><span class="WebRupee">Rs.</span> '+unitPrice+'</span><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><span class="glyphicon glyphicon-edit" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="./custom/images/food/1.jpg" alt="Test"></a><p class="show-read-more"> eu lacus dignissim efficitur. Proin ex metus, ornare placerat nisi at, porta lobortis turpis. Praesent euismod nec nulla ultrices maximus. Vivamus imperdiet quam ac lobortis cursus. Nam dapibus ullamcorper magna vehicula aliquam. Vivamus hendrerit molestie neque. Ut interdum diam a purus ultrices facilisis. Suspendisse molestie</p></div></li>';
 		$('.items').append(item);
 	};
 	var calcRWD = function(){
 		var rwdInfo = "1";
-		if (window.getComputedStyle) {
+		
+		console.log("1:"+$( document ).width());
+ 
+	/*	if (window.getComputedStyle) {
 			rwdInfo = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('z-index');
-		}
+			console.log("value:"+window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('z-index'));
+		}*/
+		if($( document ).width() <= 419) rwdInfo = 4;
+		if($( document ).width() > 419 && $( document ).width() <= 767) rwdInfo = 3;
+		if($( document ).width() > 768 && $( document ).width() <= 1023) rwdInfo = 2;
 		return rwdInfo;
 		}
 		var mobileChk = function(){
 		var rwdInfo = calcRWD();
+		console.log("rwdInfo:"+rwdInfo);
 			if(rwdInfo == 4){
 				if($('.summary > p').hasClass('show-read-more'))
 					console.log("there");
@@ -457,6 +627,7 @@ init();
 				
 			}
 		}
+		
 	$( window ).resize(function() {
 			
 				mobileChk();		
