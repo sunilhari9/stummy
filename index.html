@@ -11,6 +11,7 @@
     <link href="vendor/css/bootstrap.min.css" rel="stylesheet">
     <link href="custom/css/style.css" rel="stylesheet">
 	<link href="vendor/css/bootstrap-dialog.min.css" rel="stylesheet">
+	<link href="vendor/css/jquery.sidr.dark.css" rel="stylesheet">
 <link rel="icon" 
       type="image/png" 
       href="custom/images/favicon.png">
@@ -132,9 +133,25 @@
 			</div>
 		</div>
 	  <!--End customize food modal-->
+      
+      <a id="left-menu" href="#left-menu">Left Menu</a> 
+<a id="right-menu" href="#right-menu">Right Menu</a>
+ 
+<script>
+$(document).ready(function() {
+    $('#left-menu').sidr({
+      name: 'sidr-left',
+      side: 'left' // By default
+    });
+    $('#right-menu').sidr({
+      name: 'sidr-right',
+      side: 'right'
+    });
+});
+</script>
       <div class="container main-container"> 
         <div class="row">
-         <div class="col-md-3 categories hidden-xs hidden-sm">
+         <div class="col-md-3 categories hidden-xs hidden-sm" id="categories" href="#categories">
             <div class="list-group">
               <span class="list-group-item heading">                
 				<span class="glyphicon glyphicon-th-list" title="Click to decrease"></span> Categories
@@ -212,6 +229,7 @@
 	<script src="custom/js/script.js"></script>
     <script src="vendor/js/bootstrap.min.js"></script>
 	<script src="vendor/js/bootstrap-dialog.min.js"></script>
+	<script src="vendor/js/jquery.sidr.min.js"></script>
 	
 
   </body>
