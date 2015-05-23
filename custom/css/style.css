@@ -638,7 +638,21 @@ width: 23% !important;
 }
    
 }
+.rowCheckBox {
+    border: 0px solid red;
+    overflow: hidden;
+    padding: 5px;
+}
 
+.colCheckBox {
+    border: 0px solid blue;
+    float: left;
+    padding: 5px;
+    margin-right: 5px;
+}
+.colCheckBox label{
+    padding-left: 5px;
+}
 .cartMinus1,.cartPlus1,.glyphicon-edit,.glyphicon-shopping-cart,.quantityItemt{
 	font-size: 20px;
 }

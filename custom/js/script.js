@@ -34,8 +34,11 @@ init();
 			$(this).prev().val(parseInt(currentVal)+1);
 		}
 	});
+  
 	$('body').on('click','.glyphicon-edit.itemPanel',function(){
-		var currentVal = $(this).prev().prev().text() || $(this).prev().prev().val();
+        
+          $(this).parent().siblings(".cartCustomizeHiden").toggle(500);
+		/*var currentVal = $(this).prev().prev().text() || $(this).prev().prev().val();
 		var product_code = $(this).prev().prev().data('product-code');
 		var product_name = $(this).prev().prev().data('product-name');
 		var ul_items="";
@@ -53,7 +56,7 @@ init();
 			});
 		}
 		$('.customizeFoodBody').html(ul_items+'<button id="customizeFoodBut">Update &amp; Add to Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
-		$('#customizeFood').modal('show');		
+		$('#customizeFood').modal('show');*/		
 	});
 	$('body').on('click','.glyphicon-edit.cartPanel',function(event){
 	console.log("in click");
@@ -521,6 +524,7 @@ init();
 		searchProduct(items,$(this).val().toLowerCase());
 	}
 	$(document).ready(function(){
+          $(".cartCustomizeHiden").hide();
             var maxLength = 50;
         function showLess(){
             $(".show-read-more").each(function(){
@@ -534,9 +538,9 @@ init();
                 }
             });
             $(".read-more").click(function(){
+                $(this).siblings(".more-text").append(' <a href="javascript:void(0);" class="read-less"> Less Details...</a>');
                 $(this).siblings(".more-text").contents().unwrap();
                 $(this).remove();
-                $(".show-read-more").append(' <a href="javascript:void(0);" class="read-less"> Less Details...</a>');
                 $(".read-less").on("click",function(){
                         showLess();
 	               });
