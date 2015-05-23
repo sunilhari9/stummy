@@ -72,6 +72,7 @@ $.getJSON( "custom/js/products.json", function( items ) {
 	$('.list-group-item.item-type').click(function(){
 		$('.list-group-item.item-type').removeClass('activeCat');
 		$(this).addClass('.list-group-item .item-type activeCat');
+         $.sidr('close', 'list-group');
 		displayItems($(this).text());
 	});
 });
