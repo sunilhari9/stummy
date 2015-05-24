@@ -500,18 +500,16 @@ border-color: #fff !important;
 .modal-header.customizeFoodHeader {
   padding-bottom: 0px !important;
     border-bottom: 0px;
-      padding: 72px !important;
+      padding: 25px !important;
 }
 .modal-content < .customizeFoodHeader{
     background-color: red;
 }
 .customizeFoodModel{
-    border-top-left-radius: 50% !important;
-    border-top-right-radius: 50% !important;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
     background-color: rgb(237, 178, 67);
-    color: white;
+
 }
 #customizeFoodBut{
   background-color: #46000E !important;
@@ -638,7 +636,21 @@ width: 23% !important;
 }
    
 }
+.rowCheckBox {
+    border: 0px solid red;
+    overflow: hidden;
+    padding: 5px;
+}
 
+.colCheckBox {
+    border: 0px solid blue;
+    float: left;
+    padding: 5px;
+    margin-right: 5px;
+}
+.colCheckBox label{
+    padding-left: 5px;
+}
 .cartMinus1,.cartPlus1,.glyphicon-edit,.glyphicon-shopping-cart,.quantityItemt{
 	font-size: 20px;
 }
@@ -652,3 +664,6 @@ width: 23% !important;
 		/*text-decoration: underline;*/
 		cursor: pointer;
 	}
+.panel-heading{
+margin-bottom: 5px;
+}

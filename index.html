@@ -11,6 +11,7 @@
     <link href="vendor/css/bootstrap.min.css" rel="stylesheet">
     <link href="custom/css/style.css" rel="stylesheet">
 	<link href="vendor/css/bootstrap-dialog.min.css" rel="stylesheet">
+	<link href="vendor/css/jquery.sidr.dark.css" rel="stylesheet">
 <link rel="icon" 
       type="image/png" 
       href="custom/images/favicon.png">
@@ -23,6 +24,7 @@
   </head>
   <body>
   <div class="messagesBar"></div>
+      <a id="simple-menu" href="#sidr">Left Menu</a>
   <div class="container-fluid ">
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -124,7 +126,8 @@
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<h4 class="modal-title" id="myModalLabel">
                             <h3 class="omb_authTitle" align="center">Customize your yummy food</h3>
-                            <hr class="hrLine"</hr></h4>					</div>
+                            <hr class="hrLine"</hr></h4>					
+					</div>
 					<div class="modal-body customizeFoodBody">
 						
 					</div>
@@ -132,9 +135,10 @@
 			</div>
 		</div>
 	  <!--End customize food modal-->
+      
       <div class="container main-container"> 
         <div class="row">
-         <div class="col-md-3 categories hidden-xs hidden-sm">
+         <div class="col-md-3 categories hidden-xs hidden-sm" id="categories" href="#categories">
             <div class="list-group">
               <span class="list-group-item heading">                
 				<span class="glyphicon glyphicon-th-list" title="Click to decrease"></span> Categories
@@ -195,8 +199,8 @@
 </div>
 <div class="row cartListTemplate hidden">
 	<div class="row cartList">
-				<span class="col-md-7 product_name_cart"></span>
-				<span class="col-md-5">
+				<span class="col-md-6 product_name_cart"></span>
+				<span class="col-md-6">
 					<span class="glyphicon glyphicon-minus cartMinus" title="Click to decrease"></span> 
 					<span class="quantity" data-product-code="" data-product-name=""></span> 
 					<span class="glyphicon glyphicon-plus cartPlus" title="Click to increase"></span>
@@ -212,7 +216,24 @@
 	<script src="custom/js/script.js"></script>
     <script src="vendor/js/bootstrap.min.js"></script>
 	<script src="vendor/js/bootstrap-dialog.min.js"></script>
-	
+	<script src="vendor/js/jquery.sidr.min.js"></script>
+	 
+<div id="sidr">
+  <!-- Your content -->
+  <div class="list-group">
+              <span class="list-group-item heading">                
+				<span class="glyphicon glyphicon-th-list" title="Click to decrease"></span> Categories
+              </span>
+            </div>
+</div>
+      
+      
+ 
+<script>
+$(document).ready(function() {
+  $('#simple-menu').sidr();
+});
+</script>
 
   </body>
 </html>
