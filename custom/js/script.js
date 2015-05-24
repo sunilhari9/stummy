@@ -36,7 +36,7 @@ init();
 	});
   
 	$('body').on('click','.glyphicon-edit.itemPanel',function(){
-
+<<<<<<< HEAD
         if($(this).parent().siblings(".cartCustomizeHiden").is(":visible")){
 			$(this).parent().siblings(".cartCustomizeHiden").hide("slow");		
 			return false;
@@ -46,7 +46,7 @@ init();
 		  $(this).parent().siblings(".cartCustomizeHiden").show();	
 		 $(this).parent().siblings(".cartCustomizeHiden").html("<center><img src='custom/images/loading.gif' /></center>");
 		var currentVal = $(this).prev().prev().text() || $(this).prev().prev().val();
-
+=======
         
           $(this).parent().siblings(".cartCustomizeHiden").toggle(500);
 		/*var currentVal = $(this).prev().prev().text() || $(this).prev().prev().val();
@@ -78,9 +78,10 @@ init();
 		
 		$(this).parent().siblings(".cartCustomizeHiden").html(ul_items+'</div></div><button id="customizeFoodBut">Update &amp; Add to Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
 			
-
+=======
 		$('.customizeFoodBody').html(ul_items+'<button id="customizeFoodBut">Update &amp; Add to Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
-		$('#customizeFood').modal('show');	
+		$('#customizeFood').modal('show');*/		
+>>>>>>> origin/master
 	});
 	$('body').on('click','.glyphicon-edit.cartPanel',function(event){
 	console.log("in click");
