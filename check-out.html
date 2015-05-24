@@ -135,13 +135,13 @@
       <div class="col-xs-12">
           <div class="col-md-12 well  stummyBrandingBottom">
             <div class="col-md-6">
-                <div class="panel panel-primary">
+                <div class="panel panel-primary defaultHomeAddress">
                       <!-- Default panel contents -->
                       <div class="panel-heading ">
                         <h3>
                           <input type="radio" name="optionsRadios" id="homeAddress" value="option1">
                           Home Address 
-                          <div class="pull-right"><span class="glyphicon glyphicon-pencil"></span></div>
+                          <div class="pull-right editHomeAddressIcon"><span class="glyphicon glyphicon-pencil"></span></div>
                           </h3>
                         </div>
                       <ul class="list-group">
@@ -149,30 +149,108 @@
                           <li class="list-group-item">Lig Plot no: 75, KPHb-2 Lane, Kukatpally, RR District, Hyderabad,Telangan - 500072, Ph: 9705984789</li>
                       </ul>
                 </div>
+                 <div class="panel panel-primary editHomeAddress address">
+                     <div class="panel-heading ">
+                            <h3>
+                          Update Home Address
+                          </h3>
+                        </div>
+                     <form class="form-horizontal">
+                         <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="inputEmail3" Value="Suneel Manyam" placeholder="FirstName">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                              <input type="email" class="form-control" value="sunilhai9@gmail.com" id="inputEmail3" placeholder="Email">
+                            </div>
+                          </div>
+                         <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Phone</label>
+                            <div class="col-sm-10">
+                              <input type="phone" class="form-control" id="inputEmail3" value="9705984789" placeholder="9705984789">
+                            </div>
+                          </div>
+                         <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Address</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="inputEmail3" value="9705984789" placeholder="9705984789">Lig Plot no: 75, KPHb-2 Lane, Kukatpally, RR District, Hyderabad,Telangan - 500072</textarea>
+                            </div>
+                          </div>
+                         
+                          <div class="form-group ">
+                            <div class="col-sm-offset-2 col-sm-10">
+                              <button type="submit" class="btn btn-default pull-right">Save</button>
+                            </div>
+                          </div>
+                    </form>
+        
+                </div>
             </div>
             <div class="col-md-6">
-                    <div class="panel panel-primary">
-                      <!-- Default panel contents -->
+                    <div class="panel panel-primary defaultDelivaryAddress">
                       <div class="panel-heading ">
                             <h3>
                           <input type="radio" name="optionsRadios" id="delivaryAddress" value="option2">
                           Delivary Address
-                        <div class="pull-right"><span class="glyphicon glyphicon-pencil"></span></div>
+                        <div class="pull-right editDelivaryAddressIcon"><span class="glyphicon glyphicon-pencil"></span></div>
                           </h3>
                         </div>
                       <ul class="list-group">
                           <li class="list-group-item"><strong>Suneel Manyam</strong></li>
                         <li class="list-group-item">Lig Plot no: 75, KPHb-2 Lane, Kukatpally, RR District, Hyderabad,Telangan - 500072, Ph: 9705984789</li>
                       </ul>
-                </div>
                     <button id="activate-step-2" class="btn btn-primary pull-right">Process to cart Items</button>
+                </div>
+                <div class="panel panel-primary editDelivaryAddress address">
+                    <div class="panel-heading ">
+                            <h3>
+                          Update Delivary Address
+                          </h3>
+                        </div>
+                     <form class="form-horizontal">
+                         <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="inputEmail3" Value="Suneel Manyam" placeholder="FirstName">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                              <input type="email" class="form-control" value="sunilhai9@gmail.com" id="inputEmail3" placeholder="Email">
+                            </div>
+                          </div>
+                         <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Phone</label>
+                            <div class="col-sm-10">
+                              <input type="phone" class="form-control" id="inputEmail3" value="9705984789" placeholder="9705984789">
+                            </div>
+                          </div>
+                         <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Address</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="inputEmail3" value="9705984789" placeholder="9705984789">Lig Plot no: 75, KPHb-2 Lane, Kukatpally, RR District, Hyderabad,Telangan - 500072</textarea>
+                            </div>
+                          </div>
+                         
+                          <div class="form-group ">
+                            <div class="col-sm-offset-2 col-sm-10">
+                              <button type="submit" class="btn btn-default pull-right">Save</button>
+                            </div>
+                          </div>
+                    </form>
+                </div>
                 </div>
             </div>
         </div>       
     </div>
     <div class="row setup-content" id="step-2">
         <div class="col-xs-12">
-            <div class="col-md-12 well  stummyBrandingBottom">
+            <div class="col-md-12 well stummyBrandingBottom">
                 <table id="cart" class="table table-hover table-condensed">
     				<thead>
 						<tr>
@@ -316,5 +394,13 @@
 	<script src="vendor/js/bootstrap.min.js"></script>
 	<script src="vendor/js/bootstrap-dialog.min.js"></script>
   	<script src="custom/js/checkout.js"></script>	
+     <style>
+        .address{
+             
+  border: 0px !important;
+  background-color: whitesmoke !important;
+            
+        }
+      </style>
       </body>
 </html>
