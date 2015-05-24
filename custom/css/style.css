@@ -666,3 +666,26 @@ width: 23% !important;
 		/*text-decoration: underline;*/
 		cursor: pointer;
 	}
+a.list-group-item {
+  color: #FFFFFF !importent;
+}
+.categoriesListMenuOverlay .heading {
+    background-color: #A1001D !important;
+}
+.categoriesListMenuOverlay .list-group-item.activeCat {
+  background-color: #C40326 !important;
+  }
+.categoriesListMenuOverlay .item-type:hover {
+  background-color:#C40326 !important;
+}
+.categoriesListMenuOverlay a.list-group-item{
+    border: 0px !important;
+      color: #FFFEFE !important;
+}
+#left-menu{
+   margin-top: 60%;
+  position: fixed;
+  z-index: 1;   
+    font-size:30px;
+    
+}

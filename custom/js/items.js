@@ -75,5 +75,5 @@ $.getJSON( "custom/js/products.json", function( items ) {
 		$(this).addClass('.list-group-item .item-type activeCat');
          $.sidr('close', 'list-group');
 		displayItems($(this).text());
-	});
+    });
 });

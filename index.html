@@ -24,7 +24,7 @@
   </head>
   <body>
   <div class="messagesBar"></div>
-      <a id="simple-menu" href="#sidr">Left Menu</a>
+     
   <div class="container-fluid ">
       <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -134,7 +134,7 @@
 			</div>
 		</div>
 	  <!--End customize food modal-->
-      
+       <a id="left-menu" class="hidden-sm" href="#sidr"><span class="glyphicon glyphicon-chevron-left"></span></a>
       <div class="container main-container"> 
         <div class="row">
          <div class="col-md-3 categories hidden-xs hidden-sm" id="categories" href="#categories">
@@ -144,6 +144,7 @@
               </span>
             </div>  
          </div>
+            
           <div class="col-md-6 itemList">
               <ul class="nav nav-tabs nav-justified">
                    <li class="lateNight"><a href="#">Menu Items</a>                     
@@ -217,20 +218,17 @@
 	<script src="vendor/js/bootstrap-dialog.min.js"></script>
 	<script src="vendor/js/jquery.sidr.min.js"></script>
 	 
-<div id="sidr">
-  <!-- Your content -->
-  <div class="list-group">
-              <span class="list-group-item heading">                
-				<span class="glyphicon glyphicon-th-list" title="Click to decrease"></span> Categories
-              </span>
-            </div>
+<div id="sidr" class="hidden-sm hidden-md hidden-lg">
+  <div class="list-group categoriesListMenuOverlay">
+      <span class="list-group-item heading">                
+          <span class="glyphicon glyphicon-th-list" title="Click to decrease"></span> Categories
+      </span>
+  </div>
 </div>
-      
-      
  
 <script>
 $(document).ready(function() {
-  $('#simple-menu').sidr();
+  $('#left-menu').sidr();
 });
 </script>
 
