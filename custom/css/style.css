@@ -500,18 +500,16 @@ border-color: #fff !important;
 .modal-header.customizeFoodHeader {
   padding-bottom: 0px !important;
     border-bottom: 0px;
-      padding: 72px !important;
+      padding: 25px !important;
 }
 .modal-content < .customizeFoodHeader{
     background-color: red;
 }
 .customizeFoodModel{
-    border-top-left-radius: 50% !important;
-    border-top-right-radius: 50% !important;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
     background-color: rgb(237, 178, 67);
-    color: white;
+
 }
 #customizeFoodBut{
   background-color: #46000E !important;
@@ -666,6 +664,7 @@ width: 23% !important;
 		/*text-decoration: underline;*/
 		cursor: pointer;
 	}
+<<<<<<< HEAD
 a.list-group-item {
   color: #FFFFFF !importent;
 }
@@ -689,3 +688,8 @@ a.list-group-item {
     font-size:30px;
     
 }
+=======
+.panel-heading{
+margin-bottom: 5px;
+}
+>>>>>>> origin/master
