@@ -420,7 +420,7 @@ init();
 				if (value.ProductCode == product_code) {
 				//ul_item = "<div class='product-name'>"+product_name+" "+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
 				ul_item = "<div class='product-name'>"+product_name+" #"+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
-				ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">Item #'+(i+1)+'</a>&nbsp;&nbsp;&nbsp;<img src="custom/images/trash.png" title="Delete this Item" alt="Delete this Item" class="trash" data-sno="'+i+'" data-product-code="'+product_code+'"/></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
+				ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">Item #'+(i+1)+'</a>&nbsp;&nbsp;&nbsp;<img src="custom/images/trash.png" title="Delete this Item" alt="Delete this Item" class="trash" data-sno="'+i+'" data-product-code="'+product_code+'" data-qty="'+currentVal+'"/></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
 					$.each(value.ProductsLineList, function(index1, value1) {
 						var li_item = '';
 						console.log(value1.ProductLineItemCode);
@@ -446,8 +446,10 @@ init();
 		$('#customizeFood').modal('show');
 	});
 	$('body').on('click','.trash',function(){
-		console.log($(this).data('sno'));
-		console.log($(this).data('product-code'));
+		var sno_trash = $(this).data('sno');
+		var product_code_trash = $(this).data('product-code');
+		var currentQty_trash = $(this).data('qty');
+		var del_id = $(this).parents('.panel-heading').attr('id');
 		BootstrapDialog.confirm('Are you sure to delete this Item?'
 			, function(result){
 				if(result) {
@@ -460,15 +462,15 @@ init();
 						currentCartJSON = {};
 						currentCartJSON.itemsArray = [];
 					}
-					var currentQty = $('#current_product_qty').val();
+					
 					//currentQty = parseInt(currentQty)-1;
 					var currentItemsArray = currentCartJSON.itemsArray;		
-					selectedItem.product_code = $(this).data('product-code');
+					selectedItem.product_code = product_code_trash;
 					selectedItem.product_name = $(this).data('product-code');
-					selectedItem.product_qty = parseInt(currentQty)-1;
+					selectedItem.product_qty = parseInt(currentQty_trash)-1;
 					$('#errorMsgs').html('');
-					for(var i=0;i<parseInt(currentQty);i++){
-						if(i != $(this).data('sno')){
+					for(var i=0;i<parseInt(currentQty_trash);i++){
+						if(i != sno_trash){
 							var selectedLineItems = [];
 							console.log($('input[name=product-line-items-selection-cart'+i+']:checked').length);
 							if($('input[name="product-line-items-selection-cart'+i+'"]:checked').length > 0){
@@ -479,11 +481,15 @@ init();
 							selectedLineItemsAll.push(selectedLineItems);
 						}
 					}
+					console.log(selectedLineItemsAll);
 					selectedItem.product_lineitems = selectedLineItemsAll;		
 					if($('#errorMsgs').text().length == 0){
 						for (var i=0; i<currentItemsArray.length; i++) {
-						  if (currentItemsArray[i].product_code == $('#current_product_code').val()) {
-							currentItemsArray[i].product_qty =  parseInt($('#current_product_qty').val());
+						console.log("=========================");
+						console.log(currentItemsArray[i].product_code);
+						console.log(product_code_trash);
+						  if (currentItemsArray[i].product_code == product_code_trash) {
+							currentItemsArray[i].product_qty =  parseInt(currentQty_trash)-1;
 							currentItemsArray[i].product_lineitems = selectedLineItemsAll;
 							break;
 						  }
@@ -491,6 +497,9 @@ init();
 						currentCartJSON.itemsArray = currentItemsArray;
 						localStorage.setItem('cartJson',JSON.stringify(currentCartJSON));
 						renderCart();
+						$('#headingOne'+sno_trash).remove();
+						$('#collapseOne'+sno_trash).remove();
+						console.log("======:"+$('.panel.panel-default').html());
 						$('#errorMsgs').html('Deleted successfully');
 					}
 				}
@@ -588,15 +597,23 @@ init();
 				var cartItemDescHtml = '';
 				for(var index = 0;index<cartTotalItemsLength;index++){
 					var eachItemData = cartTotalItems.itemsArray[index];
-					$clone.find('.quantity').text(eachItemData.product_qty);
-					console.log(eachItemData.product_code);
-					$clone.find('.quantity').attr('data-product-code',eachItemData.product_code);
-					$clone.find('.quantity').attr('data-product-name',eachItemData.product_name);
-					$clone.find('.product_name_cart').text(eachItemData.product_name);
-					cartItemDescHtml += $clone.html();
+					if(eachItemData.product_qty){
+						$clone.find('.quantity').text(eachItemData.product_qty);
+						console.log(eachItemData.product_code);
+						$clone.find('.quantity').attr('data-product-code',eachItemData.product_code);
+						$clone.find('.quantity').attr('data-product-name',eachItemData.product_name);
+						$clone.find('.product_name_cart').text(eachItemData.product_name);
+						cartItemDescHtml += $clone.html();
+					}
 				}
 				$('#cartItemDesc').html('');
-				$('#cartItemDesc').append(cartItemDescHtml);
+				if(cartItemDescHtml.length > 0)
+					$('#cartItemDesc').append(cartItemDescHtml);
+				else{
+					$('.cartItemCount').html("0");
+					$('.cartItemCount').removeClass('active');
+					$('#cartItemDesc').html("<div>No items yet</div>");
+				}
 				
 			}else{
 				$('.cartItemCount').html("0");
