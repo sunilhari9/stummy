@@ -114,9 +114,9 @@ init();
 				//ul_item = "<div class='product-name'>"+product_name+" "+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
 				ul_item = "<div class='product-name'>"+product_name+" #"+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
 				if(i == 0)
-							ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">Item #'+(i+1)+'</a></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
+							ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">Item #'+(i+1)+'</a>&nbsp;&nbsp;&nbsp;<img src="custom/images/trash.png" title="Delete this Item" alt="Delete this Item" class="trash" data-sno="'+i+'" data-product-code="'+product_code+'" data-qty="'+currentVal+'"/></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
 						else
-							ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">Item #'+(i+1)+'</a></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
+							ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">Item #'+(i+1)+'</a>&nbsp;&nbsp;&nbsp;<img src="custom/images/trash.png" title="Delete this Item" alt="Delete this Item" class="trash" data-sno="'+i+'" data-product-code="'+product_code+'" data-qty="'+currentVal+'"/></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
 					$.each(value.ProductsLineList, function(index1, value1) {
 						var li_item = '';
 						console.log(value1.ProductLineItemCode);
@@ -208,6 +208,7 @@ init();
 			currentCartJSON.itemsArray = currentItemsArray;
 			localStorage.setItem('cartJson',JSON.stringify(currentCartJSON));
 			renderCart();
+			$('.customizeFoodBody').html('');
 			$('#customizeFood').modal('hide');
 			$('.messagesBar').html("Cart updated successfully");
 			$('.messagesBar').show('slow').delay(3000).fadeOut('slow');
@@ -282,6 +283,7 @@ init();
 		}
 		var currentItemsArray = currentCartJSON.itemsArray;
 		$('#errorMsgs').html('');
+		console.log("sssssssssssssssss:"+$('#current_product_qty').val());
 		for(var i=0;i<parseInt($('#current_product_qty').val());i++){
 			var selectedLineItems = [];
 			console.log($('input[name=product-line-items-selection'+i+']:checked').length);
@@ -291,10 +293,15 @@ init();
 				});
 			}
 			else{
-				if(parseInt($('#current_product_qty').val())>1)
-						$('#errorMsgs').html("Choose any one option to proceed under each section");
-					else
-						$('#errorMsgs').html("Choose any one option to proceed");
+			console.log("inside else");
+			console.log(parseInt($('#current_product_qty').val())>1);
+				if(parseInt($('#current_product_qty').val())>1){
+				console.log("in if");
+					$('#errorMsgs').html("Choose any one option to proceed under each section");
+				}else{
+				console.log("in else");
+					$('#errorMsgs').html("Choose any one option to proceed");
+				}
 				}
 			selectedLineItemsAll.push(selectedLineItems);
 		}
@@ -453,6 +460,7 @@ init();
 		BootstrapDialog.confirm('Are you sure to delete this Item?'
 			, function(result){
 				if(result) {
+				
 					var currentCartJSON = {};
 					var selectedLineItemsAll = [];		
 					var selectedItem = {};
@@ -496,11 +504,16 @@ init();
 						}	
 						currentCartJSON.itemsArray = currentItemsArray;
 						localStorage.setItem('cartJson',JSON.stringify(currentCartJSON));
-						renderCart();
-						$('#headingOne'+sno_trash).remove();
-						$('#collapseOne'+sno_trash).remove();
+						renderCart();						
+						//$('#headingOne'+sno_trash).remove('slow');
+						//$('#collapseOne'+sno_trash).remove('slow');
+						$('#headingOne'+sno_trash).animate({ backgroundColor: "#fbc7c7" }, "fast").animate({ opacity: "hide" }, "slow").remove('slow');
+						$('#collapseOne'+sno_trash).animate({ backgroundColor: "#fbc7c7" }, "fast").animate({ opacity: "hide" }, "slow").remove('slow');
 						console.log("======:"+$('.panel.panel-default').html());
-						$('#errorMsgs').html('Deleted successfully');
+						$('.customizeFoodBody').html('');
+						$('#customizeFood').modal('hide');
+						$('.messagesBar').html('Deleted successfully');
+						$('.messagesBar').show('slow').delay(3000).fadeOut('slow');
 					}
 				}
 		});
