@@ -525,11 +525,7 @@ init();
 				$('.cartItemCount').removeClass('active');
 				$('#cartItemDesc').html("<div>No items yet</div>");
 			}
-		}else{
-			$('.cartItemCount').html("0");
-			$('.cartItemCount').removeClass('active');
-			$('#cartItemDesc').html("<div>No items yet</div>");
-		}			
+		}		
 	};
 	//$('#myModal').on('hidden.bs.modal', function () {
   
