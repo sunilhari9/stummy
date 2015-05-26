@@ -19,6 +19,9 @@ body:before {
     margin-top: -45px !important;
 }
 }
+.container{
+	padding-left: 110px !important;
+}
 @media screen and (min-width: 0) and (max-width: 419px) {
   body:before {
     content: 'SmallMobile';
@@ -31,7 +34,8 @@ body:before {
 }
 @font-face {
     font-family: segoe-Light;
-    src: url(../fonts/segoe-ui-light.ttf);
+    /*src: url(../fonts/segoe-ui-light.ttf);*/
+	src: url(../fonts/OpenSans-Light.ttf);
 }
 
 @font-face {
@@ -76,8 +80,8 @@ body:before {
 }
 
 .modal-content{
-   border-bottom-left-radius: 50px;
-  border-top-right-radius: 50px;  
+   border-bottom-left-radius: 30px;
+  border-top-right-radius: 30px;  
     background-color:  rgb(239, 231, 215);
 }
 .loginButton{
@@ -129,7 +133,7 @@ body:before {
   margin: -9px;
   border-bottom-left-radius: 40px;
   border-top-right-radius: 40px;
-    background: url("../images/bg_image.png");
+    background: url("../images/bg_image1.png");
     background-size: 100%;
 }
 	
@@ -143,7 +147,7 @@ body:before {
 
 /*Index Screen Style*/
 body{
-    background-image: url("../../custom/images/bg_image.png");
+    background-image: url("../../custom/images/bg_image1.JPG");
     background-size: 100%;
      min-height: 500px;
   padding-top: 70px;
@@ -181,10 +185,10 @@ body{
 	padding-right: 0px !important;
 }
 .img{
-    width:100px;
-    height:100px;
-      border: 2px solid #000000;
-  border-bottom-left-radius: 20px;
+    width:75px;
+    height:75px;
+    border: 2px solid #000000;
+ `` border-bottom-left-radius: 20px;
 }
 .logo{
     height:45px;
@@ -218,11 +222,11 @@ body{
   background-color: #FFFFFF !important;
 }
 .list-group-item {
-   background-color: transparent !important; 
-   border-bottom: 2px solid #D1CBC0;
+   background-color: rgb(239,231,215) !important; 
+   border: 0px !important;
 }
 .list-group-item.activeCat{
-   background-color: #FFF !important; 
+   background-color: white !important; 
    border: none !important; 
 }
 .heading{
@@ -247,27 +251,30 @@ body{
   border-top-right-radius: 10px;
 }
 .item-type:hover{
-    background-color: rgb(255, 249, 237) !important;
+    background-color: white !important;
 }
 .cart{
-  margin-top: 40px;
   min-height: 300px;
  background-color: rgb(70, 0, 14);
  width: 292px;
+ border-radius: 10px;
 }
 .cartItems{
     padding: 5px;
     min-height: 300px; 
-     background: -webkit-linear-gradient(#EFE7D7, #fff,#EFE7D7); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#EFE7D7, #fff,#EFE7D7); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#EFE7D7, #fff,#EFE7D7); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#EFE7D7, #fff,#EFE7D7); /* Standard syntax (must be last) */
+     background: -webkit-linear-gradient(#CCC1AA 5%, #fff); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#CCC1AA 5%, white); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#CCC1AA 5%, white); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#CCC1AA 5%, white); /* Standard syntax (must be last) */
       margin-bottom: 16px;
       font-family: segoe-Light;
 	  padding-bottom: 25px;
+	   overflow-y: scroll;
+    overflow-x: hidden;
+	max-height: 350px;
 }
 .scroll::-webkit-scrollbar {
-    width: 5px;
+    width: 10px;
     background-color: rgb(255, 249, 237);
     padding-right: 10px;
 }
@@ -282,7 +289,7 @@ body{
 width: 40px;
 }
 .cartHeading{
-      margin-top: 10px;
+  margin-top: 10px;
   margin-left: 5px;
   font-family: segoe-Light;
   font-size: 14px;
@@ -386,14 +393,16 @@ float: right;
 }
 .media-heading{
    
-    margin-bottom: 15px;
-  margin-top: 15px;
       padding-left: 5px;
       padding-right: 5px;
 font-family: segoe-Light;
     margin-right: 30%;
 	font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
+}
+.summary{
+	font-size: 14px;
+	line-height: 25px;
 }
 .glyphicon-plus,.glyphicon-chevron-right,.glyphicon-minus,.glyphicon-chevron-left,.glyphicon-trash,.glyphicon-edit,.glyphicon-shopping-cart{
 	padding-left: 3px;
@@ -535,8 +544,9 @@ img.img.media-object.visible-xs {
 .media-right span {
   margin-right: 3px;
 }
-.cartItemCount.active{
-background-color: blue !important;
+.cartItemCount.active {
+  background-color: rgb(238, 179, 64) !important;
+  color: rgb(70, 0, 14);
 }
 .cartItemCount{
 position: absolute;
@@ -561,7 +571,7 @@ color: white;
 font-size: 14px;
 font-weight: bold;
 }
-li.food_item{background-color:#e2e2e2; padding-bottom: 0.5em !important; padding:0 0.5em; margin-top:0.5em;padding-top:15px;padding-bottom:15px;display:block;
+li.food_item{background-color:rgb(239,231,215); padding-bottom: 0em !important; padding:0 0.5em; margin-top:0.5em;padding-top:5px;display:block;
 -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-tap-highlight-color: transparent; /* For some Androids */
   border-radius: 4px;
@@ -577,7 +587,6 @@ li.food_item{background-color:#e2e2e2; padding-bottom: 0.5em !important; padding
 @media (max-width: 768px) {
     .customizeIcon {
         margin-right: 3% !important;
-        margin-top: -27px;
 }
     .customizeIcon span{
   margin-right: 0%;
@@ -585,15 +594,16 @@ li.food_item{background-color:#e2e2e2; padding-bottom: 0.5em !important; padding
 }
 @media (min-width: 992px){
     .customizeIcon {
-   margin-right: 0% !important;
-          margin-top: -11%;
-}
-    
+   margin-right: 0% !important;          
+}    
 }
 @media (min-width: 992px) {
 .categories{
 width: 19% !important;
 }
+.nav-tabs.nav-justified {
+  width: 101% !important;
+  }
 }
 @media (min-width: 1050px) {
 .categories{
@@ -607,28 +617,25 @@ width: 22% !important;
 }
 @media (min-width: 1150px) {
 .categories{
-width: 23% !important;
+width: 13% !important;
 }
 }
 .round-button {
-	display: block;
-	width: 45px;
-	height: 45px;
-	line-height: 45px;
-	border: 2px solid #F5F5F5;
-	border-radius: 50%;
-	color: #F5F5F5;
-	text-align: center;
-	text-decoration: none;
-	background: none repeat scroll 0% 0% #464646;
-	box-shadow: 0px 0px 3px #808080;
-	font-size: 12px;
-	font-weight: bold;
-	margin-left: 27px;
-	margin-bottom: 15px;
-}
-.round-button:hover {
-    background: #262626;
+  display: block;
+  width: 45px;
+  height: 30px;
+  line-height: 30px;
+  /* border: 2px solid #F5F5F5; */
+  /* border-radius: 50%; */
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  /* background: none repeat scroll 0% 0% #46000E; */
+  /* box-shadow: 0px 0px 3px #808080; */
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 27px;
+  margin-bottom: 15px;
 }
 
 @media (max-width: 420px){
@@ -684,7 +691,7 @@ a.list-group-item {
   background-color: #C40326 !important;
   }
 .categoriesListMenuOverlay .item-type:hover {
-  background-color:#C40326 !important;
+  background-color:red !important;
 }
 .categoriesListMenuOverlay a.list-group-item{
     border: 0px !important;
