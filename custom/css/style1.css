@@ -1,3 +1,16 @@
+.glyphicon-edit.itemPanel{
+	margin-top: 15px;
+  padding-right: 33px;
+  margin-left: 4px;
+}
+.food_item .cartMinus1{
+	padding-left: 7px;
+}
+.food_item .quantityItem{
+	padding-left: 13px !important;
+  padding-right: 10px;
+  border: 1px solid;
+}
 body:before {
   z-index: 1;
 }
@@ -5,6 +18,11 @@ body:before {
   body:before {
     z-index: 2;
   }
+}
+@media screen and (min-width: 768px) {
+.container{
+	padding-left: 8% !important;
+}
 }
 @media screen and (min-width: 420px) and (max-width: 767px) {
   body:before {
@@ -19,9 +37,7 @@ body:before {
     margin-top: -45px !important;
 }
 }
-.container{
-	padding-left: 110px !important;
-}
+
 @media screen and (min-width: 0) and (max-width: 419px) {
   body:before {
     content: 'SmallMobile';
@@ -187,12 +203,12 @@ body{
 .img{
     width:75px;
     height:75px;
-    border: 2px solid #000000;
+    border: 1px solid #000000;
  `` border-bottom-left-radius: 20px;
 }
 .logo{
-    height:45px;
-    margin-top: -17px;
+  /*  height:45px;
+    margin-top: -17px;*/
 }
 .nav-tabs>li>a{
     color:#fff !important;
@@ -269,18 +285,23 @@ body{
       margin-bottom: 16px;
       font-family: segoe-Light;
 	  padding-bottom: 25px;
-	   overflow-y: scroll;
+	  max-height: 350px;
+}
+#cartItemDesc {
+	 overflow-y: scroll;
     overflow-x: hidden;
-	max-height: 350px;
+	max-height: 120px;
 }
 .scroll::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
     background-color: rgb(255, 249, 237);
+	
     padding-right: 10px;
 }
  
 .scroll::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	
 }
  
 .scroll::-webkit-scrollbar-thumb {
@@ -289,7 +310,7 @@ body{
 width: 40px;
 }
 .cartHeading{
-  margin-top: 10px;
+  margin-top: 15px;
   margin-left: 5px;
   font-family: segoe-Light;
   font-size: 14px;
@@ -297,14 +318,14 @@ width: 40px;
   color: #fff;
 }.cartList{
       margin-top: 13px;
-    margin-left: 10px;
+    margin-left: 0px;
  
 }
 .hrLine{
       border-top: 1px solid #a0001c !important;
 }
 .customize{
-    background-color: #46000E !important;
+   background-color: #46000E !important;
   text-align: center;
   width: 138px;
   margin-left: auto;
@@ -313,7 +334,7 @@ width: 40px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   color: #fff;
-margin-bottom: 40px;
+margin-bottom: 20px;
     
 }
 .totalAmount{
@@ -550,7 +571,7 @@ img.img.media-object.visible-xs {
 }
 .cartItemCount{
 position: absolute;
-  top: 5px;
+  top: 15px;
   margin-left: 5px;
   }
   .cartHeading .glyphicon-shopping-cart{
@@ -667,7 +688,7 @@ width: 13% !important;
 .colCheckBox label{
     padding-left: 5px;
 }
-.cartMinus1,.cartPlus1,.glyphicon-edit,.glyphicon-shopping-cart,.quantityItemt{
+.cartMinus1,.cartPlus1,.glyphicon-edit,.glyphicon-shopping-cart,.quantityItem{
 	font-size: 20px;
 }
 @font-face{font-family: 'WebRupee';src: url('../../vendor/fonts/inr/WebRupee.V2.0.eot');src: local('WebRupee'), url('../../vendor/fonts/inr/WebRupee.V2.0.ttf') format('truetype'),  url('../../vendor/fonts/inr/WebRupee.V2.0.woff') format('woff'), url('../../vendor/fonts/inr/WebRupee.V2.0.svg') format('svg');font-weight: normal;font-style: normal;}
