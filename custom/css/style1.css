@@ -7,9 +7,12 @@
 	padding-left: 7px;
 }
 .food_item .quantityItem{
-	padding-left: 13px !important;
+	padding-left: 10px !important;
   padding-right: 10px;
   border: 1px solid;
+}
+.rate {
+  color: rgb(70, 0, 14);
 }
 body:before {
   z-index: 1;
@@ -548,6 +551,8 @@ border-color: #fff !important;
   width: 227px;
   margin-top: 13px;
   padding: 5px;
+  margin-left: 60px;
+  margin-bottom: 10px;
 }
 .nav-tabs>li>a:hover {
   background-color: rgb(70, 0, 14) !important;
