@@ -62,10 +62,12 @@ init();
 		var product_name = $(this).siblings( ".quantity" ).data('product-name');
 		var ul_items='<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"><div class="panel panel-default">';
 		console.log(currentVal);
+		var lineItemExists = false;
 		for(var i=0;i<parseInt(currentVal);i++){
 			$.each(LineItems, function(index, value) {
 				var ul_item = "";
 				if (value.ProductCode == product_code) {
+				lineItemExists = true;
 				ul_item = "<div class='product-name'>"+product_name+" #"+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
 				if(i == 0)
 					ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">Item #'+(i+1)+'</a></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
@@ -83,14 +85,23 @@ init();
 		}
 		/*$('.customizeFoodBody').html(ul_items+'<button id="customizeFoodBut">Update &amp; Add to Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
 		$('#customizeFood').modal('show');*/
+		console.log(ul_items);
+		if(lineItemExists==true)
+			$(this).parent().siblings(".cartCustomizeHiden").html(ul_items+'</div></div><button id="customizeFoodBut">Update &amp; Add to Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
+		else{
+			$(this).parent().siblings(".cartCustomizeHiden").html("");
+			BootstrapDialog.show({
+				title: 'Customize Item',
+				message: 'Customization currently not available for this Item'
+			});
+		}
 		
-		$(this).parent().siblings(".cartCustomizeHiden").html(ul_items+'</div></div><button id="customizeFoodBut">Update &amp; Add to Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
 
 	});
 	$('body').on('click','.glyphicon-edit.cartPanel',function(event){
-	console.log("in click");
+	console.log("in click++++++++++++++");
 		var currentVal = $(this).siblings( ".quantity" ).text();
-		console.log("sibling:"+$('.glyphicon-edit.cartPanel').siblings( ".quantity" ).data('product-code'));
+		console.log("sibling:"+$(this).siblings( ".quantity" ).data('product-code'));
 		var product_code = $(this).siblings( ".quantity" ).data('product-code');
 		var product_name = $(this).siblings( ".quantity" ).data('product-name');
 		var currentCartJSON = {};
@@ -108,7 +119,7 @@ init();
 			break;
 		  }
 		}	
-		console.log(curretnProductArray);
+		if(curretnProductArray.length>0){
 		var ul_items="";
 		ul_items='<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"><div class="panel panel-default">';
 				
@@ -142,12 +153,21 @@ init();
 						console.log(li_item);
 						ul_item += li_item;
 					});
+					ul_items += ul_item+"</div></div></div>";
 				}
-				ul_items += ul_item+"</div>";
+				//ul_items += ul_item+"</div>";
 			});
 		}
-		$('.customizeFoodBody').html(ul_items+'</div></div><button id="customizeFoodButCart">Customize the Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
+		$('.customizeFoodBody').html(ul_items+'</div></div><button id="customizeFoodButCart">Customize the Item</button><button id="DeleteButCart">Delete this Item</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
 		$('#customizeFood').modal('show');
+		}else{
+			$('.customizeFoodBody').html("");
+			BootstrapDialog.show({
+				title: 'Customize Item',
+				message: 'Customization currently not available for this Item'
+			});
+		}
+		
 	});
 	var editCartPanel = function(){
 	
@@ -221,6 +241,44 @@ init();
 			$('.messagesBar').html("Cart updated successfully");
 			$('.messagesBar').show('slow').delay(3000).fadeOut('slow');
 		}
+	});
+	$('body').on('click','#DeleteButCart',function(){
+	BootstrapDialog.confirm('Are you sure to delete this Item?'
+			, function(result){
+				if(result) {
+		var currentCartJSON = {};
+		var selectedLineItemsAll = [];		
+		var selectedItem = {};
+		if(localStorage.getItem('cartJson') != undefined && localStorage.getItem('cartJson').length>0)
+			currentCartJSON = JSON.parse(localStorage.getItem('cartJson'));
+		if(Object.keys(currentCartJSON).length == 0){
+			currentCartJSON = {};
+			currentCartJSON.itemsArray = [];
+		}
+		var currentItemsArray = currentCartJSON.itemsArray;		
+		selectedItem.product_code = $('#current_product_code').val();
+		selectedItem.product_name = $('#current_product_name').val();
+		selectedItem.product_qty = $('#current_product_qty').val();
+		$('#errorMsgs').html('');
+		
+		selectedItem.product_lineitems = selectedLineItemsAll;		
+		if($('#errorMsgs').text().length == 0){
+			for (var i=0; i<currentItemsArray.length; i++) {
+			  if (currentItemsArray[i].product_code == $('#current_product_code').val()) {
+				currentItemsArray[i] = [];
+				break;
+			  }
+			}	
+			currentCartJSON.itemsArray = currentItemsArray;
+			localStorage.setItem('cartJson',JSON.stringify(currentCartJSON));
+			renderCart();
+			$('.customizeFoodBody').html('');
+			$('#customizeFood').modal('hide');
+			$('.messagesBar').html("Item deleted successfully");
+			$('.messagesBar').show('slow').delay(3000).fadeOut('slow');
+		}
+		}
+		});
 	});
 	
 	var saveItemToCart = function(){
@@ -425,7 +483,7 @@ init();
 		console.log(curretnProductArray);
 		var ul_items="";
 		ul_items='<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"><div class="panel panel-default">';
-				
+				console.log(ul_items);
 		for(var i=0;i<parseInt(currentVal);i++){
 		
 			$.each(LineItems, function(index, value) {
@@ -436,6 +494,7 @@ init();
 				//ul_item = "<div class='product-name'>"+product_name+" "+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
 				ul_item = "<div class='product-name'>"+product_name+" #"+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
 				ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">Item #'+(i+1)+'</a>&nbsp;&nbsp;&nbsp;<img src="custom/images/trash.png" title="Delete this Item" alt="Delete this Item" class="trash" data-sno="'+i+'" data-product-code="'+product_code+'" data-qty="'+currentVal+'"/></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
+				console.log(ul_item);
 					$.each(value.ProductsLineList, function(index1, value1) {
 						var li_item = '';
 						console.log(value1.ProductLineItemCode);
@@ -453,11 +512,15 @@ init();
 						console.log(li_item);
 						ul_item += li_item;
 					});
+					ul_items += ul_item+"</div></div></div>";
 				}
-				ul_items += ul_item+"</div>";
+				console.log(ul_items);
+				//if(ul_item.length>0)
+					
 			});
 		}
 		$('.customizeFoodBody').html(ul_items+'</div></div><div id=errorMsgs></div>');
+		console.log($('.customizeFoodBody').html());
 		$('#customizeFood').modal('show');
 	});
 	$('body').on('click','.trash',function(){
@@ -591,11 +654,12 @@ init();
 						console.log(li_item);
 						ul_item += li_item;
 					});
+					ul_items += ul_item+"</div></div></div>";
 				}
-				ul_items += ul_item+"</div>";
+				
 			});
 		}
-		$('.customizeFoodBody').html(ul_items+'</div></div><button id="customizeFoodButCart">Customize the Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
+		$('.customizeFoodBody').html(ul_items+'</div></div></div><button id="customizeFoodButCart">Customize the Cart</button><input type=hidden id=current_product_code value="'+product_code+'"/><input type=hidden id=current_product_name value="'+product_name+'"/><input type=hidden id=current_product_qty value="'+currentVal+'"/><div id=errorMsgs></div>');
 		$('#customizeFood').modal('show');
 		
 	});

@@ -270,7 +270,7 @@ body{
   border-top-right-radius: 10px;
 }
 .item-type:hover{
-    background-color: white !important;
+    background-color: rgb(213, 198, 177) !important;
 }
 .cart{
   min-height: 300px;
@@ -291,8 +291,9 @@ body{
 	  max-height: 350px;
 }
 #cartItemDesc {
-	 overflow-y: scroll;
+	 overflow-y: auto;
     overflow-x: hidden;
+	min-height: 120px;
 	max-height: 120px;
 }
 .scroll::-webkit-scrollbar {
@@ -541,7 +542,7 @@ border-color: #fff !important;
     background-color: rgb(237, 178, 67);
 
 }
-#customizeFoodBut{
+#customizeFoodBut,#customizeFoodButCart,#DeleteButCart{
   background-color: #46000E !important;
  border-bottom-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -551,6 +552,8 @@ border-color: #fff !important;
   width: 227px;
   margin-top: 13px;
   padding: 5px;
+}
+#customizeFoodBut{
   margin-left: 60px;
   margin-bottom: 10px;
 }
@@ -685,13 +688,13 @@ width: 13% !important;
 }
 
 .colCheckBox {
-    border: 0px solid blue;
     float: left;
     padding: 5px;
     margin-right: 5px;
 }
 .colCheckBox label{
     padding-left: 5px;
+	font-family: san-Regular;
 }
 .cartMinus1,.cartPlus1,.glyphicon-edit,.glyphicon-shopping-cart,.quantityItem{
 	font-size: 20px;
