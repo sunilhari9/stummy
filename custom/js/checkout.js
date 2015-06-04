@@ -52,7 +52,7 @@
 				for(var index = 0;index<cartTotalItemsLength;index++){
 					var eachItemData = cartTotalItems.itemsArray[index];
 					 var productSubTotal= eachItemData.product_qty * 25;
-                var CheckOutItems='<tr><td data-th=""><div class="row"><div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div><div class="col-sm-6"><h4 class="nomargin productName">'+eachItemData.product_name+'</h4></div>          </div></td><td data-th="Price" class="price">&#8377; 25 </td><td data-th="Quantity"><input type="number" class="form-control text-center " value="'+eachItemData.product_qty+'"></td><td data-th="Subtotal" class="text-center" class="subtotal">&#8377;'+productSubTotal+' </td>  <td class="actions" data-th=""><button class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash deleteItem"></i></button></td>     </tr>'
+                var CheckOutItems='<tr><td data-th=""><div class="row"><div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div><div class="col-sm-6"><h4 class="nomargin productName">'+eachItemData.product_name+'</h4></div>          </div></td><td data-th="Price" class="price">&#8377; 25 </td><td data-th="Quantity">'+eachItemData.product_qty+'</td><td data-th="Subtotal" class="text-center" class="subtotal">&#8377;'+productSubTotal+' </td>  <td class="actions" data-th=""><button class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash deleteItem"></i></button></td>     </tr>'
                     
 					cartItemDescHtml += CheckOutItems;
 				}

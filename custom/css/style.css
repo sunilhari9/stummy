@@ -17,10 +17,10 @@ body:before {
 .search .form-control-feedback {
   margin-right: 20% !important;
 }
-.form-control {
+/*.form-control {
     width: 80% !important;
     margin-top: -45px !important;
-}
+}*/
 }
 @media screen and (min-width: 0) and (max-width: 419px) {
   body:before {
@@ -190,8 +190,8 @@ body{
   border-bottom-left-radius: 20px;
 }
 .logo{
-    height:45px;
-    margin-top: -17px;
+  /*  height:45px;
+    margin-top: -17px;*/
 }
 .nav-tabs>li>a{
     color:#fff !important;
