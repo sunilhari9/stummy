@@ -4,6 +4,30 @@
         allWells = $('.setup-content');
 
     allWells.hide();
+    var homeAddressLocalStorage = JSON.parse(localStorage.getItem("homeAddress"));
+    $("#displayHomeName").text(homeAddressLocalStorage.Name)
+    $("#displayHomeAddress").text(homeAddressLocalStorage.Address + ", Ph:" + homeAddressLocalStorage.Phone ) 
+    
+    var deliveryAddressLocalStorage = JSON.parse(localStorage.getItem("deliveryAddress"));
+      console.log(deliveryAddressLocalStorage)
+    $("#displayDelivaryName").text(deliveryAddressLocalStorage.Name)
+    $("#displayDelivaryAddress").text(deliveryAddressLocalStorage.Address + ", Ph:" + deliveryAddressLocalStorage.Phone )
+      $("#homeAddressSubmit").click(function(){
+         var homeAddress={};
+        homeAddress.Name= $("#homeName").val();
+        homeAddress.Email= $("#homeEmail").val();
+        homeAddress.Phone= $("#homePhone").val();
+        homeAddress.Address= $("#homeAddr").val();
+        localStorage.setItem("homeAddress", JSON.stringify(homeAddress));
+      })
+$("#deliveryAddressSubmit").click(function(){
+         var deliveryAddress={};
+        deliveryAddress.Name= $("#deliveryName").val();
+        deliveryAddress.Email= $("#deliveryEmail").val();
+        deliveryAddress.Phone= $("#deliveryPhone").val();
+        deliveryAddress.Address= $("#deliveryAddr").val();
+        localStorage.setItem("deliveryAddress", JSON.stringify(deliveryAddress));
+      })
 
     navListItems.click(function(e)
     {
