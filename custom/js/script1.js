@@ -70,9 +70,9 @@ init();
 				lineItemExists = true;
 				ul_item = "<div class='product-name'>"+product_name+" #"+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
 				if(i == 0)
-					ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">Item #'+(i+1)+'</a></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
+					ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">'+product_name+' #'+(i+1)+'</a></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
 				else
-					ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">Item #'+(i+1)+'</a></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
+					ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">'+product_name+' #'+(i+1)+'</a></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
 					$.each(value.ProductsLineList, function(index1, value1) {
 						var li_item = '<li><input type=checkbox name="product-line-items-selection'+i+'" value="'+value1.ProductLineItemCode+'">'+value1.ProductLineItemName+'</li>';
 						li_item = '<div class="colCheckBox"><input type="checkbox" name="product-line-items-selection'+i+'" value="'+value1.ProductLineItemCode+'"><label>'+value1.ProductLineItemName+'</label></div>';
@@ -133,9 +133,9 @@ init();
 				//ul_item = "<div class='product-name'>"+product_name+" "+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
 				ul_item = "<div class='product-name'>"+product_name+" #"+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
 				if(i == 0)
-							ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">Item #'+(i+1)+'</a>&nbsp;&nbsp;&nbsp;<img src="custom/images/trash.png" title="Delete this Item" alt="Delete this Item" class="trash" data-sno="'+i+'" data-product-code="'+product_code+'" data-qty="'+currentVal+'"/></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
+							ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">'+product_name+' #'+(i+1)+'</a>&nbsp;&nbsp;&nbsp;<img src="custom/images/trash.png" title="Delete this Item" alt="Delete this Item" class="trash" data-sno="'+i+'" data-product-code="'+product_code+'" data-qty="'+currentVal+'"/></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
 						else
-							ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">Item #'+(i+1)+'</a>&nbsp;&nbsp;&nbsp;<img src="custom/images/trash.png" title="Delete this Item" alt="Delete this Item" class="trash" data-sno="'+i+'" data-product-code="'+product_code+'" data-qty="'+currentVal+'"/></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
+							ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">'+product_name+' #'+(i+1)+'</a>&nbsp;&nbsp;&nbsp;<img src="custom/images/trash.png" title="Delete this Item" alt="Delete this Item" class="trash" data-sno="'+i+'" data-product-code="'+product_code+'" data-qty="'+currentVal+'"/></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
 					$.each(value.ProductsLineList, function(index1, value1) {
 						var li_item = '';
 						console.log(value1.ProductLineItemCode);
@@ -493,7 +493,7 @@ init();
 				if (value.ProductCode == product_code) {
 				//ul_item = "<div class='product-name'>"+product_name+" "+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
 				ul_item = "<div class='product-name'>"+product_name+" #"+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
-				ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">Item #'+(i+1)+'</a>&nbsp;&nbsp;&nbsp;<img src="custom/images/trash.png" title="Delete this Item" alt="Delete this Item" class="trash" data-sno="'+i+'" data-product-code="'+product_code+'" data-qty="'+currentVal+'"/></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
+				ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">'+product_name+' #'+(i+1)+'</a>&nbsp;&nbsp;&nbsp;<img src="custom/images/trash.png" title="Delete this Item" alt="Delete this Item" class="trash" data-sno="'+i+'" data-product-code="'+product_code+'" data-qty="'+currentVal+'"/></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
 				console.log(ul_item);
 					$.each(value.ProductsLineList, function(index1, value1) {
 						var li_item = '';
@@ -634,9 +634,9 @@ init();
 				//ul_item = "<div class='product-name'>"+product_name+" "+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
 				ul_item = "<div class='product-name'>"+product_name+" #"+(i+1)+":</div>"+"<ul class='product-line-items clearfix'>";
 				if(i == currentVal-1)
-							ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">Item #'+(i+1)+'</a></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
+							ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">'+product_name+' #'+(i+1)+'</a></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
 						else
-							ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">Item #'+(i+1)+'</a></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
+							ul_item = '<div class="panel-heading" role="tab" id="headingOne'+i+'"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne'+i+'" aria-expanded="false" aria-controls="collapseOne">'+product_name+' #'+(i+1)+'</a></h4></div><div id="collapseOne'+i+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne'+i+'"><div class="panel-body"><div class="rowCheckBox">';
 					$.each(value.ProductsLineList, function(index1, value1) {
 						var li_item = '';
 						console.log(value1.ProductLineItemCode);
@@ -774,6 +774,129 @@ init();
 	$('body').on('click','.hlink',function(){
 		$(this).siblings('.summary').children('.mobileHide').toggle();
 	});
+	$('body').on('click','#unitPrice,#popularity',function(){
+		var activeCatName = $('.list-group-item.item-type.activeCat').text();
+		console.log(activeCatName);
+		var filterArray = [];
+		$.each(items, function(index, value) {
+			if(value.Name === activeCatName){
+				var items = value.ProductsList;
+				if(items.length > 0){
+					for (var i=0;i<items.length;i++)
+					{
+						filterArray.push(items[i]);
+					}					
+				}
+			}
+		});
+		if($(this).attr('id') == 'unitPrice'){
+			if($(this).hasClass('asc')){
+				$('.unitPriceImg').attr('src','./custom/images/sort_down.png');
+			}else{
+				$('.unitPriceImg').attr('src','./custom/images/sort_up.png');
+			}
+		}
+		else if($(this).attr('id') == 'popularity'){
+			if($(this).hasClass('asc')){
+				$('.popularityImg').attr('src','./custom/images/sort_down.png');
+			}else{
+				$('.popularityImg').attr('src','./custom/images/sort_up.png');
+			}
+		}
+		filterArray1 = sortJSON(filterArray, $(this).attr('id'));
+		if($(this).hasClass('asc')){
+			$(this).removeClass('asc');
+			$(this).addClass('desc');
+		}else if($(this).hasClass('desc')){
+		filterArray1 = filterArray1.reverse();
+			$(this).removeClass('desc');
+			$(this).addClass('asc');
+		}
+		$('.items').html('');
+		for (var i=0;i<filterArray1.length;i++)
+		{
+			displayItemDOM(filterArray1[i].ProductName,filterArray1[i].ProductCode,filterArray1[i].unitPrice,filterArray1[i].isVeg,filterArray1[i].imageURL);
+		}
+		var maxLength = 50;
+        function showLess(){
+            $(".show-read-more").each(function(){
+                var myStr = $(this).text();
+                if($.trim(myStr).length > maxLength){
+                    var newStr = myStr.substring(0, maxLength);
+                    var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                    $(this).empty().html(newStr);
+                    $(this).append(' <a href="javascript:void(0);" class="read-more"> More Details...</a>');
+                    $(this).append('<span class="more-text">' + removedStr + '</span>');
+                }
+            });
+            $(".read-more").click(function(){
+				$(this).siblings(".more-text").append(' <a href="javascript:void(0);" class="read-less"> Less Details...</a>');
+                $(this).siblings(".more-text").contents().unwrap();
+                $(this).remove();
+                $(".read-less").on("click",function(){
+                        showLess();
+	               });
+            });                     
+        }
+        showLess();		
+	});
+	$('body').on('click','#veg,#nonveg',function(){
+		var activeCatName = $('.list-group-item.item-type.activeCat').text();
+		console.log(activeCatName);
+		var filterArray = [];
+		$.each(items, function(index, value) {
+			if(value.Name === activeCatName){
+				var items = value.ProductsList;
+				if(items.length > 0){
+					for (var i=0;i<items.length;i++)
+					{
+						filterArray.push(items[i]);
+					}					
+				}
+			}
+		});
+		filterArray1 = sortJSON(filterArray, 'isVeg');
+		if($(this).attr('id') == 'veg')
+			filterArray1 = filterArray1.reverse();
+		$('.items').html('');
+		for (var i=0;i<filterArray1.length;i++)
+		{
+			displayItemDOM(filterArray1[i].ProductName,filterArray1[i].ProductCode,filterArray1[i].unitPrice,filterArray1[i].isVeg,filterArray1[i].imageURL);
+		}
+		var maxLength = 50;
+        function showLess(){
+            $(".show-read-more").each(function(){
+                var myStr = $(this).text();
+                if($.trim(myStr).length > maxLength){
+                    var newStr = myStr.substring(0, maxLength);
+                    var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                    $(this).empty().html(newStr);
+                    $(this).append(' <a href="javascript:void(0);" class="read-more"> More Details...</a>');
+                    $(this).append('<span class="more-text">' + removedStr + '</span>');
+                }
+            });
+            $(".read-more").click(function(){
+				$(this).siblings(".more-text").append(' <a href="javascript:void(0);" class="read-less"> Less Details...</a>');
+                $(this).siblings(".more-text").contents().unwrap();
+                $(this).remove();
+                $(".read-less").on("click",function(){
+                        showLess();
+	               });
+            });                     
+        }
+        showLess();		
+	});
+	var displayItemDOM = function(ProductName,ProductCode,unitPrice,isVeg,imageURL){
+
+        //var item = '<li class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="./custom/images/food/C.jpg" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName+'</h4><div class="customizeIcon"><span class="round-button"><span class="WebRupee">Rs.</span> '+unitPrice+'</span><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="./custom/images/food/C.jpg" alt="Test"></a><p class="show-read-more"> eu lacus dignissim efficitur. Proin ex metus, ornare placerat nisi at, porta lobortis turpis. Praesent euismod nec nulla ultrices maximus. Vivamus imperdiet quam ac lobortis cursus. Nam dapibus ullamcorper magna vehicula aliquam. Vivamus hendrerit molestie neque. Ut interdum diam a purus ultrices facilisis. Suspendisse molestie</p></div><div class="cartCustomizeHiden"></div></div></li>';
+		var item = '<li class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="'+imageURL+'" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName;
+		if(isVeg)
+			item += '&nbsp;&nbsp;<img src="./custom/images/Veg.png" alt="Veg" title="Veg">';
+		else
+			item += '&nbsp;&nbsp;<img src="./custom/images/NonVeg.png" alt="Non Veg" title="Non Veg">';
+		item+='<span class="pull-right rate"><span class="WebRupee">Rs.</span> '+unitPrice+'</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><br/><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="'+imageURL+'" alt="Test"></a><p class="show-read-more"> eu lacus dignissim efficitur. Proin ex metus, ornare placerat nisi at, porta lobortis turpis. Praesent euismod nec nulla ultrices maximus. Vivamus imperdiet quam ac lobortis cursus. Nam dapibus ullamcorper magna vehicula aliquam. Vivamus hendrerit molestie neque. Ut interdum diam a purus ultrices facilisis. Suspendisse molestie</p></div><div class="cartCustomizeHiden"></div></div></li>';
+		$('.items').append(item);
+	};
 	$('body').on('click','.clearCart',function(){
 	var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
 		if(cartTotalItems != undefined){
@@ -811,8 +934,8 @@ init();
 				obj.product_name = array1[ii].product_name;
 				data.push(obj);*/
 				//console.log("found");
-				//console.log(array1[ii]);
-				displayItemDOMSearch(array1[ii].ProductName,array1[ii].ProductCode,array1[ii].unitPrice)
+				console.log(array1[ii]);
+				displayItemDOMSearch(array1[ii].ProductName,array1[ii].ProductCode,array1[ii].unitPrice,array1[ii].isVeg,array1[ii].imageURL)
 			}
 			}
 			
@@ -820,8 +943,13 @@ init();
 		}
 		
 	};
-	var displayItemDOMSearch = function(ProductName,ProductCode,unitPrice){
-        var item = '<li class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="./custom/images/food/C.jpg" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName+'</h4><div class="customizeIcon"><span class="round-button"><span class="WebRupee">Rs.</span> '+unitPrice+'</span><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><span class="glyphicon glyphicon-edit" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="./custom/images/food/C.jpg" alt="Test"></a><p class="show-read-more"> eu lacus dignissim efficitur. Proin ex metus, ornare placerat nisi at, porta lobortis turpis. Praesent euismod nec nulla ultrices maximus. Vivamus imperdiet quam ac lobortis cursus. Nam dapibus ullamcorper magna vehicula aliquam. Vivamus hendrerit molestie neque. Ut interdum diam a purus ultrices facilisis. Suspendisse molestie</p></div></li>';
+	var displayItemDOMSearch = function(ProductName,ProductCode,unitPrice,isVeg,imageURL){
+        var item = '<li class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="'+imageURL+'" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">'+ProductName;
+		if(isVeg)
+			item += '&nbsp;&nbsp;<img src="./custom/images/Veg.png" alt="Veg" title="Veg">';
+		else
+			item += '&nbsp;&nbsp;<img src="./custom/images/NonVeg.png" alt="Non Veg" title="Non Veg">';
+		item+='</h4><div class="customizeIcon"><span class="round-button"><span class="WebRupee">Rs.</span> '+unitPrice+'</span><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><span class="glyphicon glyphicon-edit" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="'+imageURL+'" alt="Test"></a><p class="show-read-more"> eu lacus dignissim efficitur. Proin ex metus, ornare placerat nisi at, porta lobortis turpis. Praesent euismod nec nulla ultrices maximus. Vivamus imperdiet quam ac lobortis cursus. Nam dapibus ullamcorper magna vehicula aliquam. Vivamus hendrerit molestie neque. Ut interdum diam a purus ultrices facilisis. Suspendisse molestie</p></div></li>';
 		$('.items').append(item);
 	};
 	var calcRWD = function(){
@@ -864,3 +992,10 @@ init();
 			
 				mobileChk();		
 			});
+function sortJSON(data, key) {
+    return data.sort(function (a, b) {
+        var x = a[key];
+        var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+}
