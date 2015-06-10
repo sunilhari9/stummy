@@ -179,15 +179,15 @@ body{
 }
 .categories{
    height: 642px;
-    background-color: rgb(239, 231, 215);
+    background-color: #DFD2B2;
        padding-right: 0px !important; 
    padding-left: 0px !important; 
 }
 .items{
     background-color: #fff;
     padding: 12px;
-	 min-height: 563px;
-    max-height: 563px;
+	 min-height: 558px;
+    max-height: 558px;
       overflow: auto;
 }
 .items div.media:after {
@@ -244,17 +244,25 @@ body{
   background-color: #FFFFFF !important;
 }
 .list-group-item {
-   background-color: rgb(239,231,215) !important; 
+   background-color: rgb(223,210,178) !important; 
    border: 0px !important;
 }
 .list-group-item.activeCat{
-   background-color: white !important; 
+   background-color: rgb(190,165,107) !important; 
    border: none !important; 
 }
 .heading{
-    background-color: #D1CBC0 !important;
+    background-color: rgb(117,0,0) !important;
     font-size: 18px;
 	height: 42px;
+	color: white;
+}
+.list-group-item:first-child {
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+.glyphicon-th-list{
+	color: white;
 }
 @media (min-width: 768px){
 .nav-tabs.nav-justified>li>a {
@@ -273,7 +281,7 @@ body{
   border-top-right-radius: 10px;
 }
 .item-type:hover{
-    background-color: rgb(213, 198, 177) !important;
+    background-color: rgb(204, 183, 141) !important;
 }
 .cart{
   min-height: 300px;
@@ -609,7 +617,7 @@ color: white;
 font-size: 14px;
 font-weight: bold;
 }
-li.food_item{background-color:rgb(239,231,215); padding-bottom: 0em !important; padding:0 0.5em; margin-top:0.5em;padding-top:5px;display:block;
+li.food_item{background-color:rgb(233,223,199); padding-bottom: 0em !important; padding:0 0.5em; margin-top:0.5em;padding-top:5px;display:block;
 -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-tap-highlight-color: transparent; /* For some Androids */
   border-radius: 4px;
@@ -805,6 +813,10 @@ padding-left: 30px;
   font-size: 14px;
   padding: 3px;
 }
+.HPHeader2 > table{
+	padding: 2px;
+	width: 100%;
+}
 .sort {
   list-style-type: none;
   padding: 0px;
@@ -813,7 +825,21 @@ padding-left: 30px;
 }
 .sort li {
   float: left;
-  padding: 5px;
+  padding: 5px 5px 5px 5px;
+  text-align: center;
+  height: 31px;
+  width: 25%;
+}
+.sort_first{
+	width: 20%;
+}
+.sort_second{
+  background-color: rgb(233, 223, 199);
+  	border-radius: 5px;
+}
+.sort li:hover{
+  background-color: rgb(204, 183, 141);
+  border-radius: 10px;
 }
 .sort li a {
   padding: 5px;

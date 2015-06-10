@@ -4,15 +4,18 @@
 			{
 					"ProductLineItemName": "Spicy",
 					"ProductLineItemCode": "1",
+					"ProductLineItemCost": "10",
 					"default":true
 			},
 			{
 					"ProductLineItemName": "No Spicy",
-					"ProductLineItemCode": "2"
+					"ProductLineItemCode": "2",
+					"ProductLineItemCost": "15"
 			},
 			{
 					"ProductLineItemName": "Med Spicy",
-					"ProductLineItemCode": "3"
+					"ProductLineItemCode": "3",
+					"ProductLineItemCost": "20"
 			}
 		],
        "ProductCode": "1001"
@@ -22,15 +25,18 @@
 			{
 					"ProductLineItemName": "Dry Fish",
 					"ProductLineItemCode": "1",
-					"default":true
+					"default":true,
+					"ProductLineItemCost": "10"
 			},
 			{
 					"ProductLineItemName": "Boneless Fish",
-					"ProductLineItemCode": "2"
+					"ProductLineItemCode": "2",
+					"ProductLineItemCost": "15"
 			},
 			{
 					"ProductLineItemName": "Large Fish",
-					"ProductLineItemCode": "3"
+					"ProductLineItemCode": "3",
+					"ProductLineItemCost": "20"
 			}
 		],
        "ProductCode": "1002"
@@ -39,16 +45,19 @@
         "ProductsLineList": [
 			{
 					"ProductLineItemName": "Chicken1",
-					"ProductLineItemCode": "1"
+					"ProductLineItemCode": "1",
+					"ProductLineItemCost": "10"
 			},
 			{
 					"ProductLineItemName": "Chicken2",
 					"ProductLineItemCode": "2",
-					"default":true
+					"default":true,
+					"ProductLineItemCost": "15"
 			},
 			{
 					"ProductLineItemName": "Chicken13",
-					"ProductLineItemCode": "3"
+					"ProductLineItemCode": "3",
+					"ProductLineItemCost": "20"
 			}
 		],
        "ProductCode": "1003"

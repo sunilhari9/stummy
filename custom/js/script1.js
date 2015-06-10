@@ -672,6 +672,59 @@ $(".cartCustomizeHiden").html('');
 			$(this).prev().val(parseInt(currentVal)+1);
 		}
 	});*/
+	var getProductPrice = function(productCodes){
+	console.log(productCodes);
+	$.getJSON( "custom/js/products.json", function( data ) {
+			items = data;
+		
+	//console.log("inside getProductPrice"+items);
+	//var totalProducts = [];
+		$.each(items, function(index, value) {
+		//for (var j=0;j<items.length;j++){
+			//var value = items[j];
+			var items1 = value.ProductsList;
+			//console.log(items1);
+			if(items1.length > 0){
+				for (var i=0;i<items1.length;i++)
+				{
+				/*	if(items1[i].ProductCode == productCode){
+					console.log(items1[i].unitPrice);
+						return items1[i].unitPrice;
+					}*/
+					//totalProducts.push(items1[i]);
+					console.log(items1[i].ProductCode);	
+					console.log($.inArray(items1[i].ProductCode, productCodes));
+					if($.inArray(parseInt(items1[i].ProductCode), productCodes) != -1){
+						console.log(items1[i]);	
+					}
+				}					
+			}				
+		});
+	//	console.log("totalProducts");
+		//console.log(totalProducts);
+		
+		
+		});
+	};
+	var calcCartAmount = function(){
+	
+		var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
+		if(cartTotalItems != undefined){
+			cartTotalItemsLength = cartTotalItems.itemsArray.length
+			if(cartTotalItemsLength > 0){
+			var cartProductCodes = [];
+				for(var index = 0;index<cartTotalItemsLength;index++){
+					var eachItemData = cartTotalItems.itemsArray[index];
+					console.log("before getProductPrice");
+					//var price = getProductPrice(eachItemData.product_code);
+					cartProductCodes.push(eachItemData.product_code);
+					//console.log("Price:"+price);
+				}
+				getProductPrice(cartProductCodes);
+			}
+		}
+	};
+	
 	var renderCart = function(){
 	$('#cartItemDesc').html("<center><img src='custom/images/loading.gif' /></center>");
 		var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
@@ -694,8 +747,10 @@ $(".cartCustomizeHiden").html('');
 					}
 				}
 				$('#cartItemDesc').html('');
-				if(cartItemDescHtml.length > 0)
+				if(cartItemDescHtml.length > 0){
 					$('#cartItemDesc').append(cartItemDescHtml);
+					calcCartAmount();
+				}
 				else{
 					$('.cartItemCount').html("0");
 					$('.cartItemCount').removeClass('active');
@@ -706,13 +761,14 @@ $(".cartCustomizeHiden").html('');
 				$('.cartItemCount').html("0");
 				$('.cartItemCount').removeClass('active');
 				$('#cartItemDesc').html("<div>No items yet</div>");
-			}
+			}			
 		}else{
 			$('.cartItemCount').html("0");
 			$('.cartItemCount').removeClass('active');
 			$('#cartItemDesc').html("<div>No items yet</div>");
 		}	
 	};
+	
 	//$('#myModal').on('hidden.bs.modal', function () {
   
 	$('body').on('hidden.bs.modal',function(){
@@ -780,47 +836,54 @@ $(".cartCustomizeHiden").html('');
 	$('body').on('click','#unitPrice,#popularity',function(){
 		var activeCatName = $('.list-group-item.item-type.activeCat').text();
 		//console.log(activeCatName);
-		var filterArray = [];
-		$.each(items, function(index, value) {
-			if(value.Name === activeCatName){
-				var items = value.ProductsList;
-				if(items.length > 0){
-					for (var i=0;i<items.length;i++)
-					{
-						filterArray.push(items[i]);
-					}					
+		if(activeCatName.length > 0){
+			var filterArray = [];
+			$.each(items, function(index, value) {
+				if(value.Name === activeCatName){
+					var items = value.ProductsList;
+					if(items.length > 0){
+						for (var i=0;i<items.length;i++)
+						{
+							filterArray.push(items[i]);
+						}					
+					}
+				}
+			});
+			if($(this).attr('id') == 'unitPrice'){
+				$('.popularityImg').attr('src','./custom/images/no_sort.png');
+				if($(this).hasClass('asc')){
+					$('.unitPriceImg').attr('src','./custom/images/sort_down.png');
+				}else{
+					$('.unitPriceImg').attr('src','./custom/images/sort_up.png');
 				}
 			}
-		});
-		if($(this).attr('id') == 'unitPrice'){
-			$('.popularityImg').attr('src','./custom/images/no_sort.png');
-			if($(this).hasClass('asc')){
-				$('.unitPriceImg').attr('src','./custom/images/sort_down.png');
-			}else{
-				$('.unitPriceImg').attr('src','./custom/images/sort_up.png');
+			else if($(this).attr('id') == 'popularity'){
+				$('.unitPriceImg').attr('src','./custom/images/no_sort.png');
+				if($(this).hasClass('asc')){
+					$('.popularityImg').attr('src','./custom/images/sort_down.png');
+				}else{
+					$('.popularityImg').attr('src','./custom/images/sort_up.png');
+				}
 			}
-		}
-		else if($(this).attr('id') == 'popularity'){
-			$('.unitPriceImg').attr('src','./custom/images/no_sort.png');
+			filterArray1 = sortJSON(filterArray, $(this).attr('id'));
 			if($(this).hasClass('asc')){
-				$('.popularityImg').attr('src','./custom/images/sort_down.png');
-			}else{
-				$('.popularityImg').attr('src','./custom/images/sort_up.png');
+				$(this).removeClass('asc');
+				$(this).addClass('desc');
+			}else if($(this).hasClass('desc')){
+			filterArray1 = filterArray1.reverse();
+				$(this).removeClass('desc');
+				$(this).addClass('asc');
 			}
-		}
-		filterArray1 = sortJSON(filterArray, $(this).attr('id'));
-		if($(this).hasClass('asc')){
-			$(this).removeClass('asc');
-			$(this).addClass('desc');
-		}else if($(this).hasClass('desc')){
-		filterArray1 = filterArray1.reverse();
-			$(this).removeClass('desc');
-			$(this).addClass('asc');
-		}
-		$('.items').html('');
-		for (var i=0;i<filterArray1.length;i++)
-		{
-			displayItemDOM(filterArray1[i].ProductName,filterArray1[i].ProductCode,filterArray1[i].unitPrice,filterArray1[i].isVeg,filterArray1[i].imageURL);
+			$('.items').html('');
+			for (var i=0;i<filterArray1.length;i++)
+			{
+				displayItemDOM(filterArray1[i].ProductName,filterArray1[i].ProductCode,filterArray1[i].unitPrice,filterArray1[i].isVeg,filterArray1[i].imageURL);
+			}
+		}else{
+			BootstrapDialog.show({
+				title: 'Sort Option',
+				message: 'Please selecte any Category to Sort'
+			});
 		}
 		var maxLength = 50;
         function showLess(){
@@ -847,26 +910,32 @@ $(".cartCustomizeHiden").html('');
 	});
 	$('body').on('click','#veg,#nonveg',function(){
 		var activeCatName = $('.list-group-item.item-type.activeCat').text();
-		console.log(activeCatName);
-		var filterArray = [];
-		$.each(items, function(index, value) {
-			if(value.Name === activeCatName){
-				var items = value.ProductsList;
-				if(items.length > 0){
-					for (var i=0;i<items.length;i++)
-					{
-						filterArray.push(items[i]);
-					}					
+		if(activeCatName.length > 0){
+			var filterArray = [];
+			$.each(items, function(index, value) {
+				if(value.Name === activeCatName){
+					var items = value.ProductsList;
+					if(items.length > 0){
+						for (var i=0;i<items.length;i++)
+						{
+							filterArray.push(items[i]);
+						}					
+					}
 				}
+			});
+			filterArray1 = sortJSON(filterArray, 'isVeg');
+			if($(this).attr('id') == 'veg')
+				filterArray1 = filterArray1.reverse();
+			$('.items').html('');
+			for (var i=0;i<filterArray1.length;i++)
+			{
+				displayItemDOM(filterArray1[i].ProductName,filterArray1[i].ProductCode,filterArray1[i].unitPrice,filterArray1[i].isVeg,filterArray1[i].imageURL);
 			}
-		});
-		filterArray1 = sortJSON(filterArray, 'isVeg');
-		if($(this).attr('id') == 'veg')
-			filterArray1 = filterArray1.reverse();
-		$('.items').html('');
-		for (var i=0;i<filterArray1.length;i++)
-		{
-			displayItemDOM(filterArray1[i].ProductName,filterArray1[i].ProductCode,filterArray1[i].unitPrice,filterArray1[i].isVeg,filterArray1[i].imageURL);
+		}else{
+			BootstrapDialog.show({
+				title: 'Sort Option',
+				message: 'Please selecte any Category to Sort'
+			});
 		}
 		var maxLength = 50;
         function showLess(){
@@ -941,6 +1010,7 @@ $(".cartCustomizeHiden").html('');
 				//console.log("found");
 				console.log(array1[ii]);
 				displayItemDOMSearch(array1[ii].ProductName,array1[ii].ProductCode,array1[ii].unitPrice,array1[ii].isVeg,array1[ii].imageURL)
+				$('.list-group-item.item-type').removeClass('activeCat');
 			}
 			}
 			
@@ -954,7 +1024,7 @@ $(".cartCustomizeHiden").html('');
 			item += '&nbsp;&nbsp;<img src="./custom/images/Veg.png" alt="Veg" title="Veg">';
 		else
 			item += '&nbsp;&nbsp;<img src="./custom/images/NonVeg.png" alt="Non Veg" title="Non Veg">';
-		item+='</h4><div class="customizeIcon"><span class="round-button"><span class="WebRupee">Rs.</span> '+unitPrice+'</span><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><span class="glyphicon glyphicon-edit" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="'+imageURL+'" alt="Test"></a><p class="show-read-more"> eu lacus dignissim efficitur. Proin ex metus, ornare placerat nisi at, porta lobortis turpis. Praesent euismod nec nulla ultrices maximus. Vivamus imperdiet quam ac lobortis cursus. Nam dapibus ullamcorper magna vehicula aliquam. Vivamus hendrerit molestie neque. Ut interdum diam a purus ultrices facilisis. Suspendisse molestie</p></div></li>';
+		item+='<span class="pull-right rate"><span class="WebRupee">Rs.</span> '+unitPrice+'</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="'+ProductCode+'" data-product-name="'+ProductName+'">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><br/><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="'+imageURL+'" alt="Test"></a><p class="show-read-more"> eu lacus dignissim efficitur. Proin ex metus, ornare placerat nisi at, porta lobortis turpis. Praesent euismod nec nulla ultrices maximus. Vivamus imperdiet quam ac lobortis cursus. Nam dapibus ullamcorper magna vehicula aliquam. Vivamus hendrerit molestie neque. Ut interdum diam a purus ultrices facilisis. Suspendisse molestie</p></div><div class="cartCustomizeHiden"></div></div></li>';
 		$('.items').append(item);
 	};
 	var calcRWD = function(){
