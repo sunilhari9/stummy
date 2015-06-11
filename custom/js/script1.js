@@ -100,7 +100,10 @@ $(".cartCustomizeHiden").html('');
 		
 
 	});
-	$('body').on('click','.glyphicon-edit.cartPanel',function(event){
+	$('body').on('click','.searchInMobile',function(event){
+        $(".search").toggleClass( "hiddeninMobile",1000 );
+    });
+        $('body').on('click','.glyphicon-edit.cartPanel',function(event){
 	console.log("in click++++++++++++++");
 		var currentVal = $(this).siblings( ".quantity" ).text();
 		console.log("sibling:"+$(this).siblings( ".quantity" ).data('product-code'));
