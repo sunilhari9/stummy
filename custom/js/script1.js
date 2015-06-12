@@ -3,20 +3,21 @@ var cartJson = {};
 	var itemsArray = [];
 	var items;
 	var LineItems;
-	
+$.getJSON( "custom/js/products.json", function( data ) {
+	items = data;
+	$.getJSON( "custom/js/LineItems.json", function( items ) {
+		sessionStorage.setItem('LineItems',JSON.stringify(items));
+		init();
+	});
+});	
 //if(sessionStorage.getItem('LineItems') == undefined){
-$.getJSON( "custom/js/LineItems.json", function( items ) {
-	sessionStorage.setItem('LineItems',JSON.stringify(items));
-	init();
-});
+
+
 /*}else{
 init();
 }*/
 	function init(){
-		cartJson.itemsArray = itemsArray;
-		$.getJSON( "custom/js/products.json", function( data ) {
-			items = data;
-		});
+		cartJson.itemsArray = itemsArray;		
 		LineItems = JSON.parse(sessionStorage.getItem('LineItems'));
 		renderCart();
 	}
@@ -101,9 +102,9 @@ $(".cartCustomizeHiden").html('');
 
 	});
 	$('body').on('click','.searchInMobile',function(event){
-        $(".search").toggleClass( "hiddeninMobile",1000 );
-    });
-        $('body').on('click','.glyphicon-edit.cartPanel',function(event){
+		$(".search").toggleClass( "hiddeninMobile",1000 );
+	});
+	$('body').on('click','.glyphicon-edit.cartPanel',function(event){
 	console.log("in click++++++++++++++");
 		var currentVal = $(this).siblings( ".quantity" ).text();
 		console.log("sibling:"+$(this).siblings( ".quantity" ).data('product-code'));
@@ -675,39 +676,60 @@ $(".cartCustomizeHiden").html('');
 			$(this).prev().val(parseInt(currentVal)+1);
 		}
 	});*/
-	var getProductPrice = function(productCodes){
-	console.log(productCodes);
-	$.getJSON( "custom/js/products.json", function( data ) {
-			items = data;
-		
-	//console.log("inside getProductPrice"+items);
-	//var totalProducts = [];
-		$.each(items, function(index, value) {
-		//for (var j=0;j<items.length;j++){
-			//var value = items[j];
-			var items1 = value.ProductsList;
-			//console.log(items1);
+	var getProductPrice = function(productCodes,cartProductLineItems,cartProductQty){
+	//console.log(items);
+	var subTotalAmount = 0;
+//	var cartSubTotalArray = 0;
+	//$.getJSON( "custom/js/products.json", function( data ) {
+	//	items = data;
+	//$.each(items, function(index, value) {
+		for (var j=0;j<items.length;j++){
+			var items1 = items[j].ProductsList;
 			if(items1.length > 0){
 				for (var i=0;i<items1.length;i++)
 				{
-				/*	if(items1[i].ProductCode == productCode){
-					console.log(items1[i].unitPrice);
-						return items1[i].unitPrice;
-					}*/
-					//totalProducts.push(items1[i]);
-					console.log(items1[i].ProductCode);	
-					console.log($.inArray(items1[i].ProductCode, productCodes));
-					if($.inArray(parseInt(items1[i].ProductCode), productCodes) != -1){
-						console.log(items1[i]);	
+					if($.inArray(parseInt(items1[i].ProductCode), productCodes) >= 0){
+				//	console.log($.inArray(parseInt(items1[i].ProductCode), productCodes));
+					//if(parseInt(items1[i].ProductCode) == productCode){
+				//	console.log(items1[i]);
+				//	console.log("inside:"+items1[i].unitPrice);
+						var unitPriceCurrent =  parseInt(items1[i].unitPrice);
+						console.log(unitPriceCurrent);
+						var lineItems = cartProductLineItems[$.inArray(parseInt(items1[i].ProductCode), productCodes)];
+						console.log(lineItems);
+						for (var k=0;k<lineItems.length;k++)
+						{
+							subTotalAmount += parseInt(unitPriceCurrent);
+							for (var l=0;l<lineItems[k].length;l++)
+							{
+								$.each(LineItems, function(index, value) {
+									var ul_item = "";
+									if (value.ProductCode == items1[i].ProductCode) {
+										$.each(value.ProductsLineList, function(index1, value1) {
+											if(value1.ProductLineItemCode == lineItems[k][l]){
+												console.log(value1.ProductLineItemCost);
+												subTotalAmount += parseInt(value1.ProductLineItemCost);
+											}
+										});
+									}
+								});
+							}
+						}				
 					}
 				}					
 			}				
-		});
-	//	console.log("totalProducts");
-		//console.log(totalProducts);
-		
-		
-		});
+		};		
+		//});
+		console.log("subTotalAmount:"+subTotalAmount);
+		$('.subtotal').text(subTotalAmount.toFixed(2));
+		var grandTotal = (parseFloat(subTotalAmount) + 
+						parseFloat($('.delivery').html()) + 
+						parseFloat($('.container_charges').html()));
+		$('.service_tax').text(grandTotal * 0.15);
+		grandTotal += grandTotal * 0.15;
+		$('.rounded_off').text((grandTotal % 1).toFixed(2));
+		grandTotal -= (grandTotal % 1).toFixed(2);
+		$('.grand_total').html('Rs. '+grandTotal.toFixed(2));
 	};
 	var calcCartAmount = function(){
 	
@@ -715,15 +737,19 @@ $(".cartCustomizeHiden").html('');
 		if(cartTotalItems != undefined){
 			cartTotalItemsLength = cartTotalItems.itemsArray.length
 			if(cartTotalItemsLength > 0){
-			var cartProductCodes = [];
+			var cartProductCodes = [],cartProductLineItems = [],cartProductQty = [];
 				for(var index = 0;index<cartTotalItemsLength;index++){
 					var eachItemData = cartTotalItems.itemsArray[index];
-					console.log("before getProductPrice");
+					console.log(eachItemData);
 					//var price = getProductPrice(eachItemData.product_code);
 					cartProductCodes.push(eachItemData.product_code);
+					cartProductLineItems.push(eachItemData.product_lineitems);
+					cartProductQty.push(eachItemData.product_qty);
 					//console.log("Price:"+price);
+					//var productPrice = getProductPrice(eachItemData.product_code);
+					//console.log("productCode:"+eachItemData.product_code+"-----productPrice:"+productPrice)
 				}
-				getProductPrice(cartProductCodes);
+				getProductPrice(cartProductCodes,cartProductLineItems,cartProductQty);
 			}
 		}
 	};
