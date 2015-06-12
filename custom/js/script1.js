@@ -961,7 +961,7 @@
 	                filterArray1 = filterArray1.reverse();
 	            $('.items').html('');
 	            for (var i = 0; i < filterArray1.length; i++) {
-	                displayItemDOM(filterArray1[i].ProductName, filterArray1[i].ProductCode, filterArray1[i].unitPrice, filterArray1[i].isVeg, filterArray1[i].imageURL);
+	                displayItemDOM(filterArray1[i].ProductName, filterArray1[i].ProductCode, filterArray1[i].unitPrice, filterArray1[i].isVeg, filterArray1[i].imageURL,filterArray1[i].itemDes);
 	            }
 	        } else {
 	            BootstrapDialog.show({

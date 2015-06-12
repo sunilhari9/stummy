@@ -789,9 +789,9 @@ li.food_item {
     cursor: pointer;
     font-size: 14px;
 }
-.media-heading img {
+/*.media-heading img {
     height: 15px;
-}
+}*/
 a.list-group-item {
     color: #FFFFFF !importent;
 }
@@ -903,9 +903,9 @@ a.list-group-item {
     padding-top: 0px;
     padding-bottom: 0px;
 }
-.sort li a img {
+/*.sort li a img {
     height: 15px;
-}
+}*/
 @media screen and (min-width: 461px) and (max-width: 991px) {
     li.food_item {
         padding-bottom: .5em !important;
