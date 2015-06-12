@@ -1,4 +1,12 @@
+	$(window).load(function() {
+		// Animate loader off screen
+		$(".se-pre-con").fadeOut("slow");;
+	});
 $(document).ready(function(){
+$('#checkout').click(function(){
+console.log("on checkout");
+	$( '.index_body' ).fadeOut(1000,function(){window.location.href = 'check-out.html';});
+});
 var cartJson = {};
 	var itemsArray = [];
 	var items;
@@ -725,7 +733,7 @@ $(".cartCustomizeHiden").html('');
 		var grandTotal = (parseFloat(subTotalAmount) + 
 						parseFloat($('.delivery').html()) + 
 						parseFloat($('.container_charges').html()));
-		$('.service_tax').text(grandTotal * 0.15);
+		$('.service_tax').text((grandTotal * 0.15).toFixed(2));
 		grandTotal += grandTotal * 0.15;
 		$('.rounded_off').text((grandTotal % 1).toFixed(2));
 		grandTotal -= (grandTotal % 1).toFixed(2);
