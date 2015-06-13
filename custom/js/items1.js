@@ -75,11 +75,26 @@ $.getJSON("custom/js/products.json", function(items) {
     var displayDefaultItems = function() {
         displayItems(uniqueCategories[0]);
     }
+     $(window).touchwipe({
+        wipeLeft: function() {
+          console.log("Slider touch");
+          $.sidr('open', 'sidr');
+        },
+        wipeRight: function() {
+          // Open
+          $.sidr('open', 'sidr');
+        },
+        preventDefaultEvents: false
+      });
     displayDefaultItems();
     $('.list-group-item.item-type').click(function() {
         $('.list-group-item.item-type').removeClass('activeCat');
         $(this).addClass('list-group-item item-type activeCat');
-        $.sidr('close', 'list-group');
+        
+        if(!$("#sidr").is(':hidden')){
+            $.sidr('close', 'sidr');
+            console.log("Slider is open");
+        }
         displayItems($(this).text());
     });
 });
