@@ -190,30 +190,17 @@
                         <div id="cartItemDesc" class="scroll"></div>
                         <hr class="hrLine">
                         <div class="customize clearCart" title="Click to clear all cart items">Clear Cart</div>
-                        <div>
-                            <div class="left">Sub Total</div>
-                            <div class="right subtotal">0.00</div>
-                        </div>
-                        <div>
-                            <div class="left">Delivery Free</div>
-                            <div class="right delivery">0.00</div>
-                        </div>
-                        <div>
-                            <div class="left">Container Charges (+)</div>
-                            <div class="right container_charges">50.40</div>
-                        </div>
-                        <div>
-                            <div class="left">Service Tax(+)</div>
-                            <div class="right service_tax">0.00</div>
-                        </div>
-                        <div>
-                            <div class="left">Rounded Off (+/-) </div>
-                            <div class="right rounded_off">0.40</div>
-                        </div>
-                        <div class="totalAmount row">
-                            <span class="col-md-6">Total</span>
-                            <span class="col-md-6 text-right grand_total">Rs. 350</span>
-                        </div>
+                        <div class="calc">
+						<div><div class="left">Sub Total</div><div class="right subtotal">0.00</div></div>
+						<div><div class="left">Delivery Free</div><div class="right delivery">0.00</div></div>
+						<div><div class="left">Container Charges (+)</div><div class="right container_charges">0.00</div></div>
+						<div><div class="left">Service Tax(+)</div><div class="right service_tax">0.00</div></div>
+						<div><div class="left">Rounded Off (+/-) </div><div class="right rounded_off">0.00</div></div>
+						<div class="totalAmount row">
+							<span class="col-md-5">Total</span>
+							<span class="col-md-7 text-right grand_total">Rs. 0.00</span>
+						</div>
+					</div>
                         <hr class="hrLine">
                         <div id="checkout" class="col-md-8">Proceed to Checkout</div>
                     </div>
@@ -278,8 +265,8 @@
     <script src="vendor/js/jquery.touchwipe.js"></script>
     <script>
         $(document).ready(function() {
-            $('#left-menu').sidr();
-        });
+			$('#left-menu').sidr();
+		});
     </script>
 
 </body>

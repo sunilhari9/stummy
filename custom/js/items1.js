@@ -10,7 +10,7 @@ $.getJSON("custom/js/products.json", function(items) {
         else
             item += '&nbsp;&nbsp;<img src="./custom/images/NonVeg.png" alt="Non Veg" title="Non Veg">';
         item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><br/><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">'+itemDes+'</p></div><div class="cartCustomizeHiden"></div></div></li>';
-        $('.items').append(item);
+        $('.items').append(item);		
     };
     var getUniqueCategories = function() {
         var categories = [];
@@ -37,6 +37,7 @@ $.getJSON("custom/js/products.json", function(items) {
                     for (var i = 0; i < items.length; i++) {
                         displayItemDOM(items[i].ProductName, items[i].ProductCode, items[i].unitPrice, items[i].isVeg, items[i].imageURL,items[i].itemDes);
                     }
+					mobileChk();
                 }
             }
         });
@@ -67,18 +68,17 @@ $.getJSON("custom/js/products.json", function(items) {
 
             }
             showLess();
-            mobileChk();
 
         });
     }
 
     var displayDefaultItems = function() {
-        displayItems(uniqueCategories[0]);
+        displayItems(uniqueCategories[2]);
     }
      $(window).touchwipe({
         wipeLeft: function() {
           console.log("Slider touch");
-          $.sidr('open', 'sidr');
+          $.sidr('close', 'sidr');
         },
         wipeRight: function() {
           // Open

@@ -1,3 +1,10 @@
+a:focus{
+outline: none;
+}
+a,a:hover,a:active{
+text-decoration: none !important;
+}
+
     .no-js #loader {
         display: none;
     }
@@ -78,7 +85,6 @@
     
     @media screen and (min-width: 0) and (max-width: 419px) {
         body:before {
-            content: 'SmallMobile';
             z-index: 4;
         }
         .searchInMobile {
@@ -89,6 +95,9 @@
         .hiddeninMobile {
             display: none;
         }
+		.hlink  img,#veg img,#nonveg img{
+			width: 15px;
+			}
     }
     
     @font-face {
@@ -784,6 +793,10 @@ li.food_item {
 }*/
 a.list-group-item {
     color: #FFFFFF !importent;
+	font-weight: bold;
+}
+.categoriesListMenuOverlay{
+	position: relative;
 }
 .categoriesListMenuOverlay .heading {
     background-color: #A1001D !important;
@@ -852,9 +865,11 @@ a.list-group-item {
 .panel-default>.panel-heading a {
     font-weight: bold;
 }
-.product_actions_cart {
-    padding-left: 30px;
+.product_actions_cart{
+padding-left: 25px;
+text-align: right;
 }
+
 .HPHeader2 {
     background-color: #f8f8f8;
     border: 1px solid lightgray;
@@ -879,6 +894,7 @@ a.list-group-item {
 }
 .sort_first {
     width: 20%;
+	font-weight: bold;
 }
 .sort_second {
     background-color: rgb(233, 223, 199);
