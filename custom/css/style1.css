@@ -1,316 +1,305 @@
     .no-js #loader {
-    display: none;
-}
-
-.js #loader {
-    display: block;
-    position: absolute;
-    left: 100px;
-    top: 0;
-}
-
-.se-pre-con {
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    background: url(../../custom/images/Preloader_8.gif) center no-repeat #fff;
-}
-
-.glyphicon-edit.itemPanel {
-    margin-top: 15px;
-    padding-right: 40px;
-    margin-left: 4px;
-}
-
-.food_item .cartMinus1 {
-    padding-left: 7px;
-}
-
-.food_item .quantityItem {
-    margin-left: 12px !important;
-    margin-right: 11px;
-    border: 1px solid;
-    padding: 0px 8px 0px 8px;
-    border-radius: 0px 10px;
-}
-
-.rate {
-    color: rgb(70, 0, 14);
-}
-
-body:before {
-    z-index: 1;
-}
-
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-    body:before {
-        z-index: 2;
+        display: none;
     }
-}
-
-
-/*
+    
+    .js #loader {
+        display: block;
+        position: absolute;
+        left: 100px;
+        top: 0;
+    }
+    
+    .se-pre-con {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url(../../custom/images/Preloader_8.gif) center no-repeat #fff;
+    }
+    
+    .glyphicon-edit.itemPanel {
+        margin-top: 15px;
+        padding-right: 40px;
+        margin-left: 4px;
+    }
+    
+    .food_item .cartMinus1 {
+        padding-left: 7px;
+    }
+    
+    .food_item .quantityItem {
+        margin-left: 12px !important;
+        margin-right: 11px;
+        border: 1px solid;
+        padding: 0px 8px 0px 8px;
+        border-radius: 0px 10px;
+    }
+    
+    .rate {
+        color: rgb(70, 0, 14);
+    }
+    
+    body:before {
+        z-index: 1;
+    }
+    
+    @media screen and (min-width: 768px) and (max-width: 1023px) {
+        body:before {
+            z-index: 2;
+        }
+    }
+    /*
 @media screen and (min-width: 768px) {
 .container{
 	padding-left: 8% !important;
 }
 }*/
-
-@media screen and (min-width: 420px) and (max-width: 767px) {
-    body:before {
-        z-index: 3;
+    
+    @media screen and (min-width: 420px) and (max-width: 767px) {
+        body:before {
+            z-index: 3;
+        }
+        .search .form-control-feedback {
+            margin-right: 20% !important;
+        }
+        .search.form-group {
+            margin-left: 50% !important;
+        }
+        .form-control {
+            width: 80% !important;
+            margin-top: -45px !important;
+        }
+        .hiddenInTab {
+            display: none;
+        }
     }
-    .search .form-control-feedback {
-        margin-right: 20% !important;
+    
+    @media screen and (min-width: 0) and (max-width: 419px) {
+        body:before {
+            content: 'SmallMobile';
+            z-index: 4;
+        }
+        .searchInMobile {
+            float: right;
+            margin-top: -24px;
+            margin-right: 64px;
+        }
+        .hiddeninMobile {
+            display: none;
+        }
     }
-    .search.form-group {
-        margin-left: 50% !important;
+    
+    @font-face {
+        font-family: san-Light;
+        src: url(../fonts/OpenSans-Light.ttf);
     }
-    .form-control {
-        width: 80% !important;
-        margin-top: -45px !important;
+    
+    @font-face {
+        font-family: segoe-Light;
+        /*src: url(../fonts/segoe-ui-light.ttf);*/
+        src: url(../fonts/OpenSans-Light.ttf);
     }
-    .hiddenInTab {
-        display: none;
+    
+    @font-face {
+        font-family: san-Regular;
+        src: url(../fonts/OpenSans-Regular.ttf);
     }
-}
-
-@media screen and (min-width: 0) and (max-width: 419px) {
-    body:before {
-        content: 'SmallMobile';
-        z-index: 4;
-    }
-    .searchInMobile {
-        float: right;
-        margin-top: -24px;
-        margin-right: 64px;
-    }
-    .hiddeninMobile {
-        display: none;
-    }
-}
-
-@font-face {
-    font-family: san-Light;
-    src: url(../fonts/OpenSans-Light.ttf);
-}
-
-@font-face {
-    font-family: segoe-Light;
-    /*src: url(../fonts/segoe-ui-light.ttf);*/
-    src: url(../fonts/OpenSans-Light.ttf);
-}
-
-@font-face {
-    font-family: san-Regular;
-    src: url(../fonts/OpenSans-Regular.ttf);
-}
-
-
-/*Login Screen Style*/
-
-
-/*
+    /*Login Screen Style*/
+    /*
     Note: It is best to use a less version of this file ( see http://css2less.cc
     For the media queries use @screen-sm-min instead of 768px.
     For .omb_spanOr use @body-bg instead of white.
 */
-
-@media (min-width: 768px) {
-    .omb_row-sm-offset-3 div:first-child[class*="col-"] {
-        margin-left: 25%;
-    }
-}
-
-.omb_login .omb_authTitle {
-    text-align: center;
-}
-
-.omb_login .omb_socialButtons a {
-    color: white; // In yourUse @body-bg 
-    opacity: 0.9;
-}
-
-.omb_login .omb_socialButtons a:hover {
-    color: white;
-    opacity: 1;
-}
-
-.omb_login .omb_socialButtons .omb_btn-facebook {
-    background: #3b5998;
-    border-bottom-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-
-.omb_login .omb_socialButtons .omb_btn-google {
-    background: #c32f10;
-    border-bottom-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-
-.modal-content {
-    border-bottom-left-radius: 30px;
-    border-top-right-radius: 30px;
-    background-color: rgb(239, 231, 215);
-}
-
-.loginButton {
-    border-bottom-left-radius: 20px;
-    border-top-right-radius: 20px;
-    text-align: center;
-    color: #fff;
-    border: none;
-    background-color: #c32f10;
-    width: 227px;
-    margin-top: 13px;
-    padding: 5px;
-}
-
-.omb_login .omb_loginOr {
-    position: relative;
-    font-size: 1.5em;
-    color: #aaa;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    padding-bottom: 0.5em;
-}
-
-.omb_login .omb_loginOr .omb_hrOr {
-    background-color: #cdcdcd;
-    height: 1px;
-    margin-top: 0px !important;
-    margin-bottom: 0px !important;
-}
-
-.omb_login .omb_loginOr .omb_spanOr {
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: -0.6em;
-    margin-left: -1.5em;
-    background-color: white;
-    width: 3em;
-    text-align: center;
-}
-
-.omb_login .omb_loginForm .input-group.i {
-    width: 2em;
-}
-
-.omb_login .omb_loginForm .help-block {
-    color: red;
-}
-
-.loginForm {
-    padding: 19px;
-    margin: -9px;
-    border-bottom-left-radius: 40px;
-    border-top-right-radius: 40px;
-    background: url("../../custom/images/bg_image1.jpg");
-    background-size: 100%;
-}
-
-@media (min-width: 768px) {
-    .omb_login .omb_forgotPwd {
-        text-align: right;
-        margin-top: 10px;
-    }
-}
-
-
-/*End Login Screen Style*/
-
-
-/*Index Screen Style*/
-
-body {
-    background-image: url("../../custom/images/bg_image1.jpg");
-    background-repeat: repeat-y;
-    background-size: 100%;
-    min-height: 500px;
-    padding-top: 70px;
-    padding-bottom: 70px;
-    font-family: segoe-Light;
-}
-.address {
-            border: 0px !important;
-            background-color: whitesmoke !important;
+    
+    @media (min-width: 768px) {
+        .omb_row-sm-offset-3 div:first-child[class*="col-"] {
+            margin-left: 25%;
         }
-
-.categories {
-    height: 642px;
-    background-color: #DFD2B2;
-    padding-right: 0px !important;
-    padding-left: 0px !important;
-}
-
-.items {
-    background-color: #fff;
-    padding: 12px;
-    min-height: 558px;
-    max-height: 558px;
-    overflow: auto;
-}
-
-.items div.media:after {
-    content: "";
-    display: block;
-    height: 2px;
-    width: 100%;
-    margin-top: 10px;
-    background: #A0001C;
-}
-
-.nav-links {
-    color: #A0001C !important;
-}
-
-.itemList {
-    height: 642px;
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-}
-
-.img {
-    width: 75px;
-    height: 75px;
-    border: 1px solid #000000;
-    `` border-bottom-left-radius: 20px;
-}
-
-.logo {
-    /*  height:45px;
+    }
+    
+    .omb_login .omb_authTitle {
+        text-align: center;
+    }
+    
+    .omb_login .omb_socialButtons a {
+        color: white; // In yourUse @body-bg 
+        opacity: 0.9;
+    }
+    
+    .omb_login .omb_socialButtons a:hover {
+        color: white;
+        opacity: 1;
+    }
+    
+    .omb_login .omb_socialButtons .omb_btn-facebook {
+        background: #3b5998;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+    
+    .omb_login .omb_socialButtons .omb_btn-google {
+        background: #c32f10;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+    
+    .modal-content {
+        border-bottom-left-radius: 30px;
+        border-top-right-radius: 30px;
+        background-color: rgb(239, 231, 215);
+    }
+    
+    .loginButton {
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 20px;
+        text-align: center;
+        color: #fff;
+        border: none;
+        background-color: #c32f10;
+        width: 227px;
+        margin-top: 13px;
+        padding: 5px;
+    }
+    
+    .omb_login .omb_loginOr {
+        position: relative;
+        font-size: 1.5em;
+        color: #aaa;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        padding-bottom: 0.5em;
+    }
+    
+    .omb_login .omb_loginOr .omb_hrOr {
+        background-color: #cdcdcd;
+        height: 1px;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+    }
+    
+    .omb_login .omb_loginOr .omb_spanOr {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: -0.6em;
+        margin-left: -1.5em;
+        background-color: white;
+        width: 3em;
+        text-align: center;
+    }
+    
+    .omb_login .omb_loginForm .input-group.i {
+        width: 2em;
+    }
+    
+    .omb_login .omb_loginForm .help-block {
+        color: red;
+    }
+    
+    .loginForm {
+        padding: 19px;
+        margin: -9px;
+        border-bottom-left-radius: 40px;
+        border-top-right-radius: 40px;
+        background: url("../../custom/images/bg_image1.jpg");
+        background-size: 100%;
+    }
+    
+    @media (min-width: 768px) {
+        .omb_login .omb_forgotPwd {
+            text-align: right;
+            margin-top: 10px;
+        }
+    }
+    /*End Login Screen Style*/
+    /*Index Screen Style*/
+    
+    body {
+        background-image: url("../../custom/images/bg_image1.jpg");
+        background-repeat: repeat-y;
+        background-size: 100%;
+        min-height: 500px;
+        padding-top: 70px;
+        padding-bottom: 70px;
+        font-family: segoe-Light;
+    }
+    
+    .address {
+        border: 0px !important;
+        background-color: whitesmoke !important;
+    }
+    
+    .categories {
+        height: 642px;
+        background-color: #DFD2B2;
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+    }
+    
+    .items {
+        background-color: #fff;
+        padding: 12px;
+        min-height: 558px;
+        max-height: 558px;
+        overflow: auto;
+    }
+    
+    .items div.media:after {
+        content: "";
+        display: block;
+        height: 2px;
+        width: 100%;
+        margin-top: 10px;
+        background: #A0001C;
+    }
+    
+    .nav-links {
+        color: #A0001C !important;
+    }
+    
+    .itemList {
+        height: 642px;
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    
+    .img {
+        width: 75px;
+        height: 75px;
+        border: 1px solid #000000;
+        `` border-bottom-left-radius: 20px;
+    }
+    
+    .logo {
+        /*  height:45px;
     margin-top: -17px;*/
-}
-
-.nav-tabs>li>a {
-    color: #fff !important;
-}
-
-.breakFast {
-    background-color: rgb(233, 105, 44);
-    border-top-right-radius: 10px;
-}
-
-.lunch {
-    background-color: rgb(254, 17, 59);
-    border-top-right-radius: 10px;
-}
-
-.dinner {
-    background-color: rgb(195, 0, 35);
-    border-top-right-radius: 10px;
-}
-
-.lateNight {
-    background-color: rgb(70, 0, 14);
-    border-top-right-radius: 10px;
-}
-
-
+    }
+    
+    .nav-tabs>li>a {
+        color: #fff !important;
+    }
+    
+    .breakFast {
+        background-color: rgb(233, 105, 44);
+        border-top-right-radius: 10px;
+    }
+    
+    .lunch {
+        background-color: rgb(254, 17, 59);
+        border-top-right-radius: 10px;
+    }
+    
+    .dinner {
+        background-color: rgb(195, 0, 35);
+        border-top-right-radius: 10px;
+    }
+    
+    .lateNight {
+        background-color: rgb(70, 0, 14);
+        border-top-right-radius: 10px;
+    }
 }
 .glyphicon-th-list {
     color: rgb(70, 0, 14);
@@ -789,6 +778,7 @@ li.food_item {
     cursor: pointer;
     font-size: 14px;
 }
+
 /*.media-heading img {
     height: 15px;
 }*/
@@ -903,6 +893,7 @@ a.list-group-item {
     padding-top: 0px;
     padding-bottom: 0px;
 }
+
 /*.sort li a img {
     height: 15px;
 }*/

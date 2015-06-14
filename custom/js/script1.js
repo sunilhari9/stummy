@@ -277,7 +277,8 @@
 	                if ($('#errorMsgs').text().length == 0) {
 	                    for (var i = 0; i < currentItemsArray.length; i++) {
 	                        if (currentItemsArray[i].product_code == $('#current_product_code').val()) {
-	                            currentItemsArray[i] = [];
+	                            currentItemsArray.splice(i, 1);
+	                            //currentItemsArray[i] = [];
 	                            break;
 	                        }
 	                    }
@@ -855,7 +856,7 @@
 	                    $(this).siblings(".more-text").contents().unwrap();
 	                    $(this).remove();
 	                    $(".read-less").on("click", function() {
-                             $(this).remove();
+	                        $(this).remove();
 	                        showLess();
 	                    });
 	                });
@@ -961,7 +962,7 @@
 	                filterArray1 = filterArray1.reverse();
 	            $('.items').html('');
 	            for (var i = 0; i < filterArray1.length; i++) {
-	                displayItemDOM(filterArray1[i].ProductName, filterArray1[i].ProductCode, filterArray1[i].unitPrice, filterArray1[i].isVeg, filterArray1[i].imageURL,filterArray1[i].itemDes);
+	                displayItemDOM(filterArray1[i].ProductName, filterArray1[i].ProductCode, filterArray1[i].unitPrice, filterArray1[i].isVeg, filterArray1[i].imageURL, filterArray1[i].itemDes);
 	            }
 	        } else {
 	            BootstrapDialog.show({
@@ -993,13 +994,13 @@
 	        }
 	        showLess();
 	    });
-	    var displayItemDOM = function(ProductName, ProductCode, unitPrice, isVeg, imageURL,itemDes) {
+	    var displayItemDOM = function(ProductName, ProductCode, unitPrice, isVeg, imageURL, itemDes) {
 	        var item = '<li class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="' + imageURL + '" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">' + ProductName;
 	        if (isVeg)
 	            item += '&nbsp;&nbsp;<img src="./custom/images/Veg.png" alt="Veg" title="Veg">';
 	        else
 	            item += '&nbsp;&nbsp;<img src="./custom/images/NonVeg.png" alt="Non Veg" title="Non Veg">';
-	        item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><br/><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">'+itemDes+'</p></div><div class="cartCustomizeHiden"></div></div></li>';
+	        item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><br/><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">' + itemDes + '</p></div><div class="cartCustomizeHiden"></div></div></li>';
 	        $('.items').append(item);
 	    };
 	    $('body').on('click', '.clearCart', function() {
@@ -1040,7 +1041,7 @@
 				data.push(obj);*/
 	                    //console.log("found");
 	                    console.log(array1[ii]);
-	                    displayItemDOMSearch(array1[ii].ProductName, array1[ii].ProductCode, array1[ii].unitPrice, array1[ii].isVeg, array1[ii].imageURL,array1[ii].itemDes)
+	                    displayItemDOMSearch(array1[ii].ProductName, array1[ii].ProductCode, array1[ii].unitPrice, array1[ii].isVeg, array1[ii].imageURL, array1[ii].itemDes)
 	                    $('.list-group-item.item-type').removeClass('activeCat');
 	                }
 	            }
@@ -1049,13 +1050,13 @@
 	    }
 
 	};
-	var displayItemDOMSearch = function(ProductName, ProductCode, unitPrice, isVeg, imageURL,itemDes) {
+	var displayItemDOMSearch = function(ProductName, ProductCode, unitPrice, isVeg, imageURL, itemDes) {
 	    var item = '<li class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="' + imageURL + '" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">' + ProductName;
 	    if (isVeg)
 	        item += '&nbsp;&nbsp;<img src="./custom/images/Veg.png" alt="Veg" title="Veg">';
 	    else
 	        item += '&nbsp;&nbsp;<img src="./custom/images/NonVeg.png" alt="Non Veg" title="Non Veg">';
-	    item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><br/><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">'+itemDes+'</p></div><div class="cartCustomizeHiden"></div></div></li>';
+	    item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><br/><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">' + itemDes + '</p></div><div class="cartCustomizeHiden"></div></div></li>';
 	    $('.items').append(item);
 	};
 	var calcRWD = function() {
