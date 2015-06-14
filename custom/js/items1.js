@@ -74,6 +74,7 @@ $.getJSON("custom/js/products.json", function(items) {
 
     var displayDefaultItems = function() {
         displayItems(uniqueCategories[2]);
+		$('#activeCat').val(uniqueCategories[2]);
     }
      $(window).touchwipe({
         wipeLeft: function() {
@@ -95,6 +96,7 @@ $.getJSON("custom/js/products.json", function(items) {
             $.sidr('close', 'sidr');
             console.log("Slider is open");
         }
+		$('#activeCat').val($(this).text());
         displayItems($(this).text());
     });
 });

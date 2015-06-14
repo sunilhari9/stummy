@@ -882,7 +882,7 @@
 	        $(this).siblings('.summary').children('.mobileHide').toggle();
 	    });
 	    $('body').on('click', '#unitPrice,#popularity', function() {
-	        var activeCatName = $('.list-group-item.item-type.activeCat').text();
+	        var activeCatName = $('#activeCat').val();//$('.list-group-item.item-type.activeCat').text();
 	        //console.log(activeCatName);
 	        if (activeCatName.length > 0) {
 	            var filterArray = [];
@@ -922,8 +922,9 @@
 	            }
 	            $('.items').html('');
 	            for (var i = 0; i < filterArray1.length; i++) {
-	                displayItemDOM(filterArray1[i].ProductName, filterArray1[i].ProductCode, filterArray1[i].unitPrice, filterArray1[i].isVeg, filterArray1[i].imageURL);
+	                displayItemDOM(filterArray1[i].ProductName, filterArray1[i].ProductCode, filterArray1[i].unitPrice, filterArray1[i].isVeg, filterArray1[i].imageURL, filterArray1[i].itemDes);
 	            }
+				mobileChk();
 	        } else {
 	            BootstrapDialog.show({
 	                title: 'Sort Option',
@@ -955,7 +956,7 @@
 	        showLess();
 	    });
 	    $('body').on('click', '#veg,#nonveg', function() {
-	        var activeCatName = $('.list-group-item.item-type.activeCat').text();
+	        var activeCatName = $('#activeCat').val();//$('.list-group-item.item-type.activeCat').text();
 	        if (activeCatName.length > 0) {
 	            var filterArray = [];
 	            $.each(items, function(index, value) {
@@ -975,6 +976,7 @@
 	            for (var i = 0; i < filterArray1.length; i++) {
 	                displayItemDOM(filterArray1[i].ProductName, filterArray1[i].ProductCode, filterArray1[i].unitPrice, filterArray1[i].isVeg, filterArray1[i].imageURL, filterArray1[i].itemDes);
 	            }
+				mobileChk();
 	        } else {
 	            BootstrapDialog.show({
 	                title: 'Sort Option',
