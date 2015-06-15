@@ -139,7 +139,7 @@
             </div>
         </div>
         <!--End customize food modal-->
-        <a id="left-menu" class="hidden-sm hidden-lg" href="#sidr"><span class="menuMobile">Categories</span></a>
+        <a id="left-menu" class="visible-xs visible-sm" href="#sidr"><span class="menuMobile">Categories</span></a>
 
         <div class="container main-container">
             <div class="row">
@@ -265,7 +265,9 @@
     <script src="vendor/js/jquery.touchwipe.js"></script>
     <script>
         $(document).ready(function() {
-			$('#left-menu').sidr();
+			if ($(document).width() <= 1023) {
+				$('#left-menu').sidr();
+			}
 		});
     </script>
 

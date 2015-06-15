@@ -250,8 +250,8 @@ text-decoration: none !important;
     .items {
         background-color: #fff;
         padding: 12px;
-        min-height: 558px;
-        max-height: 558px;
+        min-height: 562px;
+        max-height: 562px;
         overflow: auto;
     }
     
@@ -522,7 +522,7 @@ text-decoration: none !important;
 .glyphicon-chevron-left,
 .glyphicon-trash,
 .glyphicon-edit,
-.glyphicon-shopping-cart {
+.glyphicon-shopping-cart,.glyphicon-search {
     padding-left: 3px;
     cursor: pointer;
 }
@@ -653,9 +653,9 @@ ul.product-line-items li input[type="radio"] {
     text-align: center;
     color: #fff;
     border: none;
-    width: 227px;
+    
     margin-top: 13px;
-    padding: 5px;
+    padding: 5px 20px 5px 20px;
 }
 #customizeFoodBut {
     margin-left: 60px;
@@ -785,7 +785,8 @@ li.food_item {
 .hlink {
     color: blue;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
+	width: 100%;
 }
 
 /*.media-heading img {
@@ -799,17 +800,22 @@ a.list-group-item {
 	position: relative;
 }
 .categoriesListMenuOverlay .heading {
-    background-color: #A1001D !important;
+    background-color: #750000 !important
+	font-size: 18px;
+	height: 42px;
+	color: #FFF;
+	width: 153px !important;
 }
 .categoriesListMenuOverlay .list-group-item.activeCat {
-    background-color: #C40326 !important;
+    background-color: #BEA56B !important;
 }
 .categoriesListMenuOverlay .item-type:hover {
-    background-color: red !important;
+    background-color: #CCB78D !important;
 }
 .categoriesListMenuOverlay a.list-group-item {
     border: 0px !important;
-    color: #FFFEFE !important;
+    background-color: #DFD2B2 !important;
+	color: #555;
 }
 #left-menu {
     margin-top: 20%;
@@ -934,12 +940,18 @@ text-align: right;
 @media screen and (min-width: 320px) and (max-width: 420px) {
     .customizeIcon {
         margin-right: 0% !important;
+		margin-top: 1%;
     }
-    
+    #customizeFoodBut {
+		margin-left: 15%;
+	}
     .customizeIcon span {
         line-height: 0;
         !important;
     }
+	.cartCustomizeHiden{
+		margin-top: 60px;
+	}
 }
 @media (min-width: 992px) {
     .customizeIcon {

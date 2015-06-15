@@ -111,7 +111,7 @@
 
 	    });
 	    $('body').on('click', '.searchInMobile', function(event) {
-	        $(".search").toggleClass("hiddeninMobile", 1000);
+	        $(".search").toggleClass("hiddeninMobile").delay(3000).show('slow');
 	    });
 	    $('body').on('click', '.glyphicon-edit.cartPanel', function(event) {
 	        console.log("in click++++++++++++++");
