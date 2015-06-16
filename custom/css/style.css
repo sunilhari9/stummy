@@ -233,6 +233,9 @@ body{
     font-size: 18px;
 	height: 42px;
 }
+#activate-cartItems{
+    margin-top: 10px;
+}
 @media (min-width: 768px){
 .nav-tabs.nav-justified>li>a {
   border-bottom: 0px solid #ddd !important;
@@ -311,6 +314,32 @@ width: 40px;
   color: #fff;
 margin-bottom: 40px;
     
+}
+#activate-cartItems{
+    margin-top: 10px;
+}
+.well .list-group-item {
+  background-color: #fff !important;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+  background-color: #A0001C !important;
+}
+
+.btn-primary {
+  background-color: #A0001C !important;
+  border-color: #A0001C !important;
+}
+
+.panel-primary {
+  border-color: #A0001C !important;
+}
+.panel-primary>.panel-heading {
+  background-color: #A0001C !important;
+  border-color: #A0001C !important;
+}
+.well{
+      padding-bottom: 30px;
 }
 .totalAmount{
     font-size: 20px;

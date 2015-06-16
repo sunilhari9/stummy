@@ -684,7 +684,7 @@
 			$(this).prev().val(parseInt(currentVal)+1);
 		}
 	});*/
-getProductPrice = function(productCodes, cartProductLineItems, cartProductQty) {
+	    getProductPrice = function(productCodes, cartProductLineItems, cartProductQty) {
 	        console.log(items);
 	        var subTotalAmount = 0;
 	        //	var cartSubTotalArray = 0;
@@ -761,59 +761,58 @@ getProductPrice = function(productCodes, cartProductLineItems, cartProductQty) {
 	        }
 	    };
 
-	    var renderCart = function(){
-	$('#cartItemDesc').html("<center><img src='custom/images/loading.gif' /></center>");
-		var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
-		if(cartTotalItems != undefined){
-			cartTotalItemsLength = cartTotalItems.itemsArray.length
-			if(cartTotalItemsLength > 0){
-				
-				$('.cartItemCount').addClass('active');
-				$clone = $('.cartListTemplate').clone();
-				var cartItemDescHtml = '';
-				var cartTotalItemsLength1 = 0;
-				for(var index = 0;index<cartTotalItemsLength;index++){
-					var eachItemData = cartTotalItems.itemsArray[index];
-					if(eachItemData.product_qty){
-					cartTotalItemsLength1++;
-						product_qty = eachItemData.product_qty;
-						if(parseInt(eachItemData.product_qty) <= 9)
-							product_qty = "0"+eachItemData.product_qty;
-						$clone.find('.quantity').text(product_qty);
-						console.log(eachItemData.product_code);
-						$clone.find('.quantity').attr('data-product-code',eachItemData.product_code);
-						$clone.find('.quantity').attr('data-product-name',eachItemData.product_name);
-						$clone.find('.product_name_cart').text(eachItemData.product_name);
-						cartItemDescHtml += $clone.html();
-					}else{
-						//cartTotalItems.itemsArray[index] = [];
-						cartTotalItems.itemsArray.splice(index,1);
-					}
-				}
-				localStorage.setItem('cartJson',JSON.stringify(cartTotalItems));
-				$('.cartItemCount').html(cartTotalItemsLength);
-				$('#cartItemDesc').html('');
-				if(cartItemDescHtml.length > 0){
-					$('#cartItemDesc').append(cartItemDescHtml);
-					calcCartAmount();
-				}
-				else{
-					$('.cartItemCount').html("0");
-					$('.cartItemCount').removeClass('active');
-					$('#cartItemDesc').html("<div>No items yet</div>");
-				}
-				
-			}else{
-				$('.cartItemCount').html("0");
-				$('.cartItemCount').removeClass('active');
-				$('#cartItemDesc').html("<div>No items yet</div>");
-			}			
-		}else{
-			$('.cartItemCount').html("0");
-			$('.cartItemCount').removeClass('active');
-			$('#cartItemDesc').html("<div>No items yet</div>");
-		}	
-	};
+	    var renderCart = function() {
+	        $('#cartItemDesc').html("<center><img src='custom/images/loading.gif' /></center>");
+	        var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
+	        if (cartTotalItems != undefined) {
+	            cartTotalItemsLength = cartTotalItems.itemsArray.length
+	            if (cartTotalItemsLength > 0) {
+
+	                $('.cartItemCount').addClass('active');
+	                $clone = $('.cartListTemplate').clone();
+	                var cartItemDescHtml = '';
+	                var cartTotalItemsLength1 = 0;
+	                for (var index = 0; index < cartTotalItemsLength; index++) {
+	                    var eachItemData = cartTotalItems.itemsArray[index];
+	                    if (eachItemData.product_qty) {
+	                        cartTotalItemsLength1++;
+	                        product_qty = eachItemData.product_qty;
+	                        if (parseInt(eachItemData.product_qty) <= 9)
+	                            product_qty = "0" + eachItemData.product_qty;
+	                        $clone.find('.quantity').text(product_qty);
+	                        console.log(eachItemData.product_code);
+	                        $clone.find('.quantity').attr('data-product-code', eachItemData.product_code);
+	                        $clone.find('.quantity').attr('data-product-name', eachItemData.product_name);
+	                        $clone.find('.product_name_cart').text(eachItemData.product_name);
+	                        cartItemDescHtml += $clone.html();
+	                    } else {
+	                        //cartTotalItems.itemsArray[index] = [];
+	                        cartTotalItems.itemsArray.splice(index, 1);
+	                    }
+	                }
+	                localStorage.setItem('cartJson', JSON.stringify(cartTotalItems));
+	                $('.cartItemCount').html(cartTotalItemsLength);
+	                $('#cartItemDesc').html('');
+	                if (cartItemDescHtml.length > 0) {
+	                    $('#cartItemDesc').append(cartItemDescHtml);
+	                    calcCartAmount();
+	                } else {
+	                    $('.cartItemCount').html("0");
+	                    $('.cartItemCount').removeClass('active');
+	                    $('#cartItemDesc').html("<div>No items yet</div>");
+	                }
+
+	            } else {
+	                $('.cartItemCount').html("0");
+	                $('.cartItemCount').removeClass('active');
+	                $('#cartItemDesc').html("<div>No items yet</div>");
+	            }
+	        } else {
+	            $('.cartItemCount').html("0");
+	            $('.cartItemCount').removeClass('active');
+	            $('#cartItemDesc').html("<div>No items yet</div>");
+	        }
+	    };
 
 	    //$('#myModal').on('hidden.bs.modal', function () {
 
@@ -882,7 +881,7 @@ getProductPrice = function(productCodes, cartProductLineItems, cartProductQty) {
 	        $(this).siblings('.summary').children('.mobileHide').toggle();
 	    });
 	    $('body').on('click', '#unitPrice,#popularity', function() {
-	        var activeCatName = $('#activeCat').val();//$('.list-group-item.item-type.activeCat').text();
+	        var activeCatName = $('#activeCat').val(); //$('.list-group-item.item-type.activeCat').text();
 	        //console.log(activeCatName);
 	        if (activeCatName.length > 0) {
 	            var filterArray = [];
@@ -924,7 +923,7 @@ getProductPrice = function(productCodes, cartProductLineItems, cartProductQty) {
 	            for (var i = 0; i < filterArray1.length; i++) {
 	                displayItemDOM(filterArray1[i].ProductName, filterArray1[i].ProductCode, filterArray1[i].unitPrice, filterArray1[i].isVeg, filterArray1[i].imageURL, filterArray1[i].itemDes);
 	            }
-				mobileChk();
+	            mobileChk();
 	        } else {
 	            BootstrapDialog.show({
 	                title: 'Sort Option',
@@ -956,7 +955,7 @@ getProductPrice = function(productCodes, cartProductLineItems, cartProductQty) {
 	        showLess();
 	    });
 	    $('body').on('click', '#veg,#nonveg', function() {
-	        var activeCatName = $('#activeCat').val();//$('.list-group-item.item-type.activeCat').text();
+	        var activeCatName = $('#activeCat').val(); //$('.list-group-item.item-type.activeCat').text();
 	        if (activeCatName.length > 0) {
 	            var filterArray = [];
 	            $.each(items, function(index, value) {
@@ -976,7 +975,7 @@ getProductPrice = function(productCodes, cartProductLineItems, cartProductQty) {
 	            for (var i = 0; i < filterArray1.length; i++) {
 	                displayItemDOM(filterArray1[i].ProductName, filterArray1[i].ProductCode, filterArray1[i].unitPrice, filterArray1[i].isVeg, filterArray1[i].imageURL, filterArray1[i].itemDes);
 	            }
-				mobileChk();
+	            mobileChk();
 	        } else {
 	            BootstrapDialog.show({
 	                title: 'Sort Option',
@@ -1076,9 +1075,9 @@ getProductPrice = function(productCodes, cartProductLineItems, cartProductQty) {
 	    var rwdInfo = "1";
 
 	    console.log("1:" + $(document).width());
-	if(!$("#sidr").is(':hidden')){
-		return "4";
-	}
+	    if (!$("#sidr").is(':hidden')) {
+	        return "4";
+	    }
 	    /*	if (window.getComputedStyle) {
 			rwdInfo = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('z-index');
 			console.log("value:"+window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('z-index'));
@@ -1123,128 +1122,138 @@ getProductPrice = function(productCodes, cartProductLineItems, cartProductQty) {
 	    });
 	}
 
-/*Start cart logic*/
+	/*Start cart logic*/
 
-      var navListItems = $('ul.setup-panel li a'),
-          allWells = $('.setup-content');
-      allWells.hide();
-      if (localStorage.getItem("homeAddress") == null) {
-          var homeAddress = {};
-          homeAddress.Name = "Suneel";
-          homeAddress.Email = "sunilhari9@gmail.com";
-          homeAddress.Phone = "9705984789";
-          homeAddress.Address = "Hyd";
-          localStorage.setItem("homeAddress", JSON.stringify(homeAddress));
-      }
-      if (localStorage.getItem("deliveryAddress") == null) {
-          var deliveryAddress = {};
-          deliveryAddress.Name = "Suneel";
-          deliveryAddress.Email = "sunilhari9@gmail.com";
-          deliveryAddress.Phone = "9705984789";
-          deliveryAddress.Address = "Hyd";
-          localStorage.setItem("deliveryAddress", JSON.stringify(deliveryAddress));
-      }
-      var homeAddressLocalStorage = JSON.parse(localStorage.getItem("homeAddress"));
-      $("#displayHomeName").text(homeAddressLocalStorage.Name)
-      $("#displayHomeAddress").text(homeAddressLocalStorage.Address + ", Ph:" + homeAddressLocalStorage.Phone);
-      $("#homeName").val(homeAddressLocalStorage.Name);
-      $("#homeEmail").val(homeAddressLocalStorage.Email);
-      $("#homePhone").val(homeAddressLocalStorage.Phone);
-      $("#homeAddr").val(homeAddressLocalStorage.Address);
-
-
-      var deliveryAddressLocalStorage = JSON.parse(localStorage.getItem("deliveryAddress"));
-      $("#displayDelivaryName").text(deliveryAddressLocalStorage.Name)
-      $("#displayDelivaryAddress").text(deliveryAddressLocalStorage.Address + ", Ph:" + deliveryAddressLocalStorage.Phone)
-      $("#deliveryName").val(deliveryAddressLocalStorage.Name);
-      $("#deliveryEmail").val(deliveryAddressLocalStorage.Email);
-      $("#deliveryPhone").val(deliveryAddressLocalStorage.Phone);
-      $("#deliveryAddr").val(deliveryAddressLocalStorage.Address);
-      $("#homeAddressSubmit").click(function() {
-          var homeAddress = {};
-          homeAddress.Name = $("#homeName").val();
-          homeAddress.Email = $("#homeEmail").val();
-          homeAddress.Phone = $("#homePhone").val();
-          homeAddress.Address = $("#homeAddr").val();
-          localStorage.setItem("homeAddress", JSON.stringify(homeAddress));
-      })
-      $("#deliveryAddressSubmit").click(function() {
-          var deliveryAddress = {};
-          deliveryAddress.Name = $("#deliveryName").val();
-          deliveryAddress.Email = $("#deliveryEmail").val();
-          deliveryAddress.Phone = $("#deliveryPhone").val();
-          deliveryAddress.Address = $("#deliveryAddr").val();
-          localStorage.setItem("deliveryAddress", JSON.stringify(deliveryAddress));
-      })
-
-      navListItems.click(function(e) {
-          e.preventDefault();
-          var $target = $($(this).attr('href')),
-              $item = $(this).closest('li');
-
-          if (!$item.hasClass('disabled')) {
-              navListItems.closest('li').removeClass('active');
-              $item.addClass('active');
-              allWells.hide();
-              $target.show();
-          }
-      });
-
-      $('ul.setup-panel li.active a').trigger('click');
-
-      // DEMO ONLY //
-      $('#activate-step-2').on('click', function(e) {
-          $('ul.setup-panel li:eq(1)').removeClass('disabled');
-          $('ul.setup-panel li a[href="#step-2"]').trigger('click');
-      })
-
-      $(".editHomeAddress").hide();
-      $(".editDelivaryAddress").hide();
-      $(".editHomeAddressIcon").click(function() {
-          $(".defaultHomeAddress").toggle(500);
-          $(".editHomeAddress").toggle(500);
-          if ($(".defaultDelivaryAddress").is(':hidden')) {
-              $(".defaultDelivaryAddress").toggle(500);
-              $(".editDelivaryAddress").toggle(500);
-          }
+	var navListItems = $('ul.setup-panel li a'),
+	    allWells = $('.setup-content');
+	allWells.hide();
+	if (localStorage.getItem("homeAddress") == null) {
+	    var homeAddress = {};
+	    homeAddress.Name = "Suneel";
+	    homeAddress.Email = "sunilhari9@gmail.com";
+	    homeAddress.Phone = "9705984789";
+	    homeAddress.Address = "Hyd";
+	    localStorage.setItem("homeAddress", JSON.stringify(homeAddress));
+	}
+	if (localStorage.getItem("deliveryAddress") == null) {
+	    var deliveryAddress = {};
+	    deliveryAddress.Name = "Suneel";
+	    deliveryAddress.Email = "sunilhari9@gmail.com";
+	    deliveryAddress.Phone = "9705984789";
+	    deliveryAddress.Address = "Hyd";
+	    localStorage.setItem("deliveryAddress", JSON.stringify(deliveryAddress));
+	}
+	var homeAddressLocalStorage = JSON.parse(localStorage.getItem("homeAddress"));
+	$("#displayHomeName").text(homeAddressLocalStorage.Name)
+	$("#displayHomeAddress").text(homeAddressLocalStorage.Address + ", Ph:" + homeAddressLocalStorage.Phone);
+	$("#homeName").val(homeAddressLocalStorage.Name);
+	$("#homeEmail").val(homeAddressLocalStorage.Email);
+	$("#homePhone").val(homeAddressLocalStorage.Phone);
+	$("#homeAddr").val(homeAddressLocalStorage.Address);
 
 
-      })
-      $(".editDelivaryAddressIcon").click(function() {
-          $(".defaultDelivaryAddress").toggle(500);
-          $(".editDelivaryAddress").toggle(500);
-          if ($(".defaultHomeAddress").is(':hidden')) {
-              $(".defaultHomeAddress").toggle(500);
-              $(".editHomeAddress").toggle(500);
-          }
+	var deliveryAddressLocalStorage = JSON.parse(localStorage.getItem("deliveryAddress"));
+	$("#displayDelivaryName").text(deliveryAddressLocalStorage.Name)
+	$("#displayDelivaryAddress").text(deliveryAddressLocalStorage.Address + ", Ph:" + deliveryAddressLocalStorage.Phone)
+	$("#deliveryName").val(deliveryAddressLocalStorage.Name);
+	$("#deliveryEmail").val(deliveryAddressLocalStorage.Email);
+	$("#deliveryPhone").val(deliveryAddressLocalStorage.Phone);
+	$("#deliveryAddr").val(deliveryAddressLocalStorage.Address);
+	$("#homeAddressSubmit").click(function() {
+	    var homeAddress = {};
+	    homeAddress.Name = $("#homeName").val();
+	    homeAddress.Email = $("#homeEmail").val();
+	    homeAddress.Phone = $("#homePhone").val();
+	    homeAddress.Address = $("#homeAddr").val();
+	    localStorage.setItem("homeAddress", JSON.stringify(homeAddress));
+	})
+	$("#deliveryAddressSubmit").click(function() {
+	    var deliveryAddress = {};
+	    deliveryAddress.Name = $("#deliveryName").val();
+	    deliveryAddress.Email = $("#deliveryEmail").val();
+	    deliveryAddress.Phone = $("#deliveryPhone").val();
+	    deliveryAddress.Address = $("#deliveryAddr").val();
+	    localStorage.setItem("deliveryAddress", JSON.stringify(deliveryAddress));
+	})
 
-      })
+	navListItems.click(function(e) {
+	    e.preventDefault();
+	    var $target = $($(this).attr('href')),
+	        $item = $(this).closest('li');
 
-      $.getJSON("custom/js/products.json", function(items) {
-          console.log(items);
-      });
+	    if (!$item.hasClass('disabled')) {
+	        navListItems.closest('li').removeClass('active');
+	        $item.addClass('active');
+	        allWells.hide();
+	        $target.show();
+	    }
+	});
 
-      var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
-      if (cartTotalItems != undefined) {
-          cartTotalItemsLength = cartTotalItems.itemsArray.length
-          if (cartTotalItemsLength > 0) {
-              var cartItemDescHtml = '';
-              for (var index = 0; index < cartTotalItemsLength; index++) {
-                  var eachItemData = cartTotalItems.itemsArray[index];
-                  //var productSubTotal = eachItemData.product_qty * 25;
-                  // getProductPrice(cartProductCodes, cartProductLineItems, cartProductQty);
-                  var productSubTotal =  getProductPrice(eachItemData.product_code, eachItemData.product_lineitems, eachItemData.product_qty);
-                  var CheckOutItems = '<tr><td data-th=""><div class="row"><div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div><div class="col-sm-6"><h4 class="nomargin productName">' + eachItemData.product_name + '</h4></div>          </div></td><td data-th="Price" class="price">&#8377; 25 </td><td data-th="Quantity">' + eachItemData.product_qty + '</td><td data-th="Subtotal" class="text-center" class="subtotal">&#8377;' + productSubTotal + ' </td>  <td class="actions" data-th=""></td>     </tr>'
+	$('ul.setup-panel li.active a').trigger('click');
 
-                  cartItemDescHtml += CheckOutItems;
-              }
-              $('#checkOutItemsList').html('');
-              $('#checkOutItemsList').append(cartItemDescHtml);
+	
+	$('#activate-cartItems').on('click', function(e) {
 
-          } else {
+	    if ($('input[name=addressSelection]:checked').length > 0) {
 
-              $('#checkOutItemsList').html("<div>No items yet</div>");
-          }
-      }
+	        $('ul.setup-panel li:eq(1)').removeClass('disabled');
+	        $('ul.setup-panel li a[href="#step-2"]').trigger('click');
+	    }
+	})
+    $('#activate-payment').on('click', function(e) {
 
-/*End cart logic*/
+	        $('ul.setup-panel li:eq(2)').removeClass('disabled');
+	        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+	 
+	})
+
+	$(".editHomeAddress").hide();
+	$(".editDelivaryAddress").hide();
+	$(".editHomeAddressIcon").click(function() {
+	    $(".defaultHomeAddress").toggle(500);
+	    $(".editHomeAddress").toggle(500);
+	    if ($(".defaultDelivaryAddress").is(':hidden')) {
+	        $(".defaultDelivaryAddress").toggle(500);
+	        $(".editDelivaryAddress").toggle(500);
+	    }
+
+
+	})
+	$(".editDelivaryAddressIcon").click(function() {
+	    $(".defaultDelivaryAddress").toggle(500);
+	    $(".editDelivaryAddress").toggle(500);
+	    if ($(".defaultHomeAddress").is(':hidden')) {
+	        $(".defaultHomeAddress").toggle(500);
+	        $(".editHomeAddress").toggle(500);
+	    }
+
+	})
+
+	$.getJSON("custom/js/products.json", function(items) {
+	    console.log(items);
+	});
+
+	var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
+	if (cartTotalItems != undefined) {
+	    cartTotalItemsLength = cartTotalItems.itemsArray.length
+	    if (cartTotalItemsLength > 0) {
+	        var cartItemDescHtml = '';
+	        for (var index = 0; index < cartTotalItemsLength; index++) {
+	            var eachItemData = cartTotalItems.itemsArray[index];
+	            //var productSubTotal = eachItemData.product_qty * 25;
+	            // getProductPrice(cartProductCodes, cartProductLineItems, cartProductQty);
+	            var productSubTotal = getProductPrice(eachItemData.product_code, eachItemData.product_lineitems, eachItemData.product_qty);
+	            var CheckOutItems = '<tr><td data-th=""><div class="row"><div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div><div class="col-sm-6"><h4 class="nomargin productName">' + eachItemData.product_name + '</h4></div>          </div></td><td data-th="Price" class="price">&#8377; 25 </td><td data-th="Quantity">' + eachItemData.product_qty + '</td><td data-th="Subtotal" class="text-center" class="subtotal">&#8377;' + productSubTotal + ' </td>  <td class="actions" data-th=""></td>     </tr>'
+
+	            cartItemDescHtml += CheckOutItems;
+	        }
+	        $('#checkOutItemsList').html('');
+	        $('#checkOutItemsList').append(cartItemDescHtml);
+
+	    } else {
+
+	        $('#checkOutItemsList').html("<div>No items yet</div>");
+	    }
+	}
+
+	/*End cart logic*/

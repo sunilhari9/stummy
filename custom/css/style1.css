@@ -334,9 +334,39 @@ text-decoration: none !important;
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
 }
+
 .glyphicon-th-list {
     color: white;
 }
+/*start Cart css*/
+#activate-cartItems{
+    margin-top: 10px;
+}
+.well .list-group-item {
+  background-color: #fff !important;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+  background-color: #A0001C !important;
+}
+
+.btn-primary {
+  background-color: #A0001C !important;
+  border-color: #A0001C !important;
+}
+
+.panel-primary {
+  border-color: #A0001C !important;
+}
+.panel-primary>.panel-heading {
+  background-color: #A0001C !important;
+  border-color: #A0001C !important;
+}
+.well{
+      padding-bottom: 30px;
+}
+/*end Cart css*/
+
 @media (min-width: 768px) {
     .nav-tabs.nav-justified>li>a {
         border-bottom: 0px solid #ddd !important;
@@ -572,6 +602,7 @@ text-decoration: none !important;
     margin-top: 35px;
 }*/
 }
+
 @media screen and (max-width: 320px) {
     .media-right {
         margin-top: -12%;
@@ -796,6 +827,7 @@ a.list-group-item {
     color: #FFFFFF !importent;
 	font-weight: bold;
 }
+
 .categoriesListMenuOverlay{
 	position: relative;
 }
