@@ -1199,6 +1199,9 @@
 	        $('ul.setup-panel li:eq(1)').removeClass('disabled');
 	        $('ul.setup-panel li a[href="#step-2"]').trigger('click');
 	    }
+        else{
+            alert("Please select address to deliver food items");
+        }
 	})
     $('#activate-payment').on('click', function(e) {
 
