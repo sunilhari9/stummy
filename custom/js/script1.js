@@ -30,6 +30,7 @@
 	        cartJson.itemsArray = itemsArray;
 	        LineItems = JSON.parse(sessionStorage.getItem('LineItems'));
 	        renderCart();
+			renderCartInCheckout();
 	    }
 	    $('body').on('click', '.cartMinus1,.glyphicon-chevron-left', function() {
 	        var currentVal = $(this).next().text() || $(this).next().val();
@@ -813,7 +814,97 @@
 	            $('#cartItemDesc').html("<div>No items yet</div>");
 	        }
 	    };
+		var calcSubTotal = function(productCode, lineItems){
+		var subTotals = [];
+			for (var j = 0; j < items.length; j++) {
+	            var items1 = items[j].ProductsList;
+	            if (items1.length > 0) {
+	                for (var i = 0; i < items1.length; i++) {
+						if(parseInt(items1[i].ProductCode) == productCode){
+						var unitPriceCurrent = parseInt(items1[i].unitPrice);
+						var subTotalAmount = 0;
+							for (var k = 0; k < lineItems.length; k++) {
+	                            subTotalAmount += parseInt(unitPriceCurrent);
+	                            for (var l = 0; l < lineItems[k].length; l++) {
+	                                $.each(LineItems, function(index, value) {
+	                                    var ul_item = "";
+	                                    if (value.ProductCode == items1[i].ProductCode) {
+	                                        $.each(value.ProductsLineList, function(index1, value1) {
+	                                            if (value1.ProductLineItemCode == lineItems[k][l]) {
+	                                                console.log(value1.ProductLineItemCost);
+	                                                subTotalAmount += parseInt(value1.ProductLineItemCost);
+	                                            }
+	                                        });
+	                                    }
+	                                });
+	                            }
+	                        }
+							console.log("subTotalAmount:"+subTotalAmount);
+							subTotals.push(subTotalAmount);
+							subTotals.push(unitPriceCurrent);
+							return subTotals;
+						}
+					}
+				}
+			}
+		};
+		var renderCartInCheckout = function() {
+	        //$('#checkOutItemsList').html("<center><img src='custom/images/loading.gif' /></center>");
+	        var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
+	        if (cartTotalItems != undefined) {
+	            cartTotalItemsLength = cartTotalItems.itemsArray.length;
+				var checkoutTotalAmount = 0;
+	            if (cartTotalItemsLength > 0) {
+	                $clone = $('.itemRowCheckout').clone();
+					console.log($clone.html());
+	                var cartItemDescHtml = '';
+	                var cartTotalItemsLength1 = 0;
+					
+	                for (var index = 0; index < cartTotalItemsLength; index++) {
+	                    var eachItemData = cartTotalItems.itemsArray[index];
+	                    if (eachItemData.product_qty) {
+	                        cartTotalItemsLength1++;
+	                        product_qty = eachItemData.product_qty;
+	                        if (parseInt(eachItemData.product_qty) <= 9)
+	                            product_qty = "0" + eachItemData.product_qty;
+	                        //$clone.find('.quantity').text(product_qty);
+	                        console.log(eachItemData.product_name);
+							
+	                        $clone.find('.itemRowPname').text(eachItemData.product_name);
+							$clone.find('.itemRowQuantity').text(eachItemData.product_qty);
+							$clone.find('.itemRowQuantity').text(eachItemData.product_qty);
+							var calcSubTotals = calcSubTotal(eachItemData.product_code,eachItemData.product_lineitems);
+							console.log("calcSubTotals[0]:"+calcSubTotals[0]);
+							console.log("calcSubTotals[1]:"+calcSubTotals[1]);
+							$clone.find('.itemRowTotal').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[0]);
+							$clone.find('.itemRowPrice').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[1]);
+							checkoutTotalAmount += calcSubTotals[0];
+	                        cartItemDescHtml += $clone.html();
+							console.log(cartItemDescHtml);
+	                    } else {
+	                        //cartTotalItems.itemsArray[index] = [];
+	                        cartTotalItems.itemsArray.splice(index, 1);
+	                    }
+	                }
+	                localStorage.setItem('cartJson', JSON.stringify(cartTotalItems));
+					
+	                $('#checkOutItemsList').html('');
+	                if (cartItemDescHtml.length > 0) {
+	                    $('#checkOutItemsList').html(cartItemDescHtml);
+						$('.checkoutTotalAmount').html('Total: <span class="WebRupee">Rs.</span> '+checkoutTotalAmount);
+	                    //calcCartAmount();
+	                } else {
+	                    $('#checkOutItemsList').html("<div>No items yet</div>");
+	                }
 
+	            } else {
+	                $('#checkOutItemsList').html("<div>No items yet</div>");
+	            }
+	        } else {
+	            $('#checkOutItemsList').html("<div>No items yet</div>");
+	        }
+	    };
+//renderCartInCheckout();
 	    //$('#myModal').on('hidden.bs.modal', function () {
 
 	    $('body').on('hidden.bs.modal', function() {
@@ -1200,7 +1291,11 @@
 	        $('ul.setup-panel li a[href="#step-2"]').trigger('click');
 	    }
         else{
-            alert("Please select address to deliver food items");
+            //alert("Please select address to deliver food items");
+			BootstrapDialog.show({
+	                title: 'Adderess Selection',
+	                message: 'Please select address to deliver food items'
+	            });
         }
 	})
     $('#activate-payment').on('click', function(e) {
@@ -1236,7 +1331,7 @@
 	    console.log(items);
 	});
 
-	var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
+/*	var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
 	if (cartTotalItems != undefined) {
 	    cartTotalItemsLength = cartTotalItems.itemsArray.length
 	    if (cartTotalItemsLength > 0) {
@@ -1257,6 +1352,6 @@
 
 	        $('#checkOutItemsList').html("<div>No items yet</div>");
 	    }
-	}
+	}*/
 
 	/*End cart logic*/

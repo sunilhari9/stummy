@@ -1014,7 +1014,14 @@ text-align: right;
         width: 13% !important;
         margin-left: 6% !important;
     }
+}
     
     #checkout {
         cursor: pointer;
     }
+	.itemRowQuantity{
+		text-align: center;
+	}
+	#cartCheckout > thead > tr > th{
+		font-weight: bold;
+	}
