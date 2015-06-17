@@ -23,7 +23,7 @@
 </head>
 
 <body>
-  <div class="se-pre-con"></div>
+    <div class="se-pre-con"></div>
 
     <div class="container-fluid ">
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -158,6 +158,16 @@
                                     <li class="list-group-item" id="displayHomeAddress"></li>
                                 </ul>
                             </div>
+                            <div class="panel panel-primary createHomeAddress address">
+                                <div class="panel-heading ">
+                                    <h3>
+                          Enter Home Address
+                          </h3>
+                                </div>
+                                <a href="#" class="editHomeAddressIcon glyphicon-pencil" >
+                                    click here to create Home address
+                                </a>
+                            </div>
                             <div class="panel panel-primary editHomeAddress address">
                                 <div class="panel-heading ">
                                     <h3>
@@ -214,6 +224,16 @@
                                 </ul>
                                 <button id="activate-cartItems" class="btn btn-primary pull-right">Process to cart Items</button>
                             </div>
+                            <div class="panel panel-primary createDeliveryAddress address">
+                                <div class="panel-heading ">
+                                    <h3>
+                          Enter Delivery Address
+                          </h3>
+                            </div>
+                                <a href="#" class="editDelivaryAddressIcon glyphicon-pencil" >
+                                    click here to create Delivary address
+                                </a>
+                            </div>
                             <div class="panel panel-primary editDelivaryAddress address">
                                 <div class="panel-heading ">
                                     <h3>
@@ -259,7 +279,7 @@
                 </div>
             </div>
             <div>
-        
+
             </div>
             <div class="row setup-content" id="step-2">
                 <div class="col-xs-12">
@@ -274,7 +294,7 @@
                                 </tr>
                             </thead>
                             <tbody id="checkOutItemsList">
-                                
+
                             </tbody>
                             <tfoot>
                                 <tr class="visible-xs">
@@ -316,21 +336,23 @@
             </div>
         </nav>
     </div>
-	<div class="itemRowCheckout hidden">
-		<table><tr>
-			<td data-th="">
-				<div class="row">
-					<div class="col-sm-2 hidden-xs"><img src="./custom/images/food/C.jpg" alt="..." class="itemRowImage img-responsive" /></div>
-					<div class="col-sm-6">
-						<h4 class="nomargin itemRowPname"></h4></div>
-				</div>
-			</td>
-			<td data-th="Price" class="itemRowPrice"></td>
-			<td data-th="Quantity" class="itemRowQuantity"></td>
-			<td data-th="Subtotal" class="text-right itemRowTotal"></td>
-		</tr></table>
-	</div>
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <div class="itemRowCheckout hidden">
+        <table>
+            <tr>
+                <td data-th="">
+                    <div class="row">
+                        <div class="col-sm-2 hidden-xs"><img src="./custom/images/food/C.jpg" alt="..." class="itemRowImage img-responsive" /></div>
+                        <div class="col-sm-6">
+                            <h4 class="nomargin itemRowPname"></h4></div>
+                    </div>
+                </td>
+                <td data-th="Price" class="itemRowPrice"></td>
+                <td data-th="Quantity" class="itemRowQuantity"></td>
+                <td data-th="Subtotal" class="text-right itemRowTotal"></td>
+            </tr>
+        </table>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="vendor/js/jquery-1.11.3.min.js"></script>
     <script src="custom/js/SocialLogin.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>

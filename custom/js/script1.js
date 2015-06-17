@@ -1219,30 +1219,29 @@
 	    allWells = $('.setup-content');
 	allWells.hide();
 	if (localStorage.getItem("homeAddress") == null) {
-	    var homeAddress = {};
-	    homeAddress.Name = "Suneel";
-	    homeAddress.Email = "sunilhari9@gmail.com";
-	    homeAddress.Phone = "9705984789";
-	    homeAddress.Address = "Hyd";
-	    localStorage.setItem("homeAddress", JSON.stringify(homeAddress));
-	}
-	if (localStorage.getItem("deliveryAddress") == null) {
-	    var deliveryAddress = {};
-	    deliveryAddress.Name = "Suneel";
-	    deliveryAddress.Email = "sunilhari9@gmail.com";
-	    deliveryAddress.Phone = "9705984789";
-	    deliveryAddress.Address = "Hyd";
-	    localStorage.setItem("deliveryAddress", JSON.stringify(deliveryAddress));
-	}
-	var homeAddressLocalStorage = JSON.parse(localStorage.getItem("homeAddress"));
+        $(".createHomeAddress").show();
+        $(".defaultHomeAddress").hide();
+        
+        }
+else{
+    $(".defaultHomeAddress").show();
+    $(".createHomeAddress").hide();
+    var homeAddressLocalStorage = JSON.parse(localStorage.getItem("homeAddress"));
 	$("#displayHomeName").text(homeAddressLocalStorage.Name)
 	$("#displayHomeAddress").text(homeAddressLocalStorage.Address + ", Ph:" + homeAddressLocalStorage.Phone);
 	$("#homeName").val(homeAddressLocalStorage.Name);
 	$("#homeEmail").val(homeAddressLocalStorage.Email);
 	$("#homePhone").val(homeAddressLocalStorage.Phone);
 	$("#homeAddr").val(homeAddressLocalStorage.Address);
-
-
+}
+	if (localStorage.getItem("deliveryAddress") == null) {
+        $(".createDeliveryAddress").show();
+        $(".defaultDelivaryAddress").hide();
+	    }
+	else{
+        $(".createDeliveryAddress").hide();
+        $(".defaultDelivaryAddress").show();
+        
 	var deliveryAddressLocalStorage = JSON.parse(localStorage.getItem("deliveryAddress"));
 	$("#displayDelivaryName").text(deliveryAddressLocalStorage.Name)
 	$("#displayDelivaryAddress").text(deliveryAddressLocalStorage.Address + ", Ph:" + deliveryAddressLocalStorage.Phone)
@@ -1250,6 +1249,9 @@
 	$("#deliveryEmail").val(deliveryAddressLocalStorage.Email);
 	$("#deliveryPhone").val(deliveryAddressLocalStorage.Phone);
 	$("#deliveryAddr").val(deliveryAddressLocalStorage.Address);
+    }
+
+
 	$("#homeAddressSubmit").click(function() {
 	    var homeAddress = {};
 	    homeAddress.Name = $("#homeName").val();
@@ -1257,6 +1259,8 @@
 	    homeAddress.Phone = $("#homePhone").val();
 	    homeAddress.Address = $("#homeAddr").val();
 	    localStorage.setItem("homeAddress", JSON.stringify(homeAddress));
+        $(".defaultHomeAddress").toggle(500);
+        $(".editHomeAddress").toggle(500);
 	})
 	$("#deliveryAddressSubmit").click(function() {
 	    var deliveryAddress = {};
@@ -1265,6 +1269,8 @@
 	    deliveryAddress.Phone = $("#deliveryPhone").val();
 	    deliveryAddress.Address = $("#deliveryAddr").val();
 	    localStorage.setItem("deliveryAddress", JSON.stringify(deliveryAddress));
+        $(".editDelivaryAddress").toggle(500);
+        $(".defaultDelivaryAddress").toggle(500);
 	})
 
 	navListItems.click(function(e) {
@@ -1307,24 +1313,35 @@
 
 	$(".editHomeAddress").hide();
 	$(".editDelivaryAddress").hide();
+
 	$(".editHomeAddressIcon").click(function() {
+        if (localStorage.getItem("homeAddress") == null) {
+        $(".createHomeAddress").toggle(500);
+        $(".editHomeAddress").toggle(500);
+	    }else{
+            
 	    $(".defaultHomeAddress").toggle(500);
 	    $(".editHomeAddress").toggle(500);
-	    if ($(".defaultDelivaryAddress").is(':hidden')) {
+	    if ($(".defaultDelivaryAddress").is(':hidden') && localStorage.getItem("deliveryAddress") != null) {
 	        $(".defaultDelivaryAddress").toggle(500);
 	        $(".editDelivaryAddress").toggle(500);
 	    }
+        }
 
 
 	})
 	$(".editDelivaryAddressIcon").click(function() {
+        if (localStorage.getItem("deliveryAddress") == null) {
+        $(".createDeliveryAddress").toggle(500);
+        $(".editDelivaryAddress").toggle(500);
+	    }else{
 	    $(".defaultDelivaryAddress").toggle(500);
 	    $(".editDelivaryAddress").toggle(500);
-	    if ($(".defaultHomeAddress").is(':hidden')) {
+	    if ($(".defaultHomeAddress").is(':hidden') && localStorage.getItem("homeAddress") != null) {
 	        $(".defaultHomeAddress").toggle(500);
 	        $(".editHomeAddress").toggle(500);
 	    }
-
+        }
 	})
 
 	$.getJSON("custom/js/products.json", function(items) {
