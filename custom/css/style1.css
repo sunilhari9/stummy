@@ -231,7 +231,6 @@ text-decoration: none !important;
         background-size: 100%;
         min-height: 500px;
         padding-top: 70px;
-        padding-bottom: 70px;
         font-family: segoe-Light;
     }
     
@@ -315,6 +314,10 @@ text-decoration: none !important;
 }
 .navbar-default {
     background-color: #FFFFFF !important;
+}
+.navbar-bottom{
+  margin-top: 70px;
+  margin-bottom: 0px !important;
 }
 .list-group-item {
     background-color: rgb(223, 210, 178) !important;
