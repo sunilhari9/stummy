@@ -1123,6 +1123,7 @@
 
 	        }
 	    });
+       
 	});
 
 	function searchProduct(array, product_name) {

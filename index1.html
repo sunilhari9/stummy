@@ -102,7 +102,7 @@
 
                                             <div class="col-xs-12 col-sm-6">
                                                 <p class="omb_forgotPwd">
-                                                    <a href="#">Generate OTP/Forgot password?</a>
+                                                     <a href="#" data-toggle="modal" data-target="#otpScreen" data-dismiss="modal">Generate OTP/Forgot password?</a>
                                                 </p>
                                             </div>
                                             <div class="col-xs-12 col-sm-3">
@@ -122,6 +122,43 @@
             </div>
         </div>
         <!--End Login Screen-->
+         <!--Start Model OTP-->
+        <div class="modal fade" id="otpScreen" tabindex="-1" role="dialog" aria-labelledby="otpLabel" aria-hidden="true">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><h3 class="omb_authTitle" align="center">Enter your OTP sent to your mobile</h3></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row loginForm">
+                                <div class="col-xs-12 col-sm-12">
+                                    <form class="omb_loginForm" action="" autocomplete="off" method="POST">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                            <input type="text" class="form-control otpValue" name="username" placeholder="XXXX">
+                                        </div>
+                                        <span class="help-block"></span>
+                                        <div class="col-xs-12 col-sm-6">
+                                             
+                                            </div>
+
+                                        <div class="row col-xs-12">
+                                            <div class="col-xs-12 col-sm-3">
+                                                <button class="otpValidateButton loginButton" type="submit">Validate OTP</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>    
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Model OTP-->
+
         <!--Customize food modal-->
         <div class="modal fade" id="customizeFood" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
