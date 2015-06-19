@@ -1373,3 +1373,15 @@ else{
 	}*/
 
 	/*End cart logic*/
+/*Start OTP Logic*/
+$(".conformPasswordBlock").hide();
+$('body').on('click', '.otpValidateButton', function() {
+	otp=      $(".otpValue").val();
+    if(otp!=1234){
+        $(".omb_authTitle").text("Confirm Password");
+        $(".otpForm").toggle();
+        $(".conformPasswordBlock").toggle();
+    }
+
+	    });
+/*End OTP Logic*/

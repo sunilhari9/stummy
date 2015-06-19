@@ -134,10 +134,10 @@
                     <div class="modal-body">
                         <div class="row loginForm">
                                 <div class="col-xs-12 col-sm-12">
-                                    <form class="omb_loginForm" action="" autocomplete="off" method="POST">
+                                    <div class="otpForm">
                                         <div class="input-group input-group-lg">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <input type="text" class="form-control otpValue" name="username" placeholder="XXXX">
+                                            <input type="password" class="form-control otpValue" name="username" placeholder="XXXX">
                                         </div>
                                         <span class="help-block"></span>
                                         <div class="col-xs-12 col-sm-6">
@@ -149,7 +149,30 @@
                                                 <button class="otpValidateButton loginButton" type="submit">Validate OTP</button>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
+                                    
+                                    <div class="conformPasswordBlock">
+                                        <span class="help-block">Wrong OTP Please chosee your Password's</span>
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                            <input type="text" class="form-control password" name="password" placeholder="password">
+                                        </div>
+                                         <span class="help-block"></span>
+                                         <div class="input-group input-group-lg">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                            <input type="text" class="form-control confirmPassword" name="confirmPassword" placeholder="confirm password">
+                                        </div>
+                                        <span class="help-block"></span>
+                                        <div class="col-xs-12 col-sm-6">
+                                             
+                                            </div>
+
+                                        <div class="row col-xs-12">
+                                            <div class="col-xs-12 col-sm-3">
+                                                <button class="loginButton" type="submit">save</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>    
 
