@@ -25,6 +25,9 @@ text-decoration: none !important;
         z-index: 9999;
         background: url(../../custom/images/Preloader_8.gif) center no-repeat #fff;
     }
+.error-block,.help-block{
+    color: #fff;
+}
     
     .glyphicon-edit.itemPanel {
         margin-top: 15px;

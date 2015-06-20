@@ -1373,14 +1373,47 @@ else{
 	}*/
 
 	/*End cart logic*/
+
 /*Start OTP Logic*/
 $(".conformPasswordBlock").hide();
+$('body').on('click', '#otpLink', function() {
+    $(".otpValidateForm").hide();
+});
+$('body').on('click', '.sendOTPButton', function() {
+    var phoneno= $(".phNumberForOTP").val();
+    $(".otpValidateForm").toggle();
+    
+    $(".otp_ConformPassword").text("Please enter OTP sent to :"+ phoneno );
+    $(".sendOTPForm").toggle();
+});
+
+$('body').on('click', '.savePasswordButton', function() {
+    if($(".confirmPassword").val()==$(".password").val() && $(".password").val()!=""){
+    $('#otpScreen').modal('hide');
+    $('body').removeClass('modal-open');}
+    else{
+        $(".error-block").text("Password doesn't match..! please try again");
+        $(".confirmPassword").val("");
+        $(".password").val("");
+    }
+});
+otpAttemps=0;
 $('body').on('click', '.otpValidateButton', function() {
-	otp=      $(".otpValue").val();
-    if(otp!=1234){
-        $(".omb_authTitle").text("Confirm Password");
+	otp=$(".otpValue").val();
+    if(otpAttemps>=2){
+       $('#otpScreen').modal('hide');
+       $('body').removeClass('modal-open');
+        alert("Reached Maximum attempts");
+        otpAttemps=0;
+    }
+    if(otp==1234){
+        $(".otp_ConformPassword").text("Confirm Password");
         $(".otpForm").toggle();
         $(".conformPasswordBlock").toggle();
+    }
+    else{
+        otpAttemps++
+         $(".help-block").text("OTP Max attempts 3 times. current attempt : " + otpAttemps);
     }
 
 	    });
