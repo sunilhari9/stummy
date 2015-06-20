@@ -25,7 +25,7 @@ text-decoration: none !important;
         z-index: 9999;
         background: url(../../custom/images/Preloader_8.gif) center no-repeat #fff;
     }
-.error-block,.help-block{
+.error-block,.help-block,.OTP-error-block,.phone-help-block{
     color: #fff;
 }
     
@@ -207,7 +207,7 @@ text-decoration: none !important;
     }
     
     .omb_login .omb_loginForm .help-block {
-        color: red;
+        color: #fff;
     }
     
     .loginForm {

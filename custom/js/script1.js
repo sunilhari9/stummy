@@ -3,6 +3,18 @@
 	    $(".se-pre-con").fadeOut("slow");;
 	});
 	$(document).ready(function() {
+        function ajaxRequest(url, jsonData, method, asyn, callBackFunction) {
+	    $.ajax({
+	        url: url,
+	        data: jsonData,
+	        type: method,
+	        dataType: "json",
+	        asyn: asyn,
+	        success: function(result) {
+	            callBackFunction(result);
+	        }
+	    })
+	}
 	    $('#checkout').click(function() {
 	        console.log("on checkout");
 	        $('.index_body').fadeOut(1000, function() {
@@ -30,7 +42,7 @@
 	        cartJson.itemsArray = itemsArray;
 	        LineItems = JSON.parse(sessionStorage.getItem('LineItems'));
 	        renderCart();
-			renderCartInCheckout();
+	        renderCartInCheckout();
 	    }
 	    $('body').on('click', '.cartMinus1,.glyphicon-chevron-left', function() {
 	        var currentVal = $(this).next().text() || $(this).next().val();
@@ -814,16 +826,16 @@
 	            $('#cartItemDesc').html("<div>No items yet</div>");
 	        }
 	    };
-		var calcSubTotal = function(productCode, lineItems){
-		var subTotals = [];
-			for (var j = 0; j < items.length; j++) {
+	    var calcSubTotal = function(productCode, lineItems) {
+	        var subTotals = [];
+	        for (var j = 0; j < items.length; j++) {
 	            var items1 = items[j].ProductsList;
 	            if (items1.length > 0) {
 	                for (var i = 0; i < items1.length; i++) {
-						if(parseInt(items1[i].ProductCode) == productCode){
-						var unitPriceCurrent = parseInt(items1[i].unitPrice);
-						var subTotalAmount = 0;
-							for (var k = 0; k < lineItems.length; k++) {
+	                    if (parseInt(items1[i].ProductCode) == productCode) {
+	                        var unitPriceCurrent = parseInt(items1[i].unitPrice);
+	                        var subTotalAmount = 0;
+	                        for (var k = 0; k < lineItems.length; k++) {
 	                            subTotalAmount += parseInt(unitPriceCurrent);
 	                            for (var l = 0; l < lineItems[k].length; l++) {
 	                                $.each(LineItems, function(index, value) {
@@ -839,27 +851,27 @@
 	                                });
 	                            }
 	                        }
-							console.log("subTotalAmount:"+subTotalAmount);
-							subTotals.push(subTotalAmount);
-							subTotals.push(unitPriceCurrent);
-							return subTotals;
-						}
-					}
-				}
-			}
-		};
-		var renderCartInCheckout = function() {
+	                        console.log("subTotalAmount:" + subTotalAmount);
+	                        subTotals.push(subTotalAmount);
+	                        subTotals.push(unitPriceCurrent);
+	                        return subTotals;
+	                    }
+	                }
+	            }
+	        }
+	    };
+	    var renderCartInCheckout = function() {
 	        //$('#checkOutItemsList').html("<center><img src='custom/images/loading.gif' /></center>");
 	        var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
 	        if (cartTotalItems != undefined) {
 	            cartTotalItemsLength = cartTotalItems.itemsArray.length;
-				var checkoutTotalAmount = 0;
+	            var checkoutTotalAmount = 0;
 	            if (cartTotalItemsLength > 0) {
 	                $clone = $('.itemRowCheckout').clone();
-					console.log($clone.html());
+	                console.log($clone.html());
 	                var cartItemDescHtml = '';
 	                var cartTotalItemsLength1 = 0;
-					
+
 	                for (var index = 0; index < cartTotalItemsLength; index++) {
 	                    var eachItemData = cartTotalItems.itemsArray[index];
 	                    if (eachItemData.product_qty) {
@@ -869,29 +881,29 @@
 	                            product_qty = "0" + eachItemData.product_qty;
 	                        //$clone.find('.quantity').text(product_qty);
 	                        console.log(eachItemData.product_name);
-							
+
 	                        $clone.find('.itemRowPname').text(eachItemData.product_name);
-							$clone.find('.itemRowQuantity').text(eachItemData.product_qty);
-							$clone.find('.itemRowQuantity').text(eachItemData.product_qty);
-							var calcSubTotals = calcSubTotal(eachItemData.product_code,eachItemData.product_lineitems);
-							console.log("calcSubTotals[0]:"+calcSubTotals[0]);
-							console.log("calcSubTotals[1]:"+calcSubTotals[1]);
-							$clone.find('.itemRowTotal').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[0]);
-							$clone.find('.itemRowPrice').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[1]);
-							checkoutTotalAmount += calcSubTotals[0];
+	                        $clone.find('.itemRowQuantity').text(eachItemData.product_qty);
+	                        $clone.find('.itemRowQuantity').text(eachItemData.product_qty);
+	                        var calcSubTotals = calcSubTotal(eachItemData.product_code, eachItemData.product_lineitems);
+	                        console.log("calcSubTotals[0]:" + calcSubTotals[0]);
+	                        console.log("calcSubTotals[1]:" + calcSubTotals[1]);
+	                        $clone.find('.itemRowTotal').html('<span class="WebRupee">Rs.</span> ' + calcSubTotals[0]);
+	                        $clone.find('.itemRowPrice').html('<span class="WebRupee">Rs.</span> ' + calcSubTotals[1]);
+	                        checkoutTotalAmount += calcSubTotals[0];
 	                        cartItemDescHtml += $clone.html();
-							console.log(cartItemDescHtml);
+	                        console.log(cartItemDescHtml);
 	                    } else {
 	                        //cartTotalItems.itemsArray[index] = [];
 	                        cartTotalItems.itemsArray.splice(index, 1);
 	                    }
 	                }
 	                localStorage.setItem('cartJson', JSON.stringify(cartTotalItems));
-					
+
 	                $('#checkOutItemsList').html('');
 	                if (cartItemDescHtml.length > 0) {
 	                    $('#checkOutItemsList').html(cartItemDescHtml);
-						$('.checkoutTotalAmount').html('Total: <span class="WebRupee">Rs.</span> '+checkoutTotalAmount);
+	                    $('.checkoutTotalAmount').html('Total: <span class="WebRupee">Rs.</span> ' + checkoutTotalAmount);
 	                    //calcCartAmount();
 	                } else {
 	                    $('#checkOutItemsList').html("<div>No items yet</div>");
@@ -904,7 +916,7 @@
 	            $('#checkOutItemsList').html("<div>No items yet</div>");
 	        }
 	    };
-//renderCartInCheckout();
+	    //renderCartInCheckout();
 	    //$('#myModal').on('hidden.bs.modal', function () {
 
 	    $('body').on('hidden.bs.modal', function() {
@@ -1123,7 +1135,7 @@
 
 	        }
 	    });
-       
+
 	});
 
 	function searchProduct(array, product_name) {
@@ -1220,37 +1232,35 @@
 	    allWells = $('.setup-content');
 	allWells.hide();
 	if (localStorage.getItem("homeAddress") == null) {
-        $(".createHomeAddress").show();
-        $(".defaultHomeAddress").hide();
-        
-        }
-else{
-    $(".defaultHomeAddress").show();
-    $(".createHomeAddress").hide();
-    var homeAddressLocalStorage = JSON.parse(localStorage.getItem("homeAddress"));
-	$("#displayHomeName").text(homeAddressLocalStorage.Name)
-	$("#displayHomeAddress").text(homeAddressLocalStorage.Address + ", Ph:" + homeAddressLocalStorage.Phone);
-	$("#homeName").val(homeAddressLocalStorage.Name);
-	$("#homeEmail").val(homeAddressLocalStorage.Email);
-	$("#homePhone").val(homeAddressLocalStorage.Phone);
-	$("#homeAddr").val(homeAddressLocalStorage.Address);
-}
+	    $(".createHomeAddress").show();
+	    $(".defaultHomeAddress").hide();
+
+	} else {
+	    $(".defaultHomeAddress").show();
+	    $(".createHomeAddress").hide();
+	    var homeAddressLocalStorage = JSON.parse(localStorage.getItem("homeAddress"));
+	    $("#displayHomeName").text(homeAddressLocalStorage.Name)
+	    $("#displayHomeAddress").text(homeAddressLocalStorage.Address + ", Ph:" + homeAddressLocalStorage.Phone);
+	    $("#homeName").val(homeAddressLocalStorage.Name);
+	    $("#homeEmail").val(homeAddressLocalStorage.Email);
+	    $("#homePhone").val(homeAddressLocalStorage.Phone);
+	    $("#homeAddr").val(homeAddressLocalStorage.Address);
+	}
 	if (localStorage.getItem("deliveryAddress") == null) {
-        $(".createDeliveryAddress").show();
-        $(".defaultDelivaryAddress").hide();
-	    }
-	else{
-        $(".createDeliveryAddress").hide();
-        $(".defaultDelivaryAddress").show();
-        
-	var deliveryAddressLocalStorage = JSON.parse(localStorage.getItem("deliveryAddress"));
-	$("#displayDelivaryName").text(deliveryAddressLocalStorage.Name)
-	$("#displayDelivaryAddress").text(deliveryAddressLocalStorage.Address + ", Ph:" + deliveryAddressLocalStorage.Phone)
-	$("#deliveryName").val(deliveryAddressLocalStorage.Name);
-	$("#deliveryEmail").val(deliveryAddressLocalStorage.Email);
-	$("#deliveryPhone").val(deliveryAddressLocalStorage.Phone);
-	$("#deliveryAddr").val(deliveryAddressLocalStorage.Address);
-    }
+	    $(".createDeliveryAddress").show();
+	    $(".defaultDelivaryAddress").hide();
+	} else {
+	    $(".createDeliveryAddress").hide();
+	    $(".defaultDelivaryAddress").show();
+
+	    var deliveryAddressLocalStorage = JSON.parse(localStorage.getItem("deliveryAddress"));
+	    $("#displayDelivaryName").text(deliveryAddressLocalStorage.Name)
+	    $("#displayDelivaryAddress").text(deliveryAddressLocalStorage.Address + ", Ph:" + deliveryAddressLocalStorage.Phone)
+	    $("#deliveryName").val(deliveryAddressLocalStorage.Name);
+	    $("#deliveryEmail").val(deliveryAddressLocalStorage.Email);
+	    $("#deliveryPhone").val(deliveryAddressLocalStorage.Phone);
+	    $("#deliveryAddr").val(deliveryAddressLocalStorage.Address);
+	}
 
 
 	$("#homeAddressSubmit").click(function() {
@@ -1260,8 +1270,8 @@ else{
 	    homeAddress.Phone = $("#homePhone").val();
 	    homeAddress.Address = $("#homeAddr").val();
 	    localStorage.setItem("homeAddress", JSON.stringify(homeAddress));
-        $(".defaultHomeAddress").toggle(500);
-        $(".editHomeAddress").toggle(500);
+	    $(".defaultHomeAddress").toggle(500);
+	    $(".editHomeAddress").toggle(500);
 	})
 	$("#deliveryAddressSubmit").click(function() {
 	    var deliveryAddress = {};
@@ -1270,8 +1280,8 @@ else{
 	    deliveryAddress.Phone = $("#deliveryPhone").val();
 	    deliveryAddress.Address = $("#deliveryAddr").val();
 	    localStorage.setItem("deliveryAddress", JSON.stringify(deliveryAddress));
-        $(".editDelivaryAddress").toggle(500);
-        $(".defaultDelivaryAddress").toggle(500);
+	    $(".editDelivaryAddress").toggle(500);
+	    $(".defaultDelivaryAddress").toggle(500);
 	})
 
 	navListItems.click(function(e) {
@@ -1289,132 +1299,195 @@ else{
 
 	$('ul.setup-panel li.active a').trigger('click');
 
-	
+
 	$('#activate-cartItems').on('click', function(e) {
 
 	    if ($('input[name=addressSelection]:checked').length > 0) {
 
 	        $('ul.setup-panel li:eq(1)').removeClass('disabled');
 	        $('ul.setup-panel li a[href="#step-2"]').trigger('click');
+	    } else {
+	        //alert("Please select address to deliver food items");
+	        BootstrapDialog.show({
+	            title: 'Adderess Selection',
+	            message: 'Please select address to deliver food items'
+	        });
 	    }
-        else{
-            //alert("Please select address to deliver food items");
-			BootstrapDialog.show({
-	                title: 'Adderess Selection',
-	                message: 'Please select address to deliver food items'
-	            });
-        }
 	})
-    $('#activate-payment').on('click', function(e) {
+	$('#activate-payment').on('click', function(e) {
 
-	        $('ul.setup-panel li:eq(2)').removeClass('disabled');
-	        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
-	 
+	    $('ul.setup-panel li:eq(2)').removeClass('disabled');
+	    $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+
 	})
 
 	$(".editHomeAddress").hide();
 	$(".editDelivaryAddress").hide();
 
 	$(".editHomeAddressIcon").click(function() {
-        if (localStorage.getItem("homeAddress") == null) {
-        $(".createHomeAddress").toggle(500);
-        $(".editHomeAddress").toggle(500);
-	    }else{
-            
-	    $(".defaultHomeAddress").toggle(500);
-	    $(".editHomeAddress").toggle(500);
-	    if ($(".defaultDelivaryAddress").is(':hidden') && localStorage.getItem("deliveryAddress") != null) {
-	        $(".defaultDelivaryAddress").toggle(500);
-	        $(".editDelivaryAddress").toggle(500);
+	    if (localStorage.getItem("homeAddress") == null) {
+	        $(".createHomeAddress").toggle(500);
+	        $(".editHomeAddress").toggle(500);
+	    } else {
+
+	        $(".defaultHomeAddress").toggle(500);
+	        $(".editHomeAddress").toggle(500);
+	        if ($(".defaultDelivaryAddress").is(':hidden') && localStorage.getItem("deliveryAddress") != null) {
+	            $(".defaultDelivaryAddress").toggle(500);
+	            $(".editDelivaryAddress").toggle(500);
+	        }
 	    }
-        }
 
 
 	})
 	$(".editDelivaryAddressIcon").click(function() {
-        if (localStorage.getItem("deliveryAddress") == null) {
-        $(".createDeliveryAddress").toggle(500);
-        $(".editDelivaryAddress").toggle(500);
-	    }else{
-	    $(".defaultDelivaryAddress").toggle(500);
-	    $(".editDelivaryAddress").toggle(500);
-	    if ($(".defaultHomeAddress").is(':hidden') && localStorage.getItem("homeAddress") != null) {
-	        $(".defaultHomeAddress").toggle(500);
-	        $(".editHomeAddress").toggle(500);
+	    if (localStorage.getItem("deliveryAddress") == null) {
+	        $(".createDeliveryAddress").toggle(500);
+	        $(".editDelivaryAddress").toggle(500);
+	    } else {
+	        $(".defaultDelivaryAddress").toggle(500);
+	        $(".editDelivaryAddress").toggle(500);
+	        if ($(".defaultHomeAddress").is(':hidden') && localStorage.getItem("homeAddress") != null) {
+	            $(".defaultHomeAddress").toggle(500);
+	            $(".editHomeAddress").toggle(500);
+	        }
 	    }
-        }
 	})
 
 	$.getJSON("custom/js/products.json", function(items) {
 	    console.log(items);
 	});
 
-/*	var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
-	if (cartTotalItems != undefined) {
-	    cartTotalItemsLength = cartTotalItems.itemsArray.length
-	    if (cartTotalItemsLength > 0) {
-	        var cartItemDescHtml = '';
-	        for (var index = 0; index < cartTotalItemsLength; index++) {
-	            var eachItemData = cartTotalItems.itemsArray[index];
-	            //var productSubTotal = eachItemData.product_qty * 25;
-	            // getProductPrice(cartProductCodes, cartProductLineItems, cartProductQty);
-	            var productSubTotal = getProductPrice(eachItemData.product_code, eachItemData.product_lineitems, eachItemData.product_qty);
-	            var CheckOutItems = '<tr><td data-th=""><div class="row"><div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div><div class="col-sm-6"><h4 class="nomargin productName">' + eachItemData.product_name + '</h4></div>          </div></td><td data-th="Price" class="price">&#8377; 25 </td><td data-th="Quantity">' + eachItemData.product_qty + '</td><td data-th="Subtotal" class="text-center" class="subtotal">&#8377;' + productSubTotal + ' </td>  <td class="actions" data-th=""></td>     </tr>'
+	/*	var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
+		if (cartTotalItems != undefined) {
+		    cartTotalItemsLength = cartTotalItems.itemsArray.length
+		    if (cartTotalItemsLength > 0) {
+		        var cartItemDescHtml = '';
+		        for (var index = 0; index < cartTotalItemsLength; index++) {
+		            var eachItemData = cartTotalItems.itemsArray[index];
+		            //var productSubTotal = eachItemData.product_qty * 25;
+		            // getProductPrice(cartProductCodes, cartProductLineItems, cartProductQty);
+		            var productSubTotal = getProductPrice(eachItemData.product_code, eachItemData.product_lineitems, eachItemData.product_qty);
+		            var CheckOutItems = '<tr><td data-th=""><div class="row"><div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div><div class="col-sm-6"><h4 class="nomargin productName">' + eachItemData.product_name + '</h4></div>          </div></td><td data-th="Price" class="price">&#8377; 25 </td><td data-th="Quantity">' + eachItemData.product_qty + '</td><td data-th="Subtotal" class="text-center" class="subtotal">&#8377;' + productSubTotal + ' </td>  <td class="actions" data-th=""></td>     </tr>'
 
-	            cartItemDescHtml += CheckOutItems;
-	        }
-	        $('#checkOutItemsList').html('');
-	        $('#checkOutItemsList').append(cartItemDescHtml);
+		            cartItemDescHtml += CheckOutItems;
+		        }
+		        $('#checkOutItemsList').html('');
+		        $('#checkOutItemsList').append(cartItemDescHtml);
 
-	    } else {
+		    } else {
 
-	        $('#checkOutItemsList').html("<div>No items yet</div>");
-	    }
-	}*/
+		        $('#checkOutItemsList').html("<div>No items yet</div>");
+		    }
+		}*/
 
 	/*End cart logic*/
 
-/*Start OTP Logic*/
-$(".conformPasswordBlock").hide();
-$('body').on('click', '#otpLink', function() {
-    $(".otpValidateForm").hide();
-});
-$('body').on('click', '.sendOTPButton', function() {
-    var phoneno= $(".phNumberForOTP").val();
-    $(".otpValidateForm").toggle();
-    
-    $(".otp_ConformPassword").text("Please enter OTP sent to :"+ phoneno );
-    $(".sendOTPForm").toggle();
-});
+	/*Start OTP Logic*/
+	function validatePhone(phone) {
+	    if (phone.match(/^[7-9][0-9]{9}$/) != null) {
+	        return true;
+	    } else {
+	        return false;
+	    }
+	}
+	$(".conformPasswordBlock").hide();
+	$('body').on('click', '#otpLink', function() {
 
-$('body').on('click', '.savePasswordButton', function() {
-    if($(".confirmPassword").val()==$(".password").val() && $(".password").val()!=""){
-    $('#otpScreen').modal('hide');
-    $('body').removeClass('modal-open');}
-    else{
-        $(".error-block").text("Password doesn't match..! please try again");
-        $(".confirmPassword").val("");
-        $(".password").val("");
-    }
-});
-otpAttemps=0;
-$('body').on('click', '.otpValidateButton', function() {
-	otp=$(".otpValue").val();
-    if(otpAttemps>=2){
-       $('#otpScreen').modal('hide');
-       $('body').removeClass('modal-open');
-        alert("Reached Maximum attempts");
-        otpAttemps=0;
-    }
-    if(otp==1234){
-        $(".otp_ConformPassword").text("Confirm Password");
-        $(".otpForm").toggle();
-        $(".conformPasswordBlock").toggle();
-    }
-    else{
-        otpAttemps++
-         $(".help-block").text("OTP Max attempts 3 times. current attempt : " + otpAttemps);
-    }
+	    var phoneNo = $(".phoneNo").val();
+	    var validPhoneNo = validatePhone(phoneNo);
 
-	    });
-/*End OTP Logic*/
+	    if (validPhoneNo) {
+	        $(".OTP-error-block").text("");
+	        $(".sendOTPForm").hide();
+	        $('#loginScreen').modal('hide');
+	        $('#otpScreen').modal();
+
+	        $(".otp_ConformPassword").text("Please enter OTP sent to :" + phoneNo);
+	    } else {
+	        $('.phone-help-block').text("Please enter valid phone number to generate OTP");
+
+	    }
+
+
+	});
+	$('body').on('click', '.sendOTPButton', function() {
+	    var phoneNo = $(".phNumberForOTP").val();
+	    var validPhoneNo = validatePhone(phoneNo);
+	    if (validPhoneNo) {
+	        $('.OTP-error-block').text("");
+	        $(".sendOTPForm").toggle();
+	        $(".otpValidateForm").toggle();
+	        $(".otp_ConformPassword").text("Please enter OTP sent to :" + phoneno);
+	    } else {
+	        $('.OTP-error-block').text("Please enter valid phone number to generate OTP");
+	    }
+	});
+
+	$('body').on('click', '#signUp', function() {
+
+	    $(".otpValidateForm").hide();
+	    $('#loginScreen').modal('hide');
+	    $('#otpScreen').modal();
+	});
+	$('body').on('click', '#login', function() {
+
+	    var phoneNo = $(".phoneNo").val();
+	    var password = $(".loginPassword").val();
+	    var validPhoneNo = validatePhone(phoneNo);
+         var validPassword = password.indexOf("'");
+        
+	    if (validPhoneNo && validPassword==-1) {
+	        $('.phone-help-block').text("");
+	        alert("Sample service method created ajaxRequest(url, jsonData, method, asyn, callBackFunction)");
+            //ajaxRequest(url, jsonData, method, asyn, callBackFunction)
+            $('#loginScreen').modal('hide');
+            $('body').removeClass('modal-open');
+	       $('#sign-up-button').remove();
+	        $('#welcomeMsg').text("Welcome to stummy");
+	    } else {
+	        $('.phone-help-block').text("Please check your credencials");
+             $(".loginPassword").val("");
+	    }
+	});
+
+	$('body').on('click', '.savePasswordButton', function() {
+	    var removeSingleQuote = $(".confirmPassword").val().indexOf("'");
+
+
+	    if (removeSingleQuote == -1 && $(".confirmPassword").val() == $(".password").val() && $(".password").val() != "") {
+	        $(".error-block").text("");
+	        $('#otpScreen').modal('hide');
+	        $('#sign-up-button').remove();
+	        $('#welcomeMsg').text("Welcome to stummy");
+	        $('body').removeClass('modal-open');
+	    } else {
+	        $(".error-block").text("Password not match/valid..! please try again");
+	        $(".confirmPassword").val("");
+	        $(".password").val("");
+	    }
+	});
+	otpAttemps = 0;
+
+	$('body').on('click', '.otpValidateButton', function() {
+	    otp = $(".otpValue").val();
+	    var validOTP = otp.match(/^[0-9]{4}$/);
+	    if (validOTP != null && otp == 1234) {
+	        $(".OTP-error-block").text("");
+	        $(".otp_ConformPassword").text("Confirm Password");
+	        $(".otpForm").toggle();
+	        $(".conformPasswordBlock").toggle();
+	    } else {
+	        $(".otpValue").val("");
+	        otpAttemps++
+	        $(".OTP-error-block").text("OTP Max attempts 3 times. current attempt : " + otpAttemps);
+	    }
+	    if (otpAttemps >= 3) {
+	        $('#otpScreen').modal('hide');
+	        $('body').removeClass('modal-open');
+	        alert("Reached Maximum attempts");
+	        otpAttemps = 0;
+	    }
+
+	});
+	/*End OTP Logic*/
