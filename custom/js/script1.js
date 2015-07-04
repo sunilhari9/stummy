@@ -1,15 +1,29 @@
 	$(window).load(function() {
 	    // Animate loader off screen
 	    $(".se-pre-con").fadeOut("slow");;
- 
+
 	});
+	userDetails = "";
+
+	function setuserProfile() {
+	    if (localStorage.getItem("userInfo") != "" && localStorage.getItem("userInfo") != null) {
+	        userDetails = JSON.parse(localStorage.getItem("userInfo"));
+	        $("#sign-up-button").hide(500);
+	        $("#welcomeMsg").show(500);
+	        $("#userProfilePic").attr("src", "data:image/png;base64," + userDetails[0].pic);
+	    } else {
+	        $("#welcomeMsg").hide(500);
+	        $("#sign-up-button").show(500);
+	    }
+	}
 	$(document).ready(function() {
-        if(sessionStorage.getItem("promotionsFlag")==null){
-        $('#advertiseModel').modal('show');
-        }
-        $(".closeAdd").click(function(){
-            sessionStorage.setItem("promotionsFlag",true);
-        })
+	    if (sessionStorage.getItem("promotionsFlag") == null) {
+	        $('#advertiseModel').modal('show');
+	    }
+	    $(".closeAdd").click(function() {
+	        sessionStorage.setItem("promotionsFlag", true);
+	    })
+
 	    function ajaxRequest(url, jsonData, method, asyn, callBackFunction) {
 	        $.ajax({
 	            url: url,
@@ -22,19 +36,10 @@
 	            }
 	        })
 	    }
-	    setuserProfile = function() {
-	        if (localStorage.getItem("userInfo") != "") {
-	            userDetails = JSON.parse(localStorage.getItem("userInfo"));
-	            $("#sign-up-button").hide(500);
-	            $("#welcomeMsg").show(500);
-	            $("#userProfilePic").attr("src", userDetails[0].pic);
-	        } else {
-	            $("#welcomeMsg").hide(500);
-	            $("#sign-up-button").show(500);
-	        }
-	    }
+
 	    setuserProfile();
-        var profilePicPopOverContent='<ul id="profileList" class="list-group"><li class="list-group-item">Profile</li><li class="list-group-item" id="logout">Logout</li></ul>';
+
+	    var profilePicPopOverContent = '<ul id="profileList" class="list-group"><li class="list-group-item">Profile</li><li class="list-group-item" id="logout">Logout</li></ul>';
 	    $("#userProfilePic").popover({
 	        html: true,
 	        placement: 'bottom',
@@ -1255,57 +1260,96 @@
 	var navListItems = $('ul.setup-panel li a'),
 	    allWells = $('.setup-content');
 	allWells.hide();
-	if (localStorage.getItem("homeAddress") == null) {
-	    $(".createHomeAddress").show();
-	    $(".defaultHomeAddress").hide();
 
-	} else {
-	    $(".defaultHomeAddress").show();
-	    $(".createHomeAddress").hide();
-	    var homeAddressLocalStorage = JSON.parse(localStorage.getItem("homeAddress"));
-	    $("#displayHomeName").text(homeAddressLocalStorage.Name)
-	    $("#displayHomeAddress").text(homeAddressLocalStorage.Address + ", Ph:" + homeAddressLocalStorage.Phone);
-	    $("#homeName").val(homeAddressLocalStorage.Name);
-	    $("#homeEmail").val(homeAddressLocalStorage.Email);
-	    $("#homePhone").val(homeAddressLocalStorage.Phone);
-	    $("#homeAddr").val(homeAddressLocalStorage.Address);
+	setuserProfile();
+
+	function updateAddress() {
+	    if (userDetails.length > 0) {
+	        $("#displayDeliveryName").text(userDetails[0].DeliveryFirstName + " " + userDetails[0].DeliveryLastName)
+	        $("#displayDeliveryAddress").text(userDetails[0].DeliveryDNo+" ,"+userDetails[0].DeliveryStreet+" ,"+userDetails[0].DeliveryCity+" ,"+userDetails[0].DeliveryState +" -"+ userDetails[0].DeliveryPostalCode+ ", Ph:" + userDetails[0].DeliveryPhone)
+	        $("#deliveryFirstName").val(userDetails[0].DeliveryFirstName);
+	        $("#deliveryLastName").val(userDetails[0].DeliveryLastName);
+	        $("#deliveryPhone").val(userDetails[0].DeliveryPhone);
+	        $("#displayHomeName").text(userDetails[0].FirstName + " " + userDetails[0].LastName)
+	        $("#displayHomeAddress").text(userDetails[0].HomeDNo+" ,"+userDetails[0].HomeStreet+" ,"+userDetails[0].HomeCity+" ,"+userDetails[0].HomeState +" -"+ userDetails[0].HomePostalCode+ ", Ph:" + userDetails[0].Phone );
+	        $("#homeFirstName").val(userDetails[0].FirstName);
+	        $("#homeLastName").val(userDetails[0].LastName);
+	        $("#homePhone").val(userDetails[0].Phone);
+            
+	    }
 	}
-	if (localStorage.getItem("deliveryAddress") == null) {
-	    $(".createDeliveryAddress").show();
-	    $(".defaultDelivaryAddress").hide();
-	} else {
-	    $(".createDeliveryAddress").hide();
-	    $(".defaultDelivaryAddress").show();
+	updateAddress();
+	$.getJSON("custom/js/locations.json", function(items) {
 
-	    var deliveryAddressLocalStorage = JSON.parse(localStorage.getItem("deliveryAddress"));
-	    $("#displayDelivaryName").text(deliveryAddressLocalStorage.Name)
-	    $("#displayDelivaryAddress").text(deliveryAddressLocalStorage.Address + ", Ph:" + deliveryAddressLocalStorage.Phone)
-	    $("#deliveryName").val(deliveryAddressLocalStorage.Name);
-	    $("#deliveryEmail").val(deliveryAddressLocalStorage.Email);
-	    $("#deliveryPhone").val(deliveryAddressLocalStorage.Phone);
-	    $("#deliveryAddr").val(deliveryAddressLocalStorage.Address);
+	    $.each(items, function(key, value) {
+	        $("#homePinCode").append('<option data-street=' + value.street + ' value=' + value.PIN + '>' + value.PIN + '</option>');
+	        $("#homeStreet").append('<option data-pin=' + value.PIN + ' value=' + value.street + '>' + value.street + '</option>');
+	        $("#deliveryPinCode").append('<option data-street=' + value.street + ' value=' + value.PIN + '>' + value.PIN + '</option>');
+	        $("#deliveryStreet").append('<option data-pin=' + value.PIN + ' value=' + value.street + '>' + value.street + '</option>');
+	    });
+
+	});
+
+	$("#homePinCode").change(function() {
+	    $("#homeStreet").val($("#homePinCode option:selected").data('street'));
+	    updateAddress();
+	});
+	$("#homeStreet").change(function() {
+	    $("#homePinCode").val($("#homeStreet option:selected").data('pin'));
+	    updateAddress();
+	});
+	$("#deliveryPinCode").change(function() {
+	    $("#deliveryStreet").val($("#deliveryPinCode option:selected").data('street'));
+	    updateAddress();
+	});
+	$("#deliveryStreet").change(function() {
+	    $("#deliveryPinCode").val($("#deliveryStreet option:selected").data('pin'));
+	    updateAddress();
+	});
+	if (userDetails.length > 0) {
+	    if (userDetails[0].HomeStreet == null && userDetails[0].HomePostalCode == null) {
+	        $(".createHomeAddress").show();
+	        $(".defaultHomeAddress").hide();
+
+	    } else {
+	        $(".defaultHomeAddress").show();
+	        $(".createHomeAddress").hide();
+
+	    }
+	    if (userDetails[0].DeliveryStreet == null && userDetails[0].DeliveryPostalCode == null) {
+	        $(".createDeliveryAddress").show();
+	        $(".defaultDeliveryAddress").hide();
+	    } else {
+	        $(".createDeliveryAddress").hide();
+	        $(".defaultDeliveryAddress").show();
+
+	    }
 	}
-
 
 	$("#homeAddressSubmit").click(function() {
-	    var homeAddress = {};
-	    homeAddress.Name = $("#homeName").val();
-	    homeAddress.Email = $("#homeEmail").val();
-	    homeAddress.Phone = $("#homePhone").val();
-	    homeAddress.Address = $("#homeAddr").val();
-	    localStorage.setItem("homeAddress", JSON.stringify(homeAddress));
+
+	    userDetails[0].FirstName = $("#homeFirstName").val();
+	    userDetails[0].LastName = $("#homeLastName").val();
+	    userDetails[0].Phone = $("#homePhone").val();
+	    userDetails[0].HomeDNo = $("#homeDNo").val();
+	    userDetails[0].HomeStreet = $("#homeStreet").val();
+	    userDetails[0].HomePostalCode = $("#homePinCode").val();
+	    localStorage.setItem("userInfo", JSON.stringify(userDetails));
 	    $(".defaultHomeAddress").toggle(500);
 	    $(".editHomeAddress").toggle(500);
+	    updateAddress();
 	})
 	$("#deliveryAddressSubmit").click(function() {
-	    var deliveryAddress = {};
-	    deliveryAddress.Name = $("#deliveryName").val();
-	    deliveryAddress.Email = $("#deliveryEmail").val();
-	    deliveryAddress.Phone = $("#deliveryPhone").val();
-	    deliveryAddress.Address = $("#deliveryAddr").val();
-	    localStorage.setItem("deliveryAddress", JSON.stringify(deliveryAddress));
-	    $(".editDelivaryAddress").toggle(500);
-	    $(".defaultDelivaryAddress").toggle(500);
+	    userDetails[0].DeliveryFirstName = $("#deliveryFirstName").val();
+	    userDetails[0].DeliveryLastName = $("#deliveryLastName").val();
+	    userDetails[0].DeliveryPhone = $("#deliveryPhone").val();
+	    userDetails[0].DeliveryDNo = $("#deliveryDNo").val();
+	    userDetails[0].DeliveryStreet = $("#deliveryStreet").val();
+	    userDetails[0].DeliveryPostalCode = $("#deliveryPinCode").val();
+	    localStorage.setItem("userInfo", JSON.stringify(userDetails));
+	    $(".editDeliveryAddress").toggle(500);
+	    $(".defaultDeliveryAddress").toggle(500);
+	    updateAddress();
 	})
 
 	navListItems.click(function(e) {
@@ -1346,32 +1390,34 @@
 	})
 
 	$(".editHomeAddress").hide();
-	$(".editDelivaryAddress").hide();
+	$(".editDeliveryAddress").hide();
+
 
 	$(".editHomeAddressIcon").click(function() {
-	    if (localStorage.getItem("homeAddress") == null) {
+	    if (userDetails[0].HomeStreet == null && userDetails[0].HomePostalCode == null) {
 	        $(".createHomeAddress").toggle(500);
 	        $(".editHomeAddress").toggle(500);
 	    } else {
 
 	        $(".defaultHomeAddress").toggle(500);
 	        $(".editHomeAddress").toggle(500);
-	        if ($(".defaultDelivaryAddress").is(':hidden') && localStorage.getItem("deliveryAddress") != null) {
-	            $(".defaultDelivaryAddress").toggle(500);
-	            $(".editDelivaryAddress").toggle(500);
+	        if ($(".defaultDeliveryAddress").is(':hidden') && userDetails[0].DeliveryPostalCode != null) {
+	            $(".defaultDeliveryAddress").toggle(500);
+	            $(".editDeliveryAddress").toggle(500);
 	        }
 	    }
 
 
 	})
-	$(".editDelivaryAddressIcon").click(function() {
-	    if (localStorage.getItem("deliveryAddress") == null) {
+	$(".editDeliveryAddressIcon").click(function() {
+	    if (userDetails[0].DeliveryStreet == null && userDetails[0].DeliveryPostalCode == null) {
+
 	        $(".createDeliveryAddress").toggle(500);
-	        $(".editDelivaryAddress").toggle(500);
+	        $(".editDeliveryAddress").toggle(500);
 	    } else {
-	        $(".defaultDelivaryAddress").toggle(500);
-	        $(".editDelivaryAddress").toggle(500);
-	        if ($(".defaultHomeAddress").is(':hidden') && localStorage.getItem("homeAddress") != null) {
+	        $(".defaultDeliveryAddress").toggle(500);
+	        $(".editDeliveryAddress").toggle(500);
+	        if ($(".defaultHomeAddress").is(':hidden') && userDetails[0].HomePostalCode != null) {
 	            $(".defaultHomeAddress").toggle(500);
 	            $(".editHomeAddress").toggle(500);
 	        }
@@ -1467,11 +1513,35 @@
 	        //ajaxRequest(url, jsonData, method, asyn, callBackFunction)
 	        $('#loginScreen').modal('hide');
 	        $('body').removeClass('modal-open');
-	        var userDetails = [{
-	            "name": "Suneel Manyam",
-	            "pic": "custom/images/defult.png"
+	        var userDetailsResponce = [{
+	            "Phone": "9999099990",
+	            "LastName": "B",
+	            "HomeStreet": null,
+	            "HomeState": "Telangana",
+	            "HomePostalCode": null,
+	            "HomePhone": null,
+	            "HomeLongitude": null,
+	            "HomeDNo": "",
+	            "DeliveryDNo": "",
+	            "HomeLatitude": null,
+	            "HomeCountry": "India",
+	            "HomeCity": "Hyderabad",
+	            "FirstName": "Ramesh",
+	            "ErrorMessage": "",
+	            "Email": "nikhilmutyam@yahoo.com",
+	            "DeliveryStreet": null,
+	            "DeliveryState": "Telangana",
+	            "DeliveryPostalCode": null,
+	            "DeliveryLongitude": null,
+	            "DeliveryLatitude": null,
+                "DeliveryLastName": "M",
+	            "DeliveryCountry": "India",
+	            "DeliveryCity": "Hyderabad",
+	            "DeliveryFirstName": "Suneel",
+	            "Birthdate": "1989-01-01",
+	            "pic": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q=="
 	        }];
-	        localStorage.setItem('userInfo', JSON.stringify(userDetails));
+	        localStorage.setItem('userInfo', JSON.stringify(userDetailsResponce));
 	        setuserProfile();
 
 	    } else {
@@ -1487,11 +1557,34 @@
 	    if (removeSingleQuote == -1 && $(".confirmPassword").val() == $(".password").val() && $(".password").val() != "") {
 	        $(".error-block").text("");
 	        $('#otpScreen').modal('hide');
-	        var userDetails = [{
-	            "name": "Suneel Manyam",
-	            "pic": "custom/images/defult.png"
+	        var userDetailsResponce = [{
+	            "Phone": "9999099990",
+	            "LastName": "B",
+	            "HomeStreet": null,
+	            "HomeState": "Telangana",
+	            "HomePostalCode": null,
+	            "HomePhone": null,
+	            "HomeLongitude": null,
+	            "HomeDNo": "",
+	            "DeliveryDNo": "",
+	            "HomeLatitude": null,
+	            "HomeCountry": "India",
+	            "HomeCity": "Hyderabad",
+	            "FirstName": "Ramesh",
+	            "ErrorMessage": "",
+	            "Email": "nikhilmutyam@yahoo.com",
+	            "DeliveryStreet": null,
+	            "DeliveryState": "Telangana",
+	            "DeliveryPostalCode": null,
+	            "DeliveryLongitude": null,
+	            "DeliveryLatitude": null,
+	            "DeliveryCountry": "India",
+	            "DeliveryCity": "Hyderabad",
+	            "DeliveryFirstName": "Suneel","DeliveryLastName": "M",
+	            "Birthdate": "1989-01-01",
+	            "pic": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q=="
 	        }];
-	        localStorage.setItem('userInfo', userDetails);
+	        localStorage.setItem('userInfo', JSON.stringify(userDetailsResponce));
 	        setuserProfile();
 	        $('body').removeClass('modal-open');
 	    } else {
