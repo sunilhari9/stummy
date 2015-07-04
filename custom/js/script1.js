@@ -1,20 +1,48 @@
 	$(window).load(function() {
 	    // Animate loader off screen
 	    $(".se-pre-con").fadeOut("slow");;
+ 
 	});
 	$(document).ready(function() {
-        function ajaxRequest(url, jsonData, method, asyn, callBackFunction) {
-	    $.ajax({
-	        url: url,
-	        data: jsonData,
-	        type: method,
-	        dataType: "json",
-	        asyn: asyn,
-	        success: function(result) {
-	            callBackFunction(result);
+        if(sessionStorage.getItem("promotionsFlag")==null){
+        $('#advertiseModel').modal('show');
+        }
+        $(".closeAdd").click(function(){
+            sessionStorage.setItem("promotionsFlag",true);
+        })
+	    function ajaxRequest(url, jsonData, method, asyn, callBackFunction) {
+	        $.ajax({
+	            url: url,
+	            data: jsonData,
+	            type: method,
+	            dataType: "json",
+	            asyn: asyn,
+	            success: function(result) {
+	                callBackFunction(result);
+	            }
+	        })
+	    }
+	    setuserProfile = function() {
+	        if (localStorage.getItem("userInfo") != "") {
+	            userDetails = JSON.parse(localStorage.getItem("userInfo"));
+	            $("#sign-up-button").hide(500);
+	            $("#welcomeMsg").show(500);
+	            $("#userProfilePic").attr("src", userDetails[0].pic);
+	        } else {
+	            $("#welcomeMsg").hide(500);
+	            $("#sign-up-button").show(500);
 	        }
-	    })
-	}
+	    }
+	    setuserProfile();
+        var profilePicPopOverContent='<ul id="profileList" class="list-group"><li class="list-group-item">Profile</li><li class="list-group-item" id="logout">Logout</li></ul>';
+	    $("#userProfilePic").popover({
+	        html: true,
+	        placement: 'bottom',
+	        content: profilePicPopOverContent
+	    }).parent().on('click', '#logout', function() {
+	        localStorage.setItem("userInfo", "");
+	        setuserProfile();
+	    });
 	    $('#checkout').click(function() {
 	        console.log("on checkout");
 	        $('.index_body').fadeOut(1000, function() {
@@ -32,12 +60,8 @@
 	            init();
 	        });
 	    });
-	    //if(sessionStorage.getItem('LineItems') == undefined){
 
 
-	    /*}else{
-	    init();
-	    }*/
 	    function init() {
 	        cartJson.itemsArray = itemsArray;
 	        LineItems = JSON.parse(sessionStorage.getItem('LineItems'));
@@ -1191,7 +1215,7 @@
 	    if ($(document).width() > 768 && $(document).width() <= 1023) rwdInfo = 2;
 	    return rwdInfo;
 	}
-	var mobileChk = function() {
+	mobileChk = function() {
 	    var rwdInfo = calcRWD();
 	    console.log("rwdInfo:" + rwdInfo);
 	    if (rwdInfo == 4) {
@@ -1435,19 +1459,24 @@
 	    var phoneNo = $(".phoneNo").val();
 	    var password = $(".loginPassword").val();
 	    var validPhoneNo = validatePhone(phoneNo);
-         var validPassword = password.indexOf("'");
-        
-	    if (validPhoneNo && validPassword==-1) {
+	    var validPassword = password.indexOf("'");
+
+	    if (validPhoneNo && validPassword == -1) {
 	        $('.phone-help-block').text("");
 	        alert("Sample service method created ajaxRequest(url, jsonData, method, asyn, callBackFunction)");
-            //ajaxRequest(url, jsonData, method, asyn, callBackFunction)
-            $('#loginScreen').modal('hide');
-            $('body').removeClass('modal-open');
-	       $('#sign-up-button').remove();
-	        $('#welcomeMsg').text("Welcome to stummy");
+	        //ajaxRequest(url, jsonData, method, asyn, callBackFunction)
+	        $('#loginScreen').modal('hide');
+	        $('body').removeClass('modal-open');
+	        var userDetails = [{
+	            "name": "Suneel Manyam",
+	            "pic": "custom/images/defult.png"
+	        }];
+	        localStorage.setItem('userInfo', JSON.stringify(userDetails));
+	        setuserProfile();
+
 	    } else {
 	        $('.phone-help-block').text("Please check your credencials");
-             $(".loginPassword").val("");
+	        $(".loginPassword").val("");
 	    }
 	});
 
@@ -1458,8 +1487,12 @@
 	    if (removeSingleQuote == -1 && $(".confirmPassword").val() == $(".password").val() && $(".password").val() != "") {
 	        $(".error-block").text("");
 	        $('#otpScreen').modal('hide');
-	        $('#sign-up-button').remove();
-	        $('#welcomeMsg').text("Welcome to stummy");
+	        var userDetails = [{
+	            "name": "Suneel Manyam",
+	            "pic": "custom/images/defult.png"
+	        }];
+	        localStorage.setItem('userInfo', userDetails);
+	        setuserProfile();
 	        $('body').removeClass('modal-open');
 	    } else {
 	        $(".error-block").text("Password not match/valid..! please try again");

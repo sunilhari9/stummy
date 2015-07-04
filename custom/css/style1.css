@@ -209,6 +209,23 @@ text-decoration: none !important;
     .omb_login .omb_loginForm .help-block {
         color: #fff;
     }
+#userProfilePic{
+    margin-top: 10px;
+}
+#profileList{
+    margin-bottom: 0px;
+}
+.popover-content{
+    padding: 0px;
+}
+#profileList .list-group-item{
+    background-color: #fff !important;
+  border-top: 1px solid #ddd !important;
+      cursor: pointer;
+}
+#profileList .list-group-item:hover{
+    background-color: #ddd !important;
+}
     
     .loginForm {
         padding: 19px;

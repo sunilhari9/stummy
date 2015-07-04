@@ -23,6 +23,21 @@
 </head>
 
 <body class="index_body">
+    <div class="modal fade" id="advertiseModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-body">
+        
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary closeAdd" data-dismiss="modal">Close add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
     <div class="se-pre-con"></div>
     <div class="messagesBar"></div>
 
@@ -45,7 +60,10 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><span id="welcomeMsg"></span><a href="#" class="links-active" data-toggle="modal" data-target="#loginScreen" id="sign-up-button">Sign-in / Sign-up</a></li>
+                        <li>
+                            <span id="welcomeMsg">
+                            <img src='custom/images/profile.png' id='userProfilePic' class='navToggle img-responsive img-circle'>
+                            </span><a href="#" class="links-active" data-toggle="modal" data-target="#loginScreen" id="sign-up-button">Sign-in / Sign-up</a></li>
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
@@ -65,7 +83,7 @@
                     <div class="modal-body">
 
                         <div class="omb_login">
-                            <div class="row omb_socialButtons">
+                            <!--<div class="row omb_socialButtons">
                                 <div class="col-xs-6 col-sm-6">
                                     <img src="custom/images/button-facebook.png" onclick="FbClick()" class="socialButton" />
                                     <div id="fbDetails"></div>
@@ -83,7 +101,7 @@
                                     <span class="omb_spanOr">or</span>
                                 </div>
                             </div>
-
+-->
                             <div class="row loginForm">
                                 <div class="col-xs-12 col-sm-12">
                                   
