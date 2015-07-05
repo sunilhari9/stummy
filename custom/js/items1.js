@@ -9,7 +9,8 @@ $.getJSON("custom/js/products.json", function(items) {
             item += '&nbsp;&nbsp;<img src="./custom/images/Veg.png" alt="Veg" title="Veg">';
         else
             item += '&nbsp;&nbsp;<img src="./custom/images/NonVeg.png" alt="Non Veg" title="Non Veg">';
-        item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><br/><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">'+itemDes+'</p></div><div class="cartCustomizeHiden"></div></div></li>';
+    //    item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><br/><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">'+itemDes+'</p></div><div class="cartCustomizeHiden"></div></div></li>';
+		item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus-sign cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus-sign cartPlus1" title="Click to increase"></span><br/><button class="addCart itemPanel">Add to Cart</button></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">'+itemDes+'</p></div><div class="cartCustomizeHiden"></div></div></li>';
         $('.items').append(item);		
     };
     var getUniqueCategories = function() {
@@ -26,7 +27,7 @@ $.getJSON("custom/js/products.json", function(items) {
         if (index == 0)
             $('.list-group').append('<a href="#" class="list-group-item item-type activeCat">' + value + '</a>');
         else
-            $('.list-group').append('<a href="#" class="list-group-item item-type">' + value + '</a>');
+            $('.list-group').append('<a href="#" class="list-group-item item-type inActive">' + value + '</a>');
     });
     var displayItems = function(categoryName) {
         $('.items').html('');
@@ -73,9 +74,30 @@ $.getJSON("custom/js/products.json", function(items) {
     }
 
     var displayDefaultItems = function() {
-        displayItems(uniqueCategories[2]);
-		$('#activeCat').val(uniqueCategories[2]);
+        displayItems(uniqueCategories[0]);
+		$('#activeCat').val(uniqueCategories[0]);
     }
+	var mobileChk = function() {
+	    var rwdInfo = calcRWD();
+	    console.log("rwdInfo:" + rwdInfo);
+	    if (rwdInfo == 4) {
+	        if ($('.summary > p').hasClass('show-read-more'))
+	            console.log("there");
+	        $('.summary > p > a.read-more').addClass('hidden');
+	        $('.summary > p').addClass('mobileHide').removeClass('show-read-more');
+	        $('.media-heading').addClass('hlink');
+	        $('.mobileHide').hide();
+	    } else {
+	        if ($('.summary > p').hasClass('mobileHide')) {
+	            $('.mobileHide').show();
+	            $('.summary > p').addClass('show-read-more').removeClass('mobileHide');
+	            $('.summary > p > a.read-more').removeClass('hidden');
+	            $('.media-heading').removeClass('hlink');
+
+	        }
+
+	    }
+	}
      $(window).touchwipe({
         wipeLeft: function() {
           console.log("Slider touch");
@@ -89,7 +111,7 @@ $.getJSON("custom/js/products.json", function(items) {
       });
     displayDefaultItems();
     $('.list-group-item.item-type').click(function() {
-        $('.list-group-item.item-type').removeClass('activeCat');
+        $('.list-group-item.item-type').removeClass('activeCat').addClass('inActive');
         $(this).addClass('list-group-item item-type activeCat');
         
         if(!$("#sidr").is(':hidden')){

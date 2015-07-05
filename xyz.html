@@ -1,0 +1,28 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$.ajax({
+			method: "POST",
+			data:{"grant_type":"password","client_id":"3MVG9ZL0ppGP5UrAslWO7Jdgx_jtpc_92K1MWhmh77qkn1ZJ_Jxac4XlNhvYSVABRSB.3i81ELQ==","client_secret":"6167355528564993607","username":"crm@stummy.com","password":"sfdc@12345"},
+			// data: { name: "John", location: "Boston" },
+			dataType: "json",
+			url: 'https://ap2.salesforce.com/services/oauth2/token',	
+			contentType: "application/x-www-form-urlencoded",
+			crossDomain : true,
+			success: function(data){
+			console.log("in success");
+			console.log(data);
+			},
+			failure: function(error){
+				console.log("error");
+				console.log(error);
+			},
+			complete: function(data){
+				console.log("completed");
+				console.log(data);
+				console.log(JSON.stringify(data));
+			}
+		});
+    });
+</script>
+AJAX Call

@@ -1,7 +1,6 @@
 	$(window).load(function() {
 	    // Animate loader off screen
 	    $(".se-pre-con").fadeOut("slow");;
-
 	});
 	userDetails = "";
 
@@ -17,7 +16,7 @@
 	    }
 	}
 	$(document).ready(function() {
-	    if (sessionStorage.getItem("promotionsFlag") == null) {
+	if (sessionStorage.getItem("promotionsFlag") == null) {
 	        $('#advertiseModel').modal('show');
 	    }
 	    $(".closeAdd").click(function() {
@@ -48,11 +47,17 @@
 	        localStorage.setItem("userInfo", "");
 	        setuserProfile();
 	    });
-	    $('#checkout').click(function() {
+		    $('#checkout').click(function() {
 	        console.log("on checkout");
-	        $('.index_body').fadeOut(1000, function() {
-	            window.location.href = 'check-out.html';
-	        });
+			if(userDetails.length>0){
+				$('.index_body').fadeOut(1000, function() {
+					window.location.href = 'check-out.html';
+				});
+			}
+			else{
+				$('#loginScreen').modal('show');
+			}
+	        
 	    });
 	    var cartJson = {};
 	    var itemsArray = [];
@@ -65,13 +70,17 @@
 	            init();
 	        });
 	    });
+	    //if(sessionStorage.getItem('LineItems') == undefined){
 
 
+	    /*}else{
+	    init();
+	    }*/
 	    function init() {
 	        cartJson.itemsArray = itemsArray;
 	        LineItems = JSON.parse(sessionStorage.getItem('LineItems'));
 	        renderCart();
-	        renderCartInCheckout();
+			renderCartInCheckout();
 	    }
 	    $('body').on('click', '.cartMinus1,.glyphicon-chevron-left', function() {
 	        var currentVal = $(this).next().text() || $(this).next().val();
@@ -92,8 +101,21 @@
 	            $(".cartCustomizeHiden").hide();
 	        }
 	    });
-
-	    $('body').on('click', '.glyphicon-edit.itemPanel', function() {
+		/*var checkMultiple = function(i){
+			console.log ($('input[name="product-line-items-selection' + i + '"]:checked').length);
+		};*/
+		$('body').on('click', '.checkMultiple', function() {
+			console.log("clicked");
+			if ($('input[name="' + $(this).attr('name') + '"]:checked').length > 1){
+			
+				BootstrapDialog.show({
+	                title: 'Message',
+	                message: 'Muliple selection not possible for this item'
+	            });
+				return false;
+			}
+		});
+	    $('body').on('click', '.addCart.itemPanel', function() {
 	        console.log("111111++++++++++++++++++++++1111111");
 	        if ($(this).parent().siblings(".cartCustomizeHiden").is(":visible")) {
 	            //console.log("22222222222");
@@ -105,8 +127,7 @@
 	        //console.log("333333333333333");
 	        $(".cartCustomizeHiden").html('');
 	        $(".cartCustomizeHiden").hide();
-	        $(this).parent().siblings(".cartCustomizeHiden").show();
-	        $(this).parent().siblings(".cartCustomizeHiden").html("<center><img src='custom/images/loading.gif' /></center>");
+			$(this).parent().siblings(".cartCustomizeHiden").delay(500).show('slow');//.show();
 	        //var currentVal = $(this).prev().prev().text() || $(this).prev().prev().val();
 	        //var product_code = $(this).prev().prev().data('product-code');
 	        //var product_name = $(this).prev().prev().data('product-name');
@@ -120,17 +141,22 @@
 	        for (var i = 0; i < parseInt(currentVal); i++) {
 	            $.each(LineItems, function(index, value) {
 	                var ul_item = "";
-	                if (value.ProductCode == product_code) {
-	                    lineItemExists = true;
+					if (value.ProductCode == product_code) {
+					    lineItemExists = true;
 	                    ul_item = "<div class='product-name'>" + product_name + " #" + (i + 1) + ":</div>" + "<ul class='product-line-items clearfix'>";
 	                    if (i == 0)
 	                        ul_item = '<div class="panel-heading" role="tab" id="headingOne' + i + '"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne' + i + '" aria-expanded="false" aria-controls="collapseOne">' + product_name + ' #' + (i + 1) + '</a></h4></div><div id="collapseOne' + i + '" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne' + i + '"><div class="panel-body"><div class="rowCheckBox">';
 	                    else
 	                        ul_item = '<div class="panel-heading" role="tab" id="headingOne' + i + '"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne' + i + '" aria-expanded="false" aria-controls="collapseOne">' + product_name + ' #' + (i + 1) + '</a></h4></div><div id="collapseOne' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne' + i + '"><div class="panel-body"><div class="rowCheckBox">';
 	                    $.each(value.ProductsLineList, function(index1, value1) {
-	                        var li_item = '<li><input type=checkbox name="product-line-items-selection' + i + '" value="' + value1.ProductLineItemCode + '">' + value1.ProductLineItemName + '</li>';
-	                        li_item = '<div class="colCheckBox"><input type="checkbox" name="product-line-items-selection' + i + '" value="' + value1.ProductLineItemCode + '"><label>' + value1.ProductLineItemName + '</label></div>';
+						var li_item = '';
+						if(!value.isMultiSelect){
+							li_item = '<div class="colCheckBox"><input type="checkbox" name="product-line-items-selection' + i + '" value="' + value1.ProductLineItemCode +	'" class="checkMultiple"><label>' + value1.ProductLineItemName + ' - <span class="WebRupee">Rs.</span>' + value1.ProductLineItemCost + '</label></div>';
 	                        ul_item += li_item;
+						}else{
+	                        li_item = '<div class="colCheckBox"><input type="checkbox" name="product-line-items-selection' + i + '" value="' + value1.ProductLineItemCode + '"><label>' + value1.ProductLineItemName + ' - <span class="WebRupee">Rs.</span>' + value1.ProductLineItemCost + '</label></div>';
+	                        ul_item += li_item;
+						}
 	                    });
 	                }
 	                //console.log(ul_item);
@@ -702,11 +728,11 @@
 	                        if (curretnProductArray[i] != undefined) {
 
 	                            if (curretnProductArray[i].indexOf(value1.ProductLineItemCode) != -1)
-	                                li_item = '<div class="colCheckBox"><input type="checkbox" name="product-line-items-selection-cart' + i + '" value="' + value1.ProductLineItemCode + '" checked="checked"><label>' + value1.ProductLineItemName + '</label></div>';
+	                                li_item = '<div class="colCheckBox"><input type="checkbox" name="product-line-items-selection-cart' + i + '" value="' + value1.ProductLineItemCode + '" checked="checked"><label>' + value1.ProductLineItemName + '-' + value1.ProductLineItemCost + '</label></div>';
 	                            else
-	                                li_item = '<div class="colCheckBox"><input type="checkbox" name="product-line-items-selection-cart' + i + '" value="' + value1.ProductLineItemCode + '"><label>' + value1.ProductLineItemName + '</label></div>';
+	                                li_item = '<div class="colCheckBox"><input type="checkbox" name="product-line-items-selection-cart' + i + '" value="' + value1.ProductLineItemCode + '"><label>' + value1.ProductLineItemName + '-' + value1.ProductLineItemCost + '</label></div>';
 	                        } else
-	                            li_item = '<div class="colCheckBox"><input type="checkbox" name="product-line-items-selection-cart' + i + '" value="' + value1.ProductLineItemCode + '"><label>' + value1.ProductLineItemName + '</label></div>';
+	                            li_item = '<div class="colCheckBox"><input type="checkbox" name="product-line-items-selection-cart' + i + '" value="' + value1.ProductLineItemCode + '"><label>' + value1.ProductLineItemName + '-' + value1.ProductLineItemCost + '</label></div>';
 	                        console.log(li_item);
 	                        ul_item += li_item;
 	                    });
@@ -729,6 +755,7 @@
 	    getProductPrice = function(productCodes, cartProductLineItems, cartProductQty) {
 	        console.log(items);
 	        var subTotalAmount = 0;
+			console.log(productCodes);
 	        //	var cartSubTotalArray = 0;
 	        //$.getJSON( "custom/js/products.json", function( data ) {
 	        //	items = data;
@@ -737,14 +764,15 @@
 	            var items1 = items[j].ProductsList;
 	            if (items1.length > 0) {
 	                for (var i = 0; i < items1.length; i++) {
-	                    if ($.inArray(parseInt(items1[i].ProductCode), productCodes) >= 0) {
-	                        //	console.log($.inArray(parseInt(items1[i].ProductCode), productCodes));
+					console.log($.inArray(items1[i].ProductCode, productCodes));
+	                    if ($.inArray(items1[i].ProductCode, productCodes) >= 0) {
+	                        	console.log($.inArray(parseInt(items1[i].ProductCode), productCodes));
 	                        //if(parseInt(items1[i].ProductCode) == productCode){
 	                        //	console.log(items1[i]);
-	                        //	console.log("inside:"+items1[i].unitPrice);
+	                        	console.log("inside:"+items1[i].unitPrice);
 	                        var unitPriceCurrent = parseInt(items1[i].unitPrice);
 	                        console.log(unitPriceCurrent);
-	                        var lineItems = cartProductLineItems[$.inArray(parseInt(items1[i].ProductCode), productCodes)];
+	                        var lineItems = cartProductLineItems[$.inArray(items1[i].ProductCode, productCodes)];
 	                        console.log(lineItems);
 	                        for (var k = 0; k < lineItems.length; k++) {
 	                            subTotalAmount += parseInt(unitPriceCurrent);
@@ -855,16 +883,16 @@
 	            $('#cartItemDesc').html("<div>No items yet</div>");
 	        }
 	    };
-	    var calcSubTotal = function(productCode, lineItems) {
-	        var subTotals = [];
-	        for (var j = 0; j < items.length; j++) {
+		var calcSubTotal = function(productCode, lineItems){
+		var subTotals = [];
+			for (var j = 0; j < items.length; j++) {
 	            var items1 = items[j].ProductsList;
 	            if (items1.length > 0) {
 	                for (var i = 0; i < items1.length; i++) {
-	                    if (parseInt(items1[i].ProductCode) == productCode) {
-	                        var unitPriceCurrent = parseInt(items1[i].unitPrice);
-	                        var subTotalAmount = 0;
-	                        for (var k = 0; k < lineItems.length; k++) {
+						if(parseInt(items1[i].ProductCode) == productCode){
+						var unitPriceCurrent = parseInt(items1[i].unitPrice);
+						var subTotalAmount = 0;
+							for (var k = 0; k < lineItems.length; k++) {
 	                            subTotalAmount += parseInt(unitPriceCurrent);
 	                            for (var l = 0; l < lineItems[k].length; l++) {
 	                                $.each(LineItems, function(index, value) {
@@ -880,27 +908,29 @@
 	                                });
 	                            }
 	                        }
-	                        console.log("subTotalAmount:" + subTotalAmount);
-	                        subTotals.push(subTotalAmount);
-	                        subTotals.push(unitPriceCurrent);
-	                        return subTotals;
-	                    }
-	                }
-	            }
-	        }
-	    };
-	    var renderCartInCheckout = function() {
+							console.log("subTotalAmount:"+subTotalAmount);
+							subTotals.push(subTotalAmount);
+							subTotals.push(unitPriceCurrent);
+							return subTotals;
+						}
+					}
+				}
+			}
+		};
+		var renderCartInCheckout = function() {
+		console.log("in renderCartInCheckout");
 	        //$('#checkOutItemsList').html("<center><img src='custom/images/loading.gif' /></center>");
 	        var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
 	        if (cartTotalItems != undefined) {
 	            cartTotalItemsLength = cartTotalItems.itemsArray.length;
-	            var checkoutTotalAmount = 0;
+				var checkoutTotalAmount = 0;
 	            if (cartTotalItemsLength > 0) {
 	                $clone = $('.itemRowCheckout').clone();
-	                console.log($clone.html());
+					$cloneTotal = $('.itemRowCheckoutTotals').clone();
+					console.log($clone.html());
 	                var cartItemDescHtml = '';
 	                var cartTotalItemsLength1 = 0;
-
+					
 	                for (var index = 0; index < cartTotalItemsLength; index++) {
 	                    var eachItemData = cartTotalItems.itemsArray[index];
 	                    if (eachItemData.product_qty) {
@@ -910,29 +940,59 @@
 	                            product_qty = "0" + eachItemData.product_qty;
 	                        //$clone.find('.quantity').text(product_qty);
 	                        console.log(eachItemData.product_name);
-
+							
 	                        $clone.find('.itemRowPname').text(eachItemData.product_name);
-	                        $clone.find('.itemRowQuantity').text(eachItemData.product_qty);
-	                        $clone.find('.itemRowQuantity').text(eachItemData.product_qty);
-	                        var calcSubTotals = calcSubTotal(eachItemData.product_code, eachItemData.product_lineitems);
-	                        console.log("calcSubTotals[0]:" + calcSubTotals[0]);
-	                        console.log("calcSubTotals[1]:" + calcSubTotals[1]);
-	                        $clone.find('.itemRowTotal').html('<span class="WebRupee">Rs.</span> ' + calcSubTotals[0]);
-	                        $clone.find('.itemRowPrice').html('<span class="WebRupee">Rs.</span> ' + calcSubTotals[1]);
-	                        checkoutTotalAmount += calcSubTotals[0];
+							$clone.find('.itemRowQuantity').text(eachItemData.product_qty);
+							$clone.find('.itemRowQuantity').text(eachItemData.product_qty);
+							var calcSubTotals = calcSubTotal(eachItemData.product_code,eachItemData.product_lineitems);
+							console.log("calcSubTotals[0]:"+calcSubTotals[0]);
+							console.log("calcSubTotals[1]:"+calcSubTotals[1]);
+							$clone.find('.itemRowTotal').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[0]);
+							$clone.find('.itemRowPrice').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[1]);
+							checkoutTotalAmount += calcSubTotals[0];
 	                        cartItemDescHtml += $clone.html();
-	                        console.log(cartItemDescHtml);
+							console.log(cartItemDescHtml);
 	                    } else {
 	                        //cartTotalItems.itemsArray[index] = [];
 	                        cartTotalItems.itemsArray.splice(index, 1);
 	                    }
 	                }
+					$cloneTotal.find('.itemRowCheckoutTotalsText').html('Sub Total');
+					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> '+checkoutTotalAmount.toFixed(2));
+					cartItemDescHtml += $cloneTotal.html();
+					var deliverCharges = 0,containerCharges = 0;
+					var grandTotal = (parseFloat(checkoutTotalAmount) +
+						parseFloat(deliverCharges) +
+						parseFloat(containerCharges));
+					
+					$cloneTotal = $('.itemRowCheckoutTotals').clone();
+					$cloneTotal.find('.itemRowCheckoutTotalsText').html('Delivery Free');
+					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> 0.00');
+					cartItemDescHtml += $cloneTotal.html();
+					
+					$cloneTotal = $('.itemRowCheckoutTotals').clone();
+					$cloneTotal.find('.itemRowCheckoutTotalsText').html('Container Charges (+)');
+					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> 0.00');
+					cartItemDescHtml += $cloneTotal.html();
+					
+					$cloneTotal = $('.itemRowCheckoutTotals').clone();
+					$cloneTotal.find('.itemRowCheckoutTotalsText').html('Service Tax(+)');
+					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> '+((grandTotal * 0.15).toFixed(2)));
+					cartItemDescHtml += $cloneTotal.html();
+					
+					$cloneTotal = $('.itemRowCheckoutTotals').clone();
+					$cloneTotal.find('.itemRowCheckoutTotalsText').html('Rounded Off (+/-)');
+					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> '+((grandTotal % 1).toFixed(2)));
+					cartItemDescHtml += $cloneTotal.html();
+					grandTotal = (grandTotal * 0.15).toFixed(2);
+					grandTotal -= (grandTotal % 1).toFixed(2);
+					grandTotal += checkoutTotalAmount;
 	                localStorage.setItem('cartJson', JSON.stringify(cartTotalItems));
-
+					
 	                $('#checkOutItemsList').html('');
 	                if (cartItemDescHtml.length > 0) {
 	                    $('#checkOutItemsList').html(cartItemDescHtml);
-	                    $('.checkoutTotalAmount').html('Total: <span class="WebRupee">Rs.</span> ' + checkoutTotalAmount);
+						$('.checkoutTotalAmount').html('<span class="WebRupee">Rs.</span> '+grandTotal.toFixed(2));
 	                    //calcCartAmount();
 	                } else {
 	                    $('#checkOutItemsList').html("<div>No items yet</div>");
@@ -945,7 +1005,7 @@
 	            $('#checkOutItemsList').html("<div>No items yet</div>");
 	        }
 	    };
-	    //renderCartInCheckout();
+//renderCartInCheckout();
 	    //$('#myModal').on('hidden.bs.modal', function () {
 
 	    $('body').on('hidden.bs.modal', function() {
@@ -1164,7 +1224,7 @@
 
 	        }
 	    });
-
+       
 	});
 
 	function searchProduct(array, product_name) {
@@ -1220,7 +1280,7 @@
 	    if ($(document).width() > 768 && $(document).width() <= 1023) rwdInfo = 2;
 	    return rwdInfo;
 	}
-	mobileChk = function() {
+	var mobileChk = function() {
 	    var rwdInfo = calcRWD();
 	    console.log("rwdInfo:" + rwdInfo);
 	    if (rwdInfo == 4) {
@@ -1427,36 +1487,36 @@ else{
     
 	})
 
+
 	$.getJSON("custom/js/products.json", function(items) {
 	    console.log(items);
 	});
 
-	/*	var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
-		if (cartTotalItems != undefined) {
-		    cartTotalItemsLength = cartTotalItems.itemsArray.length
-		    if (cartTotalItemsLength > 0) {
-		        var cartItemDescHtml = '';
-		        for (var index = 0; index < cartTotalItemsLength; index++) {
-		            var eachItemData = cartTotalItems.itemsArray[index];
-		            //var productSubTotal = eachItemData.product_qty * 25;
-		            // getProductPrice(cartProductCodes, cartProductLineItems, cartProductQty);
-		            var productSubTotal = getProductPrice(eachItemData.product_code, eachItemData.product_lineitems, eachItemData.product_qty);
-		            var CheckOutItems = '<tr><td data-th=""><div class="row"><div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div><div class="col-sm-6"><h4 class="nomargin productName">' + eachItemData.product_name + '</h4></div>          </div></td><td data-th="Price" class="price">&#8377; 25 </td><td data-th="Quantity">' + eachItemData.product_qty + '</td><td data-th="Subtotal" class="text-center" class="subtotal">&#8377;' + productSubTotal + ' </td>  <td class="actions" data-th=""></td>     </tr>'
+/*	var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
+	if (cartTotalItems != undefined) {
+	    cartTotalItemsLength = cartTotalItems.itemsArray.length
+	    if (cartTotalItemsLength > 0) {
+	        var cartItemDescHtml = '';
+	        for (var index = 0; index < cartTotalItemsLength; index++) {
+	            var eachItemData = cartTotalItems.itemsArray[index];
+	            //var productSubTotal = eachItemData.product_qty * 25;
+	            // getProductPrice(cartProductCodes, cartProductLineItems, cartProductQty);
+	            var productSubTotal = getProductPrice(eachItemData.product_code, eachItemData.product_lineitems, eachItemData.product_qty);
+	            var CheckOutItems = '<tr><td data-th=""><div class="row"><div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div><div class="col-sm-6"><h4 class="nomargin productName">' + eachItemData.product_name + '</h4></div>          </div></td><td data-th="Price" class="price">&#8377; 25 </td><td data-th="Quantity">' + eachItemData.product_qty + '</td><td data-th="Subtotal" class="text-center" class="subtotal">&#8377;' + productSubTotal + ' </td>  <td class="actions" data-th=""></td>     </tr>'
 
-		            cartItemDescHtml += CheckOutItems;
-		        }
-		        $('#checkOutItemsList').html('');
-		        $('#checkOutItemsList').append(cartItemDescHtml);
+	            cartItemDescHtml += CheckOutItems;
+	        }
+	        $('#checkOutItemsList').html('');
+	        $('#checkOutItemsList').append(cartItemDescHtml);
 
-		    } else {
+	    } else {
 
-		        $('#checkOutItemsList').html("<div>No items yet</div>");
-		    }
-		}*/
+	        $('#checkOutItemsList').html("<div>No items yet</div>");
+	    }
+	}*/
 
 	/*End cart logic*/
-
-	/*Start OTP Logic*/
+/*Start OTP Logic*/
 	function validatePhone(phone) {
 	    if (phone.match(/^[7-9][0-9]{9}$/) != null) {
 	        return true;

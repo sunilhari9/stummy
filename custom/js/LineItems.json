@@ -18,7 +18,8 @@
 					"ProductLineItemCost": "20"
 			}
 		],
-       "ProductCode": "1001"
+       "ProductCode": "1001",
+	   "isMultiSelect":true
     },
 	{
         "ProductsLineList": [
@@ -39,7 +40,8 @@
 					"ProductLineItemCost": "20"
 			}
 		],
-       "ProductCode": "1002"
+       "ProductCode": "1002",
+	   "isMultiSelect":false
     },
 	{
         "ProductsLineList": [
@@ -60,12 +62,13 @@
 					"ProductLineItemCost": "20"
 			}
 		],
-       "ProductCode": "1003"
+       "ProductCode": "1003",
+	   "isMultiSelect":true
     },
 	{
         "ProductsLineList": [
 			{
-					"ProductLineItemName": "Mutton1",
+					"ProductLineItemName": "Mutton1 Mutton1Mutton1Mutton1Mutton1",
 					"ProductLineItemCode": "1",
 					"ProductLineItemCost": "10"
 			},
@@ -81,6 +84,7 @@
 					"ProductLineItemCost": "20"
 			}
 		],
-       "ProductCode": "1027"
+       "ProductCode": "1027",
+	   "isMultiSelect":true
     }
 ]

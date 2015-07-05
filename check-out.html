@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -406,9 +407,9 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                         <table id="cartCheckout" class="table table-hover table-condensed">
                             <thead>
                                 <tr>
-                                    <th style="width:55%">Items</th>
+                                    <th style="width:45%">Items</th>
                                     <th style="width:10%">Price</th>
-                                    <th style="width:10%;text-align:center;">Quantity</th>
+                                    <th style="width:20%;text-align:center;">Quantity</th>
                                     <th style="width:25%" class="text-center">Subtotal</th>
                                 </tr>
                             </thead>
@@ -463,7 +464,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 
         </div>
     </nav>
-    <div class="itemRowCheckout hidden">
+     <div class="itemRowCheckout hidden">
         <table>
             <tr>
                 <td data-th="">
@@ -479,13 +480,26 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
             </tr>
         </table>
     </div>
+	<div class="itemRowCheckoutTotals hidden">
+        <table>
+            <tr>
+				<td colspan="2"></td>
+                <td class="text-left itemRowCheckoutTotalsText">Sub Total</td>                
+                <td data-th="Subtotal" class="text-right itemRowTotal itemRowCheckoutAmount"><span class="WebRupee">Rs.</span> 266</td>
+            </tr>
+        </table>
+    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="vendor/js/jquery-1.11.3.min.js"></script>
-    <script src="custom/js/SocialLogin.js"></script>
-    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+    <!--<script src="custom/js/SocialLogin.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>-->
     <script src="vendor/js/bootstrap.min.js"></script>
     <script src="vendor/js/bootstrap-dialog.min.js"></script>
     <script src="custom/js/script1.js"></script>
+	<script>
+	
+	</script>
+	</script>
     <style>
         .address {
             border: 0px !important;
