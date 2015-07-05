@@ -1304,10 +1304,10 @@
 	});
 	$("#deliveryStreet").change(function() {
 	    $("#deliveryPinCode").val($("#deliveryStreet option:selected").data('pin'));
-	    updateAddress();
+	     
 	});
 	if (userDetails.length > 0) {
-	    if (userDetails[0].HomeStreet == null && userDetails[0].HomePostalCode == null) {
+	    if (userDetails[0].HomeStreet == "" && userDetails[0].HomePostalCode == "") {
 	        $(".createHomeAddress").show();
 	        $(".defaultHomeAddress").hide();
 
@@ -1316,7 +1316,7 @@
 	        $(".createHomeAddress").hide();
 
 	    }
-	    if (userDetails[0].DeliveryStreet == null && userDetails[0].DeliveryPostalCode == null) {
+	    if (userDetails[0].DeliveryStreet == "" && userDetails[0].DeliveryPostalCode == "") {
 	        $(".createDeliveryAddress").show();
 	        $(".defaultDeliveryAddress").hide();
 	    } else {
@@ -1325,6 +1325,10 @@
 
 	    }
 	}
+else{
+    $(".defaultHomeAddress").hide();
+    $(".defaultDeliveryAddress").hide();
+}
 
 	$("#homeAddressSubmit").click(function() {
 
@@ -1394,34 +1398,33 @@
 
 
 	$(".editHomeAddressIcon").click(function() {
-	    if (userDetails[0].HomeStreet == null && userDetails[0].HomePostalCode == null) {
-	        $(".createHomeAddress").toggle(500);
-	        $(".editHomeAddress").toggle(500);
-	    } else {
-
+	  if(userDetails.length>0){
 	        $(".defaultHomeAddress").toggle(500);
 	        $(".editHomeAddress").toggle(500);
 	        if ($(".defaultDeliveryAddress").is(':hidden') && userDetails[0].DeliveryPostalCode != null) {
 	            $(".defaultDeliveryAddress").toggle(500);
 	            $(".editDeliveryAddress").toggle(500);
-	        }
-	    }
+	        }}
+        else{
+            $('#loginScreen').modal('show');
+           
+        }
+	  
 
 
 	})
 	$(".editDeliveryAddressIcon").click(function() {
-	    if (userDetails[0].DeliveryStreet == null && userDetails[0].DeliveryPostalCode == null) {
-
-	        $(".createDeliveryAddress").toggle(500);
-	        $(".editDeliveryAddress").toggle(500);
-	    } else {
+        if(userDetails.length>0){
 	        $(".defaultDeliveryAddress").toggle(500);
 	        $(".editDeliveryAddress").toggle(500);
 	        if ($(".defaultHomeAddress").is(':hidden') && userDetails[0].HomePostalCode != null) {
 	            $(".defaultHomeAddress").toggle(500);
 	            $(".editHomeAddress").toggle(500);
-	        }
-	    }
+	    }}
+        else{
+            $('#loginScreen').modal('show');
+        }
+    
 	})
 
 	$.getJSON("custom/js/products.json", function(items) {
