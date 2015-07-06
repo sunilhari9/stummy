@@ -10,7 +10,7 @@ $.getJSON("custom/js/products.json", function(items) {
         else
             item += '&nbsp;&nbsp;<img src="./custom/images/NonVeg.png" alt="Non Veg" title="Non Veg">';
     //    item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><br/><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">'+itemDes+'</p></div><div class="cartCustomizeHiden"></div></div></li>';
-		item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus-sign cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus-sign cartPlus1" title="Click to increase"></span><br/><button class="addCart itemPanel">Add to Cart</button></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">'+itemDes+'</p></div><div class="cartCustomizeHiden"></div></div></li>';
+		item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus-sign cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus-sign cartPlus1" title="Click to increase"></span><br/><button class="addCart itemPanel">Add</button></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">'+itemDes+'</p></div><div class="cartCustomizeHiden"></div></div></li>';
         $('.items').append(item);		
     };
     var getUniqueCategories = function() {
@@ -77,6 +77,22 @@ $.getJSON("custom/js/products.json", function(items) {
         displayItems(uniqueCategories[0]);
 		$('#activeCat').val(uniqueCategories[0]);
     }
+	var calcRWD = function() {
+	    var rwdInfo = "1";
+
+	    console.log("1:" + $(document).width());
+	    if (!$("#sidr").is(':hidden')) {
+	        return "4";
+	    }
+	    /*	if (window.getComputedStyle) {
+			rwdInfo = window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('z-index');
+			console.log("value:"+window.getComputedStyle(document.querySelector('body'), ':before').getPropertyValue('z-index'));
+		}*/
+	    if ($(document).width() <= 419) rwdInfo = 4;
+	    if ($(document).width() > 419 && $(document).width() <= 767) rwdInfo = 3;
+	    if ($(document).width() > 768 && $(document).width() <= 1023) rwdInfo = 2;
+	    return rwdInfo;
+	}
 	var mobileChk = function() {
 	    var rwdInfo = calcRWD();
 	    console.log("rwdInfo:" + rwdInfo);

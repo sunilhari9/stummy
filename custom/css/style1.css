@@ -172,6 +172,7 @@ text-decoration: none !important;
         width: 227px;
         margin-top: 13px;
         padding: 5px;
+		outline: none;
     }
     
     .omb_login .omb_loginOr {
@@ -359,7 +360,7 @@ text-decoration: none !important;
     color: white;
 }
 .list-group-item:first-child {
-    border-top-left-radius: 0px !important;
+    border-top-left-radius: 10px !important;
     border-top-right-radius: 0px !important;
 }
 
@@ -515,7 +516,7 @@ text-decoration: none !important;
     color: rgb(233, 105, 44);
     font-weight: bolder;
 }
-.more {
+.more,.redirectToLogin {
     color: red !important;
     cursor: pointer;
 }
@@ -524,7 +525,7 @@ text-decoration: none !important;
     height: 22px;
     padding-left: 2px;
     padding-right: 2px;
-    font-size: 16px;
+    font-size: 14px;
 }
 .quantityBox {
     width: 25px;
@@ -1043,7 +1044,8 @@ text-align: right;
 @media (min-width: 1150px) {
     .categories {
         width: 13% !important;
-        margin-left: 6% !important;.
+        margin-left: 6% !important;
+		  border-radius: 10px 10px 0px 10px !important;
     }
 }
     
@@ -1062,10 +1064,13 @@ text-align: right;
 	button.addCart.itemPanel {
 	  border-radius: 5px;
 	  margin-top: 11px;
-	  margin-left: 10px;
+	 /* margin-left: 10px;*/
+	  margin-left: 32px;
 	  font-weight: bold;
-	  background-color: rgb(113, 112, 110);
+	/*  background-color: rgb(113, 112, 110);*/
+	  background-color: rgb(151, 158, 89);
 	  color: white;
+	  outline:none;
 	}
 	.bootstrap-dialog.type-primary .modal-header{
 		background-color: rgb(229, 157, 49) !important;
@@ -1081,3 +1086,16 @@ text-align: right;
 	.catIncon{
 		margin-right: 5px;
 		}
+	.glyphicon-edit.cartPanel{
+		font-size: 14px;
+		}
+	.glyphicon-plus.cartPlus,.glyphicon-minus.cartMinus{
+		font-size: 12px;
+		}
+		.list-group-item.item-type.inActive{
+			border-radius: 10px;
+			}
+			.list-group-item.item-type.activeCat {
+			
+			border-radius: 0px !important;
+			}

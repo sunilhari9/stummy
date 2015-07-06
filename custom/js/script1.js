@@ -468,7 +468,7 @@
 	            //$('.messagesBar').show('slow').delay(3000).fadeOut('slow');
 	        }
 	    };
-	    $('body').on('click', '.glyphicon-shopping-cart', function() {
+	    $('body').on('click', '.cartPlus2', function() {
 	        var currentVal = $(this).siblings(".quantity").text();
 	        console.log("sibling:" + $(this).siblings(".quantity").data('product-code'));
 	        var product_code = $(this).siblings(".quantity").data('product-code');
@@ -1198,13 +1198,14 @@
 	        }
 	        showLess();
 	    });
+		
 	    var displayItemDOM = function(ProductName, ProductCode, unitPrice, isVeg, imageURL, itemDes) {
 	        var item = '<li class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="' + imageURL + '" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">' + ProductName;
 	        if (isVeg)
 	            item += '&nbsp;&nbsp;<img src="./custom/images/Veg.png" alt="Veg" title="Veg">';
 	        else
 	            item += '&nbsp;&nbsp;<img src="./custom/images/NonVeg.png" alt="Non Veg" title="Non Veg">';
-	        item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><br/><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">' + itemDes + '</p></div><div class="cartCustomizeHiden"></div></div></li>';
+	        item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus-sign cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus-sign cartPlus1" title="Click to increase"></span><br><button class="addCart itemPanel">Add</button></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">' + itemDes + '</p></div><div class="cartCustomizeHiden"></div></div></li>';
 	        $('.items').append(item);
 	    };
 	    $('body').on('click', '.clearCart', function() {
@@ -1245,9 +1246,10 @@
 				obj.product_name = array1[ii].product_name;
 				data.push(obj);*/
 	                    //console.log("found");
-	                    console.log(array1[ii]);
-	                    displayItemDOMSearch(array1[ii].ProductName, array1[ii].ProductCode, array1[ii].unitPrice, array1[ii].isVeg, array1[ii].imageURL, array1[ii].itemDes)
+	                    console.log("before search printing");
 	                    $('.list-group-item.item-type').removeClass('activeCat');
+						displayItemDOMSearch(array1[ii].ProductName, array1[ii].ProductCode, array1[ii].unitPrice, array1[ii].isVeg, array1[ii].imageURL, array1[ii].itemDes);
+	                    
 	                }
 	            }
 
@@ -1261,7 +1263,10 @@
 	        item += '&nbsp;&nbsp;<img src="./custom/images/Veg.png" alt="Veg" title="Veg">';
 	    else
 	        item += '&nbsp;&nbsp;<img src="./custom/images/NonVeg.png" alt="Non Veg" title="Non Veg">';
-	    item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><br/><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">' + itemDes + '</p></div><div class="cartCustomizeHiden"></div></div></li>';
+	   // item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><br/><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">' + itemDes + '</p></div><div class="cartCustomizeHiden"></div></div></li>';
+		
+		item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus-sign cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus-sign cartPlus1" title="Click to increase"></span><br><button class="addCart itemPanel">Add</button></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">' + itemDes + '</p></div><div class="cartCustomizeHiden"></div></div></li>';
+		
 	    $('.items').append(item);
 	};
 	var calcRWD = function() {
@@ -1526,39 +1531,110 @@ else{
 	}
 	$(".conformPasswordBlock").hide();
 	$('body').on('click', '#otpLink', function() {
-
+		$('#statusFlag').val('true');
 	    var phoneNo = $(".phoneNo").val();
 	    var validPhoneNo = validatePhone(phoneNo);
-
-	    if (validPhoneNo) {
-	        $(".OTP-error-block").text("");
-	        $(".sendOTPForm").hide();
-	        $('#loginScreen').modal('hide');
-	        $('#otpScreen').modal();
-
-	        $(".otp_ConformPassword").text("Please enter OTP sent to :" + phoneNo);
-	    } else {
+		if (validPhoneNo) {
+			$(this).hide();
+			$.ajax({
+				url: 'forgotPassword.php',
+				data: {"Phone":phoneNo},
+				method: "POST",
+				success: function(response){
+					console.log("success");
+					console.log(response);
+					var data = JSON.parse(response);
+					$('#otpLink').show();
+					if(data.Status == "Success"){
+					sessionStorage.setItem('signUpOTP',data.OTP);
+						$('.OTP-error-block').text("");
+						$(".sendOTPForm").toggle();
+						$('#loginScreen').modal('hide');
+						$('#otpScreen').modal();
+						$(".otp_ConformPassword").text("Please enter OTP sent to :" + phoneNo);
+					}else if(data.Status == "Failed"){
+						console.log("9090909090");
+						//$('.omb_forgotPwd').html("This mobile number not yet registered - Please register");
+						$('#loginScreen').modal('hide');
+						BootstrapDialog.show({
+							title: 'Message',
+							message: 'This mobile number not yet registered - Please register'
+						});
+						
+					}
+					
+				},
+				failure: function(error){
+					console.log("failure");
+				}
+			});	
+		} else {
 	        $('.phone-help-block').text("Please enter valid phone number to generate OTP");
 
 	    }
 
 
 	});
+	$('body').on('click', '.redirectToLogin', function() {
+			$('#otpScreen').modal('hide');
+			$('#loginScreen').modal('show');
+	});
 	$('body').on('click', '.sendOTPButton', function() {
 	    var phoneNo = $(".phNumberForOTP").val();
 	    var validPhoneNo = validatePhone(phoneNo);
-	    if (validPhoneNo) {
+		if (validPhoneNo) {
+		$(this).hide();
+		$.ajax({
+			url: 'signUp.php',
+			data: {"Phone":phoneNo},
+			method: "POST",
+			success: function(response){
+				console.log("success");
+				console.log(response);
+				var data = JSON.parse(response);
+				$('.sendOTPButton').show();
+				if(data.Status == "Success"){
+				sessionStorage.setItem('signUpOTP',data.OTP);
+					$('.OTP-error-block').text("");
+					$(".sendOTPForm").toggle();
+					$(".otpValidateForm").toggle();
+					$(".otp_ConformPassword").text("Please enter OTP sent to :" + phoneNo);
+				}else if(data.Status == "Failed"){
+				
+						BootstrapDialog.show({
+							title: 'Message',
+							message: 'Already this mobile number registered - Please login'
+						});
+					console.log("9090909090");
+					//$('.OTP-error-block').html("Already this mobile number registered Click <a class='redirectToLogin'>here</a> to Login");
+				}
+				
+			},
+			failure: function(error){
+				console.log("failure");
+			}
+		});	
+		}
+	    else {
+	        $('.OTP-error-block').text("Please enter valid phone number to generate OTP");
+	    }
+		/*if (validPhoneNo) {
 	        $('.OTP-error-block').text("");
 	        $(".sendOTPForm").toggle();
 	        $(".otpValidateForm").toggle();
 	        $(".otp_ConformPassword").text("Please enter OTP sent to :" + phoneno);
-	    } else {
-	        $('.OTP-error-block').text("Please enter valid phone number to generate OTP");
-	    }
+	    }*/
 	});
 
 	$('body').on('click', '#signUp', function() {
-
+	$('#statusFlag').val('false');
+$(".phNumberForOTP").val('');
+$('.otpForm').show();
+$('.sendOTPForm').show();
+					$('.OTP-error-block').html("");
+					$(".otp_ConformPassword").text("Enter Mobile no to Send OTP");
+					$('.sendOTPButton').show();
+					$('.conformPasswordBlock').hide();
 	    $(".otpValidateForm").hide();
 	    $('#loginScreen').modal('hide');
 	    $('#otpScreen').modal();
@@ -1620,36 +1696,66 @@ else{
 	    if (removeSingleQuote == -1 && $(".confirmPassword").val() == $(".password").val() && $(".password").val() != "") {
 	        $(".error-block").text("");
 	        $('#otpScreen').modal('hide');
-	        var userDetailsResponce = [{
-	            "Phone": "9999099990",
-	            "LastName": "B",
-	            "HomeStreet": null,
-	            "HomeState": "Telangana",
-	            "HomePostalCode": null,
-	            "HomePhone": null,
-	            "HomeLongitude": null,
-	            "HomeDNo": "",
-	            "DeliveryDNo": "",
-	            "HomeLatitude": null,
-	            "HomeCountry": "India",
-	            "HomeCity": "Hyderabad",
-	            "FirstName": "Ramesh",
-	            "ErrorMessage": "",
-	            "Email": "nikhilmutyam@yahoo.com",
-	            "DeliveryStreet": null,
-	            "DeliveryState": "Telangana",
-	            "DeliveryPostalCode": null,
-	            "DeliveryLongitude": null,
-	            "DeliveryLatitude": null,
-	            "DeliveryCountry": "India",
-	            "DeliveryCity": "Hyderabad",
-	            "DeliveryFirstName": "Suneel","DeliveryLastName": "M",
-	            "Birthdate": "1989-01-01",
-	            "pic": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q=="
-	        }];
-	        localStorage.setItem('userInfo', JSON.stringify(userDetailsResponce));
-	        setuserProfile();
-	        $('body').removeClass('modal-open');
+			console.log($(".phNumberForOTP").val());
+			console.log($(".password").val());
+			console.log($('#statusFlag').val());
+			console.log($.md5($(".password").val()));
+			$.ajax({
+				url: 'createPwd.php',
+				data: {"Phone":$(".phNumberForOTP").val(),"Password":$.md5($(".password").val()),"Exists":$('#statusFlag').val()},
+				method: "POST",
+				success: function(response){
+					console.log("success");
+					console.log(response);
+					var data = JSON.parse(response);
+					if(data.Status == 'Success'){
+						var userDetailsResponce = [{
+							"Phone": $(".phNumberForOTP").val(),
+							"LastName": "",
+							"HomeStreet": null,
+							"HomeState": null,
+							"HomePostalCode": null,
+							"HomePhone": null,
+							"HomeLongitude": null,
+							"HomeDNo": "",
+							"DeliveryDNo": "",
+							"HomeLatitude": null,
+							"HomeCountry": "",
+							"HomeCity": "",
+							"FirstName": "",
+							"ErrorMessage": "",
+							"Email": "",
+							"DeliveryStreet": null,
+							"DeliveryState": "",
+							"DeliveryPostalCode": null,
+							"DeliveryLongitude": null,
+							"DeliveryLatitude": null,
+							"DeliveryCountry": "",
+							"DeliveryCity": "",
+							"DeliveryFirstName": "","DeliveryLastName": "",
+							"Birthdate": "",
+							"pic": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q=="
+						}];
+						//localStorage.setItem('userInfo', JSON.stringify(userDetailsResponce));
+						//setuserProfile();
+						$('body').removeClass('modal-open');
+						BootstrapDialog.show({
+							title: 'Message',
+							message: 'Successfully Password updated - Please Click Login again'
+						});
+					}else if(data.Status == 'Failed'){
+						BootstrapDialog.show({
+							title: 'Message',
+							message: 'Something went wrong - Please try again'
+						});
+					}
+					
+				},
+				failure: function(error){
+					console.log("failure");
+				}
+			});	
+	        
 	    } else {
 	        $(".error-block").text("Password not match/valid..! please try again");
 	        $(".confirmPassword").val("");
@@ -1661,7 +1767,8 @@ else{
 	$('body').on('click', '.otpValidateButton', function() {
 	    otp = $(".otpValue").val();
 	    var validOTP = otp.match(/^[0-9]{4}$/);
-	    if (validOTP != null && otp == 1234) {
+	    if (validOTP != null && otp == sessionStorage.getItem('signUpOTP')) {
+			sessionStorage.removeItem('signUpOTP');
 	        $(".OTP-error-block").text("");
 	        $(".otp_ConformPassword").text("Confirm Password");
 	        $(".otpForm").toggle();
