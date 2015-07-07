@@ -132,6 +132,7 @@ $.getJSON("custom/js/products.json", function(items) {
         
         if(!$("#sidr").is(':hidden')){
             $.sidr('close', 'sidr');
+            $( ".container-fluid " ).removeClass( "blur-backGround" );
             console.log("Slider is open");
         }
 		$('#activeCat').val($(this).text());

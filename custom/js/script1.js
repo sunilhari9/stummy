@@ -181,6 +181,9 @@
 	    $('body').on('click', '.searchInMobile', function(event) {
 	        $(".search").toggleClass("hiddeninMobile").delay(3000).show('slow');
 	    });
+        $('body').on('click', '#left-menu', function() {
+	       $( ".container-fluid " ).addClass( "blur-backGround" );
+	    });
 	    $('body').on('click', '.glyphicon-edit.cartPanel', function(event) {
 	        console.log("in click++++++++++++++");
 	        var currentVal = $(this).siblings(".quantity").text();

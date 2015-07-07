@@ -205,7 +205,13 @@ text-decoration: none !important;
     .omb_login .omb_loginForm .input-group.i {
         width: 2em;
     }
-    
+    .blur-backGround{
+         -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+    }
     .omb_login .omb_loginForm .help-block {
         color: red;
     }
@@ -880,15 +886,23 @@ a.list-group-item {
 	width: 153px !important;
 }
 .categoriesListMenuOverlay .list-group-item.activeCat {
-    background-color: #BEA56B !important;
+    background-color: #FFF !important;
 }
 .categoriesListMenuOverlay .item-type:hover {
-    background-color: #CCB78D !important;
+    background-color: #FFF !important;
 }
 .categoriesListMenuOverlay a.list-group-item {
     border: 0px !important;
-    background-color: #DFD2B2 !important;
+    background-color: #FFC450 !important;
+    font-weight: normal !important;
 	color: #555;
+}
+.sidr{
+      background: #FFC450 !important;
+  
+-webkit-box-shadow: inset 0 0 5px 5px #FFC450 !important;
+  -moz-box-shadow: inset 0 0 5px 5px #FFC450 !important;
+  box-shadow: inset 0 0 5px 5px #FFC450 !important;
 }
 #left-menu {
     margin-top: 20%;
