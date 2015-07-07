@@ -798,23 +798,25 @@
 	            }
 	        };
 	        //});
-	        console.log("subTotalAmount:" + subTotalAmount);
 	        $('.subtotal').text(subTotalAmount.toFixed(2));
-	        var grandTotal = (parseFloat(subTotalAmount) +
-	            parseFloat($('.delivery').html()) +
-	            parseFloat($('.container_charges').html()));
-	        $('.service_tax').text((grandTotal * 0.15).toFixed(2));
-	        grandTotal += grandTotal * 0.15;
-	        $('.rounded_off').text((grandTotal % 1).toFixed(2));
-	        grandTotal -= (grandTotal % 1).toFixed(2);
-	        $('.grand_total').html('Rs. ' + grandTotal.toFixed(2));
+	        var grandTotal = (parseFloat(subTotalAmount));
+			//+   parseFloat($('.delivery').html()) +
+	          //  parseFloat($('.container_charges').html()));
+	        $('.service_tax').text((grandTotal * 0.145).toFixed(2));
+	        grandTotal += grandTotal * 0.145;
+			grandTotal = parseFloat(grandTotal.toFixed(2));
+			var grandTotalRound = Math.round(grandTotal);			
+	        $('.rounded_off').text((grandTotalRound - grandTotal).toFixed(2));
+	        $('.grand_total').html('Rs. ' + grandTotalRound.toFixed(2));
 	    };
 	    var calcCartAmount = function() {
 
 	        var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
 	        if (cartTotalItems != undefined) {
+			console.log("aaaaaaaaaaaaaaaaaaa");
 	            cartTotalItemsLength = cartTotalItems.itemsArray.length
 	            if (cartTotalItemsLength > 0) {
+				console.log("bbbbbbbbbbbbbbbbbbb");
 	                var cartProductCodes = [],
 	                    cartProductLineItems = [],
 	                    cartProductQty = [];
@@ -830,8 +832,12 @@
 	                    //console.log("productCode:"+eachItemData.product_code+"-----productPrice:"+productPrice)
 	                }
 	                getProductPrice(cartProductCodes, cartProductLineItems, cartProductQty);
-	            }
-	        }
+	            }else{
+					console.log("ddddddddddddd");
+				}
+	        }else{
+			console.log("ccccccccccccccc");
+			}
 	    };
 
 	    var renderCart = function() {
@@ -869,21 +875,32 @@
 	                if (cartItemDescHtml.length > 0) {
 	                    $('#cartItemDesc').append(cartItemDescHtml);
 	                    calcCartAmount();
+						$('#checkoutDisabled').addClass('hidden');
+						$('#checkout').removeClass('hidden');
 	                } else {
 	                    $('.cartItemCount').html("0");
 	                    $('.cartItemCount').removeClass('active');
 	                    $('#cartItemDesc').html("<div>No items yet</div>");
+						$('#checkout').addClass('hidden');
+						$('#checkoutDisabled').removeClass('hidden');
+						calcCartAmount();						
 	                }
 
 	            } else {
 	                $('.cartItemCount').html("0");
 	                $('.cartItemCount').removeClass('active');
 	                $('#cartItemDesc').html("<div>No items yet</div>");
+					$('#checkout').addClass('hidden');
+						$('#checkoutDisabled').removeClass('hidden');	
+						calcCartAmount();
 	            }
 	        } else {
 	            $('.cartItemCount').html("0");
 	            $('.cartItemCount').removeClass('active');
 	            $('#cartItemDesc').html("<div>No items yet</div>");
+				$('#checkout').addClass('hidden');
+						$('#checkoutDisabled').removeClass('hidden');	
+						calcCartAmount();
 	        }
 	    };
 		var calcSubTotal = function(productCode, lineItems){
@@ -960,7 +977,9 @@
 	                        cartTotalItems.itemsArray.splice(index, 1);
 	                    }
 	                }
+					cartItemDescHtml += '<tr><td colspan="4" class="hrow" style="border-bottom: 2px solid;"></td></tr>';
 					$cloneTotal.find('.itemRowCheckoutTotalsText').html('Sub Total');
+					$cloneTotal.find('.itemRowCheckoutAmount').attr('data-th','Sub Total');
 					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> '+checkoutTotalAmount.toFixed(2));
 					cartItemDescHtml += $cloneTotal.html();
 					var deliverCharges = 0,containerCharges = 0;
@@ -968,7 +987,7 @@
 						parseFloat(deliverCharges) +
 						parseFloat(containerCharges));
 					
-					$cloneTotal = $('.itemRowCheckoutTotals').clone();
+				/*	$cloneTotal = $('.itemRowCheckoutTotals').clone();
 					$cloneTotal.find('.itemRowCheckoutTotalsText').html('Delivery Free');
 					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> 0.00');
 					cartItemDescHtml += $cloneTotal.html();
@@ -976,26 +995,31 @@
 					$cloneTotal = $('.itemRowCheckoutTotals').clone();
 					$cloneTotal.find('.itemRowCheckoutTotalsText').html('Container Charges (+)');
 					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> 0.00');
-					cartItemDescHtml += $cloneTotal.html();
+					cartItemDescHtml += $cloneTotal.html();*/
 					
 					$cloneTotal = $('.itemRowCheckoutTotals').clone();
 					$cloneTotal.find('.itemRowCheckoutTotalsText').html('Service Tax(+)');
-					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> '+((grandTotal * 0.15).toFixed(2)));
+					$cloneTotal.find('.itemRowCheckoutAmount').attr('data-th','Service Tax(+)');
+					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> '+((grandTotal * 0.145).toFixed(2)));
 					cartItemDescHtml += $cloneTotal.html();
-					
+					grandTotal += grandTotal * 0.145;
+					grandTotal = parseFloat(grandTotal.toFixed(2));
+					var grandTotalRound = Math.round(grandTotal);
 					$cloneTotal = $('.itemRowCheckoutTotals').clone();
 					$cloneTotal.find('.itemRowCheckoutTotalsText').html('Rounded Off (+/-)');
-					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> '+((grandTotal % 1).toFixed(2)));
+					$cloneTotal.find('.itemRowCheckoutAmount').attr('data-th','Rounded Off (+/-)');
+					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> '+(grandTotalRound - grandTotal).toFixed(2));
 					cartItemDescHtml += $cloneTotal.html();
-					grandTotal = (grandTotal * 0.15).toFixed(2);
+					grandTotal = (grandTotal * 0.145).toFixed(2);
 					grandTotal -= (grandTotal % 1).toFixed(2);
 					grandTotal += checkoutTotalAmount;
 	                localStorage.setItem('cartJson', JSON.stringify(cartTotalItems));
-					
+					cartItemDescHtml += '<tr><td colspan="4" class="hrow" style="border-bottom: 2px solid;"></td></tr>';
 	                $('#checkOutItemsList').html('');
 	                if (cartItemDescHtml.length > 0) {
 	                    $('#checkOutItemsList').html(cartItemDescHtml);
-						$('.checkoutTotalAmount').html('<span class="WebRupee">Rs.</span> '+grandTotal.toFixed(2));
+						$('.checkoutTotalAmount').html('<span class="WebRupee">Rs.</span> '+grandTotalRound.toFixed(2));
+						$('#activate-payment').html('Proceed Payment <br/>('+grandTotalRound.toFixed(2)+')');
 	                    //calcCartAmount();
 	                } else {
 	                    $('#checkOutItemsList').html("<div>No items yet</div>");

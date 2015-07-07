@@ -517,6 +517,23 @@ text-decoration: none !important;
     border-bottom: 15px solid white;
     width: 0;
 }
+#checkoutDisabled {
+    background-color: #999793 !important;
+    color: #fff;
+    margin-top: -12px;
+    padding: 5px;
+    width: 100%;
+}
+#checkoutDisabled:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top: 15px solid white;
+    border-left: 15px solid #999793 ;
+    border-bottom: 15px solid white;
+    width: 0;
+}
 .decrement {
     color: rgb(233, 105, 44);
     font-weight: bolder;
@@ -1116,3 +1133,45 @@ text-align: right;
 			
 			border-radius: 0px !important;
 			}
+			.table>tbody>tr>td, .table>tfoot>tr>td{
+    vertical-align: middle;
+}
+.hrow{
+	color: #757373 ;
+}
+@media screen and (max-width: 600px) {
+    table#cartCheckout tbody td .form-control{
+		width:20%;
+		display: inline !important;
+	}
+	.actions .btn{
+		width:36%;
+		margin:1.5em 0;
+	}
+	
+	.actions .btn-info{
+		float:left;
+	}
+	.actions .btn-danger{
+		float:right;
+	}
+	
+	table#cartCheckout thead { display: none; }
+	table#cartCheckout tbody td { display: block; padding: .6rem; min-width:220px;text-align: left;}
+	table#cartCheckout tbody tr td:first-child { background: #333; color: #fff; }
+	table#cartCheckout tbody td:before {
+		content: attr(data-th); font-weight: bold;
+		 display: inline-block; width:  15rem;
+	}
+	.itemRowPname,.panel-heading h3{
+		font-size: 15px;
+		margin-top: 0px !important;
+		margin-bottom: 0px !important;
+	}
+	table#cartCheckout tbody tr td.hrow { background: #757373 ; color: #fff; padding: 2px;}
+	table#cartCheckout tbody td.hrow:before {content: attr(data-th);font-weight: bold;width: 15rem;display: inline;}
+	table#cartCheckout tbody td:first-child:before {content: attr(data-th);font-weight: bold;width: 15rem;display: inline;}
+	
+	table#cartCheckout tfoot td{display:block; }
+	table#cartCheckout tfoot td .btn{display:block;}
+	}
