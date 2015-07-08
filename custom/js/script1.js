@@ -1,9 +1,9 @@
 	$(window).load(function() {
 	    // Animate loader off screen
-	    $(".se-pre-con").fadeOut("slow");;
+	    $(".se-pre-con").fadeOut("slow");
 	});
 	userDetails = "";
-
+var orderRefNo = "",orderAmountToBePaid="";
 	function setuserProfile() {
 	    if (localStorage.getItem("userInfo") != "" && localStorage.getItem("userInfo") != null) {
 	        userDetails = JSON.parse(localStorage.getItem("userInfo"));
@@ -16,12 +16,7 @@
 	    }
 	}
 	$(document).ready(function() {
-	if (sessionStorage.getItem("promotionsFlag") == null) {
-	        $('#advertiseModel').modal('show');
-	    }
-	    $(".closeAdd").click(function() {
-	        sessionStorage.setItem("promotionsFlag", true);
-	    })
+	
 
 	    function ajaxRequest(url, jsonData, method, asyn, callBackFunction) {
 	        $.ajax({
@@ -1478,10 +1473,14 @@ else{
 	        });
 	    }
 	})
-	$('#activate-payment').on('click', function(e) {
-
-	    $('ul.setup-panel li:eq(2)').removeClass('disabled');
-	    $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+	$('body').on('click', '#activate-payment', function(e) {
+		var status = "success";
+		if(status == "success"){
+			orderRefNo = '12345';
+			orderAmountToBePaid = '380.00';
+			$('ul.setup-panel li:eq(2)').removeClass('disabled');
+			$('ul.setup-panel li a[href="#step-3"]').trigger('click');
+		}
 
 	})
 
@@ -1672,43 +1671,69 @@ $('.sendOTPForm').show();
 	    var password = $(".loginPassword").val();
 	    var validPhoneNo = validatePhone(phoneNo);
 	    var validPassword = password.indexOf("'");
-
+		$(".loginPassword").val('');
+		$(".phoneNo").val('');
+		console.log($.md5(password))
 	    if (validPhoneNo && validPassword == -1) {
+			$('#login').hide();
 	        $('.phone-help-block').text("");
-	        alert("Sample service method created ajaxRequest(url, jsonData, method, asyn, callBackFunction)");
-	        //ajaxRequest(url, jsonData, method, asyn, callBackFunction)
-	        $('#loginScreen').modal('hide');
-	        $('body').removeClass('modal-open');
-	        var userDetailsResponce = [{
-	            "Phone": "9999099990",
-	            "LastName": "B",
-	            "HomeStreet": null,
-	            "HomeState": "Telangana",
-	            "HomePostalCode": null,
-	            "HomePhone": null,
-	            "HomeLongitude": null,
-	            "HomeDNo": "",
-	            "DeliveryDNo": "",
-	            "HomeLatitude": null,
-	            "HomeCountry": "India",
-	            "HomeCity": "Hyderabad",
-	            "FirstName": "Ramesh",
-	            "ErrorMessage": "",
-	            "Email": "nikhilmutyam@yahoo.com",
-	            "DeliveryStreet": null,
-	            "DeliveryState": "Telangana",
-	            "DeliveryPostalCode": null,
-	            "DeliveryLongitude": null,
-	            "DeliveryLatitude": null,
-                "DeliveryLastName": "M",
-	            "DeliveryCountry": "India",
-	            "DeliveryCity": "Hyderabad",
-	            "DeliveryFirstName": "Suneel",
-	            "Birthdate": "1989-01-01",
-	            "pic": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q=="
-	        }];
-	        localStorage.setItem('userInfo', JSON.stringify(userDetailsResponce));
-	        setuserProfile();
+	        $(".ajax-loader").show();
+	        $.ajax({
+				url: 'validateLogin.php',
+				data: {"Phone":phoneNo,"Password":$.md5(password)},
+				method: "POST",
+				success: function(response){
+				$(".ajax-loader").fadeOut("slow");
+					console.log("success");
+					console.log(response);
+					var data = JSON.parse(response);
+					$('#otpLink').show();
+					if(data.Status == "Success"){
+						$('#loginScreen').modal('hide');
+						$('body').removeClass('modal-open');
+						var userDetailsResponce = [{
+							"Phone": "9999099990",
+							"LastName": "B",
+							"HomeStreet": null,
+							"HomeState": "Telangana",
+							"HomePostalCode": null,
+							"HomePhone": null,
+							"HomeLongitude": null,
+							"HomeDNo": "",
+							"DeliveryDNo": "",
+							"HomeLatitude": null,
+							"HomeCountry": "India",
+							"HomeCity": "Hyderabad",
+							"FirstName": "Ramesh",
+							"ErrorMessage": "",
+							"Email": "nikhilmutyam@yahoo.com",
+							"DeliveryStreet": null,
+							"DeliveryState": "Telangana",
+							"DeliveryPostalCode": null,
+							"DeliveryLongitude": null,
+							"DeliveryLatitude": null,
+							"DeliveryLastName": "M",
+							"DeliveryCountry": "India",
+							"DeliveryCity": "Hyderabad",
+							"DeliveryFirstName": "Suneel",
+							"Birthdate": "1989-01-01",
+							"pic": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q=="
+						}];
+						localStorage.setItem('userInfo', JSON.stringify(userDetailsResponce));
+						$('#login').show();
+						setuserProfile();
+					}else if(data.Status == "Failed"){
+						$('.phone-help-block.help-block').html("Invalid Mobile Number/Password combination");
+						$('#login').show();						
+					}
+					
+				},
+				failure: function(error){
+					console.log("failure");
+				}
+			});	
+			var status = "success";
+
 
 	    } else {
 	        $('.phone-help-block').text("Please check your credencials");

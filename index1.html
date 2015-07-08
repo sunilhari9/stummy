@@ -39,6 +39,8 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 
 
     <div class="se-pre-con"></div>
+    <div class="ajax-loader" style="display: none;"></div>
+	
     <div class="messagesBar"></div>
 
     <div class="container-fluid ">
@@ -364,6 +366,12 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 			if ($(document).width() <= 1023) {
 				$('#left-menu').sidr();
 			}
+			if (sessionStorage.getItem("promotionsFlag") == null) {
+				$('#advertiseModel').modal('show');
+			}
+			$(".closeAdd").click(function() {
+				sessionStorage.setItem("promotionsFlag", true);
+			})
 		});
     </script>
 

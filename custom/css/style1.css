@@ -25,6 +25,16 @@ text-decoration: none !important;
         z-index: 9999;
         background: url(../../custom/images/Preloader_8.gif) center no-repeat #fff;
     }
+	.ajax-loader {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+		opacity: 0.8;
+        background: url(../../custom/images/Preloader_8.gif) center no-repeat;
+    }
     
     .glyphicon-edit.itemPanel {
         margin-top: 15px;
@@ -83,7 +93,14 @@ text-decoration: none !important;
             display: none;
         }
     }
-    
+    @media screen and (min-width: 0) and (max-width: 600px) {
+		.hiddenMobileBig{
+			display: none !important;
+		}
+		.showMobileBig{
+			display: block !important;
+		}
+	}
     @media screen and (min-width: 0) and (max-width: 419px) {
         body:before {
             z-index: 4;
@@ -206,12 +223,19 @@ text-decoration: none !important;
         width: 2em;
     }
     .blur-backGround{
-         -webkit-filter: blur(2px);
+/*          -webkit-filter: blur(2px);
     -moz-filter: blur(2px);
     -o-filter: blur(2px);
     -ms-filter: blur(2px);
     filter: blur(2px);
-    }
+ */
+  opacity: 0.1;
+  -webkit-transition: opacity .15s linear;
+  -o-transition: opacity .15s linear;
+  transition: opacity .15s linear;	
+
+  z-index: 1040;
+	}
     .omb_login .omb_loginForm .help-block {
         color: red;
     }
@@ -691,7 +715,7 @@ ul.product-line-items li input[type="radio"] {
 .modal-header .close {
     margin-top: 3px !important;
     margin-right: 12px !important;
-	color: rgb(229, 157, 49) !important;
+	color: white !important;
 	opacity: 0.9 !important;
 }
 .customizeFoodBody .product-name {
@@ -905,9 +929,10 @@ a.list-group-item {
 .categoriesListMenuOverlay .list-group-item.activeCat {
     background-color: #FFF !important;
 }
-.categoriesListMenuOverlay .item-type:hover {
+/* .categoriesListMenuOverlay .item-type:hover {
     background-color: #FFF !important;
-}
+	margin: 10px 0px 10px 3px;
+} */
 .categoriesListMenuOverlay a.list-group-item {
     border: 0px !important;
     background-color: #FFC450 !important;
@@ -1026,6 +1051,20 @@ text-align: right;
         margin-top: -3%;
     }
 }
+@media screen and (min-width: 320px) and (max-width: 461px) {
+.itemList {
+  height: 685px;
+  border: 1px solid rgb(255, 196, 80);
+  border-radius: 10px 10px 10px 10px;
+}
+}
+@media screen and (min-width: 462px) and (max-width: 768px) {
+.itemList {
+  height: 645px;
+  border: 1px solid rgb(255, 196, 80);
+  border-radius: 10px 10px 10px 10px;
+}
+}
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     body:before {
         z-index: 2;
@@ -1126,9 +1165,7 @@ text-align: right;
 	.glyphicon-plus.cartPlus,.glyphicon-minus.cartMinus{
 		font-size: 12px;
 		}
-		.list-group-item.item-type.inActive{
-			border-radius: 10px;
-			}
+		
 			.list-group-item.item-type.activeCat {
 			
 			border-radius: 0px !important;
