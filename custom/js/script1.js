@@ -1559,6 +1559,7 @@ else{
 	$('body').on('click', '#otpLink', function() {
 		$('#statusFlag').val('true');
 	    var phoneNo = $(".phoneNo").val();
+		$('.phNumberForOTP').val(phoneNo);
 	    var validPhoneNo = validatePhone(phoneNo);
 		if (validPhoneNo) {
 			$(this).hide();
@@ -1572,6 +1573,8 @@ else{
 					var data = JSON.parse(response);
 					$('#otpLink').show();
 					if(data.Status == "Success"){
+					$('.phNumberForOTP').val(phoneNo);
+					console.log($('.phNumberForOTP').val());
 					sessionStorage.setItem('signUpOTP',data.OTP);
 						$('.OTP-error-block').text("");
 						$(".sendOTPForm").toggle();
