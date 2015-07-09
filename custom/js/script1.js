@@ -3,7 +3,9 @@
 	    $(".se-pre-con").fadeOut("slow");
 	});
 	userDetails = "";
-var orderRefNo = "",orderAmountToBePaid="";
+	var orderRefNo = "",
+	    orderAmountToBePaid = "";
+
 	function setuserProfile() {
 	    if (localStorage.getItem("userInfo") != "" && localStorage.getItem("userInfo") != null) {
 	        userDetails = JSON.parse(localStorage.getItem("userInfo"));
@@ -16,7 +18,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 	    }
 	}
 	$(document).ready(function() {
-	
+
 
 	    function ajaxRequest(url, jsonData, method, asyn, callBackFunction) {
 	        $.ajax({
@@ -42,17 +44,16 @@ var orderRefNo = "",orderAmountToBePaid="";
 	        localStorage.setItem("userInfo", "");
 	        setuserProfile();
 	    });
-		    $('#checkout').click(function() {
+	    $('#checkout').click(function() {
 	        console.log("on checkout");
-			if(userDetails.length>0){
-				$('.index_body').fadeOut(1000, function() {
-					window.location.href = 'check-out.html';
-				});
-			}
-			else{
-				$('#loginScreen').modal('show');
-			}
-	        
+	        if (userDetails.length > 0) {
+	            $('.index_body').fadeOut(1000, function() {
+	                window.location.href = 'check-out.html';
+	            });
+	        } else {
+	            $('#loginScreen').modal('show');
+	        }
+
 	    });
 	    var cartJson = {};
 	    var itemsArray = [];
@@ -75,7 +76,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 	        cartJson.itemsArray = itemsArray;
 	        LineItems = JSON.parse(sessionStorage.getItem('LineItems'));
 	        renderCart();
-			renderCartInCheckout();
+	        renderCartInCheckout();
 	    }
 	    $('body').on('click', '.cartMinus1,.glyphicon-chevron-left', function() {
 	        var currentVal = $(this).next().text() || $(this).next().val();
@@ -96,20 +97,20 @@ var orderRefNo = "",orderAmountToBePaid="";
 	            $(".cartCustomizeHiden").hide();
 	        }
 	    });
-		/*var checkMultiple = function(i){
+	    /*var checkMultiple = function(i){
 			console.log ($('input[name="product-line-items-selection' + i + '"]:checked').length);
 		};*/
-		$('body').on('click', '.checkMultiple', function() {
-			console.log("clicked");
-			if ($('input[name="' + $(this).attr('name') + '"]:checked').length > 1){
-			
-				BootstrapDialog.show({
+	    $('body').on('click', '.checkMultiple', function() {
+	        console.log("clicked");
+	        if ($('input[name="' + $(this).attr('name') + '"]:checked').length > 1) {
+
+	            BootstrapDialog.show({
 	                title: 'Message',
 	                message: 'Muliple selection not possible for this item'
 	            });
-				return false;
-			}
-		});
+	            return false;
+	        }
+	    });
 	    $('body').on('click', '.addCart.itemPanel', function() {
 	        console.log("111111++++++++++++++++++++++1111111");
 	        if ($(this).parent().siblings(".cartCustomizeHiden").is(":visible")) {
@@ -122,7 +123,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 	        //console.log("333333333333333");
 	        $(".cartCustomizeHiden").html('');
 	        $(".cartCustomizeHiden").hide();
-			$(this).parent().siblings(".cartCustomizeHiden").delay(500).show('slow');//.show();
+	        $(this).parent().siblings(".cartCustomizeHiden").delay(500).show('slow'); //.show();
 	        //var currentVal = $(this).prev().prev().text() || $(this).prev().prev().val();
 	        //var product_code = $(this).prev().prev().data('product-code');
 	        //var product_name = $(this).prev().prev().data('product-name');
@@ -136,22 +137,22 @@ var orderRefNo = "",orderAmountToBePaid="";
 	        for (var i = 0; i < parseInt(currentVal); i++) {
 	            $.each(LineItems, function(index, value) {
 	                var ul_item = "";
-					if (value.ProductCode == product_code) {
-					    lineItemExists = true;
+	                if (value.ProductCode == product_code) {
+	                    lineItemExists = true;
 	                    ul_item = "<div class='product-name'>" + product_name + " #" + (i + 1) + ":</div>" + "<ul class='product-line-items clearfix'>";
 	                    if (i == 0)
 	                        ul_item = '<div class="panel-heading" role="tab" id="headingOne' + i + '"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne' + i + '" aria-expanded="false" aria-controls="collapseOne">' + product_name + ' #' + (i + 1) + '</a></h4></div><div id="collapseOne' + i + '" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne' + i + '"><div class="panel-body"><div class="rowCheckBox">';
 	                    else
 	                        ul_item = '<div class="panel-heading" role="tab" id="headingOne' + i + '"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne' + i + '" aria-expanded="false" aria-controls="collapseOne">' + product_name + ' #' + (i + 1) + '</a></h4></div><div id="collapseOne' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne' + i + '"><div class="panel-body"><div class="rowCheckBox">';
 	                    $.each(value.ProductsLineList, function(index1, value1) {
-						var li_item = '';
-						if(!value.isMultiSelect){
-							li_item = '<div class="colCheckBox"><input type="checkbox" name="product-line-items-selection' + i + '" value="' + value1.ProductLineItemCode +	'" class="checkMultiple"><label>' + value1.ProductLineItemName + ' - <span class="WebRupee">Rs.</span>' + value1.ProductLineItemCost + '</label></div>';
-	                        ul_item += li_item;
-						}else{
-	                        li_item = '<div class="colCheckBox"><input type="checkbox" name="product-line-items-selection' + i + '" value="' + value1.ProductLineItemCode + '"><label>' + value1.ProductLineItemName + ' - <span class="WebRupee">Rs.</span>' + value1.ProductLineItemCost + '</label></div>';
-	                        ul_item += li_item;
-						}
+	                        var li_item = '';
+	                        if (!value.isMultiSelect) {
+	                            li_item = '<div class="colCheckBox"><input type="checkbox" name="product-line-items-selection' + i + '" value="' + value1.ProductLineItemCode + '" class="checkMultiple"><label>' + value1.ProductLineItemName + ' - <span class="WebRupee">Rs.</span>' + value1.ProductLineItemCost + '</label></div>';
+	                            ul_item += li_item;
+	                        } else {
+	                            li_item = '<div class="colCheckBox"><input type="checkbox" name="product-line-items-selection' + i + '" value="' + value1.ProductLineItemCode + '"><label>' + value1.ProductLineItemName + ' - <span class="WebRupee">Rs.</span>' + value1.ProductLineItemCost + '</label></div>';
+	                            ul_item += li_item;
+	                        }
 	                    });
 	                }
 	                //console.log(ul_item);
@@ -176,8 +177,8 @@ var orderRefNo = "",orderAmountToBePaid="";
 	    $('body').on('click', '.searchInMobile', function(event) {
 	        $(".search").toggleClass("hiddeninMobile").delay(3000).show('slow');
 	    });
-        $('body').on('click', '#left-menu', function() {
-	       $( ".container-fluid " ).addClass( "blur-backGround" );
+	    $('body').on('click', '#left-menu', function() {
+	        $(".container-fluid ").addClass("blur-backGround");
 	    });
 	    $('body').on('click', '.glyphicon-edit.cartPanel', function(event) {
 	        console.log("in click++++++++++++++");
@@ -753,7 +754,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 	    getProductPrice = function(productCodes, cartProductLineItems, cartProductQty) {
 	        console.log(items);
 	        var subTotalAmount = 0;
-			console.log(productCodes);
+	        console.log(productCodes);
 	        //	var cartSubTotalArray = 0;
 	        //$.getJSON( "custom/js/products.json", function( data ) {
 	        //	items = data;
@@ -762,12 +763,12 @@ var orderRefNo = "",orderAmountToBePaid="";
 	            var items1 = items[j].ProductsList;
 	            if (items1.length > 0) {
 	                for (var i = 0; i < items1.length; i++) {
-					console.log($.inArray(items1[i].ProductCode, productCodes));
+	                    console.log($.inArray(items1[i].ProductCode, productCodes));
 	                    if ($.inArray(items1[i].ProductCode, productCodes) >= 0) {
-	                        	console.log($.inArray(parseInt(items1[i].ProductCode), productCodes));
+	                        console.log($.inArray(parseInt(items1[i].ProductCode), productCodes));
 	                        //if(parseInt(items1[i].ProductCode) == productCode){
 	                        //	console.log(items1[i]);
-	                        	console.log("inside:"+items1[i].unitPrice);
+	                        console.log("inside:" + items1[i].unitPrice);
 	                        var unitPriceCurrent = parseInt(items1[i].unitPrice);
 	                        console.log(unitPriceCurrent);
 	                        var lineItems = cartProductLineItems[$.inArray(items1[i].ProductCode, productCodes)];
@@ -795,12 +796,12 @@ var orderRefNo = "",orderAmountToBePaid="";
 	        //});
 	        $('.subtotal').text(subTotalAmount.toFixed(2));
 	        var grandTotal = (parseFloat(subTotalAmount));
-			//+   parseFloat($('.delivery').html()) +
-	          //  parseFloat($('.container_charges').html()));
+	        //+   parseFloat($('.delivery').html()) +
+	        //  parseFloat($('.container_charges').html()));
 	        $('.service_tax').text((grandTotal * 0.145).toFixed(2));
 	        grandTotal += grandTotal * 0.145;
-			grandTotal = parseFloat(grandTotal.toFixed(2));
-			var grandTotalRound = Math.round(grandTotal);			
+	        grandTotal = parseFloat(grandTotal.toFixed(2));
+	        var grandTotalRound = Math.round(grandTotal);
 	        $('.rounded_off').text((grandTotalRound - grandTotal).toFixed(2));
 	        $('.grand_total').html('Rs. ' + grandTotalRound.toFixed(2));
 	    };
@@ -808,10 +809,10 @@ var orderRefNo = "",orderAmountToBePaid="";
 
 	        var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
 	        if (cartTotalItems != undefined) {
-			console.log("aaaaaaaaaaaaaaaaaaa");
+	            console.log("aaaaaaaaaaaaaaaaaaa");
 	            cartTotalItemsLength = cartTotalItems.itemsArray.length
 	            if (cartTotalItemsLength > 0) {
-				console.log("bbbbbbbbbbbbbbbbbbb");
+	                console.log("bbbbbbbbbbbbbbbbbbb");
 	                var cartProductCodes = [],
 	                    cartProductLineItems = [],
 	                    cartProductQty = [];
@@ -827,12 +828,12 @@ var orderRefNo = "",orderAmountToBePaid="";
 	                    //console.log("productCode:"+eachItemData.product_code+"-----productPrice:"+productPrice)
 	                }
 	                getProductPrice(cartProductCodes, cartProductLineItems, cartProductQty);
-	            }else{
-					console.log("ddddddddddddd");
-				}
-	        }else{
-			console.log("ccccccccccccccc");
-			}
+	            } else {
+	                console.log("ddddddddddddd");
+	            }
+	        } else {
+	            console.log("ccccccccccccccc");
+	        }
 	    };
 
 	    var renderCart = function() {
@@ -870,44 +871,44 @@ var orderRefNo = "",orderAmountToBePaid="";
 	                if (cartItemDescHtml.length > 0) {
 	                    $('#cartItemDesc').append(cartItemDescHtml);
 	                    calcCartAmount();
-						$('#checkoutDisabled').addClass('hidden');
-						$('#checkout').removeClass('hidden');
+	                    $('#checkoutDisabled').addClass('hidden');
+	                    $('#checkout').removeClass('hidden');
 	                } else {
 	                    $('.cartItemCount').html("0");
 	                    $('.cartItemCount').removeClass('active');
 	                    $('#cartItemDesc').html("<div>No items yet</div>");
-						$('#checkout').addClass('hidden');
-						$('#checkoutDisabled').removeClass('hidden');
-						calcCartAmount();						
+	                    $('#checkout').addClass('hidden');
+	                    $('#checkoutDisabled').removeClass('hidden');
+	                    calcCartAmount();
 	                }
 
 	            } else {
 	                $('.cartItemCount').html("0");
 	                $('.cartItemCount').removeClass('active');
 	                $('#cartItemDesc').html("<div>No items yet</div>");
-					$('#checkout').addClass('hidden');
-						$('#checkoutDisabled').removeClass('hidden');	
-						calcCartAmount();
+	                $('#checkout').addClass('hidden');
+	                $('#checkoutDisabled').removeClass('hidden');
+	                calcCartAmount();
 	            }
 	        } else {
 	            $('.cartItemCount').html("0");
 	            $('.cartItemCount').removeClass('active');
 	            $('#cartItemDesc').html("<div>No items yet</div>");
-				$('#checkout').addClass('hidden');
-						$('#checkoutDisabled').removeClass('hidden');	
-						calcCartAmount();
+	            $('#checkout').addClass('hidden');
+	            $('#checkoutDisabled').removeClass('hidden');
+	            calcCartAmount();
 	        }
 	    };
-		var calcSubTotal = function(productCode, lineItems){
-		var subTotals = [];
-			for (var j = 0; j < items.length; j++) {
+	    var calcSubTotal = function(productCode, lineItems) {
+	        var subTotals = [];
+	        for (var j = 0; j < items.length; j++) {
 	            var items1 = items[j].ProductsList;
 	            if (items1.length > 0) {
 	                for (var i = 0; i < items1.length; i++) {
-						if(parseInt(items1[i].ProductCode) == productCode){
-						var unitPriceCurrent = parseInt(items1[i].unitPrice);
-						var subTotalAmount = 0;
-							for (var k = 0; k < lineItems.length; k++) {
+	                    if (parseInt(items1[i].ProductCode) == productCode) {
+	                        var unitPriceCurrent = parseInt(items1[i].unitPrice);
+	                        var subTotalAmount = 0;
+	                        for (var k = 0; k < lineItems.length; k++) {
 	                            subTotalAmount += parseInt(unitPriceCurrent);
 	                            for (var l = 0; l < lineItems[k].length; l++) {
 	                                $.each(LineItems, function(index, value) {
@@ -923,29 +924,29 @@ var orderRefNo = "",orderAmountToBePaid="";
 	                                });
 	                            }
 	                        }
-							console.log("subTotalAmount:"+subTotalAmount);
-							subTotals.push(subTotalAmount);
-							subTotals.push(unitPriceCurrent);
-							return subTotals;
-						}
-					}
-				}
-			}
-		};
-		var renderCartInCheckout = function() {
-		console.log("in renderCartInCheckout");
+	                        console.log("subTotalAmount:" + subTotalAmount);
+	                        subTotals.push(subTotalAmount);
+	                        subTotals.push(unitPriceCurrent);
+	                        return subTotals;
+	                    }
+	                }
+	            }
+	        }
+	    };
+	    var renderCartInCheckout = function() {
+	        console.log("in renderCartInCheckout");
 	        //$('#checkOutItemsList').html("<center><img src='custom/images/loading.gif' /></center>");
 	        var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
 	        if (cartTotalItems != undefined) {
 	            cartTotalItemsLength = cartTotalItems.itemsArray.length;
-				var checkoutTotalAmount = 0;
+	            var checkoutTotalAmount = 0;
 	            if (cartTotalItemsLength > 0) {
 	                $clone = $('.itemRowCheckout').clone();
-					$cloneTotal = $('.itemRowCheckoutTotals').clone();
-					console.log($clone.html());
+	                $cloneTotal = $('.itemRowCheckoutTotals').clone();
+	                console.log($clone.html());
 	                var cartItemDescHtml = '';
 	                var cartTotalItemsLength1 = 0;
-					
+
 	                for (var index = 0; index < cartTotalItemsLength; index++) {
 	                    var eachItemData = cartTotalItems.itemsArray[index];
 	                    if (eachItemData.product_qty) {
@@ -955,34 +956,35 @@ var orderRefNo = "",orderAmountToBePaid="";
 	                            product_qty = "0" + eachItemData.product_qty;
 	                        //$clone.find('.quantity').text(product_qty);
 	                        console.log(eachItemData.product_name);
-							
+
 	                        $clone.find('.itemRowPname').text(eachItemData.product_name);
-							$clone.find('.itemRowQuantity').text(eachItemData.product_qty);
-							$clone.find('.itemRowQuantity').text(eachItemData.product_qty);
-							var calcSubTotals = calcSubTotal(eachItemData.product_code,eachItemData.product_lineitems);
-							console.log("calcSubTotals[0]:"+calcSubTotals[0]);
-							console.log("calcSubTotals[1]:"+calcSubTotals[1]);
-							$clone.find('.itemRowTotal').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[0]);
-							$clone.find('.itemRowPrice').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[1]);
-							checkoutTotalAmount += calcSubTotals[0];
+	                        $clone.find('.itemRowQuantity').text(eachItemData.product_qty);
+	                        $clone.find('.itemRowQuantity').text(eachItemData.product_qty);
+	                        var calcSubTotals = calcSubTotal(eachItemData.product_code, eachItemData.product_lineitems);
+	                        console.log("calcSubTotals[0]:" + calcSubTotals[0]);
+	                        console.log("calcSubTotals[1]:" + calcSubTotals[1]);
+	                        $clone.find('.itemRowTotal').html('<span class="WebRupee">Rs.</span> ' + calcSubTotals[0]);
+	                        $clone.find('.itemRowPrice').html('<span class="WebRupee">Rs.</span> ' + calcSubTotals[1]);
+	                        checkoutTotalAmount += calcSubTotals[0];
 	                        cartItemDescHtml += $clone.html();
-							console.log(cartItemDescHtml);
+	                        console.log(cartItemDescHtml);
 	                    } else {
 	                        //cartTotalItems.itemsArray[index] = [];
 	                        cartTotalItems.itemsArray.splice(index, 1);
 	                    }
 	                }
-					cartItemDescHtml += '<tr><td colspan="4" class="hrow" style="border-bottom: 2px solid;"></td></tr>';
-					$cloneTotal.find('.itemRowCheckoutTotalsText').html('Sub Total');
-					$cloneTotal.find('.itemRowCheckoutAmount').attr('data-th','Sub Total');
-					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> '+checkoutTotalAmount.toFixed(2));
-					cartItemDescHtml += $cloneTotal.html();
-					var deliverCharges = 0,containerCharges = 0;
-					var grandTotal = (parseFloat(checkoutTotalAmount) +
-						parseFloat(deliverCharges) +
-						parseFloat(containerCharges));
-					
-				/*	$cloneTotal = $('.itemRowCheckoutTotals').clone();
+	                cartItemDescHtml += '<tr><td colspan="4" class="hrow" style="border-bottom: 2px solid;"></td></tr>';
+	                $cloneTotal.find('.itemRowCheckoutTotalsText').html('Sub Total');
+	                $cloneTotal.find('.itemRowCheckoutAmount').attr('data-th', 'Sub Total');
+	                $cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> ' + checkoutTotalAmount.toFixed(2));
+	                cartItemDescHtml += $cloneTotal.html();
+	                var deliverCharges = 0,
+	                    containerCharges = 0;
+	                var grandTotal = (parseFloat(checkoutTotalAmount) +
+	                    parseFloat(deliverCharges) +
+	                    parseFloat(containerCharges));
+
+	                /*	$cloneTotal = $('.itemRowCheckoutTotals').clone();
 					$cloneTotal.find('.itemRowCheckoutTotalsText').html('Delivery Free');
 					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> 0.00');
 					cartItemDescHtml += $cloneTotal.html();
@@ -991,30 +993,30 @@ var orderRefNo = "",orderAmountToBePaid="";
 					$cloneTotal.find('.itemRowCheckoutTotalsText').html('Container Charges (+)');
 					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> 0.00');
 					cartItemDescHtml += $cloneTotal.html();*/
-					
-					$cloneTotal = $('.itemRowCheckoutTotals').clone();
-					$cloneTotal.find('.itemRowCheckoutTotalsText').html('Service Tax(+)');
-					$cloneTotal.find('.itemRowCheckoutAmount').attr('data-th','Service Tax(+)');
-					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> '+((grandTotal * 0.145).toFixed(2)));
-					cartItemDescHtml += $cloneTotal.html();
-					grandTotal += grandTotal * 0.145;
-					grandTotal = parseFloat(grandTotal.toFixed(2));
-					var grandTotalRound = Math.round(grandTotal);
-					$cloneTotal = $('.itemRowCheckoutTotals').clone();
-					$cloneTotal.find('.itemRowCheckoutTotalsText').html('Rounded Off (+/-)');
-					$cloneTotal.find('.itemRowCheckoutAmount').attr('data-th','Rounded Off (+/-)');
-					$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> '+(grandTotalRound - grandTotal).toFixed(2));
-					cartItemDescHtml += $cloneTotal.html();
-					grandTotal = (grandTotal * 0.145).toFixed(2);
-					grandTotal -= (grandTotal % 1).toFixed(2);
-					grandTotal += checkoutTotalAmount;
+
+	                $cloneTotal = $('.itemRowCheckoutTotals').clone();
+	                $cloneTotal.find('.itemRowCheckoutTotalsText').html('Service Tax(+)');
+	                $cloneTotal.find('.itemRowCheckoutAmount').attr('data-th', 'Service Tax(+)');
+	                $cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> ' + ((grandTotal * 0.145).toFixed(2)));
+	                cartItemDescHtml += $cloneTotal.html();
+	                grandTotal += grandTotal * 0.145;
+	                grandTotal = parseFloat(grandTotal.toFixed(2));
+	                var grandTotalRound = Math.round(grandTotal);
+	                $cloneTotal = $('.itemRowCheckoutTotals').clone();
+	                $cloneTotal.find('.itemRowCheckoutTotalsText').html('Rounded Off (+/-)');
+	                $cloneTotal.find('.itemRowCheckoutAmount').attr('data-th', 'Rounded Off (+/-)');
+	                $cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> ' + (grandTotalRound - grandTotal).toFixed(2));
+	                cartItemDescHtml += $cloneTotal.html();
+	                grandTotal = (grandTotal * 0.145).toFixed(2);
+	                grandTotal -= (grandTotal % 1).toFixed(2);
+	                grandTotal += checkoutTotalAmount;
 	                localStorage.setItem('cartJson', JSON.stringify(cartTotalItems));
-					cartItemDescHtml += '<tr><td colspan="4" class="hrow" style="border-bottom: 2px solid;"></td></tr>';
+	                cartItemDescHtml += '<tr><td colspan="4" class="hrow" style="border-bottom: 2px solid;"></td></tr>';
 	                $('#checkOutItemsList').html('');
 	                if (cartItemDescHtml.length > 0) {
 	                    $('#checkOutItemsList').html(cartItemDescHtml);
-						$('.checkoutTotalAmount').html('<span class="WebRupee">Rs.</span> '+grandTotalRound.toFixed(2));
-						$('#activate-payment').html('Proceed Payment <br/>('+grandTotalRound.toFixed(2)+')');
+	                    $('.checkoutTotalAmount').html('<span class="WebRupee">Rs.</span> ' + grandTotalRound.toFixed(2));
+	                    $('#activate-payment').html('Proceed Payment <br/>(' + grandTotalRound.toFixed(2) + ')');
 	                    //calcCartAmount();
 	                } else {
 	                    $('#checkOutItemsList').html("<div>No items yet</div>");
@@ -1027,7 +1029,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 	            $('#checkOutItemsList').html("<div>No items yet</div>");
 	        }
 	    };
-//renderCartInCheckout();
+	    //renderCartInCheckout();
 	    //$('#myModal').on('hidden.bs.modal', function () {
 
 	    $('body').on('hidden.bs.modal', function() {
@@ -1220,7 +1222,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 	        }
 	        showLess();
 	    });
-		
+
 	    var displayItemDOM = function(ProductName, ProductCode, unitPrice, isVeg, imageURL, itemDes) {
 	        var item = '<li class="food_item media"><div class="media-left"><a href="#"><img class="img media-object hidden-xs" src="' + imageURL + '" alt="Test"></a></div><div class="media-body media-top"><h4 class="media-heading">' + ProductName;
 	        if (isVeg)
@@ -1247,7 +1249,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 
 	        }
 	    });
-       
+
 	});
 
 	function searchProduct(array, product_name) {
@@ -1270,8 +1272,8 @@ var orderRefNo = "",orderAmountToBePaid="";
 	                    //console.log("found");
 	                    console.log("before search printing");
 	                    $('.list-group-item.item-type').removeClass('activeCat');
-						displayItemDOMSearch(array1[ii].ProductName, array1[ii].ProductCode, array1[ii].unitPrice, array1[ii].isVeg, array1[ii].imageURL, array1[ii].itemDes);
-	                    
+	                    displayItemDOMSearch(array1[ii].ProductName, array1[ii].ProductCode, array1[ii].unitPrice, array1[ii].isVeg, array1[ii].imageURL, array1[ii].itemDes);
+
 	                }
 	            }
 
@@ -1285,10 +1287,10 @@ var orderRefNo = "",orderAmountToBePaid="";
 	        item += '&nbsp;&nbsp;<img src="./custom/images/Veg.png" alt="Veg" title="Veg">';
 	    else
 	        item += '&nbsp;&nbsp;<img src="./custom/images/NonVeg.png" alt="Non Veg" title="Non Veg">';
-	   // item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><br/><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">' + itemDes + '</p></div><div class="cartCustomizeHiden"></div></div></li>';
-		
-		item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus-sign cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus-sign cartPlus1" title="Click to increase"></span><br><button class="addCart itemPanel">Add</button></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">' + itemDes + '</p></div><div class="cartCustomizeHiden"></div></div></li>';
-		
+	    // item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus cartPlus1" title="Click to increase"></span><br/><span class="glyphicon glyphicon-edit itemPanel" title="Customize your food"></span><span class="glyphicon glyphicon-shopping-cart" title="Add to Cart"></span></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">' + itemDes + '</p></div><div class="cartCustomizeHiden"></div></div></li>';
+
+	    item += '<span class="pull-right rate"><span class="WebRupee">Rs.</span> ' + unitPrice + '</span></h4><div class="customizeIcon"><span class="glyphicon glyphicon-minus-sign cartMinus1" title="Click to decrease"></span><span class="quantity quantityItem" data-product-code="' + ProductCode + '" data-product-name="' + ProductName + '">1</span><span class="glyphicon glyphicon-plus-sign cartPlus1" title="Click to increase"></span><br><button class="addCart itemPanel">Add</button></div><div class="summary"><a href="#"><img class="img media-object visible-xs" src="' + imageURL + '" alt="Test"></a><p class="show-read-more">' + itemDes + '</p></div><div class="cartCustomizeHiden"></div></div></li>';
+
 	    $('.items').append(item);
 	};
 	var calcRWD = function() {
@@ -1353,16 +1355,16 @@ var orderRefNo = "",orderAmountToBePaid="";
 	function updateAddress() {
 	    if (userDetails.length > 0) {
 	        $("#displayDeliveryName").text(userDetails[0].DeliveryFirstName + " " + userDetails[0].DeliveryLastName)
-	        $("#displayDeliveryAddress").text(userDetails[0].DeliveryDNo+" ,"+userDetails[0].DeliveryStreet+" ,"+userDetails[0].DeliveryCity+" ,"+userDetails[0].DeliveryState +" -"+ userDetails[0].DeliveryPostalCode+ ", Ph:" + userDetails[0].DeliveryPhone)
+	        $("#displayDeliveryAddress").text(userDetails[0].DeliveryDNo + " ," + userDetails[0].DeliveryStreet + " ," + userDetails[0].DeliveryCity + " ," + userDetails[0].DeliveryState + " -" + userDetails[0].DeliveryPostalCode + ", Ph:" + userDetails[0].DeliveryPhone)
 	        $("#deliveryFirstName").val(userDetails[0].DeliveryFirstName);
 	        $("#deliveryLastName").val(userDetails[0].DeliveryLastName);
 	        $("#deliveryPhone").val(userDetails[0].DeliveryPhone);
 	        $("#displayHomeName").text(userDetails[0].FirstName + " " + userDetails[0].LastName)
-	        $("#displayHomeAddress").text(userDetails[0].HomeDNo+" ,"+userDetails[0].HomeStreet+" ,"+userDetails[0].HomeCity+" ,"+userDetails[0].HomeState +" -"+ userDetails[0].HomePostalCode+ ", Ph:" + userDetails[0].Phone );
+	        $("#displayHomeAddress").text(userDetails[0].HomeDNo + " ," + userDetails[0].HomeStreet + " ," + userDetails[0].HomeCity + " ," + userDetails[0].HomeState + " -" + userDetails[0].HomePostalCode + ", Ph:" + userDetails[0].Phone);
 	        $("#homeFirstName").val(userDetails[0].FirstName);
 	        $("#homeLastName").val(userDetails[0].LastName);
 	        $("#homePhone").val(userDetails[0].Phone);
-            
+
 	    }
 	}
 	updateAddress();
@@ -1391,7 +1393,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 	});
 	$("#deliveryStreet").change(function() {
 	    $("#deliveryPinCode").val($("#deliveryStreet option:selected").data('pin'));
-	     
+
 	});
 	if (userDetails.length > 0) {
 	    if (userDetails[0].HomeStreet == "" && userDetails[0].HomePostalCode == "") {
@@ -1411,11 +1413,10 @@ var orderRefNo = "",orderAmountToBePaid="";
 	        $(".defaultDeliveryAddress").show();
 
 	    }
+	} else {
+	    $(".defaultHomeAddress").hide();
+	    $(".defaultDeliveryAddress").hide();
 	}
-else{
-    $(".defaultHomeAddress").hide();
-    $(".defaultDeliveryAddress").hide();
-}
 
 	$("#homeAddressSubmit").click(function() {
 
@@ -1474,13 +1475,13 @@ else{
 	    }
 	})
 	$('body').on('click', '#activate-payment', function(e) {
-		var status = "success";
-		if(status == "success"){
-			orderRefNo = '12345';
-			orderAmountToBePaid = '380.00';
-			$('ul.setup-panel li:eq(2)').removeClass('disabled');
-			$('ul.setup-panel li a[href="#step-3"]').trigger('click');
-		}
+	    var status = "success";
+	    if (status == "success") {
+	        orderRefNo = '12345';
+	        orderAmountToBePaid = '380.00';
+	        $('ul.setup-panel li:eq(2)').removeClass('disabled');
+	        $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+	    }
 
 	})
 
@@ -1489,33 +1490,33 @@ else{
 
 
 	$(".editHomeAddressIcon").click(function() {
-	  if(userDetails.length>0){
+	    if (userDetails.length > 0) {
 	        $(".defaultHomeAddress").toggle(500);
 	        $(".editHomeAddress").toggle(500);
 	        if ($(".defaultDeliveryAddress").is(':hidden') && userDetails[0].DeliveryPostalCode != null) {
 	            $(".defaultDeliveryAddress").toggle(500);
 	            $(".editDeliveryAddress").toggle(500);
-	        }}
-        else{
-            $('#loginScreen').modal('show');
-           
-        }
-	  
+	        }
+	    } else {
+	        $('#loginScreen').modal('show');
+
+	    }
+
 
 
 	})
 	$(".editDeliveryAddressIcon").click(function() {
-        if(userDetails.length>0){
+	    if (userDetails.length > 0) {
 	        $(".defaultDeliveryAddress").toggle(500);
 	        $(".editDeliveryAddress").toggle(500);
 	        if ($(".defaultHomeAddress").is(':hidden') && userDetails[0].HomePostalCode != null) {
 	            $(".defaultHomeAddress").toggle(500);
 	            $(".editHomeAddress").toggle(500);
-	    }}
-        else{
-            $('#loginScreen').modal('show');
-        }
-    
+	        }
+	    } else {
+	        $('#loginScreen').modal('show');
+	    }
+
 	})
 
 
@@ -1523,31 +1524,31 @@ else{
 	    console.log(items);
 	});
 
-/*	var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
-	if (cartTotalItems != undefined) {
-	    cartTotalItemsLength = cartTotalItems.itemsArray.length
-	    if (cartTotalItemsLength > 0) {
-	        var cartItemDescHtml = '';
-	        for (var index = 0; index < cartTotalItemsLength; index++) {
-	            var eachItemData = cartTotalItems.itemsArray[index];
-	            //var productSubTotal = eachItemData.product_qty * 25;
-	            // getProductPrice(cartProductCodes, cartProductLineItems, cartProductQty);
-	            var productSubTotal = getProductPrice(eachItemData.product_code, eachItemData.product_lineitems, eachItemData.product_qty);
-	            var CheckOutItems = '<tr><td data-th=""><div class="row"><div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div><div class="col-sm-6"><h4 class="nomargin productName">' + eachItemData.product_name + '</h4></div>          </div></td><td data-th="Price" class="price">&#8377; 25 </td><td data-th="Quantity">' + eachItemData.product_qty + '</td><td data-th="Subtotal" class="text-center" class="subtotal">&#8377;' + productSubTotal + ' </td>  <td class="actions" data-th=""></td>     </tr>'
+	/*	var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
+		if (cartTotalItems != undefined) {
+		    cartTotalItemsLength = cartTotalItems.itemsArray.length
+		    if (cartTotalItemsLength > 0) {
+		        var cartItemDescHtml = '';
+		        for (var index = 0; index < cartTotalItemsLength; index++) {
+		            var eachItemData = cartTotalItems.itemsArray[index];
+		            //var productSubTotal = eachItemData.product_qty * 25;
+		            // getProductPrice(cartProductCodes, cartProductLineItems, cartProductQty);
+		            var productSubTotal = getProductPrice(eachItemData.product_code, eachItemData.product_lineitems, eachItemData.product_qty);
+		            var CheckOutItems = '<tr><td data-th=""><div class="row"><div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div><div class="col-sm-6"><h4 class="nomargin productName">' + eachItemData.product_name + '</h4></div>          </div></td><td data-th="Price" class="price">&#8377; 25 </td><td data-th="Quantity">' + eachItemData.product_qty + '</td><td data-th="Subtotal" class="text-center" class="subtotal">&#8377;' + productSubTotal + ' </td>  <td class="actions" data-th=""></td>     </tr>'
 
-	            cartItemDescHtml += CheckOutItems;
-	        }
-	        $('#checkOutItemsList').html('');
-	        $('#checkOutItemsList').append(cartItemDescHtml);
+		            cartItemDescHtml += CheckOutItems;
+		        }
+		        $('#checkOutItemsList').html('');
+		        $('#checkOutItemsList').append(cartItemDescHtml);
 
-	    } else {
+		    } else {
 
-	        $('#checkOutItemsList').html("<div>No items yet</div>");
-	    }
-	}*/
+		        $('#checkOutItemsList').html("<div>No items yet</div>");
+		    }
+		}*/
 
 	/*End cart logic*/
-/*Start OTP Logic*/
+	/*Start OTP Logic*/
 	function validatePhone(phone) {
 	    if (phone.match(/^[7-9][0-9]{9}$/) != null) {
 	        return true;
@@ -1555,46 +1556,50 @@ else{
 	        return false;
 	    }
 	}
-	$(".conformPasswordBlock").hide();
 	$('body').on('click', '#otpLink', function() {
-		$('#statusFlag').val('true');
+	$(".conformPasswordBlock").hide();
+	$(".sendOTPForm").hide();
+  
+	    $('#statusFlag').val('true');
 	    var phoneNo = $(".phoneNo").val();
 	    var validPhoneNo = validatePhone(phoneNo);
-		if (validPhoneNo) {
-			$(this).hide();
-			$.ajax({
-				url: 'forgotPassword.php',
-				data: {"Phone":phoneNo},
-				method: "POST",
-				success: function(response){
-					console.log("success");
-					console.log(response);
-					var data = JSON.parse(response);
-					$('#otpLink').show();
-					if(data.Status == "Success"){
-					sessionStorage.setItem('signUpOTP',data.OTP);
-						$('.OTP-error-block').text("");
-						$(".sendOTPForm").toggle();
-						$('#loginScreen').modal('hide');
-						$('#otpScreen').modal();
-						$(".otp_ConformPassword").text("Please enter OTP sent to :" + phoneNo);
-					}else if(data.Status == "Failed"){
-						console.log("9090909090");
-						//$('.omb_forgotPwd').html("This mobile number not yet registered - Please register");
-						$('#loginScreen').modal('hide');
-						BootstrapDialog.show({
-							title: 'Message',
-							message: 'This mobile number not yet registered - Please register'
-						});
-						
-					}
-					
-				},
-				failure: function(error){
-					console.log("failure");
-				}
-			});	
-		} else {
+	    if (validPhoneNo) {
+	        $(this).hide();
+	        $.ajax({
+	            url: 'forgotPassword.php',
+	            data: {
+	                "Phone": phoneNo
+	            },
+	            method: "POST",
+	            success: function(response) {
+	                console.log("success");
+	                console.log(response);
+	                var data = JSON.parse(response);
+	                $('#otpLink').show();
+	                if (data.Status == "Success") {
+	                    sessionStorage.setItem('signUpOTP', data.OTP);
+	                    $('.OTP-error-block').text("");
+	                    $(".otpForm").show();
+	                    $('#loginScreen').modal('hide');
+	                    $('#otpScreen').modal();
+	                    $(".otp_ConformPassword").text("Please enter OTP sent to :" + phoneNo);
+	                } else if (data.Status == "Failed") {
+	                    console.log("9090909090");
+	                    //$('.omb_forgotPwd').html("This mobile number not yet registered - Please register");
+	                    $('#loginScreen').modal('hide');
+	                    BootstrapDialog.show({
+	                        title: 'Message',
+	                        message: 'This mobile number not yet registered - Please register'
+	                    });
+
+	                }
+
+	            },
+	            failure: function(error) {
+	                console.log("failure");
+	            }
+	        });
+	    } else {
 	        $('.phone-help-block').text("Please enter valid phone number to generate OTP");
 
 	    }
@@ -1602,49 +1607,52 @@ else{
 
 	});
 	$('body').on('click', '.redirectToLogin', function() {
-			$('#otpScreen').modal('hide');
-			$('#loginScreen').modal('show');
+	    $('#otpScreen').modal('hide');
+	    $('#loginScreen').modal('show');
 	});
 	$('body').on('click', '.sendOTPButton', function() {
 	    var phoneNo = $(".phNumberForOTP").val();
 	    var validPhoneNo = validatePhone(phoneNo);
-		if (validPhoneNo) {
-		$(this).hide();
-		$.ajax({
-			url: 'signUp.php',
-			data: {"Phone":phoneNo},
-			method: "POST",
-			success: function(response){
-				console.log("success");
-				console.log(response);
-				var data = JSON.parse(response);
-				$('.sendOTPButton').show();
-				if(data.Status == "Success"){
-				sessionStorage.setItem('signUpOTP',data.OTP);
-					$('.OTP-error-block').text("");
-					$(".sendOTPForm").toggle();
-					$(".otpValidateForm").toggle();
-					$(".otp_ConformPassword").text("Please enter OTP sent to :" + phoneNo);
-				}else if(data.Status == "Failed"){
-				
-						BootstrapDialog.show({
-							title: 'Message',
-							message: 'Already this mobile number registered - Please login'
-						});
-					console.log("9090909090");
-					//$('.OTP-error-block').html("Already this mobile number registered Click <a class='redirectToLogin'>here</a> to Login");
-				}
-				
-			},
-			failure: function(error){
-				console.log("failure");
-			}
-		});	
-		}
-	    else {
+	    if (validPhoneNo) {
+	        $(this).hide();
+	        $.ajax({
+	            url: 'signUp.php',
+	            data: {
+	                "Phone": phoneNo
+	            },
+	            method: "POST",
+	            success: function(response) {
+	                console.log("success");
+	                console.log(response);
+	                var data = JSON.parse(response);
+	                $('.sendOTPButton').show();
+	                if (data.Status == "Success") {
+	                    sessionStorage.setItem('signUpOTP', data.OTP);
+	                    $('.OTP-error-block').text("");
+	                    $(".sendOTPForm").toggle();
+	                    $(".otpValidateForm").toggle();
+	                    $(".otp_ConformPassword").text("Please enter OTP sent to :" + phoneNo);
+	                } else if (data.Status == "Failed") {
+
+	                    BootstrapDialog.show({
+	                        title: 'Message',
+	                        message: 'Already this mobile number registered - Please login'
+	                    });
+	                    $('#otpScreen').modal('hide');
+	                    $('#loginScreen').modal();
+	                    console.log("9090909090");
+	                    //$('.OTP-error-block').html("Already this mobile number registered Click <a class='redirectToLogin'>here</a> to Login");
+	                }
+
+	            },
+	            failure: function(error) {
+	                console.log("failure");
+	            }
+	        });
+	    } else {
 	        $('.OTP-error-block').text("Please enter valid phone number to generate OTP");
 	    }
-		/*if (validPhoneNo) {
+	    /*if (validPhoneNo) {
 	        $('.OTP-error-block').text("");
 	        $(".sendOTPForm").toggle();
 	        $(".otpValidateForm").toggle();
@@ -1653,14 +1661,14 @@ else{
 	});
 
 	$('body').on('click', '#signUp', function() {
-	$('#statusFlag').val('false');
-$(".phNumberForOTP").val('');
-$('.otpForm').show();
-$('.sendOTPForm').show();
-					$('.OTP-error-block').html("");
-					$(".otp_ConformPassword").text("Enter Mobile no to Send OTP");
-					$('.sendOTPButton').show();
-					$('.conformPasswordBlock').hide();
+	    $('#statusFlag').val('false');
+	    $(".phNumberForOTP").val('');
+	    $('.otpForm').show();
+	    $('.sendOTPForm').show();
+	    $('.OTP-error-block').html("");
+	    $(".otp_ConformPassword").text("Enter Mobile no to Send OTP");
+	    $('.sendOTPButton').show();
+	    $('.conformPasswordBlock').hide();
 	    $(".otpValidateForm").hide();
 	    $('#loginScreen').modal('hide');
 	    $('#otpScreen').modal();
@@ -1671,68 +1679,71 @@ $('.sendOTPForm').show();
 	    var password = $(".loginPassword").val();
 	    var validPhoneNo = validatePhone(phoneNo);
 	    var validPassword = password.indexOf("'");
-		$(".loginPassword").val('');
-		$(".phoneNo").val('');
-		console.log($.md5(password))
+	    $(".loginPassword").val('');
+	    $(".phoneNo").val('');
+	    console.log($.md5(password))
 	    if (validPhoneNo && validPassword == -1) {
-			$('#login').hide();
+	        $('#login').hide();
 	        $('.phone-help-block').text("");
 	        $(".ajax-loader").show();
 	        $.ajax({
-				url: 'validateLogin.php',
-				data: {"Phone":phoneNo,"Password":$.md5(password)},
-				method: "POST",
-				success: function(response){
-				$(".ajax-loader").fadeOut("slow");
-					console.log("success");
-					console.log(response);
-					var data = JSON.parse(response);
-					$('#otpLink').show();
-					if(data.Status == "Success"){
-						$('#loginScreen').modal('hide');
-						$('body').removeClass('modal-open');
-						var userDetailsResponce = [{
-							"Phone": "9999099990",
-							"LastName": "B",
-							"HomeStreet": null,
-							"HomeState": "Telangana",
-							"HomePostalCode": null,
-							"HomePhone": null,
-							"HomeLongitude": null,
-							"HomeDNo": "",
-							"DeliveryDNo": "",
-							"HomeLatitude": null,
-							"HomeCountry": "India",
-							"HomeCity": "Hyderabad",
-							"FirstName": "Ramesh",
-							"ErrorMessage": "",
-							"Email": "nikhilmutyam@yahoo.com",
-							"DeliveryStreet": null,
-							"DeliveryState": "Telangana",
-							"DeliveryPostalCode": null,
-							"DeliveryLongitude": null,
-							"DeliveryLatitude": null,
-							"DeliveryLastName": "M",
-							"DeliveryCountry": "India",
-							"DeliveryCity": "Hyderabad",
-							"DeliveryFirstName": "Suneel",
-							"Birthdate": "1989-01-01",
-							"pic": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q=="
-						}];
-						localStorage.setItem('userInfo', JSON.stringify(userDetailsResponce));
-						$('#login').show();
-						setuserProfile();
-					}else if(data.Status == "Failed"){
-						$('.phone-help-block.help-block').html("Invalid Mobile Number/Password combination");
-						$('#login').show();						
-					}
-					
-				},
-				failure: function(error){
-					console.log("failure");
-				}
-			});	
-			var status = "success";
+	            url: 'validateLogin.php',
+	            data: {
+	                "Phone": phoneNo,
+	                "Password": $.md5(password)
+	            },
+	            method: "POST",
+	            success: function(response) {
+	                $(".ajax-loader").fadeOut("slow");
+	                console.log("success");
+	                console.log(response);
+	                var data = JSON.parse(response);
+	                $('#otpLink').show();
+	                if (data.Status == "Success") {
+	                    $('#loginScreen').modal('hide');
+	                    $('body').removeClass('modal-open');
+	                    var userDetailsResponce = [{
+	                        "Phone": "9999099990",
+	                        "LastName": "B",
+	                        "HomeStreet": null,
+	                        "HomeState": "Telangana",
+	                        "HomePostalCode": null,
+	                        "HomePhone": null,
+	                        "HomeLongitude": null,
+	                        "HomeDNo": "",
+	                        "DeliveryDNo": "",
+	                        "HomeLatitude": null,
+	                        "HomeCountry": "India",
+	                        "HomeCity": "Hyderabad",
+	                        "FirstName": "Ramesh",
+	                        "ErrorMessage": "",
+	                        "Email": "nikhilmutyam@yahoo.com",
+	                        "DeliveryStreet": null,
+	                        "DeliveryState": "Telangana",
+	                        "DeliveryPostalCode": null,
+	                        "DeliveryLongitude": null,
+	                        "DeliveryLatitude": null,
+	                        "DeliveryLastName": "M",
+	                        "DeliveryCountry": "India",
+	                        "DeliveryCity": "Hyderabad",
+	                        "DeliveryFirstName": "Suneel",
+	                        "Birthdate": "1989-01-01",
+	                        "pic": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q=="
+	                    }];
+	                    localStorage.setItem('userInfo', JSON.stringify(userDetailsResponce));
+	                    $('#login').show();
+	                    setuserProfile();
+	                } else if (data.Status == "Failed") {
+	                    $('.phone-help-block.help-block').html("Invalid Mobile Number/Password combination");
+	                    $('#login').show();
+	                }
+
+	            },
+	            failure: function(error) {
+	                console.log("failure");
+	            }
+	        });
+	        var status = "success";
 
 
 	    } else {
@@ -1748,66 +1759,71 @@ $('.sendOTPForm').show();
 	    if (removeSingleQuote == -1 && $(".confirmPassword").val() == $(".password").val() && $(".password").val() != "") {
 	        $(".error-block").text("");
 	        $('#otpScreen').modal('hide');
-			console.log($(".phNumberForOTP").val());
-			console.log($(".password").val());
-			console.log($('#statusFlag').val());
-			console.log($.md5($(".password").val()));
-			$.ajax({
-				url: 'createPwd.php',
-				data: {"Phone":$(".phNumberForOTP").val(),"Password":$.md5($(".password").val()),"Exists":$('#statusFlag').val()},
-				method: "POST",
-				success: function(response){
-					console.log("success");
-					console.log(response);
-					var data = JSON.parse(response);
-					if(data.Status == 'Success'){
-						var userDetailsResponce = [{
-							"Phone": $(".phNumberForOTP").val(),
-							"LastName": "",
-							"HomeStreet": null,
-							"HomeState": null,
-							"HomePostalCode": null,
-							"HomePhone": null,
-							"HomeLongitude": null,
-							"HomeDNo": "",
-							"DeliveryDNo": "",
-							"HomeLatitude": null,
-							"HomeCountry": "",
-							"HomeCity": "",
-							"FirstName": "",
-							"ErrorMessage": "",
-							"Email": "",
-							"DeliveryStreet": null,
-							"DeliveryState": "",
-							"DeliveryPostalCode": null,
-							"DeliveryLongitude": null,
-							"DeliveryLatitude": null,
-							"DeliveryCountry": "",
-							"DeliveryCity": "",
-							"DeliveryFirstName": "","DeliveryLastName": "",
-							"Birthdate": "",
-							"pic": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q=="
-						}];
-						//localStorage.setItem('userInfo', JSON.stringify(userDetailsResponce));
-						//setuserProfile();
-						$('body').removeClass('modal-open');
-						BootstrapDialog.show({
-							title: 'Message',
-							message: 'Successfully Password updated - Please Click Login again'
-						});
-					}else if(data.Status == 'Failed'){
-						BootstrapDialog.show({
-							title: 'Message',
-							message: 'Something went wrong - Please try again'
-						});
-					}
-					
-				},
-				failure: function(error){
-					console.log("failure");
-				}
-			});	
-	        
+	        console.log($(".phNumberForOTP").val());
+	        console.log($(".password").val());
+	        console.log($('#statusFlag').val());
+	        console.log($.md5($(".password").val()));
+	        $.ajax({
+	            url: 'createPwd.php',
+	            data: {
+	                "Phone": $(".phNumberForOTP").val(),
+	                "Password": $.md5($(".password").val()),
+	                "Exists": $('#statusFlag').val()
+	            },
+	            method: "POST",
+	            success: function(response) {
+	                console.log("success");
+	                console.log(response);
+	                var data = JSON.parse(response);
+	                if (data.Status == 'Success') {
+	                    var userDetailsResponce = [{
+	                        "Phone": $(".phNumberForOTP").val(),
+	                        "LastName": "",
+	                        "HomeStreet": null,
+	                        "HomeState": null,
+	                        "HomePostalCode": null,
+	                        "HomePhone": null,
+	                        "HomeLongitude": null,
+	                        "HomeDNo": "",
+	                        "DeliveryDNo": "",
+	                        "HomeLatitude": null,
+	                        "HomeCountry": "",
+	                        "HomeCity": "",
+	                        "FirstName": "",
+	                        "ErrorMessage": "",
+	                        "Email": "",
+	                        "DeliveryStreet": null,
+	                        "DeliveryState": "",
+	                        "DeliveryPostalCode": null,
+	                        "DeliveryLongitude": null,
+	                        "DeliveryLatitude": null,
+	                        "DeliveryCountry": "",
+	                        "DeliveryCity": "",
+	                        "DeliveryFirstName": "",
+	                        "DeliveryLastName": "",
+	                        "Birthdate": "",
+	                        "pic": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q=="
+	                    }];
+	                    //localStorage.setItem('userInfo', JSON.stringify(userDetailsResponce));
+	                    //setuserProfile();
+	                    $('body').removeClass('modal-open');
+	                    BootstrapDialog.show({
+	                        title: 'Message',
+	                        message: 'Successfully Password updated - Please Click Login again'
+	                    });
+	                } else if (data.Status == 'Failed') {
+	                    BootstrapDialog.show({
+	                        title: 'Message',
+	                        message: 'Something went wrong - Please try again'
+	                    });
+	                }
+
+	            },
+	            failure: function(error) {
+	                console.log("failure");
+	            }
+	        });
+
 	    } else {
 	        $(".error-block").text("Password not match/valid..! please try again");
 	        $(".confirmPassword").val("");
@@ -1820,10 +1836,10 @@ $('.sendOTPForm').show();
 	    otp = $(".otpValue").val();
 	    var validOTP = otp.match(/^[0-9]{4}$/);
 	    if (validOTP != null && otp == sessionStorage.getItem('signUpOTP')) {
-			sessionStorage.removeItem('signUpOTP');
+	        sessionStorage.removeItem('signUpOTP');
 	        $(".OTP-error-block").text("");
 	        $(".otp_ConformPassword").text("Confirm Password");
-	        $(".otpForm").toggle();
+	        $(".otpForm").hide();
 	        $(".conformPasswordBlock").toggle();
 	    } else {
 	        $(".otpValue").val("");
