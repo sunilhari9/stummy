@@ -1687,6 +1687,9 @@ function clearerrorMsg(){
 							message: 'Already this mobile number registered - Please login'
 						});
 					console.log("9090909090");
+                    $('#otpScreen').modal('hide');
+			$('#loginScreen').modal('show');
+                    $(".phoneNo").val(phoneNo);
 					//$('.OTP-error-block').html("Already this mobile number registered Click <a class='redirectToLogin'>here</a> to Login");
 				}
 				
