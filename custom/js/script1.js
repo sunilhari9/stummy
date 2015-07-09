@@ -33,14 +33,11 @@ var orderRefNo = "",orderAmountToBePaid="";
 
 	    setuserProfile();
 
-	    var profilePicPopOverContent = '<ul id="profileList" class="list-group"><li class="list-group-item">Profile</li><li class="list-group-item" id="logout">Logout</li></ul>';
+	    var profilePicPopOverContent = '<ul id="profileList" class="list-group"><li class="list-group-item">Profile</li><li class="list-group-item logout" id="logout">Logout</li></ul>';
 	    $("#userProfilePic").popover({
 	        html: true,
 	        placement: 'bottom',
 	        content: profilePicPopOverContent
-	    }).parent().on('click', '#logout', function() {
-	        localStorage.setItem("userInfo", "");
-	        setuserProfile();
 	    });
 		    $('#checkout').click(function() {
 	        console.log("on checkout");
@@ -77,6 +74,12 @@ var orderRefNo = "",orderAmountToBePaid="";
 	        renderCart();
 			renderCartInCheckout();
 	    }
+        $('body').on('click', '.logout', function() {
+	        localStorage.setItem("userInfo", "");
+	        setuserProfile();
+            $(".showMenu-Mobile").addClass("hidden-xs");
+            
+	    });
 	    $('body').on('click', '.cartMinus1,.glyphicon-chevron-left', function() {
 	        var currentVal = $(this).next().text() || $(this).next().val();
 	        if (currentVal > 1) {
@@ -1752,35 +1755,8 @@ $('.sendOTPForm').show();
 						$('body').removeClass('modal-open');
 						var userDetailsResponce = [];
 						userDetailsResponce.push(data);
-						// var userDetailsResponce = [{
-							// "Phone": "9999099990",
-							// "LastName": "B",
-							// "HomeStreet": null,
-							// "HomeState": "Telangana",
-							// "HomePostalCode": null,
-							// "HomePhone": null,
-							// "HomeLongitude": null,
-							// "HomeDNo": "",
-							// "DeliveryDNo": "",
-							// "HomeLatitude": null,
-							// "HomeCountry": "India",
-							// "HomeCity": "Hyderabad",
-							// "FirstName": "Ramesh",
-							// "ErrorMessage": "",
-							// "Email": "nikhilmutyam@yahoo.com",
-							// "DeliveryStreet": null,
-							// "DeliveryState": "Telangana",
-							// "DeliveryPostalCode": null,
-							// "DeliveryLongitude": null,
-							// "DeliveryLatitude": null,
-							// "DeliveryLastName": "M",
-							// "DeliveryCountry": "India",
-							// "DeliveryCity": "Hyderabad",
-							// "DeliveryFirstName": "Suneel",
-							// "Birthdate": "1989-01-01",
-							// "pic": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q=="
-						// }];
 						localStorage.setItem('userInfo', JSON.stringify(userDetailsResponce));
+                        $(".showMenu-Mobile").removeClass("hidden-xs");
 						sessionStorage.setItem('loggedMobileNo',phoneNo);
 						$('#login').show();
 						setuserProfile();
