@@ -16,6 +16,39 @@ var orderRefNo = "",orderAmountToBePaid="";
 	    }
 	}
 	$(document).ready(function() {
+		$('body').on('click','.placeOrder',function(){
+			var thisOrderItemArray = '{"itemsArray":'+$(this).prev('.placeOrderDetails').text()+'}';
+			//{"itemsArray":[{"product_code":"1002","product_name":"Fish Tikka","product_qty":"1","product_lineitems":[["2"]]},{"product_code":"1003","product_name":"Chicken Tikka","product_qty":"1","product_lineitems":[["1","2"]]}]}
+			//{"itemsArray":"[{"product_qty":4,"product_name":"Chicken Biryani","product_lineitems":[{"SNo":"0813"},{"SNo":"0811"}],"product_code":"0631"},{"product_qty":10,"product_name":"Aloo Gobi","product_lineitems":[],"product_code":"0588"}]}
+			var flag = false;
+			try{
+				var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
+				if (cartTotalItems != undefined) {
+					cartTotalItemsLength = cartTotalItems.itemsArray.length
+					if (cartTotalItemsLength > 0) {	
+							flag = true;
+					}
+				}
+			}catch(e){}
+			if(flag){
+				console.log("cart items");
+				BootstrapDialog.confirm('Cart not empty - Do you want overwrite with this order?', function(result) {
+	                if (result) {
+	                    localStorage.setItem('cartJson',thisOrderItemArray);
+						window.location.href = 'check-out.html';
+	                }
+	            });
+			}else{
+				console.log("no cart items");
+				BootstrapDialog.confirm('Do you want place this order again?', function(result) {
+	                if (result) {
+	                    localStorage.setItem('cartJson',thisOrderItemArray);
+						window.location.href = 'check-out.html';
+	                }
+	            });
+			}
+			
+		});
 	function toggleChevron(e) {
 		$(e.target)
 			.prev('.panel-heading')
@@ -104,10 +137,12 @@ var orderRefNo = "",orderAmountToBePaid="";
 					var data = JSON.parse(response);
 					console.log(data.Status);
 					var cartTotalOrders = data.Order_List;
-					console.log(cartTotalOrders);
+					console.log(JSON.stringify(cartTotalOrders));
 					if (cartTotalOrders != undefined) {
 					console.log("data there:"+cartTotalOrders.length);
 					for (var index1 = 0; index1 < cartTotalOrders.length; index1++) {
+						console.log(JSON.stringify(cartTotalOrders[index1]));
+						console.log(JSON.stringify(cartTotalOrders[index1].itemsArray));
 						cartTotalItemsLength = cartTotalOrders[index1].itemsArray.length;
 						console.log(cartTotalItemsLength);
 						var checkoutTotalAmount = 0;
@@ -123,7 +158,9 @@ var orderRefNo = "",orderAmountToBePaid="";
 							$eachOrderDetailsHeaderClone = $('.eachOrderDetailsHeader').clone();
 							$eachOrderDetailsHeaderClone.find('.panel-heading').attr('id','heading'+index1);
 							//console.log($eachOrderDetailsHeaderClone.find('.panel-heading'));
-							//console.log($eachOrderDetailsHeaderClone.find('.orderNo').attr('href'));
+							console.log($eachOrderDetails.find('.placeOrderDetails').text());
+							//$eachOrderDetails.find('.placeOrderDetails').text(JSON.stringify(cartTotalOrders[index1].itemsArray));
+							$eachOrderDetails.find('.placeOrderDetails').text('[{"product_code":"1002","product_name":"Fish Tikka","product_qty":"1","product_lineitems":[["2"]]},{"product_code":"1003","product_name":"Chicken Tikka","product_qty":"1","product_lineitems":[["1","2"]]}]');
 							$eachOrderDetailsHeaderClone.find('.panel-heading').attr('href','#collapse'+index1);
 							$eachOrderDetailsHeaderClone.find('.orderNo').html("Order Details: "+cartTotalItems.OrderID + " @ " + cartTotalItems.OrderDate + "<span class='pull-right'>Status: "+cartTotalItems.Status+"&nbsp;&nbsp;<i class='indicator glyphicon glyphicon-chevron-down  pull-right'></i></span>");
 							$eachOrderDetails.find('.orderInfo').html("<b>Order No:</b> "+cartTotalItems.OrderID + "<br/><b>Order Date: </b>" + cartTotalItems.OrderDate +"<br/><b> Order Amount: </b>"+cartTotalItems.TotalOrderAmount+"");

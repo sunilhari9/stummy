@@ -29,6 +29,9 @@ $.getJSON("custom/js/products.json", function(items) {
         else
             $('.list-group').append('<a href="#" class="list-group-item item-type inActive">' + value + '</a>');
     });
+	$('.itemList').height($('.list-group').height()-2);
+	$('.items').css('min-height',$('.list-group').height()-90);
+	$('.items').css('max-height',$('.list-group').height()-90);
     var displayItems = function(categoryName) {
         $('.items').html('');
         $.each(items, function(index, value) {

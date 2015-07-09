@@ -327,7 +327,7 @@ text-decoration: none !important;
     .img {
         width: 75px;
         height: 75px;
-        border: 1px solid #000000;
+        /* border: 1px solid #000000; */
         border-bottom-left-radius: 20px;
     }
     
@@ -828,7 +828,7 @@ li.food_item {
     
     border-radius: 4px;*/
 	background-color: transparent;
-  padding-bottom: 0em !important;
+  padding-bottom: 5px !important;
   padding: 0 0.5em;
   padding-top: 5px;
   display: block;
@@ -998,8 +998,8 @@ a.list-group-item {
     font-weight: bold;
 }
 .product_actions_cart{
-padding-left: 25px;
-text-align: right;
+padding-left: 5px;
+text-align: left;
 }
 
 .HPHeader2 {
@@ -1161,9 +1161,11 @@ text-align: right;
 		}
 	.glyphicon-edit.cartPanel{
 		font-size: 14px;
+		color: #949393;
 		}
 	.glyphicon-plus.cartPlus,.glyphicon-minus.cartMinus{
 		font-size: 12px;
+		color: #949393;
 		}
 		
 			.list-group-item.item-type.activeCat {

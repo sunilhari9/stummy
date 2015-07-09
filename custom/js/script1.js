@@ -16,7 +16,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 	    }
 	}
 	$(document).ready(function() {
-	
+		
 
 	    function ajaxRequest(url, jsonData, method, asyn, callBackFunction) {
 	        $.ajax({
@@ -133,9 +133,17 @@ var orderRefNo = "",orderAmountToBePaid="";
 	        var ul_items = '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"><div class="panel panel-default">';
 	        console.log(currentVal);
 	        var lineItemExists = false;
+			var ind = 0;
 	        for (var i = 0; i < parseInt(currentVal); i++) {
+			console.log("sdfdsfds");
 	            $.each(LineItems, function(index, value) {
+				//console.log("xzxzxzxz");
+				//if(ind == 1) return false;
+				ind ++;
 	                var ul_item = "";
+					console.log(value.ProductCode);
+					console.log(product_code);
+					
 					if (value.ProductCode == product_code) {
 					    lineItemExists = true;
 	                    ul_item = "<div class='product-name'>" + product_name + " #" + (i + 1) + ":</div>" + "<ul class='product-line-items clearfix'>";
@@ -143,6 +151,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 	                        ul_item = '<div class="panel-heading" role="tab" id="headingOne' + i + '"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne' + i + '" aria-expanded="false" aria-controls="collapseOne">' + product_name + ' #' + (i + 1) + '</a></h4></div><div id="collapseOne' + i + '" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne' + i + '"><div class="panel-body"><div class="rowCheckBox">';
 	                    else
 	                        ul_item = '<div class="panel-heading" role="tab" id="headingOne' + i + '"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne' + i + '" aria-expanded="false" aria-controls="collapseOne">' + product_name + ' #' + (i + 1) + '</a></h4></div><div id="collapseOne' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne' + i + '"><div class="panel-body"><div class="rowCheckBox">';
+						console.log(ul_item);
 	                    $.each(value.ProductsLineList, function(index1, value1) {
 						var li_item = '';
 						if(!value.isMultiSelect){
@@ -152,9 +161,10 @@ var orderRefNo = "",orderAmountToBePaid="";
 	                        li_item = '<div class="colCheckBox"><input type="checkbox" name="product-line-items-selection' + i + '" value="' + value1.ProductLineItemCode + '"><label>' + value1.ProductLineItemName + ' - <span class="WebRupee">Rs.</span>' + value1.ProductLineItemCost + '</label></div>';
 	                        ul_item += li_item;
 						}
+						console.log(ul_item);
 	                    });
 	                }
-	                //console.log(ul_item);
+	                console.log(ul_item);
 	                if (ul_item.length > 0)
 	                    ul_items += ul_item + "</div></div></div>";
 	            });
@@ -491,7 +501,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 	                var selectedLineItems = [];
 	                if (value.ProductCode == product_code) {
 	                    $.each(value.ProductsLineList, function(index1, value1) {
-	                        if (value1.default) {
+	                        if (value1.ProductLineItemDefault) {
 	                            selectedLineItems.push(value1.ProductLineItemCode);
 	                            selectedLineItemsAll.push(selectedLineItems);
 	                        }
@@ -1015,6 +1025,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 	                    $('#checkOutItemsList').html(cartItemDescHtml);
 						$('.checkoutTotalAmount').html('<span class="WebRupee">Rs.</span> '+grandTotalRound.toFixed(2));
 						$('#activate-payment').html('Proceed Payment <br/>('+grandTotalRound.toFixed(2)+')');
+						$('.cartFinalAmountForOrderRef').val(grandTotalRound.toFixed(2));
 	                    //calcCartAmount();
 	                } else {
 	                    $('#checkOutItemsList').html("<div>No items yet</div>");
@@ -1474,6 +1485,27 @@ else{
 	    }
 	})
 	$('body').on('click', '#activate-payment', function(e) {
+		var postData = {};
+		postData.itemsArray = JSON.parse(localStorage.getItem('cartJson')).itemsArray;
+		postData.itemsTotalAmount = ''+$('.cartFinalAmountForOrderRef').val();
+		postData.userProfile = JSON.parse(localStorage.getItem('userInfo'));
+		postData.Phone = sessionStorage.getItem('loggedMobileNo');
+		console.log(JSON.stringify(postData));
+		$(".ajax-loader").show();
+			$.ajax({
+				url: 'createOrderRef.php',
+				data: postData,
+				method: "POST",
+				success: function(response){
+					$(".ajax-loader").fadeOut("slow");
+					console.log(response);	
+				},
+				failure:function(error){
+					console.log("error");
+				}
+			});
+		
+		return false;
 		var status = "success";
 		if(status == "success"){
 			orderRefNo = '12345';
@@ -1690,39 +1722,43 @@ $('.sendOTPForm').show();
 					console.log("success");
 					console.log(response);
 					var data = JSON.parse(response);
+					data.pic = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q==";
 					$('#otpLink').show();
 					if(data.Status == "Success"){
 						$('#loginScreen').modal('hide');
 						$('body').removeClass('modal-open');
-						var userDetailsResponce = [{
-							"Phone": "9999099990",
-							"LastName": "B",
-							"HomeStreet": null,
-							"HomeState": "Telangana",
-							"HomePostalCode": null,
-							"HomePhone": null,
-							"HomeLongitude": null,
-							"HomeDNo": "",
-							"DeliveryDNo": "",
-							"HomeLatitude": null,
-							"HomeCountry": "India",
-							"HomeCity": "Hyderabad",
-							"FirstName": "Ramesh",
-							"ErrorMessage": "",
-							"Email": "nikhilmutyam@yahoo.com",
-							"DeliveryStreet": null,
-							"DeliveryState": "Telangana",
-							"DeliveryPostalCode": null,
-							"DeliveryLongitude": null,
-							"DeliveryLatitude": null,
-							"DeliveryLastName": "M",
-							"DeliveryCountry": "India",
-							"DeliveryCity": "Hyderabad",
-							"DeliveryFirstName": "Suneel",
-							"Birthdate": "1989-01-01",
-							"pic": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q=="
-						}];
+						var userDetailsResponce = [];
+						userDetailsResponce.push(data);
+						// var userDetailsResponce = [{
+							// "Phone": "9999099990",
+							// "LastName": "B",
+							// "HomeStreet": null,
+							// "HomeState": "Telangana",
+							// "HomePostalCode": null,
+							// "HomePhone": null,
+							// "HomeLongitude": null,
+							// "HomeDNo": "",
+							// "DeliveryDNo": "",
+							// "HomeLatitude": null,
+							// "HomeCountry": "India",
+							// "HomeCity": "Hyderabad",
+							// "FirstName": "Ramesh",
+							// "ErrorMessage": "",
+							// "Email": "nikhilmutyam@yahoo.com",
+							// "DeliveryStreet": null,
+							// "DeliveryState": "Telangana",
+							// "DeliveryPostalCode": null,
+							// "DeliveryLongitude": null,
+							// "DeliveryLatitude": null,
+							// "DeliveryLastName": "M",
+							// "DeliveryCountry": "India",
+							// "DeliveryCity": "Hyderabad",
+							// "DeliveryFirstName": "Suneel",
+							// "Birthdate": "1989-01-01",
+							// "pic": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q=="
+						// }];
 						localStorage.setItem('userInfo', JSON.stringify(userDetailsResponce));
+						sessionStorage.setItem('loggedMobileNo',phoneNo);
 						$('#login').show();
 						setuserProfile();
 					}else if(data.Status == "Failed"){
