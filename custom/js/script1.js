@@ -110,7 +110,11 @@ var orderRefNo = "",orderAmountToBePaid="";
 				return false;
 			}
 		});
-	    $('body').on('click', '.addCart.itemPanel', function() {
+	    $('body').on('click', '#sign-up-button', function() {
+            $(".phoneNo").val("");
+            $(".loginPassword").val("");
+        });
+            $('body').on('click', '.addCart.itemPanel', function() {
 	        console.log("111111++++++++++++++++++++++1111111");
 	        if ($(this).parent().siblings(".cartCustomizeHiden").is(":visible")) {
 	            //console.log("22222222222");
@@ -187,7 +191,11 @@ var orderRefNo = "",orderAmountToBePaid="";
 	        $(".search").toggleClass("hiddeninMobile").delay(3000).show('slow');
 	    });
         $('body').on('click', '#left-menu', function() {
-	       $( ".container-fluid " ).addClass( "blur-backGround" );
+            if( $( ".container-fluid" ).hasClass( "blur-backGround" )){
+                $( ".container-fluid" ).removeClass( "blur-backGround" );
+            }else{
+	       $( ".container-fluid" ).addClass( "blur-backGround" );
+            }
 	    });
 	    $('body').on('click', '.glyphicon-edit.cartPanel', function(event) {
 	        console.log("in click++++++++++++++");
@@ -1594,6 +1602,9 @@ else{
 		$('.phNumberForOTP').val(phoneNo);
 	    var validPhoneNo = validatePhone(phoneNo);
 		if (validPhoneNo) {
+        $(".otpValue").val("");
+	    $(".password").val("");
+	    $(".confirmPassword").val("");
 			$(this).hide();
 			$.ajax({
 				url: 'forgotPassword.php',
@@ -1611,7 +1622,10 @@ else{
 						$('.OTP-error-block').text("");
 						$(".sendOTPForm").toggle();
 						$('#loginScreen').modal('hide');
-						$('#otpScreen').modal();
+						$('#otpScreen').modal('show');
+                        $(".otpForm").show();
+                        $('.otpValidateForm').show();
+                        $('.sendOTPForm ').hide();
 						$(".otp_ConformPassword").text("Please enter OTP sent to :" + phoneNo);
 					}else if(data.Status == "Failed"){
 						console.log("9090909090");
@@ -1640,8 +1654,14 @@ else{
 			$('#otpScreen').modal('hide');
 			$('#loginScreen').modal('show');
 	});
+function clearerrorMsg(){
+    $(".help-block").text("");
+}
 	$('body').on('click', '.sendOTPButton', function() {
 	    var phoneNo = $(".phNumberForOTP").val();
+	    $(".otpValue").val("");
+	    $(".password").val("");
+	    $(".confirmPassword").val("");
 	    var validPhoneNo = validatePhone(phoneNo);
 		if (validPhoneNo) {
 		$(this).hide();
@@ -1658,7 +1678,7 @@ else{
 				sessionStorage.setItem('signUpOTP',data.OTP);
 					$('.OTP-error-block').text("");
 					$(".sendOTPForm").toggle();
-					$(".otpValidateForm").toggle();
+					$(".otpValidateForm").show();
 					$(".otp_ConformPassword").text("Please enter OTP sent to :" + phoneNo);
 				}else if(data.Status == "Failed"){
 				
@@ -1698,7 +1718,7 @@ $('.sendOTPForm').show();
 					$('.conformPasswordBlock').hide();
 	    $(".otpValidateForm").hide();
 	    $('#loginScreen').modal('hide');
-	    $('#otpScreen').modal();
+	    $('#otpScreen').modal('show');
 	});
 	$('body').on('click', '#login', function() {
 
@@ -1781,6 +1801,7 @@ $('.sendOTPForm').show();
 	});
 
 	$('body').on('click', '.savePasswordButton', function() {
+        clearerrorMsg();
 	    var removeSingleQuote = $(".confirmPassword").val().indexOf("'");
 
 
@@ -1798,6 +1819,7 @@ $('.sendOTPForm').show();
 				success: function(response){
 					console.log("success");
 					console.log(response);
+                    $(".conformPasswordBlock").hide();
 					var data = JSON.parse(response);
 					if(data.Status == 'Success'){
 						var userDetailsResponce = [{
@@ -1862,8 +1884,9 @@ $('.sendOTPForm').show();
 			sessionStorage.removeItem('signUpOTP');
 	        $(".OTP-error-block").text("");
 	        $(".otp_ConformPassword").text("Confirm Password");
-	        $(".otpForm").toggle();
-	        $(".conformPasswordBlock").toggle();
+	        $(".otpForm").hide();
+	        $(".conformPasswordBlock").show();
+            otpAttemps = 0;
 	    } else {
 	        $(".otpValue").val("");
 	        otpAttemps++
