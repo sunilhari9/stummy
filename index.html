@@ -10,7 +10,7 @@
 
     <!-- Bootstrap -->
     <link href="vendor/css/bootstrap.min.css" rel="stylesheet">
-    <link href="custom/css/style.css" rel="stylesheet">
+    <link href="custom/css/style1.css" rel="stylesheet">
     <link href="vendor/css/bootstrap-dialog.min.css" rel="stylesheet">
     <link href="vendor/css/jquery.sidr.dark.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="custom/images/favicon.png">
@@ -22,7 +22,25 @@
     <![endif]-->
 </head>
 
-<body>
+<body class="index_body">
+    <div class="modal fade" id="advertiseModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-body">
+        
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary closeAdd" data-dismiss="modal">Close add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="se-pre-con"></div>
+    <div class="ajax-loader" style="display: none;"></div>
+	
     <div class="messagesBar"></div>
 
     <div class="container-fluid ">
@@ -32,19 +50,28 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <img src="custom/images/profile.png" class="navToggle img-responsive img-circle">
                     </button>
-                    <a class="navbar-brand" href="#"><img class="logo" alt="Brand" src="custom/images/logo.png"></a>
+                    <a class="navbar-brand" href="index.html"><img class="logo" alt="Brand" src="custom/images/logo.png"></a>
                 </div>
                 <div class="col-md-6 text-center navbar-left">
-
-                    <div class="col-md-9 search form-group has-feedback">
-                        <input type="text" class="form-control typeahead" placeholder="Search....">
+                    <span class="glyphicon glyphicon-search searchInMobile hiddenInTab hidden-md hidden-lg"></span>
+                    <div class="col-md-9 search form-group has-feedback hiddeninMobile">
+                        <input type="text" class="form-control typeahead" placeholder="Search Food....">
                         <span class="glyphicon glyphicon-search form-control-feedback"></span>
 
                     </div>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" class="links-active" data-toggle="modal" data-target="#loginScreen">Sign-in / Sign-up</a></li>
+                        <li>
+                            <span id="welcomeMsg">
+                                
+                            <img src='custom/images/profile.png' id='userProfilePic' class='navToggle hidden-xs img-responsive img-circle'>
+                            </span>
+                            
+                            <a href="#" class="links-active" data-toggle="modal" data-target="#loginScreen" id="sign-up-button">Sign-in / Sign-up</a></li>
+                            <li><a href="#" class="showMenu-Mobile links-active profile" id="profile-Mobile">Profile</a></li>
+                            <li><a href="#" class="showMenu-Mobile links-active logout" id="logout-Mobile">Logout</a></li>
+                       
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
@@ -58,13 +85,13 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><h3 class="omb_authTitle" align="center">Login or <a href="#">Sign up</a></h3></h4>
+                        <button type="button" class="close bgwhite" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><h3 class="omb_authTitle" align="center">Login or <a href="#" id="signUp">Sign up</a></h3></h4>
                     </div>
                     <div class="modal-body">
 
                         <div class="omb_login">
-                            <div class="row omb_socialButtons">
+                            <!--<div class="row omb_socialButtons">
                                 <div class="col-xs-6 col-sm-6">
                                     <img src="custom/images/button-facebook.png" onclick="FbClick()" class="socialButton" />
                                     <div id="fbDetails"></div>
@@ -82,34 +109,34 @@
                                     <span class="omb_spanOr">or</span>
                                 </div>
                             </div>
-
+-->
                             <div class="row loginForm">
                                 <div class="col-xs-12 col-sm-12">
-                                    <form class="omb_loginForm" action="" autocomplete="off" method="POST">
+                                  
                                         <div class="input-group input-group-lg">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                            <input type="text" class="form-control" name="username" placeholder="9705984789">
+                                            <input type="text" class="form-control phoneNo" name="username" placeholder="9705984789">
                                         </div>
                                         <span class="help-block"></span>
 
                                         <div class="input-group input-group-lg">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <input type="password" class="form-control" name="password" placeholder="Password">
+                                            <input type="password" class="form-control loginPassword" name="password" placeholder="Password">
                                         </div>
-                                        <span class="help-block"></span>
+                                        <span class="phone-help-block help-block"></span>
                                         <div class="row col-xs-12">
 
                                             <div class="col-xs-12 col-sm-6">
                                                 <p class="omb_forgotPwd">
-                                                    <a href="#" class="links-active" data-toggle="modal" data-target="#otpScreen">Generate OTP/Forgot password?</a>
+                                                     <a href="#" id="otpLink" >Generate OTP/Forgot password?</a>
                                                 </p>
                                             </div>
                                             <div class="col-xs-12 col-sm-3">
 
-                                                <button class="loginButton" type="submit">Login</button>
+                                                <button class="loginButton" id="login">Login</button>
                                             </div>
                                         </div>
-                                    </form>
+                                 
                                 </div>
                             </div>
 
@@ -121,30 +148,66 @@
             </div>
         </div>
         <!--End Login Screen-->
-        <!--Start Model OTP-->
-        <div class="modal fade" id="otpScreen" tabindex="-1" role="dialog" aria-labelledby="otpLabel" aria-hidden="true">
+         <!--Start Model OTP-->
+        <div class="modal fade" id="otpScreen" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="otpLabel" aria-hidden="true">
 
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel"><h3 class="omb_authTitle" align="center">Enter your phone no to validate</h3></h4>
+                        <h4 class="modal-title" id="myModalLabel"><h3 class="omb_authTitle otp_ConformPassword" align="center">Enter Mobile no to Send OTP</h3></h4>
                     </div>
                     <div class="modal-body">
                         <div class="row loginForm">
                                 <div class="col-xs-12 col-sm-12">
-                                    <form class="omb_loginForm" action="" autocomplete="off" method="POST">
-                                        <div class="input-group input-group-lg">
+                                    <div class="otpForm">
+                                        <div class="input-group input-group-lg otpValidateForm">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                            <input type="password" class="form-control otpValue" name="username" placeholder="XXXX">
+                                        </div>
+                                        <div class="input-group input-group-lg sendOTPForm ">
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                            <input type="text" class="form-control otpValue" name="username" placeholder="9705984789">
+                                            <input type="text" class="form-control phNumberForOTP" name="username" placeholder="9705984789">
+                                        </div>
+                                        <span class="OTP-error-block"></span>
+                                        <div class="col-xs-12 col-sm-6">
+                                             
+                                            </div>
+
+                                        <div class="row col-xs-12 sendOTPForm">
+                                            <div class="col-xs-12 col-sm-3">
+                                                <button class="sendOTPButton loginButton">Send OTP</button>
+                                            </div>
+                                        </div>
+                                        <div class="row col-xs-12 otpValidateForm">
+                                            <div class="col-xs-12 col-sm-3">
+                                                <button class="otpValidateButton loginButton">Validate OTP</button>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div class="conformPasswordBlock">
+                                        <span class="help-block error-block" ></span>
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                            <input type="password" class="form-control password" name="password" placeholder="password">
+                                        </div>
+                                         <span class="help-block"></span>
+                                         <div class="input-group input-group-lg">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                            <input type="password" class="form-control confirmPassword" name="confirmPassword" placeholder="confirm password">
                                         </div>
                                         <span class="help-block"></span>
+                                        <div class="col-xs-12 col-sm-6">
+                                             
+                                            </div>
 
                                         <div class="row col-xs-12">
                                             <div class="col-xs-12 col-sm-3">
-                                                <button class="otpValidateButton" type="submit">Validate OTP</button>
+                                                <button class="loginButton savePasswordButton">save</button>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>    
 
@@ -153,12 +216,13 @@
             </div>
         </div>
         <!--End Model OTP-->
+
         <!--Customize food modal-->
         <div class="modal fade" id="customizeFood" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content customizeFoodModel">
                     <div class="modal-header customizeFoodHeader">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close bgwhite" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel">
                             <h3 class="omb_authTitle" align="center">Customize your yummy food</h3>
                             <hr class="hrLine"</hr></h4>
@@ -170,63 +234,81 @@
             </div>
         </div>
         <!--End customize food modal-->
-        <a id="left-menu" class="hidden-sm" href="#sidr"><span class="menuMobile">Categories</span></a>
+        <a id="left-menu" class="visible-xs visible-sm" href="#sidr"><span class="menuMobile">Categories</span></a>
+
         <div class="container main-container">
             <div class="row">
                 <div class="col-md-3 categories hidden-xs hidden-sm" id="categories" href="#categories">
                     <div class="list-group">
                         <span class="list-group-item heading">                
-				<span class="glyphicon glyphicon-th-list" title="Click to decrease"></span> Categories
+						<!--<span class="glyphicon glyphicon-th-list" title="Click to decrease"></span>-->
+						<img src="custom/images/Categorie.png" class="catIncon">Categories
                         </span>
                     </div>
                 </div>
 
-                <div class="col-md-6 itemList">
+                <div class="col-md-6 col-sm-12 itemList">
                     <ul class="nav nav-tabs nav-justified">
                         <li class="lateNight"><a href="#">Menu Items</a>
                         </li>
                     </ul>
-                    <div class="items">
+                    <div style="background-color: white" align="center">
+                        <div class="HPHeader2">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="sort_first hidden-xs"> Sort By : </td>
+                                        <td class="sort_second">
+                                            <ul class="sort">
+                                                <li>
+                                                    <a id="veg" href="#"><img src="./custom/images/Veg.png" alt="Veg" title="Veg"> Veg&nbsp; </a>
+                                                </li>
+                                                <li>
+                                                    <a id="nonveg" href="#"><img src="./custom/images/NonVeg.png" alt="Non Veg" title="Non Veg">&nbsp;Non-Veg </a>
+                                                </li>
+                                                <li> <a id="unitPrice" class="asc" href="#">Price</a><img class="unitPriceImg" src="./custom/images/no_sort.png" /> </li>
+                                                <li> <a id="popularity" class="asc" href="#">Popularity</a><img class="popularityImg" src="./custom/images/no_sort.png" /> </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="items scroll">
+
                     </div>
                 </div>
                 <div class="col-md-3 cart hidden-xs hidden-sm">
                     <div class="cartHeading"><span class="glyphicon glyphicon-shopping-cart"></span> Your Cart <span class="badge cartItemCount"></span></div>
                     <!--<div class="estimatedTime">Estimated Delivery time: 50 min</div>-->
-                    <div class="cartItems scroll">
-                        <div id="cartItemDesc"></div>
+                    <div class="cartItems">
+                        <div id="cartItemDesc" class="scroll"></div>
                         <hr class="hrLine">
                         <div class="customize clearCart" title="Click to clear all cart items">Clear Cart</div>
-                        <div>
-                            <div class="left">Sub Total</div>
-                            <div class="right">300.00</div>
-                        </div>
-                        <div>
-                            <div class="left">Delivery Free</div>
-                            <div class="right">0.00</div>
-                        </div>
-                        <div>
-                            <div class="left">Container Charges (+)</div>
-                            <div class="right">50.40</div>
-                        </div>
-                        <div>
-                            <div class="left">Rounded Off (+/-) </div>
-                            <div class="right">0.40</div>
-                        </div>
-                        <div class="totalAmount row">
-                            <span class="col-md-6">Total</span>
-                            <span class="col-md-6 text-right">Rs. 350</span>
-                        </div>
+                        <div class="calc">
+						<div><div class="left">Sub Total</div><div class="right subtotal">0.00</div></div>
+						<!--<div><div class="left">Delivery Free</div><div class="right delivery">0.00</div></div>
+						<div><div class="left">Container Charges (+)</div><div class="right container_charges">0.00</div></div>-->
+						<div><div class="left">Tax (+)</div><div class="right service_tax">0.00</div></div>
+						<div><div class="left">Rounded Off (+/-) </div><div class="right rounded_off">0.00</div></div>
+						<div class="totalAmount row">
+							<span class="col-md-5">Total</span>
+							<span class="col-md-7 text-right grand_total">Rs. 0.00</span>
+						</div>
+					</div>
                         <hr class="hrLine">
-                        <div id="checkout" class="col-md-8">Proceed to Checkout</div>
+                        <div id="checkout" class="col-md-8 hidden">Proceed to Checkout</div>
+						<div id="checkoutDisabled" class="col-md-8">Add Items to Proceed Checkout</div>
                     </div>
                 </div>
             </div>
         </div>
-        <nav class="navbar navbar-inverse navbar-fixed-bottom hidden-xs">
-            <div class="container">
-
-            </div>
-        </nav>
+        <!--<nav class="navbar navbar-inverse navbar-fixed-bottom hidden-xs">
+        <div class="container">
+    
+        </div>
+      </nav>-->
     </div>
     <div class="modal fade">
         <div class="modal-dialog">
@@ -249,8 +331,8 @@
     </div>
     <div class="row cartListTemplate hidden">
         <div class="row cartList">
-            <span class="col-md-6 product_name_cart"></span>
-            <span class="col-md-6">
+            <span class="col-md-7 product_name_cart"></span>
+            <span class="col-md-5 product_actions_cart">
 					<span class="glyphicon glyphicon-minus cartMinus" title="Click to decrease"></span>
             <span class="quantity" data-product-code="" data-product-name=""></span>
             <span class="glyphicon glyphicon-plus cartPlus" title="Click to increase"></span>
@@ -258,15 +340,6 @@
             </span>
         </div>
     </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="vendor/js/jquery-1.11.3.min.js"></script>
-    <script src="custom/js/SocialLogin.js"></script>
-    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
-    <script src="custom/js/items.js"></script>
-    <script src="custom/js/script.js"></script>
-    <script src="vendor/js/bootstrap.min.js"></script>
-    <script src="vendor/js/bootstrap-dialog.min.js"></script>
-    <script src="vendor/js/jquery.sidr.min.js"></script>
 
     <div id="sidr" class="hidden-sm hidden-md hidden-lg">
         <div class="list-group categoriesListMenuOverlay">
@@ -275,11 +348,50 @@
             </span>
         </div>
     </div>
+<input type="hidden" id="activeCat" />
+<div class="modal fade" id="mapGoogleScreen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width: 100%;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			</div>
+			<div class="modal-body" style="height: 320px;">
+				<embed src="map.html" width="100%" height="100%"></embed>
+			</div>
+		</div>
+	</div>
+</div>
 
+<nav class="navbar navbar-inverse navbar-bottom" style="min-height: 30px;">
+            <div class="container">
+				<a href="#" class="footer-link" data-toggle="modal" data-target="#mapGoogleScreen" id="mapGoogleScreen">Where we are?</a></li>
+            </div>
+</nav>
+<input type="hidden" id="statusFlag" />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="vendor/js/jquery-1.11.3.min.js"></script>
+    <!--<script src="custom/js/SocialLogin.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>-->
+	<script src="custom/js/md5.js"></script>
+    <script src="vendor/js/bootstrap.min.js"></script>
+    <script src="vendor/js/bootstrap-dialog.min.js"></script>
+	<!-- <script src="vendor/js/bootstrapx-clickover.js"></script> -->
+    <script src="vendor/js/jquery.sidr.min.js"></script>
+    <script src="vendor/js/jquery.touchwipe.js"></script>
+    <script src="custom/js/items1.js"></script>
+    <script src="custom/js/script1.js"></script>
     <script>
         $(document).ready(function() {
-            $('#left-menu').sidr();
-        });
+			if ($(document).width() <= 1023) {
+				$('#left-menu').sidr();
+			}
+			if (sessionStorage.getItem("promotionsFlag") == null) {
+				$('#advertiseModel').modal('show');
+			}
+			$(".closeAdd").click(function() {
+				sessionStorage.setItem("promotionsFlag", true);
+			})
+		});
     </script>
 
 </body>

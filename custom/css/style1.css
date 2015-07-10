@@ -368,8 +368,9 @@ text-decoration: none !important;
     background-color: rgb(255, 196, 80) !important;
 }
 .navbar-bottom{
-  margin-top: 70px;
+  margin-top: 10px;
   margin-bottom: 0px !important;
+  padding-top: 4px;
 }
 .list-group-item.inActive {
     background-color: rgb(255, 196, 80) !important;
@@ -718,6 +719,14 @@ ul.product-line-items li input[type="radio"] {
 	color: white !important;
 	opacity: 0.9 !important;
 }
+.modal-header .close.bgwhite{
+    margin-top: 3px !important;
+    margin-right: 12px !important;
+	color: rgb(237, 178, 67) !important;
+	font-weight: bold;
+	font-size: 22px;
+}
+close bgwhite
 .customizeFoodBody .product-name {
     float: left;
     margin-right: 2%;
@@ -1224,3 +1233,13 @@ text-align: left;
 		border-radius: 0px 30px 0px 0px !important;
 	}
 	
+	.img-responsive-checkout{
+		display: block;
+		max-width: 100%;
+		height: auto;
+	}
+	.footer-link{
+		color: white;
+		margin-top: 10px;
+		font-weight: bold;
+		}

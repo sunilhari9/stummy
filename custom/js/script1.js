@@ -1,3 +1,5 @@
+
+	var cartFinalAmountForOrderRef = 0.0;
 	$(window).load(function() {
 	    // Animate loader off screen
 	    $(".se-pre-con").fadeOut("slow");
@@ -19,7 +21,6 @@ var orderRefNo = "",orderAmountToBePaid="";
 	    }
 	}
 	$(document).ready(function() {
-		
 
 	    function ajaxRequest(url, jsonData, method, asyn, callBackFunction) {
 	        $.ajax({
@@ -38,10 +39,22 @@ var orderRefNo = "",orderAmountToBePaid="";
 
 	    var profilePicPopOverContent = '<ul id="profileList" class="list-group"><li class="list-group-item">Profile</li><li class="list-group-item logout" id="logout">Logout</li></ul>';
 	    $("#userProfilePic").popover({
+			animation:true,
 	        html: true,
 	        placement: 'bottom',
 	        content: profilePicPopOverContent
-	    });
+	    }).click(function(e) {
+			setTimeout(function(){
+				$('#userProfilePic').popover('hide');
+			}, 10000);
+		});
+		$('body').on('click', function (e) {
+			$('#userProfilePic').each(function () {
+				if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+					$(this).popover('hide');
+				}
+			});
+		});
 		    $('#checkout').click(function() {
 	        console.log("on checkout");
 			if(userDetails.length>0){
@@ -152,10 +165,10 @@ var orderRefNo = "",orderAmountToBePaid="";
 				//if(ind == 1) return false;
 				ind ++;
 	                var ul_item = "";
-					console.log(value.ProductCode);
-					console.log(product_code);
+					//console.log(value.ProductCode);
+					//console.log(product_code);
 					
-					if (value.ProductCode == product_code) {
+					if (value.ProductCode == product_code && value.ProductsLineList.length > 0) {
 					    lineItemExists = true;
 	                    ul_item = "<div class='product-name'>" + product_name + " #" + (i + 1) + ":</div>" + "<ul class='product-line-items clearfix'>";
 	                    if (i == 0)
@@ -225,7 +238,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 	                break;
 	            }
 	        }
-	        if (curretnProductArray.length > 0) {
+	        if (curretnProductArray.length > 0  && value.ProductsLineList.length > 0) {
 	            var ul_items = "";
 	            ul_items = '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true"><div class="panel panel-default">';
 
@@ -982,14 +995,14 @@ var orderRefNo = "",orderAmountToBePaid="";
 	                        console.log(eachItemData.product_name);
 							
 	                        $clone.find('.itemRowPname').text(eachItemData.product_name);
-							$clone.find('.itemRowQuantity').text(eachItemData.product_qty);
+							//$clone.find('.itemRowQuantity').text(eachItemData.product_qty);
 							$clone.find('.itemRowQuantity').text(eachItemData.product_qty);
 							var calcSubTotals = calcSubTotal(eachItemData.product_code,eachItemData.product_lineitems);
 							console.log("calcSubTotals[0]:"+calcSubTotals[0]);
 							console.log("calcSubTotals[1]:"+calcSubTotals[1]);
-							$clone.find('.itemRowTotal').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[0] * eachItemData.product_qty);
+							$clone.find('.itemRowTotal').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[0]);
 							$clone.find('.itemRowPrice').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[1]);
-							checkoutTotalAmount += calcSubTotals[0] * eachItemData.product_qty;
+							checkoutTotalAmount += calcSubTotals[0];
 	                        cartItemDescHtml += $clone.html();
 							console.log(cartItemDescHtml);
 	                    } else {
@@ -1040,7 +1053,8 @@ var orderRefNo = "",orderAmountToBePaid="";
 	                    $('#checkOutItemsList').html(cartItemDescHtml);
 						$('.checkoutTotalAmount').html('<span class="WebRupee">Rs.</span> '+grandTotalRound.toFixed(2));
 						$('#activate-payment').html('Proceed Payment <br/>('+grandTotalRound.toFixed(2)+')');
-						$('.cartFinalAmountForOrderRef').val(grandTotalRound.toFixed(2));
+						//$('.cartFinalAmountForOrderRef').val(grandTotalRound.toFixed(2));
+						cartFinalAmountForOrderRef = grandTotalRound.toFixed(2);
 	                    //calcCartAmount();
 	                } else {
 	                    $('#checkOutItemsList').html("<div>No items yet</div>");
@@ -1508,7 +1522,9 @@ else{
 	$('body').on('click', '#activate-payment', function(e) {
 		var postData = {};
 		postData.itemsArray = JSON.parse(localStorage.getItem('cartJson')).itemsArray;
-		postData.itemsTotalAmount = ''+$('.cartFinalAmountForOrderRef').val();
+		//postData.itemsTotalAmount = ''+$('.cartFinalAmountForOrderRef').val();
+
+		postData.itemsTotalAmount = ''+cartFinalAmountForOrderRef;
 		postData.userProfile = JSON.parse(localStorage.getItem('userInfo'));
 		postData.Phone = sessionStorage.getItem('loggedMobileNo');
 		console.log(JSON.stringify(postData));
