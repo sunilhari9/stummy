@@ -10,6 +10,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 	        $("#sign-up-button").hide(500);
 	        $("#welcomeMsg").show(500);
 	        $("#userProfilePic").attr("src", "data:image/png;base64," + userDetails[0].pic);
+	        $(".img-responsive").attr("src", "data:image/png;base64," + userDetails[0].pic);
             $(".showMenu-Mobile").addClass("visible-xs");
 	    } else {
 	        $("#welcomeMsg").hide(500);
