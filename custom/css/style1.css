@@ -870,6 +870,9 @@ li.food_item {
     overflow: hidden;
     padding: 5px;
 }
+.hidden{
+    display: none;
+}
 .colCheckBox {
     float: left;
     padding: 5px;

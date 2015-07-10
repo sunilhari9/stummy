@@ -10,9 +10,11 @@ var orderRefNo = "",orderAmountToBePaid="";
 	        $("#sign-up-button").hide(500);
 	        $("#welcomeMsg").show(500);
 	        $("#userProfilePic").attr("src", "data:image/png;base64," + userDetails[0].pic);
+            $(".showMenu-Mobile").addClass("visible-xs");
 	    } else {
 	        $("#welcomeMsg").hide(500);
 	        $("#sign-up-button").show(500);
+            $(".showMenu-Mobile").addClass("hidden");
 	    }
 	}
 	$(document).ready(function() {
@@ -77,6 +79,7 @@ var orderRefNo = "",orderAmountToBePaid="";
         $('body').on('click', '.logout', function() {
 	        localStorage.setItem("userInfo", "");
 	        setuserProfile();
+            
             $(".showMenu-Mobile").addClass("hidden-xs");
             
 	    });
@@ -1762,7 +1765,7 @@ $('.sendOTPForm').show();
 						var userDetailsResponce = [];
 						userDetailsResponce.push(data);
 						localStorage.setItem('userInfo', JSON.stringify(userDetailsResponce));
-                        $(".showMenu-Mobile").removeClass("hidden-xs");
+                        //$(".showMenu-Mobile").removeClass("hidden-xs");
 						sessionStorage.setItem('loggedMobileNo',phoneNo);
 						$('#login').show();
 						setuserProfile();
