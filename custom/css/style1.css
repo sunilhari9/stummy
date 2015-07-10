@@ -1010,6 +1010,9 @@ text-align: left;
     padding: 2px;
     width: 100%;
 }
+.HPHeader2 > table  > tbody > tr{
+    border-bottom: 1px dashed rgb(208, 208, 208);
+}
 .sort {
     list-style-type: none;
     padding: 0px;

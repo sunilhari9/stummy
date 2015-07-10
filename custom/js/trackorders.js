@@ -140,17 +140,17 @@ var orderRefNo = "",orderAmountToBePaid="";
 									if (parseInt(eachItemData.product_qty) <= 9)
 										product_qty = "0" + eachItemData.product_qty;
 									//$clone.find('.quantity').text(product_qty);
-									console.log(eachItemData.product_name);
+									console.log(eachItemData.product_lineitems);
 									
 									$clone.find('.itemRowPname').text(eachItemData.product_name);
 									$clone.find('.itemRowQuantity').text(eachItemData.product_qty);
 									$clone.find('.itemRowQuantity').text(eachItemData.product_qty);
-									//var calcSubTotals = calcSubTotal(eachItemData.product_code,eachItemData.product_lineitems);
-									var calcSubTotals = [0,0];
+									var calcSubTotals = calcSubTotal(eachItemData.product_code,eachItemData.product_lineitems);
+									//var calcSubTotals = [0,0];
 									console.log("calcSubTotals[0]:"+calcSubTotals[0]);
 									console.log("calcSubTotals[1]:"+calcSubTotals[1]);
-									$clone.find('.itemRowTotal').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[0]);
-									$clone.find('.itemRowPrice').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[1]);
+									$clone.find('.itemRowTotal').html('a<span class="WebRupee">Rs.</span> '+calcSubTotals[0]);
+									$clone.find('.itemRowPrice').html('b<span class="WebRupee">Rs.</span> '+calcSubTotals[1]);
 									checkoutTotalAmount += calcSubTotals[0];
 									cartItemDescHtml += $clone.html();
 									
@@ -161,11 +161,11 @@ var orderRefNo = "",orderAmountToBePaid="";
 							}
 							
 							
-							cartItemDescHtml += '<tr><td colspan="4" class="hrow" style="border-bottom: 2px solid;"></td></tr>';
+							//cartItemDescHtml += '<tr><td colspan="4" class="hrow" style="border-bottom: 2px solid;"></td></tr>';
 							$cloneTotal.find('.itemRowCheckoutTotalsText').html('Sub Total');
 							$cloneTotal.find('.itemRowCheckoutAmount').attr('data-th','Sub Total');
 							$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> '+checkoutTotalAmount.toFixed(2));
-							cartItemDescHtml += $cloneTotal.html();
+							//cartItemDescHtml += $cloneTotal.html();
 							var deliverCharges = 0,containerCharges = 0;
 							var grandTotal = (parseFloat(checkoutTotalAmount) +
 								parseFloat(deliverCharges) +

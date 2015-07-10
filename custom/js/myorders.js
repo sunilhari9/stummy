@@ -159,8 +159,8 @@ var orderRefNo = "",orderAmountToBePaid="";
 							$eachOrderDetailsHeaderClone.find('.panel-heading').attr('id','heading'+index1);
 							//console.log($eachOrderDetailsHeaderClone.find('.panel-heading'));
 							console.log($eachOrderDetails.find('.placeOrderDetails').text());
-							//$eachOrderDetails.find('.placeOrderDetails').text(JSON.stringify(cartTotalOrders[index1].itemsArray));
-							$eachOrderDetails.find('.placeOrderDetails').text('[{"product_code":"1002","product_name":"Fish Tikka","product_qty":"1","product_lineitems":[["2"]]},{"product_code":"1003","product_name":"Chicken Tikka","product_qty":"1","product_lineitems":[["1","2"]]}]');
+							$eachOrderDetails.find('.placeOrderDetails').text(JSON.stringify(cartTotalOrders[index1].itemsArray));
+							//$eachOrderDetails.find('.placeOrderDetails').text('[{"product_code":"1002","product_name":"Fish Tikka","product_qty":"1","product_lineitems":[["2"]]},{"product_code":"1003","product_name":"Chicken Tikka","product_qty":"1","product_lineitems":[["1","2"]]}]');
 							$eachOrderDetailsHeaderClone.find('.panel-heading').attr('href','#collapse'+index1);
 							$eachOrderDetailsHeaderClone.find('.orderNo').html("Order Details: "+cartTotalItems.OrderID + " @ " + cartTotalItems.OrderDate + "<span class='pull-right'>Status: "+cartTotalItems.Status+"&nbsp;&nbsp;<i class='indicator glyphicon glyphicon-chevron-down  pull-right'></i></span>");
 							$eachOrderDetails.find('.orderInfo').html("<b>Order No:</b> "+cartTotalItems.OrderID + "<br/><b>Order Date: </b>" + cartTotalItems.OrderDate +"<br/><b> Order Amount: </b>"+cartTotalItems.TotalOrderAmount+"");
@@ -182,13 +182,13 @@ var orderRefNo = "",orderAmountToBePaid="";
 									$clone.find('.itemRowPname').text(eachItemData.product_name);
 									$clone.find('.itemRowQuantity').text(eachItemData.product_qty);
 									$clone.find('.itemRowQuantity').text(eachItemData.product_qty);
-									//var calcSubTotals = calcSubTotal(eachItemData.product_code,eachItemData.product_lineitems);
-									var calcSubTotals = [0,0];
+									var calcSubTotals = calcSubTotal(eachItemData.product_code,eachItemData.product_lineitems);
+									//var calcSubTotals = [0,0];
 									console.log("calcSubTotals[0]:"+calcSubTotals[0]);
 									console.log("calcSubTotals[1]:"+calcSubTotals[1]);
-									$clone.find('.itemRowTotal').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[0]);
+									$clone.find('.itemRowTotal').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[0] * eachItemData.product_qty);
 									$clone.find('.itemRowPrice').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[1]);
-									checkoutTotalAmount += calcSubTotals[0];
+									checkoutTotalAmount += calcSubTotals[0] * eachItemData.product_qty;
 									cartItemDescHtml += $clone.html();
 									
 								} else {
@@ -198,11 +198,11 @@ var orderRefNo = "",orderAmountToBePaid="";
 							}
 							
 							
-							cartItemDescHtml += '<tr><td colspan="4" class="hrow" style="border-bottom: 2px solid;"></td></tr>';
+							//cartItemDescHtml += '<tr><td colspan="4" class="hrow" style="border-bottom: 2px solid;"></td></tr>';
 							$cloneTotal.find('.itemRowCheckoutTotalsText').html('Sub Total');
 							$cloneTotal.find('.itemRowCheckoutAmount').attr('data-th','Sub Total');
 							$cloneTotal.find('.itemRowCheckoutAmount').html('<span class="WebRupee">Rs.</span> '+checkoutTotalAmount.toFixed(2));
-							cartItemDescHtml += $cloneTotal.html();
+							//cartItemDescHtml += $cloneTotal.html();
 							var deliverCharges = 0,containerCharges = 0;
 							var grandTotal = (parseFloat(checkoutTotalAmount) +
 								parseFloat(deliverCharges) +

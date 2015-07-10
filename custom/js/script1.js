@@ -983,9 +983,9 @@ var orderRefNo = "",orderAmountToBePaid="";
 							var calcSubTotals = calcSubTotal(eachItemData.product_code,eachItemData.product_lineitems);
 							console.log("calcSubTotals[0]:"+calcSubTotals[0]);
 							console.log("calcSubTotals[1]:"+calcSubTotals[1]);
-							$clone.find('.itemRowTotal').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[0]);
+							$clone.find('.itemRowTotal').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[0] * eachItemData.product_qty);
 							$clone.find('.itemRowPrice').html('<span class="WebRupee">Rs.</span> '+calcSubTotals[1]);
-							checkoutTotalAmount += calcSubTotals[0];
+							checkoutTotalAmount += calcSubTotals[0] * eachItemData.product_qty;
 	                        cartItemDescHtml += $clone.html();
 							console.log(cartItemDescHtml);
 	                    } else {
@@ -1354,6 +1354,12 @@ var orderRefNo = "",orderAmountToBePaid="";
 	$(window).resize(function() {
 
 	    mobileChk();
+		var rwdInfo = calcRWD();
+	if (rwdInfo == 4) {
+		$('.itemList').height($('.list-group').height()-2);
+		$('.items').css('min-height',$('.list-group').height()-90);
+		$('.items').css('max-height',$('.list-group').height()-90);
+	}
 	});
 
 	function sortJSON(data, key) {
