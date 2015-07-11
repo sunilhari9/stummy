@@ -1238,8 +1238,49 @@ text-align: left;
 		max-width: 100%;
 		height: auto;
 	}
-	.footer-link{
+	a.footer-link,span.footer-link{
 		color: white;
 		margin-top: 10px;
 		font-weight: bold;
-		}
+		margin-right: 5%;
+	}
+	a.footer-link.space{
+		margin-right: 10%;
+	}
+	#paymentMode{
+		border-bottom: 0px !important;
+	}
+	#cod,#sod,#mc,#ib{
+		padding: 100px;
+		border: 1px solid #ddd;
+		font-family: sans-serif;
+		font-size: 1.5em;
+	}
+	.cod,.sod,.mc,.ib{
+	color: black !important;
+  font-weight: bold;
+  padding-left: 5px;
+  padding-right: 5px;
+  }
+	#paymentMode > li{
+	background-color: #F9D99A !important;
+	border-left: 1px solid rgb(229, 157, 49) !important;
+	}
+	#paymentMode > li.active{
+		background-color: rgb(229, 157, 49) !important;
+		color: white;
+	}
+	#paymentMode > li.active > span > a{
+		color: white !important;
+	}
+	.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+		margin-left: 2px;
+	}
+	.placeOrderFinal{
+		width: 50%;
+		margin-left: 25%;
+		margin-top: 10px;
+  }
+  .imgIcon{
+	padding: 10px;
+  }

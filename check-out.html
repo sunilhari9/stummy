@@ -11,6 +11,7 @@
     <!-- Bootstrap -->
     <link href="vendor/css/bootstrap.min.css" rel="stylesheet">
     <link href="vendor/css/bootstrap-dialog.min.css" rel="stylesheet">
+	    <link href="vendor/css/jquery.sidr.dark.css" rel="stylesheet">
     <link href="custom/css/style1.css" rel="stylesheet">
 
     <link rel="icon" type="image/png" href="custom/images/favicon.png">
@@ -39,6 +40,7 @@
 
 
     <div class="se-pre-con"></div>
+    <div class="ajax-loader" style="display: none;"></div>
     <div class="messagesBar"></div>
 
     <div class="container-fluid ">
@@ -46,7 +48,7 @@
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <img src="custom/images/profile.png" class="navToggle img-responsive img-circle">
+                        <img src="custom/images/Categorie.png" class="navToggle img-responsive img-circle">
                     </button>
                     <a class="navbar-brand" href="index.html"><img class="logo" alt="Brand" src="custom/images/logo.png"></a>
                 </div>
@@ -436,15 +438,18 @@
             <div class="row setup-content" id="step-3">
                 <div class="col-xs-12 ">
                     <ul id="paymentMode" class="nav nav-tabs">
-                        <li class="active"><a href="#cod" data-toggle="tab">Cash on delivery</a></li>
-                        <li><a href="#sod" data-toggle="tab">Swipe on Delivary</a></li>
-                        <li><a href="#mc" data-toggle="tab">Meal Coupns</a></li>
-                        <li><a href="#ib" data-toggle="tab">Internet Banking</a></li>
-                        
+                        <li class="active"><span><img class="imgIcon" src="./custom/images/Wallet.png" /><a href="#cod" data-toggle="tab" class="cod">Cash on delivery</a></span></li>
+                        <li class=""><span><img class="imgIcon" src="./custom/images/swipe.png" /><a href="#sod" data-toggle="tab" class="sod">Swipe on Delivery</a></span></li>
+                        <li class=""><span><img  class="imgIcon" src="./custom/images/ticket.png" /><a href="#mc" data-toggle="tab" class="mc">Meal Coupns</a></li>
+                        <li class=""><span><img  class="imgIcon" src="./custom/images/CreditCard.png" /><a href="#ib" data-toggle="tab" class="ib">Internet Banking</a></span></li>
+                        <!-- <li><a href="#sod" data-toggle="tab" class="sod">Swipe on Delivary</a></li>
+                        <li><a href="#mc" data-toggle="tab" class="mc">Meal Coupns</a></li>
+                        <li><a href="#ib" data-toggle="tab" class="ib">Internet Banking</a></li>
+                         -->
                     </ul>
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane fade in active" id="cod">
-                            <p>Get ready for the yammy food with cash</p>
+                            <p>Get ready for the yummy food with cash</p>
                         </div>
                         <div class="tab-pane fade" id="sod">
                             <p>Have your card ready for the swipe and have you food</p>
@@ -453,15 +458,16 @@
                             <p>6% extra when you use your food coupns</p>
                         </div>
                         <div class="tab-pane fade" id="ib">
-                            <p>Use our secured payment gate way for the payment</p>
-                        </div>
-                        
+                            <!-- <p>Use our secured payment gate way for the payment</p> -->
+							<p>Online payment option will  be available soon...</p>
+                        </div>                        
                     </div>
+					<button class="placeOrderFinal btn btn-primary btn-block">Place Order</button>
                 </div>
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-inverse navbar-bottom">
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
         <div class="container">
 
         </div>
