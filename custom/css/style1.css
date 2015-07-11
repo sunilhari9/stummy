@@ -80,7 +80,7 @@ text-decoration: none !important;
             z-index: 3;
         }
         .search .form-control-feedback {
-            margin-right: 20% !important;
+            margin-right: 25% !important;
         }
         .search.form-group {
             margin-left: 50% !important;
@@ -108,7 +108,7 @@ text-decoration: none !important;
         .searchInMobile {
             float: right;
             margin-top: -24px;
-            margin-right: 64px;
+            margin-right: 50px;
         }
         .hiddeninMobile {
             display: none;
@@ -474,7 +474,7 @@ text-decoration: none !important;
     padding-bottom: 25px;
     max-height: 400px;
 }
-#cartItemDesc {
+.cartItemDesc {
     overflow-y: auto;
     overflow-x: hidden;
     min-height: 150px;
@@ -738,16 +738,17 @@ close bgwhite
 }
 .navToggle {
     height: 40px !important;
+border: 1px solid rgb(255, 196, 80);
 }
 .navbar-toggle {
     padding: 0px !important;
     margin-bottom: 0px !important;
     border-radius: 0px !important;
-    border-color: #fff !important;
+    border-color: #FFC450 !important;
 }
 .navbar-default .navbar-toggle:focus,
 .navbar-default .navbar-toggle:hover {
-    background-color: #fff !important;
+    background-color: #FFC450  !important;
 }
 .modal-header.customizeFoodHeader {
     padding-bottom: 0px !important;
@@ -863,6 +864,46 @@ li.food_item {
     margin-left: 27px;
     margin-bottom: 15px;
 }
+.profilePopUP img{
+    height:80px;
+    float : left;
+}
+#welcomeMsg span{
+    padding-right: 20px;
+}
+#welcomeMsg span p{
+    font-size: 14px;
+}
+#welcomeMsg .glyphicon{
+    color: #fff;
+    cursor: pointer;
+}
+#userProfilePic p {
+    margin-left: -8px;
+}
+#logout p {
+    margin-left: -9px;
+}
+.popover{
+      top: 50px;
+  left: -90.5px;
+  display: block;
+  width: 220px;
+}
+.profileName{
+    font-weight: bold;
+}
+.left{
+    padding-left: 10px;
+    }
+.profileLink{
+    float:left;
+}
+.profileOptions{
+    clear: both;
+    list-style: none;
+    padding-left: 0px;
+}
 @media (max-width: 420px) {
     /*.show-read-more{
       clear:both !important;
@@ -897,6 +938,8 @@ li.food_item {
 }
 .glyphicon-edit,
 .glyphicon-shopping-cart,
+.glyphicon-user,
+.glyphicon-off,
 .quantityItem {
     font-size: 20px;
 }
@@ -1231,6 +1274,9 @@ text-align: left;
 	}
 	.modal-header{
 		border-radius: 0px 30px 0px 0px !important;
+        background-color: rgb(229, 157, 49);
+  color: #fff;
+  font-weight: bold;
 	}
 	
 	.img-responsive-checkout{
