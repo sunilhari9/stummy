@@ -24,23 +24,23 @@
 
 <body class="index_body">
     <div class="modal fade" id="advertiseModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-body">
-        
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary closeAdd" data-dismiss="modal">Close add</button>
-      </div>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary closeAdd" data-dismiss="modal">Close add</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 
     <div class="se-pre-con"></div>
     <div class="ajax-loader" style="display: none;"></div>
-	
+
     <div class="messagesBar"></div>
 
     <div class="container-fluid ">
@@ -48,7 +48,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <img src="custom/images/profile.png" class="navToggle img-responsive img-circle">
+                        <img src="custom/images/Categorie.png" class="navToggle img-responsive img-circle">
                     </button>
                     <a class="navbar-brand" href="index.html"><img class="logo" alt="Brand" src="custom/images/logo.png"></a>
                 </div>
@@ -64,23 +64,92 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <span id="welcomeMsg">
-                                
-                            <img src='custom/images/profile.png' id='userProfilePic' class='navToggle hidden-xs img-responsive img-circle'>
+                                <span class="glyphicon glyphicon-shopping-cart navToggle hidden-xs" id='shopping-cart' data-toggle="modal" data-target="#cartModel" aria-hidden="true"><p>Cart</p> </span>
+                            <span class="glyphicon glyphicon-user navToggle hidden-xs" id='userProfilePic' aria-hidden="true"><p>Accont</p></span>
+                            <span class="glyphicon glyphicon-off navToggle hidden-xs logout" id='logout' aria-hidden="true"><p>Logout</p></span>
                             </span>
-                            
+
                             <a href="#" class="links-active" data-toggle="modal" data-target="#loginScreen" id="sign-up-button">Sign-in / Sign-up</a></li>
-                            <li><a href="#" class="showMenu-Mobile links-active profile" id="profile-Mobile">Profile</a></li>
-                            <li><a href="#" class="showMenu-Mobile links-active logout" id="logout-Mobile">Logout</a></li>
-                       
+                        <li><a href="#" class="showMenu-Mobile links-active profile" data-toggle="modal" data-target="#cartModel" id="cart-Mobile">Cart</a></li>
+                        <li><a href="#" class="showMenu-Mobile links-active profile" data-toggle="modal" data-target="#myProfileModel" id="profile-Mobile">My Profile</a></li>
+                        <li><a href="#" class="showMenu-Mobile links-active profile" data-toggle="modal" data-target="#myOrderModel" id="order-Mobile">My Order</a></li>
+                        <li><a href="#" class="showMenu-Mobile links-active logout" id="logout-Mobile">Logout</a></li>
+
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
             </div>
             <!--/.container -->
         </nav>
+        
         <!--/.nav-defult -->
+        <div class="modal fade" id="myOrderModel" tabindex="-1" role="dialog" aria-labelledby="myOrderModel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width: 100%;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			</div>
+			<div class="modal-body" style="height: 320px;">
+				<embed src="my-orders.html" width="100%" height="100%"></embed>
+			</div>
+		</div>
+	</div>
+</div>
+        <div class="modal fade" id="myProfileModel" tabindex="-1" role="dialog" aria-labelledby="myProfileModel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width: 100%;">
+			<div class="modal-body">
+				<embed src="profile.html" width="100%" height="100%"></embed>
+			</div>
+		</div>
+	</div>
+</div>
+        <div id="cartModel" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="cartModel" aria-hidden="true">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+         <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        Your cart items
+        </div>
+     <div class="modal-body">
+                  <div class="cartItems">
+                        <div id="cartItemDescDesktop" class="scroll cartItemDesc"></div>
+                        <hr class="hrLine">
+                        <div class="customize clearCart" title="Click to clear all cart items">Clear Cart</div>
+                        <div class="calc">
+                            <div>
+                                <div class="left">Sub Total</div>
+                                <div class="right subtotal">0.00</div>
+                            </div>
+                            <!--<div><div class="left">Delivery Free</div><div class="right delivery">0.00</div></div>
+						<div><div class="left">Container Charges (+)</div><div class="right container_charges">0.00</div></div>-->
+                            <div>
+                                <div class="left">Tax (+)</div>
+                                <div class="right service_tax">0.00</div>
+                            </div>
+                            <div>
+                                <div class="left">Rounded Off (+/-) </div>
+                                <div class="right rounded_off">0.00</div>
+                            </div>
+                            <div class="totalAmount row">
+                                <span class="col-md-5">Total</span>
+                                <span class="col-md-7 text-right grand_total">Rs. 0.00</span>
+                            </div>
+                        </div>
+                        <hr class="hrLine">
+                        <div id="checkout" class="col-md-8 hidden">Proceed to Checkout</div>
+                        <div id="checkoutDisabled" class="col-md-8">Add Items to Proceed Checkout</div>
+                    </div>
+      </div>
+      
+    </div>
+
+  </div>
+</div>
         <!--Login Screen-->
-        <div class="modal fade" id="loginScreen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="loginScreen" tabindex="-1" role="dialog" aria-labelledby="loginScreen" aria-hidden="true">
 
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -112,31 +181,31 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 -->
                             <div class="row loginForm">
                                 <div class="col-xs-12 col-sm-12">
-                                  
-                                        <div class="input-group input-group-lg">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                            <input type="text" class="form-control phoneNo" name="username" placeholder="9705984789">
-                                        </div>
-                                        <span class="help-block"></span>
 
-                                        <div class="input-group input-group-lg">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <input type="password" class="form-control loginPassword" name="password" placeholder="Password">
-                                        </div>
-                                        <span class="phone-help-block help-block"></span>
-                                        <div class="row col-xs-12">
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                        <input type="text" class="form-control phoneNo" name="username" placeholder="9705984789">
+                                    </div>
+                                    <span class="help-block"></span>
 
-                                            <div class="col-xs-12 col-sm-6">
-                                                <p class="omb_forgotPwd">
-                                                     <a href="#" id="otpLink" >Generate OTP/Forgot password?</a>
-                                                </p>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-3">
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input type="password" class="form-control loginPassword" name="password" placeholder="Password">
+                                    </div>
+                                    <span class="phone-help-block help-block"></span>
+                                    <div class="row col-xs-12">
 
-                                                <button class="loginButton" id="login">Login</button>
-                                            </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <p class="omb_forgotPwd">
+                                                <a href="#" id="otpLink">Generate OTP/Forgot password?</a>
+                                            </p>
                                         </div>
-                                 
+                                        <div class="col-xs-12 col-sm-3">
+
+                                            <button class="loginButton" id="login">Login</button>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -148,7 +217,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
             </div>
         </div>
         <!--End Login Screen-->
-         <!--Start Model OTP-->
+        <!--Start Model OTP-->
         <div class="modal fade" id="otpScreen" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="otpLabel" aria-hidden="true">
 
             <div class="modal-dialog">
@@ -158,58 +227,58 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                     </div>
                     <div class="modal-body">
                         <div class="row loginForm">
-                                <div class="col-xs-12 col-sm-12">
-                                    <div class="otpForm">
-                                        <div class="input-group input-group-lg otpValidateForm">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <input type="password" class="form-control otpValue" name="username" placeholder="XXXX">
-                                        </div>
-                                        <div class="input-group input-group-lg sendOTPForm ">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                            <input type="text" class="form-control phNumberForOTP" name="username" placeholder="9705984789">
-                                        </div>
-                                        <span class="OTP-error-block"></span>
-                                        <div class="col-xs-12 col-sm-6">
-                                             
-                                            </div>
-
-                                        <div class="row col-xs-12 sendOTPForm">
-                                            <div class="col-xs-12 col-sm-3">
-                                                <button class="sendOTPButton loginButton">Send OTP</button>
-                                            </div>
-                                        </div>
-                                        <div class="row col-xs-12 otpValidateForm">
-                                            <div class="col-xs-12 col-sm-3">
-                                                <button class="otpValidateButton loginButton">Validate OTP</button>
-                                            </div>
-                                        </div>
-                                        
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="otpForm">
+                                    <div class="input-group input-group-lg otpValidateForm">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input type="password" class="form-control otpValue" name="username" placeholder="XXXX">
                                     </div>
-                                    
-                                    <div class="conformPasswordBlock">
-                                        <span class="help-block error-block" ></span>
-                                        <div class="input-group input-group-lg">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <input type="password" class="form-control password" name="password" placeholder="password">
-                                        </div>
-                                         <span class="help-block"></span>
-                                         <div class="input-group input-group-lg">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <input type="password" class="form-control confirmPassword" name="confirmPassword" placeholder="confirm password">
-                                        </div>
-                                        <span class="help-block"></span>
-                                        <div class="col-xs-12 col-sm-6">
-                                             
-                                            </div>
+                                    <div class="input-group input-group-lg sendOTPForm ">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                        <input type="text" class="form-control phNumberForOTP" name="username" placeholder="9705984789">
+                                    </div>
+                                    <span class="OTP-error-block"></span>
+                                    <div class="col-xs-12 col-sm-6">
 
-                                        <div class="row col-xs-12">
-                                            <div class="col-xs-12 col-sm-3">
-                                                <button class="loginButton savePasswordButton">save</button>
-                                            </div>
+                                    </div>
+
+                                    <div class="row col-xs-12 sendOTPForm">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <button class="sendOTPButton loginButton">Send OTP</button>
+                                        </div>
+                                    </div>
+                                    <div class="row col-xs-12 otpValidateForm">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <button class="otpValidateButton loginButton">Validate OTP</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="conformPasswordBlock">
+                                    <span class="help-block error-block"></span>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input type="password" class="form-control password" name="password" placeholder="password">
+                                    </div>
+                                    <span class="help-block"></span>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input type="password" class="form-control confirmPassword" name="confirmPassword" placeholder="confirm password">
+                                    </div>
+                                    <span class="help-block"></span>
+                                    <div class="col-xs-12 col-sm-6">
+
+                                    </div>
+
+                                    <div class="row col-xs-12">
+                                        <div class="col-xs-12 col-sm-3">
+                                            <button class="loginButton savePasswordButton">save</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>    
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -283,7 +352,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                     <div class="cartHeading"><span class="glyphicon glyphicon-shopping-cart"></span> Your Cart <span class="badge cartItemCount"></span></div>
                     <!--<div class="estimatedTime">Estimated Delivery time: 50 min</div>-->
                     <div class="cartItems">
-                        <div id="cartItemDesc" class="scroll"></div>
+                        <div id="cartItemDescModel" class="scroll cartItemDesc"></div>
                         <hr class="hrLine">
                         <div class="customize clearCart" title="Click to clear all cart items">Clear Cart</div>
                         <div class="calc">
@@ -366,7 +435,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
     <script src="vendor/js/jquery.sidr.min.js"></script>
     <script src="vendor/js/jquery.touchwipe.js"></script>
     <script src="custom/js/items1.js"></script>
-    <script src="custom/js/script1.js"></script>
+    <script src="custom/js/script_old.js"></script>
     <script>
         $(document).ready(function() {
 			if ($(document).width() <= 1023) {

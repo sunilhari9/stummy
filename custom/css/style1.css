@@ -80,7 +80,7 @@ text-decoration: none !important;
             z-index: 3;
         }
         .search .form-control-feedback {
-            margin-right: 20% !important;
+            margin-right: 25% !important;
         }
         .search.form-group {
             margin-left: 50% !important;
@@ -108,7 +108,7 @@ text-decoration: none !important;
         .searchInMobile {
             float: right;
             margin-top: -24px;
-            margin-right: 64px;
+            margin-right: 50px;
         }
         .hiddeninMobile {
             display: none;
@@ -474,7 +474,7 @@ text-decoration: none !important;
     padding-bottom: 25px;
     max-height: 400px;
 }
-#cartItemDesc {
+.cartItemDesc {
     overflow-y: auto;
     overflow-x: hidden;
     min-height: 150px;
@@ -738,16 +738,17 @@ close bgwhite
 }
 .navToggle {
     height: 40px !important;
+    border: 1px solid rgb(255, 196, 80);
 }
 .navbar-toggle {
     padding: 0px !important;
     margin-bottom: 0px !important;
     border-radius: 0px !important;
-    border-color: #fff !important;
+    border-color: #FFC450 !important;
 }
 .navbar-default .navbar-toggle:focus,
 .navbar-default .navbar-toggle:hover {
-    background-color: #fff !important;
+    background-color: #FFC450 !important;
 }
 .modal-header.customizeFoodHeader {
     padding-bottom: 0px !important;
@@ -863,6 +864,46 @@ li.food_item {
     margin-left: 27px;
     margin-bottom: 15px;
 }
+.profilePopUP img{
+    height:80px;
+    float : left;
+}
+#welcomeMsg span{
+    padding-right: 20px;
+}
+#welcomeMsg span p{
+    font-size: 14px;
+}
+#welcomeMsg .glyphicon{
+    color: #fff;
+    cursor: pointer;
+}
+#userProfilePic p {
+    margin-left: -8px;
+}
+#logout p {
+    margin-left: -9px;
+}
+.popover{
+      top: 50px;
+  left: -90.5px;
+  display: block;
+  width: 220px;
+}
+.profileName{
+    font-weight: bold;
+}
+.left{
+    padding-left: 10px;
+    }
+.profileLink{
+    float:left;
+}
+.profileOptions{
+    clear: both;
+    list-style: none;
+    padding-left: 0px;
+}
 @media (max-width: 420px) {
     /*.show-read-more{
       clear:both !important;
@@ -897,7 +938,9 @@ li.food_item {
 }
 .glyphicon-edit,
 .glyphicon-shopping-cart,
-.quantityItem {
+.quantityItem,
+.glyphicon-user,
+.glyphicon-off{
     font-size: 20px;
 }
 @font-face {
@@ -1231,6 +1274,9 @@ text-align: left;
 	}
 	.modal-header{
 		border-radius: 0px 30px 0px 0px !important;
+        background-color: rgb(229, 157, 49);
+  color: #fff;
+  font-weight: bold;
 	}
 	
 	.img-responsive-checkout{
@@ -1306,3 +1352,18 @@ text-align: left;
   .imgIcon{
 	padding: 10px;
   }
+
+/*Profile*/
+.user-details {position: relative; padding: 0;}
+.user-details .user-image {position: relative;  z-index: 1; width: 100%; text-align: center;}
+ .user-image img { clear: both; margin: auto; position: relative;}
+
+.user-details .user-info-block {width: 100%; position: absolute; top: 55px; background: rgb(255, 255, 255); z-index: 0; padding-top: 35px;}
+ .user-info-block .user-heading {width: 100%; text-align: center; margin: 40px 0 0;}
+ .user-info-block .navigation {float: left; width: 100%; margin: 0; padding: 0; list-style: none; border-top: 1px solid #428BCA;}
+  .navigation li {float: left; margin: 0; padding: 0;}
+   .navigation li a {padding: 20px 25.7px; float: left;}
+   .navigation li.active a {background: #428BCA; color: #fff;}
+ .user-info-block .user-body {float: left; padding: 5%; width: 90%;}
+  .user-body .tab-content > div {float: left; width: 100%;}
+  .user-body .tab-content h4 {width: 100%; margin: 10px 0; color: #333;}
