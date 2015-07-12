@@ -111,7 +111,7 @@
 
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                        <input type="text" class="form-control phoneNo" name="username" placeholder="9705984789">
+                                        <input type="text" class="form-control phoneNo" name="username" placeholder="Enter Phone Number">
                                     </div>
                                     <span class="help-block"></span>
 
@@ -162,7 +162,7 @@
                                     </div>
                                     <div class="input-group input-group-lg sendOTPForm">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-                                        <input type="text" class="form-control phNumberForOTP" name="username" placeholder="9705984789">
+                                        <input type="text" class="form-control phNumberForOTP" name="username" placeholder="Enter Phone Number">
                                     </div>
                                     <span class="OTP-error-block"></span>
                                     <div class="col-xs-12 col-sm-6">
@@ -245,9 +245,9 @@
                             <div class="panel panel-primary defaultDeliveryAddress">
                                 <div class="panel-heading ">
                                     <h3>
-                          <input type="radio" name="addressSelection" id="DeliveryAddress" checked value="option2">
+                          <input type="radio" name="addressSelection" id="DeliveryAddress" value="option2">
                           Delivery Address
-                        <div class="pull-right editDeliveryAddressIcon"><span class="glyphicon glyphicon-pencil"></span></div>
+                        <div class="pull-right "><span class="glyphicon glyphicon-copy" title="Click to copy Delivery Address to Home Address"></span><span class="glyphicon glyphicon-pencil editDeliveryAddressIcon" title="Edit Address"></span></div>
                           </h3>
                                 </div>
                                 <ul class="list-group">
@@ -261,7 +261,7 @@
                           Enter Delivery Address
                           </h3>
                                 </div>
-                                <a href="#" class="editDeliveryAddressIcon glyphicon-pencil">
+                                <a href="#" class="editDeliveryAddressIcon glyphicon-pencil" title="Edit Address">
                                     click here to create Delivery address
                                 </a>
                             </div>
@@ -287,17 +287,17 @@
                                     <div class="form-group">
                                         <label for="deliveryPhone" class="col-sm-2 control-label">Phone</label>
                                         <div class="col-sm-10">
-                                            <input type="phone" class="form-control" id="deliveryPhone" placeholder="9705984789">
+                                            <input type="phone" class="form-control" id="deliveryPhone" placeholder="Enter Phone Number">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="deliveryDNo" class="col-sm-2 control-label">D/No</label>
+                                        <label for="deliveryDNo" class="col-sm-2 control-label">Address</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="deliveryDNo" placeholder="Enter D/No">
+                                            <input type="text" class="form-control" id="deliveryDNo" placeholder="Enter Address">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="deliveryStreet" class="col-sm-2 control-label">Street</label>
+                                        <label for="deliveryStreet" class="col-sm-2 control-label">Area</label>
                                         <div class="col-sm-10">
                                             <select class="form-control" id="deliveryStreet"></select>
                                         </div>
@@ -311,7 +311,7 @@
 
                                     <div class="form-group ">
                                         <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" id="deliveryAddressSubmit" class="btn btn-default pull-right">Save</button>
+                                            <button type="button" id="deliveryAddressSubmit" class="btn btn-default pull-right">Save</button>
                                         </div>
                                     </div>
                                 </form>
@@ -324,7 +324,7 @@
                                     <h3>
                           <input type="radio" name="addressSelection" id="homeAddress" value="option1">
                           Home Address 
-                          <div class="pull-right editHomeAddressIcon"><span class="glyphicon glyphicon-pencil"></span></div>
+                          <div class="pull-right editHomeAddressIcon"><span class="glyphicon glyphicon-pencil" title="Edit Address"></span></div>
                           </h3>
                                 </div>
                                 <ul class="list-group">
@@ -340,7 +340,7 @@
                           Enter Home Address
                           </h3>
                                 </div>
-                                <a href="#" class="editHomeAddressIcon glyphicon-pencil">
+                                <a href="#" class="editHomeAddressIcon glyphicon-pencil" title="Edit Address">
                                     click here to create Home address
                                 </a>
                             </div>
@@ -364,17 +364,17 @@
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-2 control-label">Phone</label>
                                         <div class="col-sm-10">
-                                            <input type="phone" class="form-control" id="homePhone" placeholder="9705984789">
+                                            <input type="phone" class="form-control" id="homePhone" placeholder="Enter Phone Number">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="homeDNo" class="col-sm-2 control-label">D/No</label>
+                                        <label for="homeDNo" class="col-sm-2 control-label">Address</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="homeDNo" placeholder="Enter D/No">
+                                            <input type="text" class="form-control" id="homeDNo" placeholder="Enter Address">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="homeStreet" class="col-sm-2 control-label">Street</label>
+                                        <label for="homeStreet" class="col-sm-2 control-label">Area</label>
                                         <div class="col-sm-10">
                                             <select class="form-control" id="homeStreet"></select>
                                         </div>
@@ -389,7 +389,7 @@
 
                                     <div class="form-group ">
                                         <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" id="homeAddressSubmit" class="btn btn-default pull-right">Save</button>
+                                            <button type="button" id="homeAddressSubmit" class="btn btn-default pull-right">Save</button>
                                         </div>
                                     </div>
                                 </form>
@@ -467,7 +467,7 @@
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <nav class="navbar navbar-inverse navbar-bottom">
         <div class="container">
 
         </div>
@@ -537,7 +537,7 @@
 				flag = true;				
 			}
 			if(flag)
-				window.location.href = 'index1.html';
+				window.location.href = 'index.html';
 		});
         $('#paymentMode').tabCollapse();
     </script>

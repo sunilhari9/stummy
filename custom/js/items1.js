@@ -25,7 +25,7 @@ $.getJSON("custom/js/products.json", function(items) {
     var uniqueCategories = getUniqueCategories();
     $.each(uniqueCategories, function(index, value) {
         if (index == 0)
-            $('.list-group').append('<a href="#" class="list-group-item item-type activeCat">' + value + '</a>');
+            $('.list-group').append('<a href="#" class="list-group-item item-type inActive activeCat">' + value + '</a>');
         else
             $('.list-group').append('<a href="#" class="list-group-item item-type inActive">' + value + '</a>');
     });

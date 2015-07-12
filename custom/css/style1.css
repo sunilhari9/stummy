@@ -525,14 +525,14 @@ text-decoration: none !important;
     font-weight: bolder;
     margin-bottom: -15px;
 }
-#checkout {
+#checkoutClass {
     background-color: rgb(229, 157, 49) !important;
     color: #fff;
     margin-top: -12px;
     padding: 5px;
     width: 100%;
 }
-#checkout:before {
+#checkoutClass:before {
     content: '';
     position: absolute;
     top: 0;
@@ -542,7 +542,7 @@ text-decoration: none !important;
     border-bottom: 15px solid white;
     width: 0;
 }
-#checkoutDisabled {
+.checkoutDisabled {
     background-color: #999793 !important;
     color: #fff;
     margin-top: -12px;
@@ -738,13 +738,13 @@ close bgwhite
 }
 .navToggle {
     height: 40px !important;
-    border: 1px solid rgb(255, 196, 80);
+	border: 1px solid rgb(255, 196, 80);
 }
 .navbar-toggle {
     padding: 0px !important;
     margin-bottom: 0px !important;
     border-radius: 0px !important;
-    border-color: #FFC450 !important;
+    border-color: #FFC450 !important;	
 }
 .navbar-default .navbar-toggle:focus,
 .navbar-default .navbar-toggle:hover {
@@ -1040,7 +1040,7 @@ a.list-group-item {
     transform: rotate(-90deg);
 }
 .clearCart,
-.trash {
+.trash,.glyphicon-copy,.glyphicon-pencil {
     cursor: pointer;
 }
 .panel-default>.panel-heading {
@@ -1180,7 +1180,7 @@ text-align: left;
     }
 }
     
-    #checkout {
+    #checkoutClass {
         cursor: pointer;
     }
 	.itemRowQuantity{
@@ -1274,9 +1274,6 @@ text-align: left;
 	}
 	.modal-header{
 		border-radius: 0px 30px 0px 0px !important;
-        background-color: rgb(229, 157, 49);
-  color: #fff;
-  font-weight: bold;
 	}
 	
 	.img-responsive-checkout{
@@ -1306,7 +1303,7 @@ text-align: left;
 	color: black !important;
   font-weight: bold;
   padding-left: 5px;
-  padding-right: 5px;
+  padding-right: 10px;
   }
 	#paymentMode > li{
 	background-color: #F9D99A !important;
@@ -1352,8 +1349,14 @@ text-align: left;
   .imgIcon{
 	padding: 10px;
   }
-
-/*Profile*/
+  .bootstrap-dialog .bootstrap-dialog-message,#aboutUsScreen  .modal-body, #contactUsScreen .modal-body,#contactUsScreen .modal-body{
+		font-size: 16px !important;
+		font-weight: bold !important;
+  }
+  .address-wrapper {
+	  word-break: break-all;
+	}
+	/*Profile*/
 .user-details {position: relative; padding: 0;}
 .user-details .user-image {position: relative;  z-index: 1; width: 100%; text-align: center;}
  .user-image img { clear: both; margin: auto; position: relative;}
@@ -1367,3 +1370,6 @@ text-align: left;
  .user-info-block .user-body {float: left; padding: 5%; width: 90%;}
   .user-body .tab-content > div {float: left; width: 100%;}
   .user-body .tab-content h4 {width: 100%; margin: 10px 0; color: #333;}
+  .glyphicon-copy{
+	margin-right:20px;
+	}

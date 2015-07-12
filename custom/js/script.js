@@ -8,21 +8,46 @@
 	userDetails = "";
 var orderRefNo = "",orderAmountToBePaid="";
 	function setuserProfile() {
-	  
-     if (localStorage.getItem("userInfo") != "" && localStorage.getItem("userInfo") != null) {
+	    if (localStorage.getItem("userInfo") != "" && localStorage.getItem("userInfo") != null) {
 	        userDetails = JSON.parse(localStorage.getItem("userInfo"));
-	        $("#sign-up-button").hide(500);
-	        $("#welcomeMsg").show(500);
-	        $("#userProfilePic").attr("src", "data:image/png;base64," + userDetails[0].pic);
-	        $(".img-responsive").attr("src", "data:image/png;base64," + userDetails[0].pic);
-            $(".showMenu-Mobile").addClass("visible-xs");
-	    } else {
-	        $("#welcomeMsg").hide(500);
-	        $("#sign-up-button").show(500);
-            $(".showMenu-Mobile").addClass("hidden");
-	    }
-	};
-$(document).ready(function() {
+        $("#sign-up-button").hide(500);
+        $("#welcomeMsg").show(500);
+        $("#userProfilePic").attr("src", "data:image/png;base64," + userDetails[0].pic);
+        $(".img-responsive").attr("src", "data:image/png;base64," + userDetails[0].pic);
+        $(".showMenu-Mobile").addClass("visible-xs");
+        var profilePicPopOverContent='<div id="popupProfile"><div class="profilePopUP"><img id="popoverProfileImg" src="data:image/png;base64,'+ userDetails[0].pic+'"><span class="profileName left">'+userDetails[0].FirstName+ ' ' +userDetails[0].LastName +'</span><span class="profilePhoneNo left">'+userDetails[0].HomePhone+ '</span><span class="profileLink left"><a href="profile.html">My Profile</a></span><span class="profileOrder left"><a href="my-orders.html">My Orders</a></span></div></div>'
+     
+		$("#userProfilePic").popover({
+			animation: true,
+			html: true,
+			placement: 'bottom',
+			content: profilePicPopOverContent
+		}).click(function(e) {
+			setTimeout(function() {
+				$('#userProfilePic').popover('hide');
+			}, 10000);
+		});
+		} else {
+			$("#welcomeMsg").hide(500);
+			$("#sign-up-button").show(500);
+			$(".showMenu-Mobile").addClass("hidden");
+		}
+		};
+	$(document).ready(function() {
+		$('body').on('click', '.glyphicon-copy', function() {
+			BootstrapDialog.confirm('Do you want to copy Delivery Adderess to Home Adderess?', function(result) {
+				if (result) {
+					userDetails[0].FirstName = userDetails[0].DeliveryFirstName;
+					userDetails[0].LastName = userDetails[0].DeliveryLastName;
+					userDetails[0].HomePhone = userDetails[0].DeliveryPhone;
+					userDetails[0].HomeDNo = userDetails[0].DeliveryDNo;
+					userDetails[0].HomeCity = userDetails[0].DeliveryCity;
+					userDetails[0].HomePostalCode = userDetails[0].DeliveryPostalCode;
+					localStorage.setItem("userInfo", JSON.stringify(userDetails));
+					location.reload();
+				}
+	        });
+		});
 		$('body').on('click', '.placeOrderFinal', function() {
 			console.log(cartOrderRef);
 			var postData = {};
@@ -43,15 +68,19 @@ $(document).ready(function() {
 						var data = JSON.parse(response);
 						if(data.Status == "Success"){
 							//clear the cart
-							// localStorage.removeItem('cartJson');
-	                    // renderCart();
-						
+							localStorage.removeItem('cartJson');
+							renderCart();
+							renderCartInCheckout();						
+							BootstrapDialog.show({
+								title: 'Message',
+								message: 'Your order placed successfully <br /> Order Id:'+data.OrderId+'<br /> <a href="track-orders.html">Track </a>your order'
+							});
 						}else{
 							//localStorage.removeItem('cartJson')
 							BootstrapDialog.show({
 								title: 'Message',
 								message: 'Something went wrong - Please try again'
-							});
+							});						
 						}
 					}catch(e){
 						//localStorage.removeItem('cartJson')
@@ -95,7 +124,6 @@ $(document).ready(function() {
 
 	    setuserProfile();
 
-	   
 		$('body').on('click', function (e) {
 			$('#userProfilePic').each(function () {
 				if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
@@ -103,7 +131,7 @@ $(document).ready(function() {
 				}
 			});
 		});
-		    $('#checkout').click(function() {
+		    $('.checkout').click(function() {
 	        console.log("on checkout");
 			if(userDetails.length>0){
 				$('.index_body').fadeOut(1000, function() {
@@ -143,7 +171,7 @@ $(document).ready(function() {
 			localStorage.removeItem('loggedMobileNo');
 	        setuserProfile();            
             $(".showMenu-Mobile").addClass("hidden-xs");
-            window.href.location = 'index.html';
+            window.location.href = 'index.html';
 	    });
 	    $('body').on('click', '.cartMinus1,.glyphicon-chevron-left', function() {
 	        var currentVal = $(this).next().text() || $(this).next().val();
@@ -922,7 +950,7 @@ $(document).ready(function() {
 	    };
 
 	    var renderCart = function() {
-	        $('#cartItemDesc').html("<center><img src='custom/images/loading.gif' /></center>");
+	        $('.cartItemDesc').html("<center><img src='custom/images/loading.gif' /></center>");
 	        var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
 	        if (cartTotalItems != undefined) {
 	            cartTotalItemsLength = cartTotalItems.itemsArray.length
@@ -952,35 +980,36 @@ $(document).ready(function() {
 	                }
 	                localStorage.setItem('cartJson', JSON.stringify(cartTotalItems));
 	                $('.cartItemCount').html(cartTotalItemsLength);
-	                $('#cartItemDesc').html('');
+	                $('.cartItemDesc').html('');
 	                if (cartItemDescHtml.length > 0) {
-	                    $('#cartItemDesc').append(cartItemDescHtml);
-	                    calcCartAmount();
-						$('#checkoutDisabled').addClass('hidden');
-						$('#checkout').removeClass('hidden');
+	                    $('.cartItemDesc').append(cartItemDescHtml);
+	                    console.log($('.checkoutDisabled').length);
+						$('.checkoutDisabled').addClass('hidden');
+						$('.checkout').removeClass('hidden');
+						calcCartAmount();
 	                } else {
 	                    $('.cartItemCount').html("0");
 	                    $('.cartItemCount').removeClass('active');
-	                    $('#cartItemDesc').html("<div>No items yet</div>");
-						$('#checkout').addClass('hidden');
-						$('#checkoutDisabled').removeClass('hidden');
+	                    $('.cartItemDesc').html("<div>No items yet</div>");
+						$('.checkout').addClass('hidden');
+						$('.checkoutDisabled').removeClass('hidden');
 						calcCartAmount();						
 	                }
 
 	            } else {
 	                $('.cartItemCount').html("0");
 	                $('.cartItemCount').removeClass('active');
-	                $('#cartItemDesc').html("<div>No items yet</div>");
-					$('#checkout').addClass('hidden');
-						$('#checkoutDisabled').removeClass('hidden');	
+	                $('.cartItemDesc').html("<div>No items yet</div>");
+					$('.checkout').addClass('hidden');
+						$('.checkoutDisabled').removeClass('hidden');	
 						calcCartAmount();
 	            }
 	        } else {
 	            $('.cartItemCount').html("0");
 	            $('.cartItemCount').removeClass('active');
-	            $('#cartItemDesc').html("<div>No items yet</div>");
-				$('#checkout').addClass('hidden');
-						$('#checkoutDisabled').removeClass('hidden');	
+	            $('.cartItemDesc').html("<div>No items yet</div>");
+				$('.checkout').addClass('hidden');
+						$('.checkoutDisabled').removeClass('hidden');	
 						calcCartAmount();
 	        }
 	    };
@@ -1451,11 +1480,16 @@ $(document).ready(function() {
 	        $("#deliveryFirstName").val(userDetails[0].DeliveryFirstName);
 	        $("#deliveryLastName").val(userDetails[0].DeliveryLastName);
 	        $("#deliveryPhone").val(userDetails[0].DeliveryPhone);
+			$("#deliveryDNo").val(userDetails[0].DeliveryDNo);
 	        $("#displayHomeName").text(userDetails[0].FirstName + " " + userDetails[0].LastName)
-	        $("#displayHomeAddress").text(userDetails[0].HomeDNo+" ,"+userDetails[0].HomeStreet+" ,"+userDetails[0].HomeCity+" ,"+userDetails[0].HomeState +" -"+ userDetails[0].HomePostalCode+ ", Ph:" + userDetails[0].Phone );
+	        // $("#displayHomeAddress").text(userDetails[0].HomeDNo+" ,"+userDetails[0].HomeStreet+" ,"+userDetails[0].HomeCity+" ,"+userDetails[0].HomeState +" -"+ userDetails[0].HomePostalCode+ ", Ph:" + userDetails[0].HomePhone );
+			$("#displayHomeAddress").html('<div class="address-wrapper"><div class="user-address"><p class="custom-ellipsis address-address">'+userDetails[0].HomeDNo + '</p><p class="ellipsis address-city-pin">'+userDetails[0].HomeStreet+' - '+userDetails[0].HomePostalCode+'</p><p title="Telangana" class="ellipsis address-state">Hyderabad, Telangana</p></div><p class="address-phone">Phone: <span class="">'+userDetails[0].HomePhone+'</span></p></div>');
+			$("#displayDeliveryAddress").html('<div class="address-wrapper"><div class="user-address"><p class="custom-ellipsis address-address">'+userDetails[0].DeliveryDNo + '</p><p class="ellipsis address-city-pin">'+userDetails[0].DeliveryStreet+' - '+userDetails[0].DeliveryPostalCode+'</p><p title="Telangana" class="ellipsis address-state">Hyderabad, Telangana</p></div><p class="address-phone">Phone: <span class="">'+userDetails[0].DeliveryPhone+'</span></p></div>');
+			
 	        $("#homeFirstName").val(userDetails[0].FirstName);
 	        $("#homeLastName").val(userDetails[0].LastName);
 	        $("#homePhone").val(userDetails[0].HomePhone);
+			$("#homeDNo").val(userDetails[0].HomeDNo);
             
 	    }
 	}
@@ -1512,29 +1546,62 @@ else{
 }
 
 	$("#homeAddressSubmit").click(function() {
-
-	    userDetails[0].FirstName = $("#homeFirstName").val();
-	    userDetails[0].LastName = $("#homeLastName").val();
-	    userDetails[0].HomePhone = $("#homePhone").val();
-	    userDetails[0].HomeDNo = $("#homeDNo").val();
-	    userDetails[0].HomeStreet = $("#homeStreet").val();
-	    userDetails[0].HomePostalCode = $("#homePinCode").val();
-	    localStorage.setItem("userInfo", JSON.stringify(userDetails));
-	    $(".defaultHomeAddress").toggle(500);
-	    $(".editHomeAddress").toggle(500);
-	    updateAddress();
+		var errorMsgs = '';
+		if($("#homeFirstName").val() == '')errorMsgs += "<li>Enter First Name</li>";
+		if($("#homeLastName").val() == '')errorMsgs += "<li>Enter Last Name</li>";
+		if($("#homePhone").val() == '')errorMsgs += "<li>Enter Phone Number</li>";
+		if($("#homeDNo").val() == '')errorMsgs += "<li>Enter Address</li>";
+		if($("#homeStreet").val() == '')errorMsgs += "<li>Select Area</li>";
+		if($("#homePinCode").val() == '')errorMsgs += "<li>Select Pincode</li>";
+		if(errorMsgs.length > 0){
+			BootstrapDialog.show({
+	            title: 'Required Data for Home Address:',
+	            message: '<ul>'+errorMsgs+'</ul>'
+	        });
+			return false;
+		}else{
+		
+			userDetails[0].FirstName = $("#homeFirstName").val();
+			userDetails[0].LastName = $("#homeLastName").val();
+			userDetails[0].HomePhone = $("#homePhone").val();
+			userDetails[0].HomeDNo = $("#homeDNo").val();
+			userDetails[0].HomeStreet = $("#homeStreet").val();
+			userDetails[0].HomePostalCode = $("#homePinCode").val();
+			localStorage.setItem("userInfo", JSON.stringify(userDetails));
+			$(".defaultHomeAddress").toggle(500);
+			$(".editHomeAddress").toggle(500);
+			updateAddress();
+		}
 	})
 	$("#deliveryAddressSubmit").click(function() {
-	    userDetails[0].DeliveryFirstName = $("#deliveryFirstName").val();
-	    userDetails[0].DeliveryLastName = $("#deliveryLastName").val();
-	    userDetails[0].DeliveryPhone = $("#deliveryPhone").val();
-	    userDetails[0].DeliveryDNo = $("#deliveryDNo").val();
-	    userDetails[0].DeliveryStreet = $("#deliveryStreet").val();
-	    userDetails[0].DeliveryPostalCode = $("#deliveryPinCode").val();
-	    localStorage.setItem("userInfo", JSON.stringify(userDetails));
-	    $(".editDeliveryAddress").toggle(500);
-	    $(".defaultDeliveryAddress").toggle(500);
-	    updateAddress();
+		var errorMsgs = '';
+		if($("#deliveryFirstName").val() == '')errorMsgs += "<li>Enter First Name</li>";
+		if($("#deliveryLastName").val() == '')errorMsgs += "<li>Enter Last Name</li>";
+		if($("#deliveryPhone").val() == '')errorMsgs += "<li>Enter Phone Number</li>";
+		if($("#deliveryDNo").val() == '')errorMsgs += "<li>Enter Address</li>";
+		if($("#deliveryStreet").val() == '')errorMsgs += "<li>Select Area</li>";
+		if($("#deliveryPinCode").val() == '')errorMsgs += "<li>Select Pincode</li>";
+		console.log(errorMsgs);
+		//return false;
+		if(errorMsgs.length > 0){
+		console.log("inside");
+			BootstrapDialog.show({
+	            title: 'Required Data for Delivery Address:',
+	            message: '<ul>'+errorMsgs+'</ul>'
+	        });
+		}else{
+			userDetails[0].DeliveryFirstName = $("#deliveryFirstName").val();
+			userDetails[0].DeliveryLastName = $("#deliveryLastName").val();
+			userDetails[0].DeliveryPhone = $("#deliveryPhone").val();
+			userDetails[0].DeliveryDNo = $("#deliveryDNo").val();
+			userDetails[0].DeliveryStreet = $("#deliveryStreet").val();
+			userDetails[0].DeliveryPostalCode = $("#deliveryPinCode").val();
+			
+			localStorage.setItem("userInfo", JSON.stringify(userDetails));
+			$(".editDeliveryAddress").toggle(500);
+			$(".defaultDeliveryAddress").toggle(500);
+			updateAddress();
+		}
 	})
 
 	navListItems.click(function(e) {
@@ -1620,12 +1687,14 @@ else{
 
 
 	$(".editHomeAddressIcon").click(function() {
-	  if(userDetails.length>0){
-	        $(".defaultHomeAddress").toggle(500);
+	console.log(JSON.stringify(userDetails));
+	  if(userDetails.length > 0){
+			$(".createHomeAddress").hide();
+	        $(".defaultHomeAddress").hide();
 	        $(".editHomeAddress").toggle(500);
-	        if ($(".defaultDeliveryAddress").is(':hidden') && userDetails[0].DeliveryPostalCode != null) {
-	            $(".defaultDeliveryAddress").toggle(500);
-	            $(".editDeliveryAddress").toggle(500);
+	        if ($(".defaultDeliveryAddress").is(':hidden') && userDetails[0].FirstName != '') {
+	            $(".defaultDeliveryAddress").hide();
+	            $(".editDeliveryAddress").hide();
 	        }}
         else{
             $('#loginScreen').modal('show');
@@ -1636,12 +1705,13 @@ else{
 
 	})
 	$(".editDeliveryAddressIcon").click(function() {
-        if(userDetails.length>0){
-	        $(".defaultDeliveryAddress").toggle(500);
+        if(userDetails.length > 0){
+	        $(".createDeliveryAddress").hide();
+	        $(".defaultDeliveryAddress").hide();
 	        $(".editDeliveryAddress").toggle(500);
-	        if ($(".defaultHomeAddress").is(':hidden') && userDetails[0].HomePostalCode != null) {
-	            $(".defaultHomeAddress").toggle(500);
-	            $(".editHomeAddress").toggle(500);
+	        if ($(".defaultHomeAddress").is(':hidden') && userDetails[0].DeliveryFirstName != '') {
+	            $(".defaultHomeAddress").hide();
+	            $(".editHomeAddress").hide();
 	    }}
         else{
             $('#loginScreen').modal('show');
