@@ -1,5 +1,6 @@
 
 	var cartFinalAmountForOrderRef = 0.0;
+	var cartOrderRef = '';
 	$(window).load(function() {
 	    // Animate loader off screen
 	    $(".se-pre-con").fadeOut("slow");
@@ -21,6 +22,52 @@ var orderRefNo = "",orderAmountToBePaid="";
 	    }
 	}
 	$(document).ready(function() {
+		$('body').on('click', '.placeOrderFinal', function() {
+			console.log(cartOrderRef);
+			var postData = {};
+			postData.Phone = localStorage.getItem('loggedMobileNo');
+			postData.OrderReferenceNumber = cartOrderRef;
+			postData.paymentMode = $('#paymentMode > li.active > span > a').attr('class');
+			console.log(JSON.stringify(postData));
+			console.log("sssssssssssssssddddddd:"+$('#paymentMode > li.active > span > a').attr('class'))
+			$(".ajax-loader").show();
+			$.ajax({
+				url: 'createOrderId.php',
+				data: postData,
+				method: "POST",
+				success: function(response){
+					console.log(response);	
+					$(".ajax-loader").fadeOut("slow");
+					try{
+						var data = JSON.parse(response);
+						if(data.Status == "Success"){
+							//clear the cart
+							// localStorage.removeItem('cartJson');
+	                    // renderCart();
+						
+						}else{
+							//localStorage.removeItem('cartJson')
+							BootstrapDialog.show({
+								title: 'Message',
+								message: 'Something went wrong - Please try again'
+							});
+						}
+					}catch(e){
+						//localStorage.removeItem('cartJson')
+						BootstrapDialog.show({
+							title: 'Message',
+							message: 'Something went wrong - Please try again'
+						});
+					}
+				},
+				failure:function(error){
+					BootstrapDialog.show({
+						title: 'Message',
+						message: 'Something went wrong - Please try again'
+					});
+				}
+			});
+		});
 		$('body').on('click', '.ib', function() {
 			BootstrapDialog.confirm('Currently Online payment option not available. Do you want to proceed with another payment option?', function(result) {
 				if (result) {
@@ -102,10 +149,10 @@ var orderRefNo = "",orderAmountToBePaid="";
 	    }
         $('body').on('click', '.logout', function() {
 	        localStorage.setItem("userInfo", "");
-	        setuserProfile();
-            
+			localStorage.removeItem('loggedMobileNo');
+	        setuserProfile();            
             $(".showMenu-Mobile").addClass("hidden-xs");
-            
+            window.href.location = 'index.html';
 	    });
 	    $('body').on('click', '.cartMinus1,.glyphicon-chevron-left', function() {
 	        var currentVal = $(this).next().text() || $(this).next().val();
@@ -1417,7 +1464,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 	        $("#displayHomeAddress").text(userDetails[0].HomeDNo+" ,"+userDetails[0].HomeStreet+" ,"+userDetails[0].HomeCity+" ,"+userDetails[0].HomeState +" -"+ userDetails[0].HomePostalCode+ ", Ph:" + userDetails[0].Phone );
 	        $("#homeFirstName").val(userDetails[0].FirstName);
 	        $("#homeLastName").val(userDetails[0].LastName);
-	        $("#homePhone").val(userDetails[0].Phone);
+	        $("#homePhone").val(userDetails[0].HomePhone);
             
 	    }
 	}
@@ -1477,7 +1524,7 @@ else{
 
 	    userDetails[0].FirstName = $("#homeFirstName").val();
 	    userDetails[0].LastName = $("#homeLastName").val();
-	    userDetails[0].Phone = $("#homePhone").val();
+	    userDetails[0].HomePhone = $("#homePhone").val();
 	    userDetails[0].HomeDNo = $("#homeDNo").val();
 	    userDetails[0].HomeStreet = $("#homeStreet").val();
 	    userDetails[0].HomePostalCode = $("#homePinCode").val();
@@ -1535,12 +1582,14 @@ else{
 		//postData.itemsTotalAmount = ''+$('.cartFinalAmountForOrderRef').val();
 
 		postData.itemsTotalAmount = ''+cartFinalAmountForOrderRef;
-		postData.userProfile = JSON.parse(localStorage.getItem('userInfo'));
-		postData.Phone = sessionStorage.getItem('loggedMobileNo');
+		console.log(JSON.parse(localStorage.getItem('userInfo'))[0]);
+		postData.userProfile = JSON.parse(localStorage.getItem('userInfo'))[0];
+		postData.Phone = localStorage.getItem('loggedMobileNo');
 		console.log(JSON.stringify(postData));
-		$('ul.setup-panel li:eq(2)').removeClass('disabled');
-							 $('ul.setup-panel li a[href="#step-3"]').trigger('click');
-		/*$(".ajax-loader").show();
+		// $('ul.setup-panel li:eq(2)').removeClass('disabled');
+							 // $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+							 	// return false;
+		$(".ajax-loader").show();
 			$.ajax({
 				url: 'createOrderRef.php',
 				data: postData,
@@ -1551,17 +1600,18 @@ else{
 					try{
 						var data = JSON.parse(response);
 						if(data.Status == "Success"){
+							cartOrderRef = data.OrderReferenceNumber;
 							 $('ul.setup-panel li:eq(2)').removeClass('disabled');
 							 $('ul.setup-panel li a[href="#step-3"]').trigger('click');
 						}else{
-							localStorage.getItem('cartJson')
+							//localStorage.removeItem('cartJson')
 							BootstrapDialog.show({
 								title: 'Message',
 								message: 'Something went wrong - Please try again'
 							});
 						}
 					}catch(e){
-						localStorage.getItem('cartJson')
+						//localStorage.removeItem('cartJson')
 						BootstrapDialog.show({
 							title: 'Message',
 							message: 'Something went wrong - Please try again'
@@ -1571,17 +1621,7 @@ else{
 				failure:function(error){
 					console.log("error");
 				}
-			});*/
-		
-		return false;
-		var status = "success";
-		if(status == "success"){
-			orderRefNo = '12345';
-			orderAmountToBePaid = '380.00';
-			$('ul.setup-panel li:eq(2)').removeClass('disabled');
-			$('ul.setup-panel li a[href="#step-3"]').trigger('click');
-		}
-
+			});
 	})
 
 	$(".editHomeAddress").hide();
@@ -1805,16 +1845,17 @@ $('.sendOTPForm').show();
 					console.log("success");
 					console.log(response);
 					var data = JSON.parse(response);
-					data.pic = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q==";
+					var userProfileData = JSON.parse(response).userProfile;
+					//userProfileData.pic = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAH0AfQMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABgcBBAUDAv/EADkQAAEDAgQDBQUECwAAAAAAAAABAgMEEQUGITESQVETQmFxgSKRocHRFDJykgcjNVJidLGywuHw/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwC5AAZUAAABdjVxDEKbDoeOrlRqck5u8gNsEFxDOVTIrmUMTYmX0c/Vy/Q5MmPYo93EtbK3wS1hgs8FaszJizUZarVeDk5qa+ZJsDzXDWqkNejYZ1WzXd130GCSAXvbx2AAAAAAAAAAb6AAamK18eG0L6qXZqaNvq5V2QrPEa6oxGqdUVDlVy7N5NTwJDnysc+qhomr7LGpI/zXb4EVLEYQyAUAu2gAEqytmJ8UrKGufeN2kUi91eiqTdU528CnvG9rcyzsu1q1+EwTuW77cL/xItiWDpAAigAAAAAAAK3ze5VzHVtXu8DU/I0453c6RK3H5ZLaSRsdfrpb5HCLEAAUAAAUneQnKuETN5NqFRPytUgik/yLHw4JxptJM9fdZPkBIQAZUAAAAAAABEM/02lJVtTmsbv6p8yHFj5upH1eCSNi1dEqSInW2/wuVwWIAAoAAAq2LMyvAtPgNGxUVFVnEqeKrcr3C6V1diEFMxvFxvTi8G8y1kRGpwt0amyISgACKAAAAABkwACojtF2UrHMVJ9ixmpjRLRudxsTwX/ZZ6bkXzvhyzUra6NLuh9l/wCFeYggwFwaQAPSnhfUzxwxJd8jkagExyFR8FJNWOanE93Cxba2Qlfl02NegpW0VHDTM2Y1E9eZsGVAAAAAAAyBgBdEVVVEROanIxDMuGUKqxZu2lTuRe1712+IHXvbXl1ORmueOHAqhJHoiyJwtT95VI7XZzrJHKlFFHA3k53tO+hH6ysqa6TtKud8rr6cS7FHhpcBEBUF2N3A52U2L0ssqojGv1VeRpC3UC4EVrkRWqioqaWW5ncrCgx7E6BqNhqFWNNo3pxNJBRZ2Y6yYhTKxeb4dU9y6/EipcDVocSocQajqOpZIttW3s5PRdTa/wC2IAAAHOxnGKbCYkdO7ikd9yNu6m3WVMdJSS1Mq2ZG25VldVy11U+pnW8jl25NTohRuYrj1diaqksixxcoo9E9epzPRBYDEAAUAAAAABQl09QAMxudE5r43Kx7V0c1bL7yTYLm2eFzYsS/Wxbdr3m+fUjCmNgLegliqImywPR7HJdHJzPvyIHkzFXU9b9ikcvYzfc/hcT1TKoxnyp7LDYadi27aTXyRLkFJd+kL7+H+Uv+BESxAAFAAAAAAAAAAAAoAH1FI+CRssa2cxUcnmhbVNKk9PHM3Z7EVF63S/zKjUtLAv2Hh/8ALR/2oSj/2Q==";
 					$('#otpLink').show();
 					if(data.Status == "Success"){
 						$('#loginScreen').modal('hide');
 						$('body').removeClass('modal-open');
 						var userDetailsResponce = [];
-						userDetailsResponce.push(data);
+						userDetailsResponce.push(userProfileData);
 						localStorage.setItem('userInfo', JSON.stringify(userDetailsResponce));
                         //$(".showMenu-Mobile").removeClass("hidden-xs");
-						sessionStorage.setItem('loggedMobileNo',phoneNo);
+						localStorage.setItem('loggedMobileNo',phoneNo);
 						$('#login').show();
 						setuserProfile();
 					}else if(data.Status == "Failed"){

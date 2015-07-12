@@ -125,11 +125,10 @@ var orderRefNo = "",orderAmountToBePaid="";
 			}
 		};
 		var renderCartInMyOrders = function() {
-		console.log("in renderCartInCheckout"+localStorage.getItem('myOrders'));
 		$(".ajax-loader").show();
 			$.ajax({
 				url: 'getMyOrders.php',
-				data: {"Phone":"9090909090"},
+				data: {"Phone":localStorage.getItem('loggedMobileNo')},
 				method: "POST",
 				success: function(response){
 				$(".ajax-loader").fadeOut("slow");

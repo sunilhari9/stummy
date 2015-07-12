@@ -35,7 +35,7 @@ public function  populateToken()
 
 public function send_Data($relativeUrl, $json_data, $occurance)
 {
-sales_pro::populateToken();
+//sales_pro::populateToken();
 	//check whether session is set or not
  if(isset($_SESSION['instance_url']) && isset($_SESSION['access_token']) )
  {

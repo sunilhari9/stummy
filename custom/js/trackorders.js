@@ -96,7 +96,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 			$(".ajax-loader").show();
 			$.ajax({
 				url: 'trackOrders.php',
-				data: {"Phone":"9090909090"},
+				data: {"Phone":localStorage.getItem('loggedMobileNo')},
 				method: "POST",
 				success: function(response){
 					$(".ajax-loader").fadeOut("slow");
