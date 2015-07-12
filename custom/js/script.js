@@ -8,34 +8,21 @@
 	userDetails = "";
 var orderRefNo = "",orderAmountToBePaid="";
 	function setuserProfile() {
-	    
-function setuserProfile() {
-    if (localStorage.getItem("userInfo") != "" && localStorage.getItem("userInfo") != null) {
-        userDetails = JSON.parse(localStorage.getItem("userInfo"));
-        $("#sign-up-button").hide(500);
-        $("#welcomeMsg").show(500);
-        $("#userProfilePic").attr("src", "data:image/png;base64," + userDetails[0].pic);
-        $(".img-responsive").attr("src", "data:image/png;base64," + userDetails[0].pic);
-        $(".showMenu-Mobile").addClass("visible-xs");
-        var profilePicPopOverContent='<div id="popupProfile"><div class="profilePopUP"><img id="popoverProfileImg" src="data:image/png;base64,'+ userDetails[0].pic+'"><span class="profileName left">'+userDetails[0].FirstName+ ' ' +userDetails[0].LastName +'</span><span class="profilePhoneNo left">'+userDetails[0].Phone+ '</span><span class="profileLink left"><a href="profile.html">My Profile</a></span><span class="profileOrder left"><a href="my-orders.html">My Orders</a></span></div></div>'
-     
-    $("#userProfilePic").popover({
-        animation: true,
-        html: true,
-        placement: 'bottom',
-        content: profilePicPopOverContent
-    }).click(function(e) {
-        setTimeout(function() {
-            $('#userProfilePic').popover('hide');
-        }, 10000);
-    });
-    } else {
-        $("#welcomeMsg").hide(500);
-        $("#sign-up-button").show(500);
-        $(".showMenu-Mobile").addClass("hidden");
-    }
+	  
+     if (localStorage.getItem("userInfo") != "" && localStorage.getItem("userInfo") != null) {
+	        userDetails = JSON.parse(localStorage.getItem("userInfo"));
+	        $("#sign-up-button").hide(500);
+	        $("#welcomeMsg").show(500);
+	        $("#userProfilePic").attr("src", "data:image/png;base64," + userDetails[0].pic);
+	        $(".img-responsive").attr("src", "data:image/png;base64," + userDetails[0].pic);
+            $(".showMenu-Mobile").addClass("visible-xs");
+	    } else {
+	        $("#welcomeMsg").hide(500);
+	        $("#sign-up-button").show(500);
+            $(".showMenu-Mobile").addClass("hidden");
+	    }
 	};
-	$(document).ready(function() {
+$(document).ready(function() {
 		$('body').on('click', '.placeOrderFinal', function() {
 			console.log(cartOrderRef);
 			var postData = {};
