@@ -151,7 +151,7 @@ text-decoration: none !important;
     }
     
     .omb_login .omb_socialButtons a {
-        color: white; // In yourUse @body-bg 
+        color: white;
         opacity: 0.9;
     }
     
@@ -757,7 +757,7 @@ close bgwhite
 	color: rgb(229, 157, 49);
 	height: 91px;
 }
-.modal-content < .customizeFoodHeader {
+.modal-content > .customizeFoodHeader {
     background-color: red;
 }
 .customizeFoodModel {
@@ -967,7 +967,6 @@ li.food_item {
     height: 15px;
 }*/
 a.list-group-item {
-    color: #FFFFFF !importent;
 	font-weight: bold;
 }
 

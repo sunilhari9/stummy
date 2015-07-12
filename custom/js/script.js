@@ -15,7 +15,8 @@ var orderRefNo = "",orderAmountToBePaid="";
         $("#userProfilePic").attr("src", "data:image/png;base64," + userDetails[0].pic);
         $(".img-responsive").attr("src", "data:image/png;base64," + userDetails[0].pic);
         $(".showMenu-Mobile").addClass("visible-xs");
-        var profilePicPopOverContent='<div id="popupProfile"><div class="profilePopUP"><img id="popoverProfileImg" src="data:image/png;base64,'+ userDetails[0].pic+'"><span class="profileName left">'+userDetails[0].FirstName+ ' ' +userDetails[0].LastName +'</span><span class="profilePhoneNo left">'+userDetails[0].HomePhone+ '</span><span class="profileLink left"><a href="profile.html">My Profile</a></span><span class="profileOrder left"><a href="my-orders.html">My Orders</a></span></div></div>'
+        //var profilePicPopOverContent='<div id="popupProfile"><div class="profilePopUP"><img id="popoverProfileImg" src="data:image/png;base64,'+ userDetails[0].pic+'"><span class="profileName left">'+userDetails[0].FirstName+ ' ' +userDetails[0].LastName +'</span><span class="profilePhoneNo left">'+userDetails[0].HomePhone+ '</span><span class="profileLink left"><a href="profile.html">My Profile</a></span><span class="profileOrder left"><a href="my-orders.html">My Orders</a></span><span class="profileOrder left"><a href="track-orders.html">Track Orders</a></span></div></div>'
+        var profilePicPopOverContent='<div id="popupProfile"><div class="profilePopUP"><img id="popoverProfileImg" src="data:image/png;base64,'+ userDetails[0].pic+'"><span class="profileName left">'+userDetails[0].FirstName+ ' ' +userDetails[0].LastName +'</span><span class="profileLink left"><a href="profile.html">My Profile</a></span><span class="profileOrder left"><a href="my-orders.html">My Orders</a></span><span class="profileOrder left"><a href="track-orders.html">Track Orders</a></span></div></div>'
      
 		$("#userProfilePic").popover({
 			animation: true,
@@ -34,6 +35,14 @@ var orderRefNo = "",orderAmountToBePaid="";
 		}
 		};
 	$(document).ready(function() {
+		$('body').on('click', '.mc', function() {
+			var mealCouponAmount = parseFloat(cartFinalAmountForOrderRef);
+			mealCouponAmount += mealCouponAmount * 0.06;
+			mealCouponAmount = parseFloat(mealCouponAmount.toFixed(2));
+			var val1 = (mealCouponAmount / 10).toFixed(0);
+			var val2 = mealCouponAmount % 10 >= 10 ? 10 : 0;
+			$('#mc').html('<p>6% extra when you use your food coupons</p><p> You have to pay '+ (parseFloat(val1*10) + parseFloat(val2)).toFixed(2) + ' worth vouchers');
+		});
 		$('body').on('click', '.glyphicon-copy', function() {
 			BootstrapDialog.confirm('Do you want to copy Delivery Adderess to Home Adderess?', function(result) {
 				if (result) {
