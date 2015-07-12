@@ -1372,3 +1372,7 @@ text-align: left;
   .glyphicon-copy{
 	margin-right:20px;
 	}
+	.navbar-default .navbar-toggle {
+		z-index: 10003;
+		positon: relative;
+	}	
