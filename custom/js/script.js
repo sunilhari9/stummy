@@ -1827,7 +1827,11 @@ else{
 function clearerrorMsg(){
     $(".help-block").text("");
 }
-	$('body').on('click', '.sendOTPButton', function() {
+	$('body').on('hover', '.hovereffect', function() {
+        alert("hi");
+    
+    });
+        $('body').on('click', '.sendOTPButton', function() {
 	    var phoneNo = $(".phNumberForOTP").val();
 	    $(".otpValue").val("");
 	    $(".password").val("");

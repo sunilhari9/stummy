@@ -520,11 +520,16 @@ text-decoration: none !important;
     color: #fff;
     margin-bottom: 20px;
 }
+.grand_total{
+    float: right;
+}
 .totalAmount {
     font-size: 20px;
     font-weight: bolder;
     margin-bottom: -15px;
+    clear: both;
 }
+
 #checkoutClass {
     background-color: rgb(229, 157, 49) !important;
     color: #fff;
@@ -1280,15 +1285,19 @@ text-align: left;
 		max-width: 100%;
 		height: auto;
 	}
-	a.footer-link,span.footer-link{
-		color: white;
-		margin-top: 10px;
+	.footer-link a {
+	  cursor: pointer;
+        text-align: center;	
 		font-weight: bold;
-		margin-right: 5%;
+	
 	}
-	a.footer-link.space{
-		margin-right: 10%;
-	}
+ .footer-link span{
+		color: white;
+        cursor: pointer;
+        text-align: center;	
+ }
+
+
 	#paymentMode{
 		border-bottom: 0px !important;
 	}
