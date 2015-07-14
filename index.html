@@ -48,7 +48,7 @@
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <img src="custom/images/hambruger.png" class="navToggle img-responsive img-circle">
+                        <img src="custom/images/hambruger.png" class="navToggle img-responsive ">
                     </button>
                     <a class="navbar-brand" href="index.html"><img class="logo" alt="Brand" src="custom/images/logo.png"></a>
                 </div>
@@ -62,6 +62,7 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
+					<li><span class="glyphicon glyphicon-shopping-cart navToggle hidden-xs visible-sm" id='shopping-cart' data-toggle="modal" data-target="#cartModel" aria-hidden="true" style="margin-right:10px; color: white;" ></span></li>
                         <li>
                             <span id="welcomeMsg">
 							   <span class="glyphicon glyphicon-shopping-cart navToggle hidden-xs" id='shopping-cart' data-toggle="modal" data-target="#cartModel" aria-hidden="true"><p>Cart</p> </span>
@@ -69,6 +70,8 @@
 							<span class="glyphicon glyphicon-off navToggle hidden-xs logout" id='logout' aria-hidden="true"><p>Logout</p></span>   </span>
                             
                             <a href="#" class="links-active" data-toggle="modal" data-target="#loginScreen" id="sign-up-button">Sign-in / Sign-up</a></li>
+							
+							<li><a href="#" class="showMenu-Mobile visible-xs links-active profile" data-toggle="modal" data-target="#cartModel" id="cart-Mobile">Cart</a></li>
 							<li><a href="#" class="showMenu-Mobile links-active profile" data-toggle="modal" data-target="#cartModel" id="cart-Mobile">Cart</a></li>
 							<li><a href="#" class="showMenu-Mobile links-active profile" data-toggle="modal" data-target="#myProfileModel" id="profile-Mobile">My Profile</a></li>
 							<li><a href="#" class="showMenu-Mobile links-active profile" data-toggle="modal" data-target="#myOrderModel" id="order-Mobile">My Order</a></li>
@@ -110,7 +113,7 @@
              <button type="button" class="close bgwhite" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h2>Your cart items</h2>
         </div>
-     <div class="modal-body">
+		<div class="modal-body">
                   <div class="cartItems">
                         <div id="cartItemDescDesktop" class="scroll cartItemDesc"></div>
                         <hr class="hrLine">
@@ -396,13 +399,13 @@
     </div>
     <div class="row cartListTemplate hidden">
         <div class="row cartList">
-            <span class="col-md-7 product_name_cart"></span>
-            <span class="col-md-5 product_actions_cart">
+            <div class="col-md-7 product_name_cart"></div>
+            <div class="col-md-5 product_actions_cart">
 					<span class="glyphicon glyphicon-minus cartMinus" title="Click to decrease"></span>
             <span class="quantity" data-product-code="" data-product-name=""></span>
             <span class="glyphicon glyphicon-plus cartPlus" title="Click to increase"></span>
             <span class="glyphicon glyphicon-edit cartPanel" title="Click to Customize/Delete"></span>
-            </span>
+            </div>
         </div>
     </div>
 
