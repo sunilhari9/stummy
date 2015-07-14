@@ -1046,7 +1046,7 @@ a.list-group-item {
     transform: rotate(-90deg);
 }
 .clearCart,
-.trash,.glyphicon-copy,.glyphicon-pencil {
+.trash,.glyphicon-copy,.glyphicon-pencil,.cartPlus1,.cartMinus1 {
     cursor: pointer;
 }
 .panel-default>.panel-heading {
@@ -1413,9 +1413,12 @@ text-align: left;
 	}
 	@media screen and (min-width: 320px) and (max-width: 399px) {
 		#cartModel .modal-dialog{
-			left: 5%;
+			left: 2%;
 		}
 		.product_name_cart{
 			width: 60%;float: left;
+		}
+		.navbar-nav{
+		    margin: 6.5px 35px;
 		}
 	}
