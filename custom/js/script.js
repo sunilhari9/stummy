@@ -15,8 +15,13 @@ var orderRefNo = "",orderAmountToBePaid="";
         $("#userProfilePic").attr("src", "data:image/png;base64," + userDetails[0].pic);
         $(".img-responsive").attr("src", "data:image/png;base64," + userDetails[0].pic);
         $(".showMenu-Mobile").addClass("visible-xs");
+		var name = '';
+		if((userDetails[0].FirstName+ ' ' +userDetails[0].LastName) != ' ')
+			name = userDetails[0].FirstName+ ' ' +userDetails[0].LastName;
+		else
+			name = '<a href="profile.html">Set Name</a></span>';
         //var profilePicPopOverContent='<div id="popupProfile"><div class="profilePopUP"><img id="popoverProfileImg" src="data:image/png;base64,'+ userDetails[0].pic+'"><span class="profileName left">'+userDetails[0].FirstName+ ' ' +userDetails[0].LastName +'</span><span class="profilePhoneNo left">'+userDetails[0].HomePhone+ '</span><span class="profileLink left"><a href="profile.html">My Profile</a></span><span class="profileOrder left"><a href="my-orders.html">My Orders</a></span><span class="profileOrder left"><a href="track-orders.html">Track Orders</a></span></div></div>'
-        var profilePicPopOverContent='<div id="popupProfile"><div class="profilePopUP"><img id="popoverProfileImg" src="data:image/png;base64,'+ userDetails[0].pic+'"><span class="profileName left">'+userDetails[0].FirstName+ ' ' +userDetails[0].LastName +'</span><span class="profileLink left"><a href="profile.html">My Profile</a></span><span class="profileOrder left"><a href="my-orders.html">My Orders</a></span><span class="profileOrder left"><a href="track-orders.html">Track Orders</a></span></div></div>'
+        var profilePicPopOverContent='<div id="popupProfile"><div class="hidden changePic">Change</div><div class="profilePopUP"><img id="popoverProfileImg" class="picHover" src="data:image/png;base64,'+ userDetails[0].pic+'"><span class="profileName left">'+ name +'</span><span class="profileLink left"><a href="profile.html">My Profile</a></span><span class="profileOrder left"><a href="my-orders.html">My Orders</a></span><span class="profileOrder left"><a href="track-orders.html">Track Orders</a></span></div></div>'
      
 		$("#userProfilePic").popover({
 			animation: true,
@@ -35,6 +40,11 @@ var orderRefNo = "",orderAmountToBePaid="";
 		}
 		};
 	$(document).ready(function() {
+		$('body').on('mouseover', '.picHover', function() {
+		console.log('picHover picHover');
+			$('.changePic').removeClass('hidden');
+			$('.changePic').css('margin-top','50px');
+		});
 		$('body').on('click', '.mc', function() {
 			var mealCouponAmount = parseFloat(cartFinalAmountForOrderRef);
 			mealCouponAmount += mealCouponAmount * 0.06;

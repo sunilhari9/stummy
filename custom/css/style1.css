@@ -1385,3 +1385,6 @@ text-align: left;
 		z-index: 10003;
 		positon: relative;
 	}	
+	#cartModel .modal-dialog{
+		width: 292px !important;
+	}
