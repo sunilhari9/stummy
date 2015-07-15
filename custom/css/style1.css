@@ -1309,10 +1309,10 @@ text-align: left;
 		font-family: sans-serif;
 		font-size: 1.5em;
 	}
-	#ha,#da{
-		padding:20px 100px 0px 100px;
+	#ha,#da,#pi{
+		padding:20px 100px 20px 100px;
 		}
-	.cod,.sod,.mc,.ib,.pa,.ha,.da{
+	.cod,.sod,.mc,.ib,.pi,.ha,.da{
 	color: black !important;
   font-weight: bold;
   padding-left: 5px;
