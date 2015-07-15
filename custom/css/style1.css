@@ -742,7 +742,7 @@ close bgwhite
     margin-top: 2%;
 }
 .navToggle {
-    /* height: 40px !important; */
+    height: 40px !important;
 	  margin-top: 10px;
   border: 1px solid rgb(255, 196, 80);
 	border: 1px solid rgb(255, 196, 80);
@@ -1303,13 +1303,16 @@ text-align: left;
 	#paymentMode{
 		border-bottom: 0px !important;
 	}
-	#cod,#sod,#mc,#ib{
+	#cod,#sod,#mc,#ib,#pi,#ha,#da{
 		padding: 100px;
 		border: 1px solid #ddd;
 		font-family: sans-serif;
 		font-size: 1.5em;
 	}
-	.cod,.sod,.mc,.ib{
+	#ha,#da{
+		padding:20px 100px 0px 100px;
+		}
+	.cod,.sod,.mc,.ib,.pa,.ha,.da{
 	color: black !important;
   font-weight: bold;
   padding-left: 5px;
@@ -1351,7 +1354,7 @@ text-align: left;
 	.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
 		margin-left: 2px;
 	}
-	.placeOrderFinal{
+	.placeOrderFinal,.updateProfile{
 		width: 50%;
 		margin-left: 25%;
 		margin-top: 10px;
