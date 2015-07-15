@@ -1585,6 +1585,7 @@ else{
 			$(".defaultHomeAddress").toggle(500);
 			$(".editHomeAddress").toggle(500);
 			updateAddress();
+            $(".editDeliveryAddressIcon").show();   
 		}
 	})
 	$("#deliveryAddressSubmit").click(function() {
@@ -1615,6 +1616,8 @@ else{
 			$(".editDeliveryAddress").toggle(500);
 			$(".defaultDeliveryAddress").toggle(500);
 			updateAddress();
+            $(".editHomeAddressIcon").show();   
+            
 		}
 	})
 
@@ -1706,10 +1709,8 @@ else{
 			$(".createHomeAddress").hide();
 	        $(".defaultHomeAddress").hide();
 	        $(".editHomeAddress").toggle(500);
-	        if ($(".defaultDeliveryAddress").is(':hidden') && userDetails[0].FirstName != '') {
-	            $(".defaultDeliveryAddress").hide();
-	            $(".editDeliveryAddress").hide();
-	        }}
+	        $(".editDeliveryAddressIcon").hide();      
+      }
         else{
             $('#loginScreen').modal('show');
            
@@ -1723,10 +1724,8 @@ else{
 	        $(".createDeliveryAddress").hide();
 	        $(".defaultDeliveryAddress").hide();
 	        $(".editDeliveryAddress").toggle(500);
-	        if ($(".defaultHomeAddress").is(':hidden') && userDetails[0].DeliveryFirstName != '') {
-	            $(".defaultHomeAddress").hide();
-	            $(".editHomeAddress").hide();
-	    }}
+            $(".editHomeAddressIcon").hide();
+	      }
         else{
             $('#loginScreen').modal('show');
         }

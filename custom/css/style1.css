@@ -368,7 +368,8 @@ text-decoration: none !important;
     background-color: rgb(255, 196, 80) !important;
 }
 .navbar-bottom{
-  margin-top: 10px;
+  margin-top: 56px;
+    min-height: 30px;
   margin-bottom: 0px !important;
   padding-top: 4px;
 }
@@ -875,6 +876,11 @@ li.food_item {
     height:80px;
     float : left;
 }
+.profilePopUP img{
+    height:80px;
+    float : left;
+      margin: 5px;
+}
 #welcomeMsg span{
     padding-right: 20px;
 }
@@ -892,13 +898,13 @@ li.food_item {
     margin-left: -9px;
 }
 .popover{
-      top: 50px;
-  left: -90.5px;
-  display: block;
-  width: 220px;
+   width: 300px;
 }
 .profileName{
     font-weight: bold;
+      overflow: hidden !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .left{
     padding-left: 10px;
@@ -1425,3 +1431,4 @@ text-align: left;
 		    margin: 6.5px 35px;
 		}
 	}
+
