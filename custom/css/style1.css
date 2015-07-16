@@ -87,7 +87,8 @@ text-decoration: none !important;
         }
         .form-control {
             width: 80% !important;
-            margin-top: -45px !important;
+            margin-top: 5px !important;
+			margin-left: 10px;
         }
         .hiddenInTab {
             display: none;
@@ -1371,6 +1372,7 @@ text-align: left;
   .bootstrap-dialog .bootstrap-dialog-message,#aboutUsScreen  .modal-body, #contactUsScreen .modal-body,#contactUsScreen .modal-body{
 		font-size: 16px !important;
 		font-weight: bold !important;
+		font-family: sans-Serif;
   }
   .address-wrapper {
 	  word-break: break-all;
@@ -1411,6 +1413,13 @@ text-align: left;
 		.product_name_cart{
 			width: 60%;float: left;
 		}
+	.stummyBranding p.list-group-item-text {
+	  font-size: 12px;
+	}
+
+	.stummyBranding h4.list-group-item-heading {
+	  font-size: 14px;
+	}
 	}
 	@media screen and (min-width: 400px) and (max-width: 467px) {
 		#cartModel .modal-dialog{
@@ -1418,6 +1427,13 @@ text-align: left;
 		}
 		.product_name_cart{
 			width: 60%;float: left;
+		}
+		.stummyBranding p.list-group-item-text {
+		  font-size: 12px;
+		}
+
+		.stummyBranding h4.list-group-item-heading {
+		  font-size: 14px;
 		}
 	}
 	@media screen and (min-width: 320px) and (max-width: 399px) {
@@ -1430,5 +1446,19 @@ text-align: left;
 		.navbar-nav{
 		    margin: 6.5px 35px;
 		}
+		.stummyBrandingBottom .col-md-6{
+			padding-left: 0px !important;
+			padding-right: 0px !important;
+		}
+		.stummyBranding p.list-group-item-text {
+		  font-size: 12px;
+		}
+
+		.stummyBranding h4.list-group-item-heading {
+		  font-size: 14px;
+		}
+		#myOrderModel .modal-dialog .modal-content .modal-body{
+			padding: 2px !important;
+			}
 	}
 
