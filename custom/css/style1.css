@@ -74,6 +74,9 @@ text-decoration: none !important;
 	padding-left: 8% !important;
 }
 }*/
+.modal-header{
+       border-bottom: 0px solid #e5e5e5 !important;
+}
     
     @media screen and (min-width: 420px) and (max-width: 767px) {
         body:before {
@@ -85,9 +88,12 @@ text-decoration: none !important;
         .search.form-group {
             margin-left: 50% !important;
         }
+        .search .typeahead{
+            margin-top: -50px !important;
+        }
         .form-control {
             width: 80% !important;
-            margin-top: -50px !important;
+            margin-top: 0px !important;
 			margin-left: 10px;
         }
         .hiddenInTab {
