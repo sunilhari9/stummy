@@ -298,7 +298,11 @@ var orderRefNo = "",orderAmountToBePaid="";
 
 	    });
 	    $('body').on('click', '.searchInMobile', function(event) {
-	        $(".search").toggleClass("hiddeninMobile").delay(3000).show('slow');
+		    if($(".search").is(":visible")){
+				$(".search").hide('slow');
+			}else{
+				$(".search").show('slow');
+			}
 	    });
         $('body').on('click', '#left-menu', function() {
             if( $( ".container-fluid" ).hasClass( "blur-backGround" )){

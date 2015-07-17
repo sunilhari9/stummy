@@ -108,8 +108,9 @@ text-decoration: none !important;
         }
         .searchInMobile {
             float: right;
-            margin-top: -24px;
-            margin-right: 50px;
+            margin-top: -30px;
+            margin-right: 35px;
+			font-size: 16px;
         }
         .hiddeninMobile {
             display: none;
