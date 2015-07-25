@@ -91,7 +91,7 @@ $.getJSON("custom/js/products.json", function(items) {
 		}*/
 	    if ($(document).width() <= 419) rwdInfo = 4;
 	    if ($(document).width() > 419 && $(document).width() <= 767) rwdInfo = 3;
-	    if ($(document).width() > 768 && $(document).width() <= 1023) rwdInfo = 2;
+	    if ($(document).width() >= 768 && $(document).width() <= 1023) rwdInfo = 2;
 	    return rwdInfo;
 	}
 	var mobileChk = function() {

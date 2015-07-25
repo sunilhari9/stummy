@@ -537,6 +537,7 @@ text-decoration: none !important;
     font-weight: bolder;
     margin-bottom: -15px;
     clear: both;
+	padding-left: 10px;
 }
 
 #checkoutClass {
@@ -774,7 +775,10 @@ close bgwhite
 	height: 91px;
 }
 .modal-content > .customizeFoodHeader {
-    background-color: red;
+    background-color: transparent;
+}
+#otpLink{
+	font-weight: bold;
 }
 .customizeFoodModel {
     border-bottom-left-radius: 0px;
@@ -1152,7 +1156,10 @@ text-align: left;
         display: none;
     }
 }
-@media screen and (min-width: 320px) and (max-width: 420px) {
+.cartCustomizeHiden{
+	margin-top: 25px;
+}
+@media screen and (min-width: 0px) and (max-width: 420px) {
     .customizeIcon {
         margin-right: 0% !important;
 		margin-top: 1%;
@@ -1165,7 +1172,7 @@ text-align: left;
         !important;
     }
 	.cartCustomizeHiden{
-		margin-top: 60px;
+		margin-top: 70px;
 	}
 }
 @media (min-width: 992px) {

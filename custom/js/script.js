@@ -969,6 +969,10 @@ var orderRefNo = "",orderAmountToBePaid="";
 
 	    var renderCart = function() {
 	        $('.cartItemDesc').html("<center><img src='custom/images/loading.gif' /></center>");
+			$('.subtotal').text('0.0');
+	        $('.service_tax').text('0.0');
+	        $('.rounded_off').text('0.0');
+	        $('.grand_total').html('Rs. 0.0');
 	        var cartTotalItems = JSON.parse(localStorage.getItem('cartJson'));
 	        if (cartTotalItems != undefined) {
 	            cartTotalItemsLength = cartTotalItems.itemsArray.length
@@ -1439,7 +1443,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 		}*/
 	    if ($(document).width() <= 419) rwdInfo = 4;
 	    if ($(document).width() > 419 && $(document).width() <= 767) rwdInfo = 3;
-	    if ($(document).width() > 768 && $(document).width() <= 1023) rwdInfo = 2;
+	    if ($(document).width() >= 768 && $(document).width() <= 1023) rwdInfo = 2;
 	    return rwdInfo;
 	}
 	var mobileChk = function() {
@@ -1473,6 +1477,7 @@ var orderRefNo = "",orderAmountToBePaid="";
 		$('.items').css('min-height',$('.list-group').height()-90);
 		$('.items').css('max-height',$('.list-group').height()-90);
 	}
+	location.reload();
 	});
 
 	function sortJSON(data, key) {
